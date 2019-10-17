@@ -60,7 +60,7 @@ export class LayoutConfig {
 			},
 			'menu': {
 				'self': {
-					'display': true,
+					'display': false,
 					'layout': 'default',
 					'root-arrow': false,
 				},
@@ -80,13 +80,13 @@ export class LayoutConfig {
 				},
 			},
 		},
-		'subheader': {
-			'display': true,
-			'layout': 'subheader-v1',
-			'fixed': true,
-			'width': 'fluid',
-			'style': 'solid',
-		},
+		// 'subheader': {
+		// 	'display': false,
+			// 'layout': 'subheader-v1',
+			// 'fixed': true,
+			// 'width': 'fluid',
+			// 'style': 'solid',
+		// },
 		'content': {
 			'width': 'fluid',
 		},
