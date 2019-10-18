@@ -9,6 +9,7 @@ import {Validators} from '@angular/forms';
 @Injectable({
 	providedIn: 'root'
 })
+
 export class ClientsService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
@@ -21,8 +22,8 @@ export class ClientsService extends RootService {
 	get featureProps(): ItemProps[] {
 		return [
 			{
-				name: 'image',
-				prop: 'image',
+				name: 'photo',
+				prop: 'photo',
 				listing: true,
 				formField: true,
 				displayType: 'image',
@@ -71,6 +72,7 @@ export class ClientsService extends RootService {
 			// 	required: true,
 			// 	validations: [Validators.required, CustomValidators.validPassword]
 			// },
-		];
+		]
 	}
+
 }

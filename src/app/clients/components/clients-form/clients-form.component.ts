@@ -20,7 +20,11 @@ export class ClientsFormComponent extends CoreFormComponent implements OnInit, O
 	}
 
 	initLists() {
-		this.lists = [{['drivers/languages']: 1}];
+		this.lists = [
+			{
+				// ['drivers/languages']: 1
+			}
+		];
 	}
 
 	// refactorItem(item: any): any {
