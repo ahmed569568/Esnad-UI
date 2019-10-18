@@ -23,7 +23,7 @@ const routes: Routes = [
 		},
 		{
 			path: 'clients',
-			loadChildren: './clients/clients.module#EmployeesModule'
+			loadChildren: './clients/clients.module#ClientsModule'
 		},
 		{
 			path: 'evaluation-type',
