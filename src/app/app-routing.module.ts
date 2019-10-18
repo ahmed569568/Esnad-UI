@@ -6,10 +6,6 @@ import {SharedModule} from '@app/shared/shared.module';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'drivers',
-			loadChildren: './drivers/drivers.module#CategoriesModule'
-    },
-    {
       path: 'roles',
 			loadChildren: './roles/roles.module#RolesModule'
     },
