@@ -18,8 +18,12 @@ const routes: Routes = [
 			loadChildren: './client-price/client-price.module#ClientPriceModule'
 		},
 		{
+			path: 'employees',
+			loadChildren: './employees/employees.module#EmployeesModule'
+		},
+		{
 			path: 'clients',
-			loadChildren: './clients/clients.module#ClientsModule'
+			loadChildren: './clients/clients.module#EmployeesModule'
 		},
 		{
 			path: 'evaluation-type',

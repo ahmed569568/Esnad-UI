@@ -11,6 +11,13 @@
             </mat-form-field>
             <app-control-errors [ctl]="form.get(field.name)" class="error-message"></app-control-errors>
           </ng-container>
+					<ng-container *ngIf="field.formFieldType === 'number' && checkConditions(field.condition)">
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<input type="number" matInput [formControlName]="field.name"/>
+						</mat-form-field>
+						<app-control-errors [ctl]="form.get(field.name)" class="error-message"></app-control-errors>
+					</ng-container>
           <ng-container *ngIf="field.formFieldType === 'password' && checkConditions(field.condition)">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'common.password' | translate }}</mat-label>

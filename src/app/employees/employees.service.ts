@@ -9,31 +9,32 @@ import {Validators} from '@angular/forms';
 @Injectable({
 	providedIn: 'root'
 })
-export class FormsService extends RootService {
+
+export class EmployeesService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
 	}
 
 	routerPrefix(val: string = '') {
-		return val ? val : 'forms';
+		return val ? val : 'employees';
 	}
 
 	get featureProps(): ItemProps[] {
 		return [
-			// {
-			// 	name: 'image',
-			// 	prop: 'image',
-			// 	listing: true,
-			// 	formField: true,
-			// 	displayType: 'image',
-			// 	formFieldType: 'file_input',
-			// 	required: true,
-			// 	width: 300,
-			// 	validations: [Validators.required]
-			// },
 			{
-				name: 'name',
-				prop: 'name',
+				name: 'photo',
+				prop: 'photo',
+				listing: true,
+				formField: true,
+				displayType: 'image',
+				formFieldType: 'file_input',
+				required: true,
+				width: 300,
+				validations: [Validators.required]
+			},
+			{
+				name: 'full_name',
+				prop: 'full_name',
 				listing: true,
 				formField: true,
 				formFieldType: 'text',
@@ -42,31 +43,37 @@ export class FormsService extends RootService {
 				validations: [Validators.required]
 			},
 			{
-				name: 'client',
-				prop: 'client',
-				listing: true,
-				formField: false,
-				width: 300,
-			},
-			{
-				name: 'step_id',
-				prop: 'step_id',
+				name: 'group_id',
+				prop: 'group.name',
 				listing: true,
 				formField: true,
 				formFieldType: 'select',
-				listPrefix: 'forms/steps',
+				listPrefix: 'employees/groups',
 				required: true,
-				width: 300
+				width: 300,
+				validations: [Validators.required]
 			},
-			// {
-			//   name: 'order_id',
-			//   prop: 'order_id',
-			//   listing: true,
-			//   formField: true,
-			//   formFieldType: 'number',
-			//   required: true,
-			//   width: 300
-			// },
+			{
+				name: 'phone',
+				prop: 'phone',
+				listing: true,
+				formField: true,
+				formFieldType: 'phone',
+				required: true,
+				width: 300,
+				validations: [Validators.required]
+			},
+			{
+				name: 'email',
+				prop: 'email',
+				listing: true,
+				formField: true,
+				formFieldType: 'email',
+				required: true,
+				width: 300,
+				validations: [Validators.required]
+
+			},
 			// {
 			// 	name: 'password',
 			// 	prop: 'password',
@@ -76,16 +83,7 @@ export class FormsService extends RootService {
 			// 	required: true,
 			// 	validations: [Validators.required, CustomValidators.validPassword]
 			// },
-			// {
-			// 	name: 'language_id',
-			// 	prop: 'language.name',
-			// 	listing: true,
-			// 	formField: true,
-			// 	formFieldType: 'select',
-			// 	listPrefix: 'drivers-languages',
-			// 	width: 300,
-			// 	validations: [Validators.required]
-			// }
 		];
 	}
+
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-list-grid-summary',
@@ -19,7 +19,7 @@ export class ListGridSummaryComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.loadResources();
+		// this.loadResources();
   }
 
   /**
