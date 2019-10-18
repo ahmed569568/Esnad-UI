@@ -10,10 +10,6 @@ const routes: Routes = [
 			loadChildren: './drivers/drivers.module#CategoriesModule'
     },
     {
-      path: 'users',
-      loadChildren: './users-feature/users.module#UsersModule'
-    },
-    {
       path: 'roles',
 			loadChildren: './roles/roles.module#RolesModule'
     },
