@@ -1,40 +1,31 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {TemplatesService} from '@app/templates/templates.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TemplatesV2Service } from '@app/templates/templates-v2.service';
+import { CoreFormV2Component } from '@app/core/components/core-form-v2/core-form-v2.component';
+import { GroupByPipe } from 'ngx-pipes';
 
 @Component({
-	selector: 'app-drivers-form',
-	templateUrl: '../../../core/components/core-form/core-form.component.html'
+	selector: 'app-templates-form',
+	templateUrl:
+		'../../../core/components/core-form-v2/core-form-v2.component.html'
 })
-export class TemplatesFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
+export class TemplatesFormComponent extends CoreFormV2Component
+	implements OnInit, OnDestroy {
 	constructor(
-		service: TemplatesService,
+		service: TemplatesV2Service,
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
-		private utilities: UtilitiesService
+		groupByPipe: GroupByPipe
 	) {
-		super(service, fb, activatedRoute, utilities);
+		super(service, fb, activatedRoute, groupByPipe);
 	}
 
-	initLists() {
-		this.lists = [{['drivers/languages']: 1}];
+	ngOnInit(): void {
+		super.ngOnInit();
+		if (this.isEdit) {
+		}
 	}
-
-	// refactorItem(item: any): any {
-	//   super.refactorItem(item);
-	//   /**
-	//    * Set value of selected items
-	//    */
-	//   const selectedUsers = [];
-	//   for (const user of item.users) {
-	//     selectedUsers.push(user.user_id);
-	//   }
-	//   this.form.controls.branch_managers.setValue(selectedUsers); // Final Return
-	//   return item;
-	// }
 
 	get lists() {
 		return this._lists;
@@ -44,11 +35,13 @@ export class TemplatesFormComponent extends CoreFormComponent implements OnInit,
 		this._lists = value;
 	}
 
-	ngOnInit() {
-		super.ngOnInit();
+	refactorItem(item: any): any {
+		super.refactorItem(item);
+		if (item.photo) {
+			this.previewImage = item.photo;
+		}
+		return item;
 	}
 
-	ngOnDestroy(): void {
-		super.ngOnDestroy();
-	}
+	prepareFormAfterSubmit() {}
 }

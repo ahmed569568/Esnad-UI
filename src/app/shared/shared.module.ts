@@ -24,65 +24,80 @@ import { ListGridSummaryComponent } from '@app/shared/components/list-grid-summa
 import { ListTypeComponent } from '@app/shared/components/list-type/list-type.component';
 import { ListGridSearchComponent } from '@app/shared/components/list-grid-search/list-grid-search.component';
 import { AngularOpenlayersModule } from 'ngx-openlayers';
+import { CoreFormContentComponent } from '@app/shared/components/core-form-content/core-form-content.component';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { NgSelectModule } from '@ng-select/ng-select';
+
+import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    MaterialModule,
-    ChartsModule,
-    TranslateModule,
-    NgxSpinnerModule,
-    ColorPickerModule,
-    NgTippyModule,
-    ToastrModule.forRoot(),
-    AngularOpenlayersModule
-  ],
-  declarations: [
-    ChartComponent,
-    ListGridComponent,
-    ListGridOptionsComponent,
-    PaginationComponent,
-    FormFooterComponent,
-    ControlErrorsComponent,
-    SecuredDirective,
-    AppTooltipDirective,
-    FilterPipe,
-    DialogComponent,
-    ListGridSummaryComponent,
-    ListTypeComponent,
-    ListGridSearchComponent,
-    MapComponent
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    MaterialModule,
-    TranslateModule,
-    NgxSpinnerModule,
-    ColorPickerModule,
-    NgTippyModule,
-    ToastrModule,
-    AngularOpenlayersModule,
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		MaterialModule,
+		ChartsModule,
+		TranslateModule,
+		NgxSpinnerModule,
+		ColorPickerModule,
+		NgTippyModule,
+		NgSelectModule,
+		NgOptionHighlightModule,
+		NgPipesModule,
 
-    ChartComponent,
-    ListGridComponent,
-    ListGridOptionsComponent,
-    PaginationComponent,
-    FormFooterComponent,
-    SecuredDirective,
-    AppTooltipDirective,
-    DialogComponent,
-    ControlErrorsComponent,
-    ListGridSummaryComponent,
-    ListTypeComponent,
-    ListGridSearchComponent,
-    MapComponent
-  ],
-  entryComponents: [DialogComponent]
+		ToastrModule.forRoot(),
+		AngularOpenlayersModule
+	],
+	declarations: [
+		ChartComponent,
+		ListGridComponent,
+		ListGridOptionsComponent,
+		PaginationComponent,
+		FormFooterComponent,
+		ControlErrorsComponent,
+		SecuredDirective,
+		AppTooltipDirective,
+		FilterPipe,
+		DialogComponent,
+		ListGridSummaryComponent,
+		ListTypeComponent,
+		ListGridSearchComponent,
+		MapComponent,
+		CoreFormContentComponent
+	],
+	exports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		MaterialModule,
+		TranslateModule,
+		NgxSpinnerModule,
+		ColorPickerModule,
+		NgTippyModule,
+		ToastrModule,
+		AngularOpenlayersModule,
+		NgSelectModule,
+		NgOptionHighlightModule,
+		CoreFormContentComponent,
+
+		ChartComponent,
+		ListGridComponent,
+		ListGridOptionsComponent,
+		PaginationComponent,
+		FormFooterComponent,
+		SecuredDirective,
+		AppTooltipDirective,
+		DialogComponent,
+		ControlErrorsComponent,
+		ListGridSummaryComponent,
+		ListTypeComponent,
+		ListGridSearchComponent,
+		MapComponent,
+		NgPipesModule
+	],
+	entryComponents: [DialogComponent],
+	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]
 })
 export class SharedModule {}
