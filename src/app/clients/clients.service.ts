@@ -5,7 +5,6 @@ import {ItemProps} from '@app/interfaces';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Validators} from '@angular/forms';
-import {CustomValidators} from '@app/core/classes/custom-validations';
 
 @Injectable({
 	providedIn: 'root'
@@ -33,8 +32,8 @@ export class ClientsService extends RootService {
 				validations: [Validators.required]
 			},
 			{
-				name: 'name',
-				prop: 'name',
+				name: 'full_name',
+				prop: 'full_name',
 				listing: true,
 				formField: true,
 				formFieldType: 'text',
@@ -52,34 +51,26 @@ export class ClientsService extends RootService {
 				width: 300,
 				validations: [Validators.required]
 			},
-			// {
-			//   name: 'email',
-			//   prop: 'email',
-			//   listing: true,
-			//   formField: true,
-			//   formFieldType: 'email',
-			//   required: true,
-			//   width: 300
-			// },
 			{
-				name: 'password',
-				prop: 'password',
-				listing: false,
-				formField: true,
-				formFieldType: 'password',
-				required: true,
-				validations: [Validators.required, CustomValidators.validPassword]
-			},
-			{
-				name: 'language_id',
-				prop: 'language.name',
+				name: 'email',
+				prop: 'email',
 				listing: true,
 				formField: true,
-				formFieldType: 'select',
-				listPrefix: 'drivers-languages',
+				formFieldType: 'email',
+				required: true,
 				width: 300,
 				validations: [Validators.required]
-			}
+
+			},
+			// {
+			// 	name: 'password',
+			// 	prop: 'password',
+			// 	listing: false,
+			// 	formField: true,
+			// 	formFieldType: 'password',
+			// 	required: true,
+			// 	validations: [Validators.required, CustomValidators.validPassword]
+			// },
 		];
 	}
 }
