@@ -1,0 +1,5 @@
+<div *ngIf="this.ctl.dirty || this.ctl.touched" class="controlError">
+  <span *ngFor="let errorMsg of errorMessages" class="error">
+    {{ 'validations.' + transPrefix + errorMsg.message | translate: errorMsg.params }}
+  </span>
+</div>

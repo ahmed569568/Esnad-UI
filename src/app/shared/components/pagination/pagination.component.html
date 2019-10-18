@@ -1,0 +1,39 @@
+<div class="pagination" id="pagination" *ngIf="options.pagination">
+  <div *ngIf="pagination.total !== 0">
+    <span class="light">
+      <span class="form-to-page"> {{ pagination.from }}-{{ pagination.to }} </span> {{ 'pagination.of' | translate }}
+      {{ pagination.total }}
+      {{ 'pagination.items' | translate }}
+    </span>
+  </div>
+  <div class="d-flex pages-container">
+    <!--    <span class="light items-count">-->
+    <!--      <label>{{ 'pagination.item_per_page' | translate }}</label>-->
+    <!--      <div>-->
+    <!--        <mat-select class="select primary" [(ngModel)]="itemCount" (selectionChange)="changeItemsPerPage()">-->
+    <!--          <mat-option *ngFor="let option of options.itemsPerPage" [value]="option"> {{ option }}</mat-option>-->
+    <!--        </mat-select>-->
+    <!--      </div>-->
+    <!--    </span>-->
+    <button
+      (click)="setPageNav('first')"
+      *ngIf="currentPage !== 1 && currentPage !== 2"
+      [class]="page === currentPage ? 'primary' : 'light'"
+      class="light"
+    >
+      {{ 'pagination.first' | translate }}
+    </button>
+    <button (click)="setPageNav('prev')" *ngIf="currentPage !== 1" class="light">
+      {{ 'pagination.previous' | translate }}
+    </button>
+    <button (click)="setPage(page)" *ngFor="let page of pages" [class]="page === currentPage ? 'primary' : 'light'">
+      {{ page }}
+    </button>
+    <button (click)="setPageNav('last')" [disabled]="currentPage === pagination.last_page" class="light">
+      {{ ('pagination.last' | translate) + '  ' + pagination.last_page }}
+    </button>
+    <button (click)="setPageNav('next')" [disabled]="currentPage === pagination.last_page" class="light">
+      {{ 'pagination.next' | translate }}
+    </button>
+  </div>
+</div>

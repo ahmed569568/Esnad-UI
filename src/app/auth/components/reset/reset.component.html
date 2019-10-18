@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="left-section"></div>
+
+  <div class="right-section">
+    <mat-card class="login-card">
+      <div class="fields-container">
+        <h1 class="reset-title" translate>auth.reset.reset-password</h1>
+        <mat-card-content class="login-inputs">
+          <form (ngSubmit)="reset()" [formGroup]="resetForm" novalidate>
+            <div class="login-error" [hidden]="!error || isLoading" translate>
+              Code or password incorrect.
+            </div>
+            <br />
+            <div class="login-fields" fxLayout="column">
+              <mat-form-field [hideRequiredMarker]="true">
+                <input
+                  type="text"
+                  matInput
+                  formControlName="code"
+                  [placeholder]="'auth.reset.code' | translate"
+                  required
+                />
+                <mat-error *ngIf="resetForm.controls.code.invalid && resetForm.controls.code.touched">
+                  <span translate>auth.reset.code-required</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field [hideRequiredMarker]="true">
+                <input
+                  type="password"
+                  matInput
+                  formControlName="password"
+                  type="password"
+                  autocomplete="current-password"
+                  [placeholder]="'auth.reset.password' | translate"
+                  required
+                  id="mysecretpassword"
+                  showHideInput
+                />
+                <i
+                  matSuffix
+                  class="material-icons cursor-pointer"
+                  showHideTrigger="mysecretpassword"
+                  [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"
+                ></i>
+                <mat-error *ngIf="resetForm.controls.password.invalid && resetForm.controls.password.touched">
+                  <span translate>auth.reset.password-required</span>
+                </mat-error>
+              </mat-form-field>
+              <br />
+              <button
+                class="reset-btn"
+                mat-raised-button
+                type="submit"
+                [disabled]="resetForm.invalid || isLoading"
+                [ngClass]="{ disabled: resetForm.invalid || isLoading }"
+              >
+                <span translate>auth.reset.reset-btn</span>
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<!--
+
+
+<div class="login-page" [class.rtl]="layout.rtl">
+    <div class="banner"></div>
+    <div class="login-area">
+        <div class="login-box">
+            <div class="page-title">
+                <h2>{{'reset.reset-password' | translate}}</h2>
+                <span class="brdr"></span>
+            </div>
+            <form [formGroup]="resetForm" (ngSubmit)="reset()">
+                <div class="form-group">
+                    <label for="code">{{'reset.code' | translate }}</label>
+                    <input formControlName="code" type="text" class="form-control" id="code">
+                    <app-control-errors [ctl]="resetForm.controls['code']"></app-control-errors>
+                </div>
+                <div class="form-group">
+                    <label for="password">{{'reset.password' | translate }}</label>
+                    <input formControlName="password" type="password" class="form-control" id="password">
+                    <app-control-errors [ctl]="resetForm.controls['password']"></app-control-errors>
+                </div>
+                <div class="btns">
+                    <button class="btn btn-login" [disabled]="!resetForm.valid">
+                        {{'reset.reset-btn' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->

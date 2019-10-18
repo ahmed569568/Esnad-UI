@@ -1,0 +1,16 @@
+.weekdays-container {
+  padding: 48px;
+
+  .mat-card {
+    padding: 40px 20px;
+    border-radius: 8px;
+  }
+
+  mat-divider {
+    width: 95%;
+    height: 5px;
+    margin: 12px 2.5% 0 2.5%;
+    border-top-width: 1px;
+    border-top-color: rgba(0, 99, 244, 0.24);
+  }
+}

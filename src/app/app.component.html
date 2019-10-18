@@ -1,2 +1,4 @@
-<kt-splash-screen *ngIf="loader"></kt-splash-screen>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="timer">
+  <p style="font-size: 20px; color: white">{{ 'common.loading' | translate }}</p>
+</ngx-spinner>
 <router-outlet></router-outlet>

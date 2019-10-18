@@ -1,0 +1,57 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 20px 10px;
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  .image {
+    margin-top: 20px;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #dde0e6;
+    background: #fff;
+    &::after {
+      content: "";
+    }
+    &:hover {
+      &::after {
+        background: rgba(42, 52, 71, 0.13);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        position: absolute;
+      }
+    }
+    img {
+      max-height: 125px;
+      max-width: 125px;
+    }
+  }
+
+  h3 {
+    color: #5069e4;
+    font-size: 130%;
+  }
+}
+
+:host {
+  height: 100%;
+
+  .container {
+    height: 100%;
+
+    mat-card {
+      height: 100%;
+    }
+  }
+}

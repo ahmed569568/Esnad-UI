@@ -1,0 +1,14 @@
+.permissions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 700px;
+}
+
+.formContainer {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+}

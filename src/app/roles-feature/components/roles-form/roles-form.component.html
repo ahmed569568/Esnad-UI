@@ -1,0 +1,55 @@
+<div class="formContainer" fxFlex fxLayout="column">
+  <form
+    class="d-flex default-form-style"
+    style="justify-content: center; flex-direction: column; align-items: center; padding: 1rem;"
+    [formGroup]="form"
+    (ngSubmit)="formSubmission()"
+  >
+    <mat-form-field class="form-field" style="flex: 1 1 50%; width: 50%;">
+      <input type="text" matInput formControlName="role" [placeholder]="cid + '.role' | translate" />
+    </mat-form-field>
+
+    <div>
+      <div class="category-title">
+        <h4>{{ cid + '.all_permissions' | translate }}</h4>
+      </div>
+
+      <div class="permissions">
+        <div *ngFor="let permission of allPermissions; let i = index">
+          <mat-checkbox
+            [id]="permission.text + '-' + i"
+            [(ngModel)]="permission.checked"
+            [ngModelOptions]="{ standalone: true }"
+            (change)="selectAll(permission); setCategories()"
+          >
+            {{ 'common.' + permission.text | translate }}
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- All Permission Type Toggles -->
+      <div class="category" *ngFor="let category of permissionsModel | keyvalue">
+        <div>
+          <div class="category-title">
+            <h4>{{ cid + '.' + category.key | translate }}</h4>
+          </div>
+          <div class="permissions">
+            <div *ngFor="let permission of category.value | keyvalue">
+              <mat-checkbox
+                [id]="category.key + '-' + permission.key"
+                [(ngModel)]="permission.value"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="inputAction(category.key, permission.key, permission.value); setCategories()"
+              >
+                {{ 'common.' + permission.key | translate }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Permissions singularity Toggles -->
+    </div>
+  </form>
+  <app-form-footer (submit)="formSubmission()" [form]="form"></app-form-footer>
+</div>

@@ -1,79 +1,65 @@
-import { Subscription } from 'rxjs';
-// Angular
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-// Layout
-import { LayoutConfigService, SplashScreenService, TranslationService } from './core/_base/layout';
-// language list
-import { locale as enLang } from './core/_config/i18n/en';
-import { locale as chLang } from './core/_config/i18n/ch';
-import { locale as esLang } from './core/_config/i18n/es';
-import { locale as jpLang } from './core/_config/i18n/jp';
-import { locale as deLang } from './core/_config/i18n/de';
-import { locale as frLang } from './core/_config/i18n/fr';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { merge } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
+
+import { environment } from '@env/environment';
+import { Logger, I18nService, untilDestroyed } from '@app/core';
+
+const log = new Logger('App');
 
 @Component({
-	// tslint:disable-next-line:component-selector
-	selector: 'body[kt-root]',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-	// Public properties
-	title = 'Esnad';
-	loader: boolean;
-	private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title,
+    private translateService: TranslateService,
+    private i18nService: I18nService
+  ) {}
 
-	/**
-	 * Component constructor
-	 *
-	 * @param translationService: TranslationService
-	 * @param router: Router
-	 * @param layoutConfigService: LayoutCongifService
-	 * @param splashScreenService: SplashScreenService
-	 */
-	constructor(private translationService: TranslationService,
-				private router: Router,
-				private layoutConfigService: LayoutConfigService,
-				private splashScreenService: SplashScreenService) {
+  ngOnInit() {
+    // Setup logger
+    if (environment.production) {
+      Logger.enableProductionMode();
+    }
 
-		// register translations
-		this.translationService.loadTranslations(enLang, chLang, esLang, jpLang, deLang, frLang);
-	}
+    log.debug('init');
 
-	/**
-	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
-	 */
+    // Setup translations
+    this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
 
-	/**
-	 * On init
-	 */
-	ngOnInit(): void {
-		// enable/disable loader
-		this.loader = this.layoutConfigService.getConfig('loader.enabled');
+    const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
 
-		const routerSubscription = this.router.events.subscribe(event => {
-			if (event instanceof NavigationEnd) {
-				// hide splash screen
-				this.splashScreenService.hide();
+    // Change page title on navigation or language change, based on route data
+    merge(this.translateService.onLangChange, onNavigationEnd)
+      .pipe(
+        map(() => {
+          let route = this.activatedRoute;
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        }),
+        filter(route => route.outlet === 'primary'),
+        switchMap(route => route.data),
+        untilDestroyed(this)
+      )
+      .subscribe(event => {
+        const title = event.title;
+        if (title) {
+          this.titleService.setTitle(this.translateService.instant(title));
+        }
+      });
+  }
 
-				// scroll to top on every route change
-				window.scrollTo(0, 0);
-
-				// to display back the body content
-				setTimeout(() => {
-					document.body.classList.add('kt-page--loaded');
-				}, 500);
-			}
-		});
-		this.unsubscribe.push(routerSubscription);
-	}
-
-	/**
-	 * On Destroy
-	 */
-	ngOnDestroy() {
-		this.unsubscribe.forEach(sb => sb.unsubscribe());
-	}
+  ngOnDestroy() {
+    this.i18nService.destroy();
+  }
 }

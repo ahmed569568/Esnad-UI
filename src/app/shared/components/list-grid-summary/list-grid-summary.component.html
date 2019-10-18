@@ -1,0 +1,89 @@
+<div class="listSummary" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="title-container" fxFlex="auto">
+    <div class="img-container">
+      <img class="shadow-img" src="../../../../assets/buses.png" alt="" />
+    </div>
+    <div class="title-container" fxFlex fxLayout="column">
+      <h3 fxFlex>
+        {{ listOptions.customTitle ? (listOptions.customTitle | translate) : (controller + '.title' | translate) }}
+      </h3>
+      <div fxFlex fxLayout="row">
+        <span fxFlex class="mrg-btm" *ngIf="summary?.bus_in_ride"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.bus_in_ride }} </span
+          ><span>bus_in_rider</span></span
+        >
+        <span fxFlex class="mrg-btm" *ngIf="summary?.bus_stop"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.bus_stop }} </span><span>bus_stop</span></span
+        >
+        <span fxFlex class="mrg-btm" *ngIf="summary?.student_not_in_ride"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.student_not_in_ride }} </span
+          ><span>student_not_in_ride</span></span
+        >
+        <span fxFlex class="mrg-btm" *ngIf="summary?.students_in_ride"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.students_in_ride }} </span
+          ><span>students_in_ride</span></span
+        >
+
+        <span fxFlex class="mrg-btm" *ngIf="summary?.students_on_bus"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.students_on_bus }} </span
+          ><span>students_on_bus</span></span
+        >
+
+        <span fxFlex class="mrg-btm" *ngIf="summary?.students_not_linked"
+          ><mat-icon>linked</mat-icon><span class="number">{{ summary?.students_not_linked }} </span
+          ><span>students_not_linked</span></span
+        >
+
+        <ng-container *ngIf="summary?.length > 0">
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.linked_driver"
+            ><mat-icon>linked</mat-icon><span class="number">{{ summary[0]?.linked_driver }} </span
+            ><span>linked driver</span></span
+          >
+
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.not_linked"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.not_linked }} </span
+            ><span>not linked driver</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.driver_linked"
+            ><mat-icon>linked</mat-icon><span class="number">{{ summary[0]?.driver_linked }} </span
+            ><span>linked driver</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.driver_not_linked"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.driver_not_linked }} </span
+            ><span>not linked driver</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.bus_in_ride"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.bus_in_ride }} </span
+            ><span>bus_in_ride</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.bus_stop"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.bus_stop }} </span
+            ><span>bus_stop</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.student_not_in_ride"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.student_not_in_ride }} </span
+            ><span>student_not_in_ride</span></span
+          >
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.students_in_ride"
+            ><mat-icon>link_off</mat-icon><span class="number">{{ summary[0]?.students_in_ride }} </span
+            ><span>students_in_ride</span></span
+          >
+        </ng-container>
+      </div>
+      <ng-container *ngIf="summary?.length > 0">
+        <div fxFlex fxLayout="column">
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.students_linked">
+            <img class="icon-image" src="../../../../assets/account-badge.png" alt="IMAGE" />
+            <span class="number">{{ summary[0]?.students_linked }} </span>
+            <span>children like bus</span>
+          </span>
+          <span fxFlex class="mrg-btm" *ngIf="summary[0]?.students_not_linked">
+            <img class="icon-image" src="../../../../assets/account-badge-alert-outline.png" alt="IMAGE" />
+            <span class="number-wrong">{{ summary[0]?.students_not_linked }} </span>
+            <span>children</span>
+          </span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

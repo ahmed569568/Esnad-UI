@@ -1,0 +1,40 @@
+<div class="chart-title">
+  <span>{{ 'dashboard.chart.' + chartDetails.name | translate }}</span>
+</div>
+<div class="chart-body">
+  <canvas
+    baseChart
+    *ngIf="hasData"
+    [data]="chartDetails.chartData"
+    [labels]="chartDetails.chartLabels"
+    [chartType]="chartDetails.chartType"
+    [options]="chartDetails.options"
+    [colors]="chartDetails.chartColors"
+    style="width:225px; height:225px;"
+  ></canvas>
+  <div *ngIf="!hasData" class="no-data" translate>common.nodata</div>
+</div>
+<div class="chart-footer">
+  <div class="operation out">
+    <span class="title">
+      <span class="bullet"
+        ><i class="material-icons">
+          trip_origin
+        </i></span
+      >
+      {{ 'dashboard.chart.checkout' | translate }}
+    </span>
+    <span class="unit">{{ chartDetails.chartData[1] }} {{ 'dashboard.chart.unit' | translate }}</span>
+  </div>
+  <div class="operation in">
+    <span class="title">
+      <span class="bullet"
+        ><i class="material-icons">
+          trip_origin
+        </i></span
+      >
+      {{ 'dashboard.chart.checkin' | translate }}
+    </span>
+    <span class="unit">{{ chartDetails.chartData[0] }} {{ 'dashboard.chart.unit' | translate }}</span>
+  </div>
+</div>

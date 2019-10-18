@@ -1,0 +1,113 @@
+<div class="container" style="height: 100%">
+  <router-outlet></router-outlet>
+  <mat-card style="height: 100%">
+    <mat-card-content>
+      <div class="profilePage">
+        <h3>{{ 'common.user_profile' | translate }}</h3>
+        <label [matTooltip]="'common.click_to_upload' | translate" for="file" class="image imageUploader">
+          <img *ngIf="item?.image" [src]="environment.userImagesPath + item?.image" [alt]="item?.name" />
+          <img *ngIf="!item?.image" [src]="'http://placehold.it/200x200/ffffff/333333'" [alt]="item?.name" />
+          <input style="width: 0.1px; height: 0.1px;" id="file" type="file" (change)="uploadPhoto($event, 'image')" />
+        </label>
+
+        <form [formGroup]="form" class="d-flex default-form-style">
+          <div class="form-field">
+            <div class="inputItem">
+              <button mat-button>
+                <mat-icon>
+                  perm_identity
+                </mat-icon>
+              </button>
+              <mat-form-field>
+                <input type="text" matInput formControlName="name" [placeholder]="cid + '.name' | translate" />
+              </mat-form-field>
+              <button mat-button>
+                <mat-icon
+                  [matTooltip]="'common.edit' | translate"
+                  class="cursor-pointer"
+                  (click)="enableEditing('name')"
+                >
+                  edit
+                </mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon
+                  *ngIf="form.controls['name'].dirty"
+                  [matTooltip]="'common.save' | translate"
+                  class="cursor-pointer"
+                  (click)="formSubmission(true); form.controls.name.disable(); form.controls.name.markAsPristine()"
+                  >save
+                </mat-icon>
+              </button>
+            </div>
+
+            <div class="inputItem">
+              <button mat-button>
+                <mat-icon>
+                  mail_outline
+                </mat-icon>
+              </button>
+              <mat-form-field>
+                <input type="email" matInput formControlName="email" [placeholder]="cid + '.email' | translate" />
+              </mat-form-field>
+              <button mat-button>
+                <mat-icon
+                  [matTooltip]="'common.edit' | translate"
+                  class="cursor-pointer"
+                  (click)="enableEditing('email')"
+                >
+                  edit
+                </mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon
+                  *ngIf="form.controls['email'].dirty"
+                  [matTooltip]="'common.save' | translate"
+                  class="cursor-pointer"
+                  (click)="formSubmission(true); form.controls.email.disable(); form.controls.email.markAsPristine()"
+                  >save
+                </mat-icon>
+              </button>
+            </div>
+
+            <div class="inputItem">
+              <button mat-button>
+                <mat-icon>
+                  lock
+                </mat-icon>
+              </button>
+              <mat-form-field>
+                <input
+                  type="password"
+                  matInput
+                  formControlName="password"
+                  [placeholder]="cid + '.password' | translate"
+                />
+              </mat-form-field>
+              <button mat-button>
+                <mat-icon
+                  [matTooltip]="'common.edit' | translate"
+                  class="cursor-pointer"
+                  (click)="enableEditing('password')"
+                >
+                  edit
+                </mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon
+                  *ngIf="form.controls['password'].dirty"
+                  [matTooltip]="'common.save' | translate"
+                  class="cursor-pointer"
+                  (click)="
+                    formSubmission(true); form.controls.password.disable(); form.controls.password.markAsPristine()
+                  "
+                  >save
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

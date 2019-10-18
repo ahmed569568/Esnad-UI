@@ -1,0 +1,8 @@
+<div class="container">
+  <button class="submit" mat-button (click)="submit.emit()" [disabled]="!form.valid">
+    {{ 'common.save' | translate }}
+  </button>
+  <button class="cancel" mat-button (click)="backClicked()">
+    {{ 'common.cancel' | translate }}
+  </button>
+</div>

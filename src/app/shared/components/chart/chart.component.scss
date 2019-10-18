@@ -1,0 +1,51 @@
+.operation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.in {
+  margin-top: 1rem;
+  .bullet,
+  .unit {
+    color: #9199b6;
+  }
+}
+.out {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #5069e4;
+}
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+.bullet {
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  i {
+    font-size: 18px;
+  }
+}
+.chart-title {
+  color: #5069e4;
+  font-size: 1.375rem;
+  padding-bottom: 3rem;
+  h3 {
+    color: #131b31;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+}
+.chart-footer {
+  padding-top: 2.6875rem;
+}
+.no-data {
+  height: 225px;
+  line-height: 15rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+}

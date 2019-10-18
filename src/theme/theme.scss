@@ -1,0 +1,169 @@
+@import "~ngx-toastr/toastr";
+/*
+ * Global application theme.
+ * Framework overrides and customization goes here.
+ */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+}
+
+.menuDropDown {
+  padding: 0;
+
+  span.mat-content {
+    span {
+      display: flex !important;
+    }
+  }
+}
+
+.default-form-style {
+  flex-wrap: wrap;
+
+  .form-field {
+    mat-form-field,
+    .mat-form-field {
+      width: 25rem;
+      margin: 0 10px;
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.chartjs-render-monitor {
+  width: 100% !important;
+}
+
+.clearfix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.form-title {
+  font-size: 32px;
+  margin: 8px 8px;
+  font-weight: 600;
+}
+
+.imageUploader {
+  width: 120px;
+  height: 120px;
+  padding: 5px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f6ff;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 72px;
+    color: #b6d2fc;
+  }
+
+  .addNew {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px dashed #0063f4;
+    height: 100%;
+
+    & > img {
+      margin: 0 auto;
+      width: 80%;
+      height: 80%;
+      border-radius: 8px;
+    }
+
+    .browse {
+      border-radius: 4px;
+      color: #fff;
+      font-size: 16px;
+      padding: 7px 10px;
+      background-color: #5069e4;
+    }
+
+    .drag {
+      color: #5069e4;
+      font-size: 16px;
+    }
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.full-height {
+  height: calc(100% - 64px);
+}
+
+.disabled {
+  background: #d9dce5 !important;
+  color: #b5bacb !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+app-branches-list,
+app-roles-list {
+  height: 100%;
+}
+
+.icon-image {
+  height: 14px;
+  margin-right: 5px;
+}
+
+.mrg-btm {
+  margin-bottom: 8px;
+}
+
+app-list-type {
+  margin: 10px;
+}
+
+.fff {
+  height: 300px;
+}
+
+#mainMap #map-layout {
+  height: var(--mapHeight);
+}
+
+//app-shell {
+//
+//}
