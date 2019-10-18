@@ -1,11 +1,11 @@
-import { Title } from '@angular/platform-browser';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MediaObserver } from '@angular/flex-layout';
-import { MenuItems } from '../menuItems';
-import { AuthenticationService, CredentialsService, I18nService } from '@app/core';
-import { environment } from '@env/environment';
-import { UtilitiesService } from '@app/shared/services/utilities.service';
+import {Title} from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {MediaObserver} from '@angular/flex-layout';
+import {MenuItems} from '../menuItems';
+import {AuthenticationService, CredentialsService, I18nService} from '@app/core';
+import {environment} from '@env/environment';
+import {UtilitiesService} from '@app/shared/services/utilities.service';
 
 @Component({
   selector: 'app-shell',
@@ -71,10 +71,8 @@ export class ShellComponent implements OnInit {
   toggleSidenavSize() {
     if (!this.isWide) {
       this.isWide = true;
-      console.log('wide', this.isWide);
     } else {
       this.isWide = false;
-      console.log('narrow', this.isWide);
     }
   }
 }

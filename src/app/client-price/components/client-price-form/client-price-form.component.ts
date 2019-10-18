@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {DriversService} from '@app/drivers/drivers.service';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {UtilitiesService} from '@app/shared/services/utilities.service';
+import {ClientPriceService} from '@app/client-price/client-price.service';
 
 @Component({
 	selector: 'app-drivers-form',
@@ -11,7 +11,7 @@ import {UtilitiesService} from '@app/shared/services/utilities.service';
 })
 export class ClientPriceFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
 	constructor(
-		service: DriversService,
+		service: ClientPriceService,
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
 		private utilities: UtilitiesService
