@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { Shell } from '@app/shell/shell.service';
-import { UsersProfileComponent } from '@app/users-feature/components/users-profile/users-profile.component';
-import { SharedModule } from '@app/shared/shared.module';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {Shell} from '@app/shell/shell.service';
+import {UsersProfileComponent} from '@app/users-feature/components/users-profile/users-profile.component';
+import {SharedModule} from '@app/shared/shared.module';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -12,7 +12,7 @@ const routes: Routes = [
     },
     {
       path: 'drivers',
-      loadChildren: './drivers/drivers.module#DriversModule'
+			loadChildren: './drivers/drivers.module#CategoriesModule'
     },
     {
       path: 'vehicles',
@@ -24,7 +24,7 @@ const routes: Routes = [
     },
     {
       path: 'roles',
-      loadChildren: './roles-feature/roles.module#RolesModule'
+			loadChildren: './roles/roles.module#RolesModule'
     },
     {
       path: 'students',

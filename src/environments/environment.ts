@@ -8,15 +8,15 @@
 // This is useful for granularity you might need beyond just the environment.
 // Note that as usual, any environment variables you expose through it will end up in your
 // bundle, and you should not use it for any sensitive information like passwords or keys.
-import { env } from './.env';
+import {env} from './.env';
 
 export const environment = {
   production: false,
   hmr: true,
   version: env.npm_package_version + '-dev',
-  serverUrl: 'http://35.243.244.23:8000/api/admin/',
-  socketUrl: 'http://35.243.244.23:3200/admins',
-  imagePath: 'http://35.243.244.23:8000/public/storage/',
+	serverUrl: 'http://35.243.244.23:7000/api/',
+	socketUrl: '',
+	imagePath: 'http://35.243.244.23:7000/api/public/storage/',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'ar-SA']
 };
