@@ -119,7 +119,12 @@
     "weekdays": "Weekdays",
     "user_settings": "User Settings",
     "vacation": "Vacation Days",
-    "shifts": "Shifts"
+		"shifts": "Shifts",
+		"treatments": "Treatments",
+		"clients": "Clients",
+		"forms": "Forms",
+		"employees": "Employees",
+		"inputs": "Inputs"
   },
   "check-in": {
     "title": "Check-in"
