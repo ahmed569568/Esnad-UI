@@ -14,8 +14,7 @@
 						<div fxFlex="" class="default-form">
 							<div
 								*ngFor="
-									let groups of service.formInputsCategorized | pairs;
-									trackBy: trackByFn
+									let groups of service.formInputsCategorized | pairs; let i = index; trackBy: trackByFn
 								"
 							>
 								<!-- default inputs Group start  aka (no tab group or tabs )-->
@@ -62,51 +61,58 @@
 
 								<!-- Tabs Groups start -->
 								<ng-container *ngIf="groups[0] !== 'defaultGroup'">
-									<mat-tab-group [selectedIndex]="0" [ngClass]="groups[0]">
-										<mat-tab
-											*ngFor="let tab of groups[1] | pairs; let i = index"
-											label="{{ tab[0] | translate }}"
-										>
-											<div class="pt-5">
-												<ng-container
-													*ngFor="
+									<mat-accordion>
+										<mat-expansion-panel [ngClass]="groups[0]">
+											<mat-expansion-panel-header>
+												<mat-panel-title>
+													{{ service?.stepsNames[i] }}
+												</mat-panel-title>
+											</mat-expansion-panel-header>
+
+											<mat-card
+												*ngFor="let tab of groups[1] | pairs; let i = index"
+											>
+												<div class="pt-5">
+													<ng-container
+														*ngFor="
 														let section of tab[1] | pairs;
 														trackBy: trackByFn
 													"
-												>
-													<div class="form-section">
-														<div
-															class="form-section-title"
-															*ngIf="section[0] !== 'defaultSection'"
-														>
-															{{ section[0] | translate }}
-														</div>
-														<div class="form-section-content">
-															<ng-container *ngFor="let field of section[1]">
-																<ng-container
-																	*ngIf="
+													>
+														<div class="form-section">
+															<div
+																class="form-section-title"
+																*ngIf="section[0] !== 'defaultSection'"
+															>
+																{{ section[0] | translate }}
+															</div>
+															<div class="form-section-content">
+																<ng-container *ngFor="let field of section[1]">
+																	<ng-container
+																		*ngIf="
 																		field?.form && fieldShowConditions(field)
 																	"
-																>
-																	<app-core-form-content
-																		[cid]="service.cid"
-																		[service]="service"
-																		[field]="field"
-																		[form]="form"
-																		(showHideChanges)="showHideChanges($event)"
-																		[isEdit]="isEdit"
-																		[isClone]="isClone"
-																		[isSubmitted]="isSubmitted"
 																	>
-																	</app-core-form-content>
+																		<app-core-form-content
+																			[cid]="service.cid"
+																			[service]="service"
+																			[field]="field"
+																			[form]="form"
+																			(showHideChanges)="showHideChanges($event)"
+																			[isEdit]="isEdit"
+																			[isClone]="isClone"
+																			[isSubmitted]="isSubmitted"
+																		>
+																		</app-core-form-content>
+																	</ng-container>
 																</ng-container>
-															</ng-container>
+															</div>
 														</div>
-													</div>
-												</ng-container>
-											</div>
-										</mat-tab>
-									</mat-tab-group>
+													</ng-container>
+												</div>
+											</mat-card>
+										</mat-expansion-panel>
+									</mat-accordion>
 								</ng-container>
 								<!-- Tabs Groups end -->
 							</div>
@@ -114,6 +120,25 @@
 					</div>
 				</mat-card-content>
 				<mat-card-footer></mat-card-footer>
+			</mat-card>
+		</div>
+
+		<div fxFlex fxLayout>
+			<mat-card fxFlex>
+				<mat-card-content>
+					<button
+						class="add_stage_button"
+						mat-stroked-button
+						(click)="createStage()"
+					>
+						<mat-icon
+							class="mdi-icon"
+							svgIcon="playlist-plus"
+							[attr.size]="'22px'"
+						></mat-icon>
+						add new stage
+					</button>
+				</mat-card-content>
 			</mat-card>
 		</div>
 

@@ -14,6 +14,7 @@ import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
 })
 export class TemplatesV2Service extends RootV2Service {
 	stepsCount = 0;
+	stepsNames: string[] = [];
 
 	featureProps: ItemProps[] = [
 		{
@@ -58,39 +59,43 @@ export class TemplatesV2Service extends RootV2Service {
 	}
 
 	createStage() {
-		const stageDefaultInputs = [
+		const stageDefaultInputs: ItemProps[] = [
 			{
-				name: 'step-' + this.stepsCount + '-name',
-				prop: 'step-' + this.stepsCount + '-name',
+				name: 'step_' + this.stepsCount + '_name',
+				prop: 'step_' + this.stepsCount + '_name',
 				form: {
+					name: 'step_name',
 					Validators: [Validators.required],
 					formFieldType: 'text',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step-' + this.stepsCount + '-name',
-							tabName: 'step-' + this.stepsCount + '-name'
+							tabGroupName: 'step_' + this.stepsCount + '_name',
+							tabName: 'step_' + this.stepsCount + '_name'
 						}
 					}
 				}
 			},
 			{
-				name: 'step-' + this.stepsCount + '-typeId',
-				prop: 'step-' + this.stepsCount + '-typeId',
+				name: 'step_' + this.stepsCount + '-typeId',
+				prop: 'step_' + this.stepsCount + '-typeId',
 				form: {
+					name: 'step_typeId',
 					Validators: [Validators.required],
 					formFieldType: 'ng_select',
-					dataUrl: 'settings/vehicle-types',
-					listPrefix: 'vehicle-types',
+					dataUrl: 'templates/groups/index',
+					listPrefix: 'groups',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step-' + this.stepsCount + '-name',
-							tabName: 'step-' + this.stepsCount + '-name'
+							tabGroupName: 'step_' + this.stepsCount + '_name',
+							tabName: 'step_' + this.stepsCount + '_name'
 						}
 					}
 				}
 			}
 		];
 
-		this.featureProps = [...this.featureProps, stageDefaultInputs];
+		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		this.stepsCount++;
+		console.log(this.featureProps);
 	}
 }

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { from, Subscription } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 import { AppHelper } from '@app/core/classes/app-helper';
 import { AppConfig } from '@app/core/classes/app-config';
@@ -821,6 +821,9 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 				});
 			});
 		});
+		this.service.formInputsCategorized = {
+			...this.service.formInputsCategorized
+		};
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {

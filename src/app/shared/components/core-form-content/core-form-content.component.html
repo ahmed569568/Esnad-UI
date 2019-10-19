@@ -430,7 +430,10 @@
 							dropdownPosition="auto"
 							[closeOnSelect]="false"
 							[formControlName]="field.name"
-							placeholder="{{ cid + '.' + field.name | translate }}"
+							placeholder="{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}"
 							appendTo="body"
 						>
 							<ng-template ng-header-tmp>
@@ -637,7 +640,10 @@
 							[closeOnSelect]="true"
 							[formControlName]="field.name"
 							(change)="onChangeValue_ng_select(field, $event)"
-							placeholder="{{ service.cid + '.' + field.name | translate }}"
+							placeholder="{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}"
 							appendTo="body"
 						>
 							<ng-template ng-label-tmp let-item="item" let-clear="clear">

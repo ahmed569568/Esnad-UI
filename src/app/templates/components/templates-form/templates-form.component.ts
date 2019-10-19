@@ -7,7 +7,8 @@ import { GroupByPipe } from 'ngx-pipes';
 
 @Component({
 	selector: 'app-templates-form',
-	templateUrl: 'templates-form-component.html'
+	templateUrl: 'templates-form-component.html',
+	styleUrls: ['templates-form-component.scss']
 })
 export class TemplatesFormComponent extends CoreFormV2Component
 	implements OnInit, OnDestroy {
@@ -43,4 +44,13 @@ export class TemplatesFormComponent extends CoreFormV2Component
 	}
 
 	prepareFormAfterSubmit() {}
+
+	createStage() {
+		this.service.createStage();
+		this.groupItemsByGroup();
+		this.createForm();
+		this.service.loadSelectLists('form', true);
+
+		console.log(this.service.formInputsCategorized);
+	}
 }

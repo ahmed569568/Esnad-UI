@@ -39,7 +39,7 @@ export abstract class RootV2Service {
 	/**
 	 * define the grid list items (columns)
 	 */
-	abstract featureProps: ItemProps[];
+	featureProps: ItemProps[];
 
 	protected constructor(
 		protected router: Router,
@@ -927,7 +927,7 @@ export abstract class RootV2Service {
 		}
 	}
 
-	loadSelectLists(type?: string) {
+	loadSelectLists(type?: string, checkExisting?: boolean) {
 		this.featureProps.forEach(field => {
 			if (
 				(field.list &&
@@ -947,6 +947,13 @@ export abstract class RootV2Service {
 						field.list.dataUrl &&
 						field.list.listPrefix
 					) {
+						if (
+							checkExisting &&
+							this.lists[field.list.listPrefix] &&
+							this.lists[field.list.listPrefix].length
+						) {
+							return;
+						}
 						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
@@ -961,6 +968,13 @@ export abstract class RootV2Service {
 						field.form.dataUrl &&
 						field.form.listPrefix
 					) {
+						if (
+							checkExisting &&
+							this.lists[field.form.listPrefix] &&
+							this.lists[field.form.listPrefix].length
+						) {
+							return;
+						}
 						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
@@ -975,6 +989,13 @@ export abstract class RootV2Service {
 						field.list.dataUrl &&
 						field.list.listPrefix
 					) {
+						if (
+							checkExisting &&
+							this.lists[field.list.listPrefix] &&
+							this.lists[field.list.listPrefix].length
+						) {
+							return;
+						}
 						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
@@ -987,6 +1008,13 @@ export abstract class RootV2Service {
 						field.form.dataUrl &&
 						field.form.listPrefix
 					) {
+						if (
+							checkExisting &&
+							this.lists[field.form.listPrefix] &&
+							this.lists[field.form.listPrefix].length
+						) {
+							return;
+						}
 						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
@@ -1070,6 +1098,7 @@ export abstract class RootV2Service {
 	closeIssue(id: number) {
 		console.log(id);
 	}
+
 	reopenIssue(id: number) {
 		console.log(id);
 	}
@@ -1077,4 +1106,6 @@ export abstract class RootV2Service {
 	goBack() {
 		this.shared.location.back();
 	}
+
+	createStage() {}
 }
