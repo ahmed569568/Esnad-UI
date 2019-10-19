@@ -124,7 +124,14 @@
 		"clients": "Clients",
 		"forms": "Forms",
 		"employees": "Employees",
-		"inputs": "Inputs"
+		"inputs": "Inputs",
+		"clients_list": "Clients list",
+		"new_client": "New client",
+		"forms_list": "Forms list",
+		"new_form": "New form",
+		"special_treatments": "Special treatments",
+		"expire_treatments": "expire treatments",
+		"active_treatments": "Active treatments"
   },
   "check-in": {
     "title": "Check-in"
@@ -247,7 +254,8 @@
     "specs": "Specifications",
     "users": "Users",
     "all_permissions": "Select All Permission Set",
-    "dashboard": "Dashboard"
+		"dashboard": "Dashboard",
+		"page_name": "Page name"
   },
   "auditlog": {
     "title": "Audit-log",
@@ -401,5 +409,31 @@
 		"space_rate": "Space Rate",
 		"showroom_rate": "Showroom Rate",
 		"apartment_rate": "Apartment Rate"
+	},
+	"treatments": {
+		"title": "Treatments",
+		"name": "Name",
+		"status": "Status",
+		"client": "Client name"
+	},
+	"clients": {
+		"title": "Clients",
+		"photo": "Photo",
+		"full_name": "Full name",
+		"phone": "Phone",
+		"email": "Email"
+	},
+	"forms": {
+		"title": "Forms",
+		"name": "Name",
+		"client": "Client name"
+	},
+	"employees": {
+		"title": "Employees",
+		"photo": "Photo",
+		"full_name": "Full name",
+		"group_id": "Group",
+		"phone": "Phone",
+		"email": "Email"
 	}
 }

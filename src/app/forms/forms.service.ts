@@ -51,8 +51,8 @@ export class FormsService extends RootService {
 			{
 				name: 'step_id',
 				prop: 'step_id',
-				listing: true,
-				formField: true,
+				listing: false,
+				formField: false,
 				formFieldType: 'select',
 				listPrefix: 'forms/steps',
 				required: true,
