@@ -1,0 +1,76 @@
+// custom styling
+mat-drawer {
+	&.wide-menu {
+		width: 270px !important;
+	}
+
+	&.narrow-menu {
+		width: 60px !important;
+	}
+}
+
+mat-drawer-content {
+	&.wide-menu {
+		margin-right: 270px !important;
+	}
+
+	&.narrow-menu {
+		margin-right: 60px !important;
+	}
+}
+
+ng-select {
+	&.ng-select-style1 {
+		.ng-select-container {
+			padding-top: 5px;
+		}
+
+		&.ng-select.ng-select-multiple
+			.ng-select-container
+			.ng-value-container
+			.ng-value {
+			background-color: #d8dce4;
+			color: #202020;
+			padding: 2px 5px 2px 15px;
+			border-radius: 20px;
+			display: inline-flex;
+			justify-content: center;
+			align-content: center;
+
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				line-height: initial;
+			}
+
+			.ng-value-icon {
+				padding-right: 5px;
+
+				mat-icon {
+					justify-content: center;
+					align-items: center;
+					line-height: initial;
+					display: flex;
+
+					svg {
+						color: #97a5cb;
+					}
+				}
+			}
+		}
+
+		&.required-asterisk-inline-before {
+			.ng-value-container .ng-placeholder {
+				&::before {
+					content: "*";
+					display: block;
+					top: 0;
+					right: -8px;
+					color: #f44336;
+					position: absolute;
+				}
+			}
+		}
+	}
+}

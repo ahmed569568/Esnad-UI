@@ -36,6 +36,11 @@ export abstract class RootV2Service {
 	importData: any;
 	clearInput: Subject<any> = new Subject();
 
+	/**
+	 * define the grid list items (columns)
+	 */
+	abstract featureProps: ItemProps[];
+
 	protected constructor(
 		protected router: Router,
 		protected api: ApiRequestV2Service,
@@ -472,8 +477,8 @@ export abstract class RootV2Service {
 			);
 	}
 
-	refactorListsData(field: string, response: {}) {
-		return response;
+	refactorListsData(field: string, response: any) {
+		return response.response.data;
 	}
 
 	/**
@@ -492,11 +497,6 @@ export abstract class RootV2Service {
 			// this.lists[field].data = this.lists[field].data.concat(resp.response.data);
 		}
 	}
-
-	/**
-	 * define the grid list items (columns)
-	 */
-	abstract get featureProps(): ItemProps[];
 
 	/**
 	 * // todo : update this function docs
@@ -948,7 +948,10 @@ export abstract class RootV2Service {
 						field.list.listPrefix
 					) {
 						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
-							this.lists[field.list.listPrefix] = result.data;
+							this.lists[field.list.listPrefix] = this.refactorListsData(
+								field.name,
+								result
+							);
 						});
 					}
 				} else if (type && type === 'form') {
@@ -959,7 +962,10 @@ export abstract class RootV2Service {
 						field.form.listPrefix
 					) {
 						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
-							this.lists[field.form.listPrefix] = result.data;
+							this.lists[field.form.listPrefix] = this.refactorListsData(
+								field.name,
+								result
+							);
 						});
 					}
 				} else {
@@ -970,7 +976,10 @@ export abstract class RootV2Service {
 						field.list.listPrefix
 					) {
 						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
-							this.lists[field.list.listPrefix] = result.data;
+							this.lists[field.list.listPrefix] = this.refactorListsData(
+								field.name,
+								result
+							);
 						});
 					} else if (
 						field &&
@@ -979,7 +988,10 @@ export abstract class RootV2Service {
 						field.form.listPrefix
 					) {
 						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
-							this.lists[field.form.listPrefix] = result.data;
+							this.lists[field.form.listPrefix] = this.refactorListsData(
+								field.name,
+								result
+							);
 						});
 					}
 				}

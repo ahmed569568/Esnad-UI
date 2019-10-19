@@ -7,8 +7,7 @@ import { GroupByPipe } from 'ngx-pipes';
 
 @Component({
 	selector: 'app-templates-form',
-	templateUrl:
-		'../../../core/components/core-form-v2/core-form-v2.component.html'
+	templateUrl: 'templates-form-component.html'
 })
 export class TemplatesFormComponent extends CoreFormV2Component
 	implements OnInit, OnDestroy {

@@ -23,7 +23,7 @@ export class MenuItems {
 		{
 			title: 'templates',
 			url: '/templates',
-			icon: 'file'
+			icon: 'file_copy'
 		},
 		{
 			title: 'settings',

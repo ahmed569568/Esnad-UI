@@ -1,0 +1,129 @@
+<div
+	ngClass.gt-md="form-spacing lg"
+	[ngClass]="{ headerSmallSize: headerSmallSize }"
+>
+	<form fxFlex fxLayout="column" class="core-form-style" [formGroup]="form">
+		<div fxFlex fxLayout class="page_heading">
+			<span class="title"> </span>
+		</div>
+
+		<div fxFlex fxLayout>
+			<mat-card fxFlex>
+				<mat-card-content>
+					<div fxFlex="" fxLayout="column" class="d-flex flex-items-center">
+						<div fxFlex="" class="default-form">
+							<div
+								*ngFor="
+									let groups of service.formInputsCategorized | pairs;
+									trackBy: trackByFn
+								"
+							>
+								<!-- default inputs Group start  aka (no tab group or tabs )-->
+								<ng-container *ngIf="groups[0] === 'defaultGroup'">
+									<ng-container
+										*ngFor="let tab of groups[1] | pairs; trackBy: trackByFn"
+									>
+										<ng-container
+											*ngFor="let section of tab[1] | pairs; trackBy: trackByFn"
+										>
+											<div class="form-section defaultSection">
+												<div
+													class="form-section-title"
+													*ngIf="section[0] !== 'defaultSection'"
+												>
+													{{ section[0] | translate }}
+												</div>
+												<div class="form-section-content">
+													<ng-container
+														*ngFor="let field of section[1]; trackBy: trackByFn"
+													>
+														<ng-container
+															*ngIf="field?.form && fieldShowConditions(field)"
+														>
+															<app-core-form-content
+																[cid]="service.cid"
+																[service]="service"
+																[field]="field"
+																[form]="form"
+																(showHideChanges)="showHideChanges($event)"
+																[isEdit]="isEdit"
+																[isClone]="isClone"
+																[isSubmitted]="isSubmitted"
+															>
+															</app-core-form-content>
+														</ng-container>
+													</ng-container>
+												</div>
+											</div>
+										</ng-container>
+									</ng-container>
+								</ng-container>
+								<!-- default inputs Group start -->
+
+								<!-- Tabs Groups start -->
+								<ng-container *ngIf="groups[0] !== 'defaultGroup'">
+									<mat-tab-group [selectedIndex]="0" [ngClass]="groups[0]">
+										<mat-tab
+											*ngFor="let tab of groups[1] | pairs; let i = index"
+											label="{{ tab[0] | translate }}"
+										>
+											<div class="pt-5">
+												<ng-container
+													*ngFor="
+														let section of tab[1] | pairs;
+														trackBy: trackByFn
+													"
+												>
+													<div class="form-section">
+														<div
+															class="form-section-title"
+															*ngIf="section[0] !== 'defaultSection'"
+														>
+															{{ section[0] | translate }}
+														</div>
+														<div class="form-section-content">
+															<ng-container *ngFor="let field of section[1]">
+																<ng-container
+																	*ngIf="
+																		field?.form && fieldShowConditions(field)
+																	"
+																>
+																	<app-core-form-content
+																		[cid]="service.cid"
+																		[service]="service"
+																		[field]="field"
+																		[form]="form"
+																		(showHideChanges)="showHideChanges($event)"
+																		[isEdit]="isEdit"
+																		[isClone]="isClone"
+																		[isSubmitted]="isSubmitted"
+																	>
+																	</app-core-form-content>
+																</ng-container>
+															</ng-container>
+														</div>
+													</div>
+												</ng-container>
+											</div>
+										</mat-tab>
+									</mat-tab-group>
+								</ng-container>
+								<!-- Tabs Groups end -->
+							</div>
+						</div>
+					</div>
+				</mat-card-content>
+				<mat-card-footer></mat-card-footer>
+			</mat-card>
+		</div>
+
+		<div fxFlex fxLayout class="page_footer">
+			<span></span>
+			<app-form-footer
+				(submit)="formSubmission()"
+				(cancel)="cancelFormSubmission()"
+				[form]="form"
+			></app-form-footer>
+		</div>
+	</form>
+</div>
