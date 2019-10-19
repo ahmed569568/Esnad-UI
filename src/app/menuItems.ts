@@ -11,13 +11,13 @@ export class MenuItems {
 			children: [
 				{
 					title: 'special_treatments',
-					url: '/treatments?type=special'
+					url: '/treatments'
 				}, {
 					title: 'active_treatments',
-					url: '/treatments?type=active'
+					url: '/treatments'
 				}, {
 					title: 'expire_treatments',
-					url: '/treatments?type=expire'
+					url: '/treatments'
 				},
 			]
 		},
