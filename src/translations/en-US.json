@@ -372,5 +372,29 @@
   },
   "control": {
     "number": "Number"
-  }
+	},
+	"inputs": {
+		"cities": "Cities",
+		"clients_rate": "Clients rate",
+		"country_name": "Country name",
+		"add_city": "Add city",
+		"city_name": "City name",
+		"remove_city": "Remove city",
+		"add_region": "Add region",
+		"region_name": "Region name",
+		"remove_region": "Remove region",
+		"add_province": "Add province",
+		"province_name": "Province name",
+		"remove_province": "Remove province",
+		"add_district": "Add district",
+		"district_name": "District name",
+		"remove_district": "Remove district",
+		"add_street": "Street",
+		"street_name": "Street name",
+		"remove_street": "Remove street",
+		"villa_rate": "Villa Rate",
+		"space_rate": "Space Rate",
+		"showroom_rate": "Showroom Rate",
+		"apartment_rate": "Apartment Rate"
+	}
 }

@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {UtilitiesService} from '@app/shared/services/utilities.service';
 import {InputsService} from '@app/inputs/inputs.service';
 
 @Component({
 	selector: 'app-drivers-form',
-	templateUrl: './inputs-form.component.html'
+	templateUrl: './inputs-form.component.html',
+	styleUrls: ['./inputs-form.component.scss']
 })
 export class InputsFormComponent implements OnInit, OnDestroy {
 
@@ -24,7 +25,11 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.form = this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
+			villa: ['', []],
+			space: ['', []],
+			showroom: ['', []],
+			apartment: ['', []],
 			countries: this.fb.array([
 				this.initCountries(),
 			])
@@ -33,7 +38,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initCountries() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 			cities: this.fb.array([
 				this.initCities(),
 			])
@@ -42,7 +47,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initCities() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 			regions: this.fb.array([
 				this.initRegions(),
 			])
@@ -51,7 +56,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initRegions() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 			provinces: this.fb.array([
 				this.initProvinces(),
 			])
@@ -60,7 +65,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initProvinces() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 			districts: this.fb.array([
 				this.initDistricts(),
 			])
@@ -69,7 +74,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initDistricts() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 			streets: this.fb.array([
 				this.initStreets(),
 			])
@@ -78,7 +83,7 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	initStreets() {
 		return this.fb.group({
-			name: ['', [Validators.required, Validators.minLength(5)]],
+			name: ['', []],
 		});
 	}
 
@@ -107,6 +112,10 @@ export class InputsFormComponent implements OnInit, OnDestroy {
 
 	deleteItem(itemArrayFromFormArray: any, index: number, type: string) {
 		itemArrayFromFormArray.get(type).removeAt(index);
+	}
+
+	formSubmission() {
+		console.log(this.form.value);
 	}
 
 	ngOnDestroy(): void {

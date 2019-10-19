@@ -1,0 +1,26 @@
+.cities, .regions, .provinces, .districts, .streets {
+	margin-left: 15px;
+}
+
+.actions {
+	margin: 0 15px;
+	width: 200px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.addressContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.addressFieldContainer {
+		display: flex;
+	}
+}
+
+.fullWidthInput {
+	width: 50%;
+}
