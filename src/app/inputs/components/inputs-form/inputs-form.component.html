@@ -1,0 +1,130 @@
+<div fxFlex fxLayout="column" style="padding: 0rem 1rem;">
+	<mat-tab-group>
+		<mat-tab [label]="service.cid + '.cities' | translate">
+			<mat-card fxFlex fxLayout="column">
+
+				<div class="container">
+					<form [formGroup]="form" fxFlex fxLayout="column" style="justify-content: space-around" class="example-form"
+								novalidate>
+						<div formArrayName="countries"
+								 *ngFor="let country of form.get('countries').controls; let countryIndex = index;">
+							<div [formGroupName]="countryIndex">
+								<mat-form-field class="example-full-width">
+									<input matInput formControlName="name" [placeholder]="service.cid + '.country_name'">
+								</mat-form-field>
+								<button mat-flat-button color="primary"
+												(click)="pushItem(country, 'cities')">{{service.cid + '.add_city' | translate}}</button>
+
+								<div formArrayName="cities"
+										 *ngFor="let city of country.get('cities').controls; let cityIndex = index;">
+									<div [formGroupName]="cityIndex">
+										<mat-form-field class="example-full-width">
+											<input matInput formControlName="name" [placeholder]="service.cid + '.city_name'">
+										</mat-form-field>
+										<button mat-flat-button color="warn"
+														(click)="deleteItem(country, cityIndex, 'cities')">{{service.cid + '.remove_city' | translate}}</button>
+										<button mat-flat-button color="primary"
+														(click)="pushItem(city, 'regions')">{{service.cid + '.add_region' | translate}}</button>
+
+										<div formArrayName="regions"
+												 *ngFor="let region of city.get('regions').controls; let regionIndex = index;">
+											<div [formGroupName]="regionIndex">
+												<mat-form-field class="example-full-width">
+													<input matInput formControlName="name" [placeholder]="service.cid + '.region_name'">
+												</mat-form-field>
+												<button mat-flat-button color="warn"
+																(click)="deleteItem(city, regionIndex, 'regions')">{{service.cid + '.remove_region' | translate}}</button>
+												<button mat-flat-button color="primary"
+																(click)="pushItem(region, 'provinces')">{{service.cid + '.add_province' | translate}}</button>
+
+												<div formArrayName="provinces"
+														 *ngFor="let province of region.get('provinces').controls; let provinceIndex = index;">
+													<div [formGroupName]="provinceIndex">
+														<mat-form-field class="example-full-width">
+															<input matInput formControlName="name" [placeholder]="service.cid + '.province_name'">
+														</mat-form-field>
+														<button mat-flat-button color="warn"
+																		(click)="deleteItem(region, provinceIndex, 'provinces')">{{service.cid + '.remove_province' | translate}}</button>
+														<button mat-flat-button color="primary"
+																		(click)="pushItem(province, 'districts')">{{service.cid + '.add_district' | translate}}</button>
+
+														<div formArrayName="districts"
+																 *ngFor="let district of province.get('districts').controls; let districtIndex = index;">
+															<div [formGroupName]="districtIndex">
+																<mat-form-field class="example-full-width">
+																	<input matInput formControlName="name" [placeholder]="service.cid + '.district_name'">
+																</mat-form-field>
+																<button mat-flat-button color="warn"
+																				(click)="deleteItem(province, districtIndex, 'districts')">
+																	{{service.cid + '.remove_district' | translate}}
+																</button>
+																<button mat-flat-button color="primary"
+																				(click)="pushItem(district, 'streets')">{{service.cid + '.add-street' | translate}}</button>
+
+																<div formArrayName="streets"
+																		 *ngFor="let street of district.get('streets').controls; let streetIndex = index;">
+																	<div [formGroupName]="streetIndex">
+																		<mat-form-field class="example-full-width">
+																			<input matInput formControlName="name"
+																						 [placeholder]="service.cid + '.street_name'">
+																		</mat-form-field>
+																		<button mat-flat-button color="warn"
+																						(click)="deleteItem(district, streetIndex, 'streets')">
+																			{{service.cid + '.remove_street' | translate}}
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button type="submit" [disabled]="!form.valid">Submit</button>
+					</form>
+				</div>
+
+				<!--				<form fxFlex fxLayout="row" style="justify-content: space-around" class="example-form">-->
+				<!--					<mat-form-field class="example-full-width">-->
+				<!--						<input matInput [placeholder]="service.cid + '.city_name'">-->
+				<!--					</mat-form-field>-->
+				<!--					<button mat-flat-button>{{service.cid + '.add_city' | translate}}</button>-->
+				<!--				</form>-->
+
+				<!--				<form fxFlex fxLayout="row" style="justify-content: space-around" class="example-form">-->
+				<!--					<mat-form-field class="example-full-width">-->
+				<!--						<input matInput [placeholder]="cid + '.city_name'">-->
+				<!--					</mat-form-field>-->
+				<!--					<button mat-flat-button>{{cid + '.add_city' | translate}}</button>-->
+				<!--				</form>-->
+
+				<!--				<form fxFlex fxLayout="row" style="justify-content: space-around" class="example-form">-->
+				<!--					<mat-form-field class="example-full-width">-->
+				<!--						<input matInput [placeholder]="cid + '.city_name'">-->
+				<!--					</mat-form-field>-->
+				<!--					<button mat-flat-button>{{cid + '.add_city' | translate}}</button>-->
+				<!--				</form>-->
+
+				<!--				<form fxFlex fxLayout="row" style="justify-content: space-around" class="example-form">-->
+				<!--					<mat-form-field class="example-full-width">-->
+				<!--						<input matInput [placeholder]="cid + '.city_name'">-->
+				<!--					</mat-form-field>-->
+				<!--					<button mat-flat-button>{{cid + '.add_city' | translate}}</button>-->
+				<!--				</form>-->
+
+				<!--				<form fxFlex fxLayout="row" style="justify-content: space-around" class="example-form">-->
+				<!--					<mat-form-field class="example-full-width">-->
+				<!--						<input matInput [placeholder]="cid + '.city_name'">-->
+				<!--					</mat-form-field>-->
+				<!--					<button mat-flat-button>{{cid + '.add_city' | translate}}</button>-->
+				<!--				</form>-->
+
+			</mat-card>
+		</mat-tab>
+		<mat-tab [label]="service.cid + '.clients_rate' | translate"> Content 2</mat-tab>
+	</mat-tab-group>
+</div>

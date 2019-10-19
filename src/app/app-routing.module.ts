@@ -67,6 +67,10 @@ const routes: Routes = [
 			path: 'users',
 			loadChildren: './users/users.module#UsersModule'
 		},
+		{
+			path: 'inputs',
+			loadChildren: './inputs/inputs.module#InputsModule'
+		}
 	]),
 	// Fallback when no prior route is matched
 	{path: '**', redirectTo: '', pathMatch: 'full'}
