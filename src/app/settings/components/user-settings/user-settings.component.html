@@ -1,55 +1,69 @@
 <div fxFlex fxLayout="column">
-  <h2>{{ 'settings.general-settings' | translate }}</h2>
+	<h2>{{ 'settings.general-settings' | translate }}</h2>
 
-  <h3>{{ 'settings.logo' | translate }}</h3>
+	<h3>{{ 'settings.logo' | translate }}</h3>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="photo-upload">
-      <input type="file" accept="image/*" (change)="uploadPhoto($event, 'image')" />
-      <img id="blah" [src]="imageSrc || '../../../../assets/img-alt.png'" alt="your image" />
-    </div>
+	<form [formGroup]="form" (ngSubmit)="submit()">
+		<div class="photo-upload">
+			<input
+				type="file"
+				accept="image/*"
+				(change)="uploadPhoto($event, 'image')"
+			/>
+			<img
+				id="blah"
+				[src]="imageSrc || '../../../../assets/img-alt.png'"
+				alt="your image"
+			/>
+		</div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'settings.school_name' | translate }}</mat-label>
-      <input type="text" matInput [formControlName]="'school_name'" />
-    </mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'settings.school_name' | translate }}</mat-label>
+			<input type="text" matInput [formControlName]="'school_name'" />
+		</mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'settings.email' | translate }}</mat-label>
-      <input type="email" matInput [formControlName]="'school_email'" />
-    </mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'settings.email' | translate }}</mat-label>
+			<input type="email" matInput [formControlName]="'school_email'" />
+		</mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'settings.website' | translate }}</mat-label>
-      <input type="website" matInput [formControlName]="'website'" />
-    </mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'settings.website' | translate }}</mat-label>
+			<input type="website" matInput [formControlName]="'website'" />
+		</mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'settings.phone' | translate }}</mat-label>
-      <input type="mobile" matInput [formControlName]="'phone'" />
-    </mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'settings.phone' | translate }}</mat-label>
+			<input type="mobile" matInput [formControlName]="'phone'" />
+		</mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'settings.address' | translate }}</mat-label>
-      <input type="mobile" matInput [formControlName]="'address'" />
-    </mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>{{ 'settings.address' | translate }}</mat-label>
+			<input type="mobile" matInput [formControlName]="'address'" />
+		</mat-form-field>
 
-    <!--    <mat-form-field appearance="outline">-->
-    <!--      <mat-label>{{ 'settings.lat' | translate }}</mat-label>-->
-    <!--      <input type="mobile" matInput [formControlName]="'lat'" />-->
-    <!--    </mat-form-field>-->
+		<!--    <mat-form-field appearance="outline">-->
+		<!--      <mat-label>{{ 'settings.lat' | translate }}</mat-label>-->
+		<!--      <input type="mobile" matInput [formControlName]="'lat'" />-->
+		<!--    </mat-form-field>-->
 
-    <!--    <mat-form-field appearance="outline">-->
-    <!--      <mat-label>{{ 'settings.lng' | translate }}</mat-label>-->
-    <!--      <input type="mobile" matInput [formControlName]="'lng'" />-->
-    <!--    </mat-form-field>-->
+		<!--    <mat-form-field appearance="outline">-->
+		<!--      <mat-label>{{ 'settings.lng' | translate }}</mat-label>-->
+		<!--      <input type="mobile" matInput [formControlName]="'lng'" />-->
+		<!--    </mat-form-field>-->
 
-    <div id="map-layout">
-      <app-map [mapId]="'client_settings_form'" [mapConfig]="mapConfigs" [service]="null"></app-map>
-    </div>
+		<div id="map-layout">
+			<app-map
+				[mapId]="'client_settings_form'"
+				[mapConfig]="mapConfigs"
+				[service]="null"
+			></app-map>
+		</div>
 
-    <div class="container">
-      <button class="submit" mat-button type="submit" [disabled]="!form.valid">{{ 'common.save' | translate }}</button>
-    </div>
-  </form>
+		<div class="container">
+			<button class="submit" mat-button type="submit" [disabled]="!form.valid">
+				{{ 'common.save' | translate }}
+			</button>
+		</div>
+	</form>
 </div>

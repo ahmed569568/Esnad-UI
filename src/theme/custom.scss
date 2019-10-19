@@ -76,14 +76,11 @@ ng-select {
 		&.ng-select-focused
 			.ng-select-container
 			.ng-value-container
-			.ng-placeholder {
-			transform: translateY(-1.28125em) scale(0.75) perspective(100px)
-				translateZ(0.001px) translateX(70px);
-		}
+			.ng-placeholder,
+		.ng-select-container .ng-value-container .ng-placeholder,
 		&.ng-has-value .ng-placeholder,
 		.ng-select.ng-select-opened .ng-placeholder {
-			transform: translateY(-1.28125em) scale(0.75) perspective(100px)
-				translateZ(0.001px) translateX(70px);
+			transform-origin: 100% 0 !important;
 		}
 	}
 }

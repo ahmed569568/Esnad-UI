@@ -1,4 +1,6 @@
 <mat-form-field appearance="outline">
-  <mat-label><mat-icon>search</mat-icon>{{ 'common.search' | translate }}</mat-label>
-  <input matInput type="search" [(ngModel)]="term" (keyup.enter)="search()" />
+	<mat-label
+		><mat-icon>search</mat-icon>{{ 'common.search' | translate }}</mat-label
+	>
+	<input matInput type="search" [(ngModel)]="term" (keyup.enter)="search()" />
 </mat-form-field>

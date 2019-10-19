@@ -13,38 +13,43 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
-  declarations: [WeekDaysComponent, VacationDaysComponent, ShiftsComponent, UserSettingsComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        data: { title: extract('settings.title') },
-        children: [
-          {
-            path: 'user-settings',
-            component: UserSettingsComponent
-          },
-          {
-            path: 'weekdays',
-            component: WeekDaysComponent
-          },
-          {
-            path: 'vacation',
-            component: VacationDaysComponent
-          },
-          {
-            path: 'shifts',
-            component: ShiftsComponent
-          }
-        ]
-      }
-    ]),
-    MaterialModule,
-    FlexModule,
-    TranslateModule,
-    ReactiveFormsModule
-  ]
+	declarations: [
+		WeekDaysComponent,
+		VacationDaysComponent,
+		ShiftsComponent,
+		UserSettingsComponent
+	],
+	imports: [
+		CommonModule,
+		SharedModule,
+		RouterModule.forChild([
+			{
+				path: '',
+				data: { title: extract('settings.title') },
+				children: [
+					{
+						path: 'user-settings',
+						component: UserSettingsComponent
+					},
+					{
+						path: 'weekdays',
+						component: WeekDaysComponent
+					},
+					{
+						path: 'vacation',
+						component: VacationDaysComponent
+					},
+					{
+						path: 'shifts',
+						component: ShiftsComponent
+					}
+				]
+			}
+		]),
+		MaterialModule,
+		FlexModule,
+		TranslateModule,
+		ReactiveFormsModule
+	]
 })
 export class SettingsModule {}

@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {EvaluationTypeListComponent} from './components/evaluation-type-list/evaluation-type-list.component';
-import {EvaluationTypeFormComponent} from './components/evaluation-type-form/evaluation-type-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EvaluationTypeListComponent } from './components/evaluation-type-list/evaluation-type-list.component';
+import { EvaluationTypeFormComponent } from './components/evaluation-type-form/evaluation-type-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
 
 @NgModule({
 	declarations: [EvaluationTypeListComponent, EvaluationTypeFormComponent],
@@ -14,7 +14,7 @@ import {extract} from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('drivers.title')},
+				data: { title: extract('drivers.title') },
 				component: EvaluationTypeListComponent,
 				children: [
 					{
@@ -30,5 +30,4 @@ import {extract} from '@app/core';
 		])
 	]
 })
-export class EvaluationTypeModule {
-}
+export class EvaluationTypeModule {}

@@ -22,7 +22,12 @@ export class TemplatesV2Service extends RootV2Service {
 			prop: 'name',
 			form: {
 				Validators: [Validators.required],
-				formFieldType: 'text'
+				formFieldType: 'text',
+				grid: {
+					lg: '30%',
+					md: '50%',
+					sm: '100%'
+				}
 			}
 		},
 		{
@@ -32,7 +37,12 @@ export class TemplatesV2Service extends RootV2Service {
 				Validators: [],
 				formFieldType: 'ng_select',
 				dataUrl: 'templates/clients/index',
-				listPrefix: 'clients'
+				listPrefix: 'clients',
+				grid: {
+					lg: '30%',
+					md: '50%',
+					sm: '100%'
+				}
 			}
 		}
 	];
@@ -69,15 +79,20 @@ export class TemplatesV2Service extends RootV2Service {
 					formFieldType: 'text',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step_' + this.stepsCount + '_name',
-							tabName: 'step_' + this.stepsCount + '_name'
+							tabGroupName: 'step_' + this.stepsCount,
+							tabName: 'form_' + this.stepsCount
 						}
+					},
+					grid: {
+						lg: '30%',
+						md: '50%',
+						sm: '100%'
 					}
 				}
 			},
 			{
-				name: 'step_' + this.stepsCount + '-typeId',
-				prop: 'step_' + this.stepsCount + '-typeId',
+				name: 'step_' + this.stepsCount + '_typeId',
+				prop: 'step_' + this.stepsCount + '_typeId',
 				form: {
 					name: 'step_typeId',
 					Validators: [Validators.required],
@@ -86,9 +101,14 @@ export class TemplatesV2Service extends RootV2Service {
 					listPrefix: 'groups',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step_' + this.stepsCount + '_name',
-							tabName: 'step_' + this.stepsCount + '_name'
+							tabGroupName: 'step_' + this.stepsCount,
+							tabName: 'form_' + this.stepsCount
 						}
+					},
+					grid: {
+						lg: '30%',
+						md: '50%',
+						sm: '100%'
 					}
 				}
 			}

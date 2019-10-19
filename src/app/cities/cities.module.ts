@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CitiesListComponent} from './components/cities-list/cities-list.component';
-import {CitiesFormComponent} from './components/cities-form/cities-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CitiesListComponent } from './components/cities-list/cities-list.component';
+import { CitiesFormComponent } from './components/cities-form/cities-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
 
 @NgModule({
 	declarations: [CitiesListComponent, CitiesFormComponent],
@@ -14,7 +14,7 @@ import {extract} from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('drivers.title')},
+				data: { title: extract('drivers.title') },
 				component: CitiesListComponent,
 				children: [
 					{
@@ -30,5 +30,4 @@ import {extract} from '@app/core';
 		])
 	]
 })
-export class CitiesModule {
-}
+export class CitiesModule {}

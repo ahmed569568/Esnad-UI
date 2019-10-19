@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {PricesService} from '@app/prices/prices.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { PricesService } from '@app/prices/prices.service';
 
 @Component({
 	selector: 'app-drivers-form',
 	templateUrl: '../../../core/components/core-form/core-form.component.html'
 })
-export class PricesFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
+export class PricesFormComponent extends CoreFormComponent
+	implements OnInit, OnDestroy {
 	constructor(
 		service: PricesService,
 		fb: FormBuilder,
@@ -20,7 +21,7 @@ export class PricesFormComponent extends CoreFormComponent implements OnInit, On
 	}
 
 	initLists() {
-		this.lists = [{['drivers/languages']: 1}];
+		this.lists = [{ ['drivers/languages']: 1 }];
 	}
 
 	// refactorItem(item: any): any {

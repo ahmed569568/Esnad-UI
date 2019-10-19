@@ -6,3 +6,9 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.form-section {
+	&.cardStyle {
+		background-color: #fff;
+	}
+}

@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ClientPriceListComponent} from './components/client-price-list/client-price-list.component';
-import {ClientPriceFormComponent} from './components/client-price-form/client-price-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ClientPriceListComponent } from './components/client-price-list/client-price-list.component';
+import { ClientPriceFormComponent } from './components/client-price-form/client-price-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
 
 @NgModule({
 	declarations: [ClientPriceListComponent, ClientPriceFormComponent],
@@ -14,7 +14,7 @@ import {extract} from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('drivers.title')},
+				data: { title: extract('drivers.title') },
 				component: ClientPriceListComponent,
 				children: [
 					{
@@ -30,5 +30,4 @@ import {extract} from '@app/core';
 		])
 	]
 })
-export class ClientPriceModule {
-}
+export class ClientPriceModule {}

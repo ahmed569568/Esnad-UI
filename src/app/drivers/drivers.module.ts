@@ -7,27 +7,27 @@ import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
 
 @NgModule({
-  declarations: [DriversListComponent, DriversFormComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        data: { title: extract('drivers.title') },
-        component: DriversListComponent,
-        children: [
-          {
-            path: 'create',
-            component: DriversFormComponent
-          },
-          {
-            path: 'edit/:id',
-            component: DriversFormComponent
-          }
-        ]
-      }
-    ])
-  ]
+	declarations: [DriversListComponent, DriversFormComponent],
+	imports: [
+		CommonModule,
+		SharedModule,
+		RouterModule.forChild([
+			{
+				path: '',
+				data: { title: extract('drivers.title') },
+				component: DriversListComponent,
+				children: [
+					{
+						path: 'create',
+						component: DriversFormComponent
+					},
+					{
+						path: 'edit/:id',
+						component: DriversFormComponent
+					}
+				]
+			}
+		])
+	]
 })
 export class DriversModule {}

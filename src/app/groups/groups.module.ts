@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {GroupsListComponent} from './components/groups-list/groups-list.component';
-import {GroupsFormComponent} from './components/groups-form/groups-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GroupsListComponent } from './components/groups-list/groups-list.component';
+import { GroupsFormComponent } from './components/groups-form/groups-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
 
 @NgModule({
 	declarations: [GroupsListComponent, GroupsFormComponent],
@@ -14,7 +14,7 @@ import {extract} from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('drivers.title')},
+				data: { title: extract('drivers.title') },
 				component: GroupsListComponent,
 				children: [
 					{
@@ -30,5 +30,4 @@ import {extract} from '@app/core';
 		])
 	]
 })
-export class GroupsModule {
-}
+export class GroupsModule {}

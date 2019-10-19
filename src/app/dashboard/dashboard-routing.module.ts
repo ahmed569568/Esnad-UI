@@ -6,15 +6,19 @@ import { Shell } from '@app/shell/shell.service';
 import { DashboardComponent } from '@app/dashboard/dashboard.component';
 
 const routes: Routes = [
-  Shell.childRoutes([
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent, data: { title: extract('Dashboard') } }
-  ])
+	Shell.childRoutes([
+		{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+		{
+			path: 'dashboard',
+			component: DashboardComponent,
+			data: { title: extract('Dashboard') }
+		}
+	])
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: []
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
+	providers: []
 })
 export class DashboardRoutingModule {}

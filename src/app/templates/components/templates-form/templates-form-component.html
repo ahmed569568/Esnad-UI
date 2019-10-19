@@ -14,7 +14,7 @@
 						<div fxFlex="" class="default-form">
 							<div
 								*ngFor="
-									let groups of service.formInputsCategorized | pairs; let i = index; trackBy: trackByFn
+									let groups of service.formInputsCategorized | pairs; let groupI = index; trackBy: trackByFn
 								"
 							>
 								<!-- default inputs Group start  aka (no tab group or tabs )-->
@@ -32,7 +32,12 @@
 												>
 													{{ section[0] | translate }}
 												</div>
-												<div class="form-section-content">
+												<div
+													class="form-section-content"
+													fxFlex=""
+													fxLayout="row"
+													fxLayoutGap="30px"
+												>
 													<ng-container
 														*ngFor="let field of section[1]; trackBy: trackByFn"
 													>
@@ -48,6 +53,9 @@
 																[isEdit]="isEdit"
 																[isClone]="isClone"
 																[isSubmitted]="isSubmitted"
+																[fxFlex.lg]="getInputGridSize(field.form.grid.lg, '30px')"
+																[fxFlex.md]="getInputGridSize(field.form.grid.md, '30px')"
+																[fxFlex.sm]="getInputGridSize(field.form.grid.sm, '30px')"
 															>
 															</app-core-form-content>
 														</ng-container>
@@ -65,28 +73,40 @@
 										<mat-expansion-panel [ngClass]="groups[0]">
 											<mat-expansion-panel-header>
 												<mat-panel-title>
-													{{ service?.stepsNames[i] }}
+													{{groupI | json }} {{ form.get('step_' + groupI +
+													'_name').value ? form.get('step_' + groupI +
+													'_name').value : ('templates.step_placeholder' |
+													translate) }}
 												</mat-panel-title>
 											</mat-expansion-panel-header>
 
-											<mat-card
-												*ngFor="let tab of groups[1] | pairs; let i = index"
+											<div
+												*ngFor="let tab of groups[1] | pairs; let stepI = index;
+														trackBy: trackByFn"
 											>
 												<div class="pt-5">
 													<ng-container
 														*ngFor="
-														let section of tab[1] | pairs;
+														let section of tab[1] | pairs; let sectionI = index;
 														trackBy: trackByFn
 													"
 													>
-														<div class="form-section">
+														<div
+															class="form-section"
+															[ngClass]="{'cardStyle' : section[0] !== 'defaultSection'}"
+														>
 															<div
 																class="form-section-title"
 																*ngIf="section[0] !== 'defaultSection'"
 															>
 																{{ section[0] | translate }}
 															</div>
-															<div class="form-section-content">
+															<div
+																class="form-section-content"
+																fxFlex=""
+																fxLayout="row"
+																fxLayoutGap="30px"
+															>
 																<ng-container *ngFor="let field of section[1]">
 																	<ng-container
 																		*ngIf="
@@ -102,6 +122,9 @@
 																			[isEdit]="isEdit"
 																			[isClone]="isClone"
 																			[isSubmitted]="isSubmitted"
+																			[fxFlex.lg]="getInputGridSize(field.form.grid.lg, '30px')"
+																			[fxFlex.md]="getInputGridSize(field.form.grid.md, '30px')"
+																			[fxFlex.sm]="getInputGridSize(field.form.grid.sm, '30px')"
 																		>
 																		</app-core-form-content>
 																	</ng-container>
@@ -110,7 +133,7 @@
 														</div>
 													</ng-container>
 												</div>
-											</mat-card>
+											</div>
 										</mat-expansion-panel>
 									</mat-accordion>
 								</ng-container>

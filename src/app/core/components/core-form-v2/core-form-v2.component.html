@@ -49,6 +49,15 @@
 																[isEdit]="isEdit"
 																[isClone]="isClone"
 																[isSubmitted]="isSubmitted"
+																[fxFlex.lg]="
+																	getInputGridSize(field.form.grid.lg, '30px')
+																"
+																[fxFlex.md]="
+																	getInputGridSize(field.form.grid.md, '30px')
+																"
+																[fxFlex.sm]="
+																	getInputGridSize(field.form.grid.sm, '30px')
+																"
 															>
 															</app-core-form-content>
 														</ng-container>
@@ -97,6 +106,24 @@
 																		[isEdit]="isEdit"
 																		[isClone]="isClone"
 																		[isSubmitted]="isSubmitted"
+																		[fxFlex.lg]="
+																			getInputGridSize(
+																				field.form.grid.lg,
+																				'30px'
+																			)
+																		"
+																		[fxFlex.md]="
+																			getInputGridSize(
+																				field.form.grid.md,
+																				'30px'
+																			)
+																		"
+																		[fxFlex.sm]="
+																			getInputGridSize(
+																				field.form.grid.sm,
+																				'30px'
+																			)
+																		"
 																	>
 																	</app-core-form-content>
 																</ng-container>

@@ -376,5 +376,21 @@
 	"templates": {
 		"step_name": "Step Name",
 		"step_typeId": "Select Group to access this stage"
+	},
+	"validation_errors": {
+		"required": "This Field is Required",
+		"hasCapitalCase": "Must Have Capital letter",
+		"hasSmallCase": "Must Have small case letter",
+		"hasSpecialCharacters": "Must have special character",
+		"minlength": "Must be at least {{xx}} characters",
+		"maxlength": "Must be max {{xx}} characters",
+		"passwordSchemaWrong": "passwords don't match",
+		"email": "Is not a valid Email Address",
+		"Small letter & Capital letter & Number": "Small letter & Capital letter & Number",
+		"characters": "Characters",
+		"Special Character": "Special Character",
+		"passwordsDontMatch": "Password Don't Match",
+		"passwordsMatch": "Password Match",
+		"import_failed": "Import Failed"
 	}
 }

@@ -93,6 +93,11 @@ export interface ItemProps {
 		initValue?: any; // Init Value if provided then form will init with it
 		cssClass?: string;
 		ngSelectOptions?: NgSelectOptions;
+		grid?: {
+			lg?: string;
+			md?: string;
+			sm?: string;
+		};
 		groupBy?: {
 			section?: string;
 			tabGroup?: {
