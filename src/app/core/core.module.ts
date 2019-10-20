@@ -29,7 +29,8 @@ import { CoreViewComponent } from './components/core-view/core-view.component';
 			useClass: RouteReusableStrategy
 		}
 	],
-	declarations: [CoreListComponent, CoreFormComponent, CoreViewComponent]
+	declarations: [CoreListComponent, CoreFormComponent, CoreViewComponent],
+	exports: [CoreFormComponent]
 })
 export class CoreModule {
 	constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
