@@ -13,6 +13,10 @@ import {Validators} from '@angular/forms';
 export class ClientsService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
+		this.lists = {
+			...this.lists,
+			['clients-price']: [],
+		};
 	}
 
 	routerPrefix(val: string = '') {
@@ -72,7 +76,7 @@ export class ClientsService extends RootService {
 			// 	required: true,
 			// 	validations: [Validators.required, CustomValidators.validPassword]
 			// },
-		]
+		];
 	}
 
 }

@@ -12,9 +12,7 @@ export abstract class RootService {
   public resourcesList: any;
   resources: Subject<any> = new Subject();
   updateResources: Subject<any> = new Subject();
-  lists: any = {
-		['clients-price']: []
-  };
+	lists: any = {};
   centerPoint: { lat?: number; lng?: number; id?: number };
 
   protected constructor(protected toast: ToastrService, protected router?: Router, protected api?: ApiRequestService) {

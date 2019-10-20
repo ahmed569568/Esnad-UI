@@ -23,7 +23,8 @@
 							<div class="addressContainer" [formGroupName]="cityIndex">
 								<div class="addressFieldContainer">
 									<mat-form-field class="example-full-width">
-										<input matInput formControlName="name" [placeholder]="service.cid + '.city_name' | translate">
+										<input matInput [formControl]="city.get('name')"
+													 [placeholder]="service.cid + '.city_name' | translate">
 									</mat-form-field>
 									<div class="actions">
 										<button mat-icon-button color="warn" [matTooltip]="service.cid + '.remove_city' | translate"
@@ -42,7 +43,7 @@
 									<div class="addressContainer" [formGroupName]="regionIndex">
 										<div class="addressFieldContainer">
 											<mat-form-field class="example-full-width">
-												<input matInput formControlName="name"
+												<input matInput [formControl]="region.get('name')"
 															 [placeholder]="service.cid + '.region_name' | translate">
 											</mat-form-field>
 											<div class="actions">
@@ -63,7 +64,7 @@
 											<div class="addressContainer" [formGroupName]="provinceIndex">
 												<div class="addressFieldContainer">
 													<mat-form-field class="example-full-width">
-														<input matInput formControlName="name"
+														<input matInput [formControl]="province.get('name')"
 																	 [placeholder]="service.cid + '.province_name' | translate">
 													</mat-form-field>
 													<div class="actions">
@@ -85,7 +86,7 @@
 													<div class="addressContainer" [formGroupName]="districtIndex">
 														<div class="addressFieldContainer">
 															<mat-form-field class="example-full-width">
-																<input matInput formControlName="name"
+																<input matInput [formControl]="district.get('name')"
 																			 [placeholder]="service.cid + '.district_name' | translate">
 															</mat-form-field>
 															<div class="actions">
