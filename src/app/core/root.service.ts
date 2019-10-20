@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ApiRequestService } from '@app/core/http/api-request.service';
-import { ApiResponse, ItemProps } from '@app/interfaces';
-import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {Injectable} from '@angular/core';
+import {ApiRequestService} from '@app/core/http/api-request.service';
+import {ApiResponse, ItemProps} from '@app/interfaces';
+import {map} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export abstract class RootService {
@@ -235,7 +235,7 @@ export abstract class RootService {
 
   navigateToList() {
     this.updateResources.next();
-    return this.router.navigate([this.cid]);
+		return this.router.navigate([`${this.cid}/list`]);
   }
 
   refactorItem(item: {}) {
