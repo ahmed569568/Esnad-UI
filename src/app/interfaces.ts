@@ -1,4 +1,4 @@
-import { Validators } from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 export interface ApiResponse {
 	response?: any;
@@ -37,6 +37,8 @@ export interface ItemProps {
 	validations?: Validators[];
 	condition?: any;
 	initValue?: any;
+	searchable?: any;
+	filterFieldType?: any;
 }
 
 export interface Row {

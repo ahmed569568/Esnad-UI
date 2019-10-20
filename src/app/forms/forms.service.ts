@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { RootService } from '@app/core/root.service';
-import { ApiRequestService } from '@app/core/http/api-request.service';
-import { ItemProps } from '@app/interfaces';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Validators } from '@angular/forms';
+import {Injectable} from '@angular/core';
+import {RootService} from '@app/core/root.service';
+import {ApiRequestService} from '@app/core/http/api-request.service';
+import {ItemProps} from '@app/interfaces';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Validators} from '@angular/forms';
 
 @Injectable({
 	providedIn: 'root'
@@ -39,14 +39,15 @@ export class FormsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'client',
 				prop: 'client',
 				listing: true,
 				formField: false,
-				width: 300
+				width: 300,
 			},
 			{
 				name: 'step_id',
@@ -54,9 +55,10 @@ export class FormsService extends RootService {
 				listing: false,
 				formField: false,
 				formFieldType: 'select',
-				listPrefix: 'forms/steps',
+				listPrefix: 'forms-steps',
 				required: true,
-				width: 300
+				width: 300,
+				searchable: true
 			}
 			// {
 			//   name: 'order_id',

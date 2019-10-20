@@ -59,7 +59,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'full_name',
@@ -69,7 +70,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'nationalId',
@@ -79,7 +81,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'address',
@@ -89,7 +92,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'group_id',
@@ -100,7 +104,8 @@ export class EmployeesService extends RootService {
 				listPrefix: 'employees-groups',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'category_id',
@@ -111,7 +116,7 @@ export class EmployeesService extends RootService {
 				listPrefix: 'employees-categories',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
 			},
 			{
 				name: 'active_status',
@@ -122,7 +127,8 @@ export class EmployeesService extends RootService {
 				listPrefix: 'status',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'phone',
@@ -132,7 +138,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'phone',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'email',
@@ -142,8 +149,8 @@ export class EmployeesService extends RootService {
 				formFieldType: 'email',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
-
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'password',
