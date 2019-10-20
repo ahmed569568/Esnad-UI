@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService, untilDestroyed } from '@app/core';
+import { I18nService, Logger, untilDestroyed } from '@app/core';
 
 const log = new Logger('App');
 
@@ -37,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
 			environment.defaultLanguage,
 			environment.supportedLanguages
 		);
-
 		const onNavigationEnd = this.router.events.pipe(
 			filter(event => event instanceof NavigationEnd)
 		);
