@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {CoreListComponent} from '@app/core/components/core-list/core-list.component';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {Router} from '@angular/router';
-import {FormsService} from '@app/forms/forms.service';
+import { Component, OnInit } from '@angular/core';
+import { CoreListComponent } from '@app/core/components/core-list/core-list.component';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { Router } from '@angular/router';
+import { FormsService } from '@app/forms/forms.service';
 
 @Component({
 	selector: 'app-branches-list',

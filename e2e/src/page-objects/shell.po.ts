@@ -6,9 +6,9 @@
 import { browser, element, by } from 'protractor';
 
 export class ShellPage {
-  welcomeText = element(by.css('app-root mat-card-title'));
+	welcomeText = element(by.css('app-root mat-card-title'));
 
-  getParagraphText() {
-    return this.welcomeText.getText();
-  }
+	getParagraphText() {
+		return this.welcomeText.getText();
+	}
 }

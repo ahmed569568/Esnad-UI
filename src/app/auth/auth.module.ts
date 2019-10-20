@@ -9,16 +9,16 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    SharedModule,
-    FlexLayoutModule,
-    MaterialModule,
-    ShowHidePasswordModule,
-    AuthRoutingModule
-  ],
-  declarations: [...AuthRoutingModule.components]
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		TranslateModule,
+		SharedModule,
+		FlexLayoutModule,
+		MaterialModule,
+		ShowHidePasswordModule,
+		AuthRoutingModule
+	],
+	declarations: [...AuthRoutingModule.components]
 })
 export class AuthModule {}

@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ClientsListComponent} from './components/clients-list/clients-list.component';
-import {ClientsFormComponent} from './components/clients-form/clients-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
-import {RouterContainerComponent} from '@app/shared/components/router-container-component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ClientsListComponent } from './components/clients-list/clients-list.component';
+import { ClientsFormComponent } from './components/clients-form/clients-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [ClientsListComponent, ClientsFormComponent],
@@ -15,7 +15,7 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('clients.title')},
+				data: { title: extract('clients.title') },
 				component: RouterContainerComponent,
 				children: [
 					{
@@ -35,5 +35,4 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		])
 	]
 })
-export class ClientsModule {
-}
+export class ClientsModule {}

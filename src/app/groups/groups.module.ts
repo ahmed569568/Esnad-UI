@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {GroupsListComponent} from './components/groups-list/groups-list.component';
-import {GroupsFormComponent} from './components/groups-form/groups-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
-import {RouterContainerComponent} from '@app/shared/components/router-container-component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GroupsListComponent } from './components/groups-list/groups-list.component';
+import { GroupsFormComponent } from './components/groups-form/groups-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [GroupsListComponent, GroupsFormComponent],
@@ -15,7 +15,7 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('groups.title')},
+				data: { title: extract('groups.title') },
 				component: RouterContainerComponent,
 				children: [
 					{
@@ -35,5 +35,4 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		])
 	]
 })
-export class GroupsModule {
-}
+export class GroupsModule {}

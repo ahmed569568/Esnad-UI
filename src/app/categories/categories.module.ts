@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CategoriesListComponent} from './components/categories-list/categories-list.component';
-import {CategoriesFormComponent} from './components/categories-form/categories-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
-import {RouterContainerComponent} from '@app/shared/components/router-container-component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CategoriesListComponent } from './components/categories-list/categories-list.component';
+import { CategoriesFormComponent } from './components/categories-form/categories-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [CategoriesListComponent, CategoriesFormComponent],
@@ -15,7 +15,7 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('categories.title')},
+				data: { title: extract('categories.title') },
 				component: RouterContainerComponent,
 				children: [
 					{
@@ -35,5 +35,4 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		])
 	]
 })
-export class CategoriesModule {
-}
+export class CategoriesModule {}

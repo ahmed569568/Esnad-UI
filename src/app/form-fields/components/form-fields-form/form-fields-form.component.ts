@@ -1,54 +1,55 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {FormFieldsService} from '@app/form-fields/form-fields.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { FormFieldsService } from '@app/form-fields/form-fields.service';
 
 @Component({
 	selector: 'app-drivers-form',
-  templateUrl: '../../../core/components/core-form/core-form.component.html'
+	templateUrl: '../../../core/components/core-form/core-form.component.html'
 })
-export class FormFieldsFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
-  constructor(
+export class FormFieldsFormComponent extends CoreFormComponent
+	implements OnInit, OnDestroy {
+	constructor(
 		service: FormFieldsService,
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
 		private utilities: UtilitiesService
-  ) {
-    super(service, fb, activatedRoute, utilities);
-  }
+	) {
+		super(service, fb, activatedRoute, utilities);
+	}
 
-  initLists() {
-		this.lists = [{['drivers/languages']: 1}];
-  }
+	initLists() {
+		this.lists = [{ ['drivers/languages']: 1 }];
+	}
 
-  // refactorItem(item: any): any {
-  //   super.refactorItem(item);
-  //   /**
-  //    * Set value of selected items
-  //    */
-  //   const selectedUsers = [];
-  //   for (const user of item.users) {
-  //     selectedUsers.push(user.user_id);
-  //   }
-  //   this.form.controls.branch_managers.setValue(selectedUsers); // Final Return
-  //   return item;
-  // }
+	// refactorItem(item: any): any {
+	//   super.refactorItem(item);
+	//   /**
+	//    * Set value of selected items
+	//    */
+	//   const selectedUsers = [];
+	//   for (const user of item.users) {
+	//     selectedUsers.push(user.user_id);
+	//   }
+	//   this.form.controls.branch_managers.setValue(selectedUsers); // Final Return
+	//   return item;
+	// }
 
-  get lists() {
-    return this._lists;
-  }
+	get lists() {
+		return this._lists;
+	}
 
-  set lists(value: any) {
-    this._lists = value;
-  }
+	set lists(value: any) {
+		this._lists = value;
+	}
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
+	ngOnInit() {
+		super.ngOnInit();
+	}
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
+	ngOnDestroy(): void {
+		super.ngOnDestroy();
+	}
 }

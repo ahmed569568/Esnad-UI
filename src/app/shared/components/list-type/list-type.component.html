@@ -1,3 +1,10 @@
-<div *ngIf="listOptions.listTypes.length > 0" class="listOptions" fxFlex fxLayout="row">
-  <button mat-raised-button *ngFor="let item of listOptions.listTypes">{{ item }}</button>
+<div
+	*ngIf="listOptions.listTypes.length > 0"
+	class="listOptions"
+	fxFlex
+	fxLayout="row"
+>
+	<button mat-raised-button *ngFor="let item of listOptions.listTypes">
+		{{ item }}
+	</button>
 </div>

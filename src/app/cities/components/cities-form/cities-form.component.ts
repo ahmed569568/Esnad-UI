@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {CitiesService} from '@app/cities/cities.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { CitiesService } from '@app/cities/cities.service';
 
 @Component({
 	selector: 'app-cities-form',
 	templateUrl: './cities-form.component.html'
 })
-export class CitiesFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
+export class CitiesFormComponent extends CoreFormComponent
+	implements OnInit, OnDestroy {
 	constructor(
 		service: CitiesService,
 		fb: FormBuilder,
@@ -37,51 +38,41 @@ export class CitiesFormComponent extends CoreFormComponent implements OnInit, On
 
 	createForm(): void {
 		this.form = this.fb.group({
-			countries: this.fb.array([
-				this.initCountries(),
-			])
+			countries: this.fb.array([this.initCountries()])
 		});
 	}
 
 	initCountries() {
 		return this.fb.group({
 			name: ['', []],
-			cities: this.fb.array([
-				this.initCities(),
-			])
+			cities: this.fb.array([this.initCities()])
 		});
 	}
 
 	initCities() {
 		return this.fb.group({
 			name: ['', []],
-			regions: this.fb.array([
-				this.initRegions(),
-			])
+			regions: this.fb.array([this.initRegions()])
 		});
 	}
 
 	initRegions() {
 		return this.fb.group({
 			name: ['', []],
-			provinces: this.fb.array([
-				this.initProvinces(),
-			])
+			provinces: this.fb.array([this.initProvinces()])
 		});
 	}
 
 	initProvinces() {
 		return this.fb.group({
 			name: ['', []],
-			districts: this.fb.array([
-				this.initDistricts(),
-			])
+			districts: this.fb.array([this.initDistricts()])
 		});
 	}
 
 	initDistricts() {
 		return this.fb.group({
-			name: ['', []],
+			name: ['', []]
 			// streets: this.fb.array([
 			// 	this.initStreets(),
 			// ])
@@ -126,29 +117,28 @@ export class CitiesFormComponent extends CoreFormComponent implements OnInit, On
 	}
 }
 
-
 interface Address {
-	countries: Country
+	countries: Country;
 }
 
 interface Country {
 	name: string;
-	cities: City[]
+	cities: City[];
 }
 
 interface City {
 	name: string;
-	regions: Region[]
+	regions: Region[];
 }
 
 interface Region {
 	name: string;
-	provinces: Province[]
+	provinces: Province[];
 }
 
 interface Province {
 	name: string;
-	districts: District[]
+	districts: District[];
 }
 
 interface District {
@@ -159,4 +149,3 @@ interface District {
 // interface Street {
 // 	name: string;
 // }
-

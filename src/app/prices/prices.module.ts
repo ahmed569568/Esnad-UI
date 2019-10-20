@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {PricesListComponent} from './components/prices-list/prices-list.component';
-import {PricesFormComponent} from './components/prices-form/prices-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
-import {RouterContainerComponent} from '@app/shared/components/router-container-component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PricesListComponent } from './components/prices-list/prices-list.component';
+import { PricesFormComponent } from './components/prices-form/prices-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [PricesListComponent, PricesFormComponent],
@@ -15,7 +15,7 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('prices.title')},
+				data: { title: extract('prices.title') },
 				component: RouterContainerComponent,
 				children: [
 					{
@@ -35,5 +35,4 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		])
 	]
 })
-export class PricesModule {
-}
+export class PricesModule {}
