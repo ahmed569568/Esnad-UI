@@ -141,7 +141,9 @@
 		"prices": "Prices",
 		"categories": "Categories",
 		"groups": "Groups",
-		"cities": "Cities"
+		"cities": "Cities",
+		"cities_list": "Cities list",
+		"new_city": "New city"
 	},
   "check-in": {
     "title": "Check-in"

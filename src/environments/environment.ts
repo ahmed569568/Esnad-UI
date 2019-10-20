@@ -17,7 +17,7 @@ export const environment = {
 	serverUrl: 'http://35.243.244.23:7000/api/',
 	socketUrl: '',
 	imagePath: 'http://35.243.244.23:7000/api/public/storage/',
-  defaultLanguage: 'en-US',
+	defaultLanguage: 'ar-SA',
   supportedLanguages: ['en-US', 'ar-SA']
 };
 

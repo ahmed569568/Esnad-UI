@@ -10,9 +10,6 @@ export class MenuItems {
 			icon: 'directions_bus',
 			children: [
 				{
-					title: 'special_treatments',
-					url: '/treatments/list'
-				}, {
 					title: 'active_treatments',
 					url: '/treatments/list'
 				}, {
