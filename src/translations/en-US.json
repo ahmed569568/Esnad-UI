@@ -422,12 +422,14 @@
 	},
 	"treatments": {
 		"title": "Treatments",
+		"title_single": "Treatment",
 		"name": "Name",
 		"status": "Status",
 		"client": "Client name"
 	},
 	"clients": {
 		"title": "Clients",
+		"title_single": "Client",
 		"photo": "Photo",
 		"full_name": "Full name",
 		"phone": "Phone",
@@ -435,11 +437,13 @@
 	},
 	"forms": {
 		"title": "Forms",
+		"title_single": "Form",
 		"name": "Name",
 		"client": "Client name"
 	},
 	"employees": {
 		"title": "Employees",
+		"title_single": "Employee",
 		"photo": "Photo",
 		"full_name": "Full name",
 		"group_id": "Group",
@@ -448,18 +452,22 @@
 	},
 	"prices": {
 		"title": "Prices",
+		"title_single": "Price",
 		"name": "Name"
 	},
 	"categories": {
 		"title": "Categories",
+		"title_single": "Category",
 		"name": "Name"
 	},
 	"groups": {
 		"title": "Groups",
+		"title_single": "Group",
 		"name": "Name"
 	},
 	"cities": {
 		"title": "Cities",
+		"title_single": "City",
 		"name": "Name",
 		"level": "Level"
 	}
