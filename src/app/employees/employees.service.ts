@@ -1,16 +1,15 @@
-import {Injectable} from '@angular/core';
-import {RootService} from '@app/core/root.service';
-import {ApiRequestService} from '@app/core/http/api-request.service';
-import {ItemProps} from '@app/interfaces';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Validators} from '@angular/forms';
-import {CustomValidators} from '@app/core/classes/custom-validations';
+import { Injectable } from '@angular/core';
+import { RootService } from '@app/core/root.service';
+import { ApiRequestService } from '@app/core/http/api-request.service';
+import { ItemProps } from '@app/interfaces';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Validators } from '@angular/forms';
+import { CustomValidators } from '@app/core/classes/custom-validations';
 
 @Injectable({
 	providedIn: 'root'
 })
-
 export class EmployeesService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
@@ -19,8 +18,8 @@ export class EmployeesService extends RootService {
 			['employees-groups']: [],
 			['employees-categories']: [],
 			status: [
-				{id: 'active', name: 'active'},
-				{id: 'inactive', name: 'inactive'}
+				{ id: 'active', name: 'active' },
+				{ id: 'inactive', name: 'inactive' }
 			]
 		};
 	}
@@ -39,7 +38,7 @@ export class EmployeesService extends RootService {
 				displayType: 'image',
 				formFieldType: 'file_input',
 				required: true,
-				width: 300,
+				width: 300
 			},
 			{
 				name: 'signature',
@@ -49,7 +48,7 @@ export class EmployeesService extends RootService {
 				displayType: 'image',
 				formFieldType: 'file_input',
 				required: true,
-				width: 300,
+				width: 300
 			},
 			{
 				name: 'username',
@@ -116,7 +115,7 @@ export class EmployeesService extends RootService {
 				listPrefix: 'employees-categories',
 				required: true,
 				width: 300,
-				validations: [Validators.required],
+				validations: [Validators.required]
 			},
 			{
 				name: 'active_status',
@@ -160,8 +159,7 @@ export class EmployeesService extends RootService {
 				formFieldType: 'password',
 				required: true,
 				validations: [Validators.required, CustomValidators.validPassword]
-			},
+			}
 		];
 	}
-
 }

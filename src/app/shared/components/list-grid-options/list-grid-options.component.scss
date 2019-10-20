@@ -1,6 +1,8 @@
 .listOptions {
-	background-color: #f0f6ff;
+	background-color: white;
 	padding: 18px 20px;
+	margin-bottom: 12px;
+	box-shadow: 0 3px 6px rgba(47, 53, 79, 0.24);
 
 	.img-container {
 		background-color: #b8cce9;
@@ -29,7 +31,7 @@
 		font-size: 12px;
 
 		.number {
-			color: #0063f4;
+			color: #313853;
 		}
 
 		mat-icon {
@@ -43,8 +45,8 @@
 	}
 
 	button {
-		background-color: #0063f4;
+		background-color: #313853;
 		color: white;
-		border-radius: 20px;
+		border-radius: 8px;
 	}
 }

@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {RootService} from '@app/core/root.service';
-import {ApiRequestService} from '@app/core/http/api-request.service';
-import {ItemProps} from '@app/interfaces';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Validators} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { RootService } from '@app/core/root.service';
+import { ApiRequestService } from '@app/core/http/api-request.service';
+import { ItemProps } from '@app/interfaces';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Validators } from '@angular/forms';
 
 @Injectable({
 	providedIn: 'root'
@@ -47,7 +47,7 @@ export class FormsService extends RootService {
 				prop: 'client',
 				listing: true,
 				formField: false,
-				width: 300,
+				width: 300
 			},
 			{
 				name: 'step_id',

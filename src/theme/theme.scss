@@ -133,7 +133,7 @@ body {
 
 .disabled {
 	background: #d9dce5 !important;
-	color: #b5bacb !important;
+	color: #313853 !important;
 }
 
 .cursor-pointer {
@@ -166,6 +166,10 @@ app-list-type {
 	height: var(--mapHeight);
 }
 
-//app-shell {
-//
-//}
+app-login {
+	.mat-form-field-label-wrapper {
+		.mat-form-field-label {
+			color: white !important;
+		}
+	}
+}

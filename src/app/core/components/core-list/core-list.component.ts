@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ItemProps, ListOptions} from '@app/interfaces';
-import {RootService} from '@app/core/root.service';
-import {Router} from '@angular/router';
-import {AppHelper} from '@app/core/classes/app-helper';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {takeWhile} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ItemProps, ListOptions } from '@app/interfaces';
+import { RootService } from '@app/core/root.service';
+import { Router } from '@angular/router';
+import { AppHelper } from '@app/core/classes/app-helper';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-core-list',
@@ -27,11 +27,11 @@ export class CoreListComponent implements OnInit, OnDestroy {
 		groups: false,
 		searchable: false,
 		customTitle: '',
-		hoverData: {status: false},
+		hoverData: { status: false },
 		listTypes: [],
 		pagination: true
 	};
-	params: any = {pagination: 20};
+	params: any = { pagination: 20 };
 	pageNumber = 1;
 	alive = true;
 
@@ -51,7 +51,7 @@ export class CoreListComponent implements OnInit, OnDestroy {
 					if (!keyword[filterParam]) {
 						delete keyword[filterParam];
 					}
-					this.params = {...this.params, [filterParam]: keyword[filterParam]};
+					this.params = { ...this.params, [filterParam]: keyword[filterParam] };
 				}
 				return this.loadResources();
 			});
@@ -73,20 +73,21 @@ export class CoreListComponent implements OnInit, OnDestroy {
 	 * Init navigation observables
 	 */
 	paginationInit() {
-
-		this.utilitiesService.filterObservable$.pipe(takeWhile(() => this.alive)).subscribe((filtersData: any) => {
-			if (filtersData) {
-				const filters = {};
-				for (const key of Object.keys(filtersData)) {
-					filters[key] = filtersData[key];
-					if (!filtersData[key]) {
-						delete filters[key];
+		this.utilitiesService.filterObservable$
+			.pipe(takeWhile(() => this.alive))
+			.subscribe((filtersData: any) => {
+				if (filtersData) {
+					const filters = {};
+					for (const key of Object.keys(filtersData)) {
+						filters[key] = filtersData[key];
+						if (!filtersData[key]) {
+							delete filters[key];
+						}
 					}
+					this.params.queryParams = filters;
+					return this.resetList();
 				}
-				this.params.queryParams = filters;
-				return this.resetList();
-			}
-		});
+			});
 
 		/**
 		 * refresh resources list
