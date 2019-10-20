@@ -38,7 +38,47 @@ export class MenuItems {
 					url: '/clients/create'
 				}
 			]
-		}, {
+		},
+		{
+			title: 'prices',
+			icon: 'school',
+			children: [
+				{
+					title: 'prices_list',
+					url: '/prices'
+				}, {
+					title: 'new_price',
+					url: '/prices/create'
+				}
+			]
+		},
+		{
+			title: 'groups',
+			icon: 'school',
+			children: [
+				{
+					title: 'groups_list',
+					url: '/groups'
+				}, {
+					title: 'new_group',
+					url: '/groups/create'
+				}
+			]
+		},
+		{
+			title: 'categories',
+			icon: 'school',
+			children: [
+				{
+					title: 'categories_list',
+					url: '/categories'
+				}, {
+					title: 'new_category',
+					url: '/categories/create'
+				}
+			]
+		},
+		{
 			title: 'forms',
 			icon: 'school',
 			children: [

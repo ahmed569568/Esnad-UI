@@ -128,11 +128,20 @@
 		"clients_list": "Clients list",
 		"new_client": "New client",
 		"forms_list": "Forms list",
+		"groups_list": "Groups list",
+		"categories_list": "Categories list",
 		"new_form": "New form",
 		"special_treatments": "Special treatments",
 		"expire_treatments": "expire treatments",
-		"active_treatments": "Active treatments"
-  },
+		"active_treatments": "Active treatments",
+		"new_price": "New price",
+		"new_category": "New category",
+		"new_group": "New group",
+		"prices_list": "Prices list",
+		"prices": "Prices",
+		"categories": "Categories",
+		"groups": "Groups"
+	},
   "check-in": {
     "title": "Check-in"
   },
@@ -435,5 +444,17 @@
 		"group_id": "Group",
 		"phone": "Phone",
 		"email": "Email"
+	},
+	"prices": {
+		"title": "Prices",
+		"name": "Name"
+	},
+	"categories": {
+		"title": "Categories",
+		"name": "Name"
+	},
+	"groups": {
+		"title": "Groups",
+		"name": "Name"
 	}
 }
