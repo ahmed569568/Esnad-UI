@@ -856,15 +856,15 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	getInputGridSize(inputSize: string, gap: string) {
 		if (inputSize) {
 			if (gap) {
-				return `calc(${inputSize} - ${gap}`;
+				return `0 1 calc(${inputSize} - ${gap})`;
 			} else {
-				return inputSize;
+				return `0 1 ${inputSize}`;
 			}
 		} else {
 			if (gap) {
-				return `100% - ${gap}`;
+				return `0 1 calc(100% - ${gap})`;
 			} else {
-				return inputSize;
+				return `0 1 100%`;
 			}
 		}
 	}

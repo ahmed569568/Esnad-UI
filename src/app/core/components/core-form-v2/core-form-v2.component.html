@@ -33,7 +33,7 @@
 												>
 													{{ section[0] | translate }}
 												</div>
-												<div class="form-section-content">
+												<div class="form-section-content flex-wrap-wrap">
 													<ng-container
 														*ngFor="let field of section[1]; trackBy: trackByFn"
 													>
@@ -49,14 +49,35 @@
 																[isEdit]="isEdit"
 																[isClone]="isClone"
 																[isSubmitted]="isSubmitted"
-																[fxFlex.lg]="
-																	getInputGridSize(field.form.grid.lg, '30px')
+																[fxFlex.gt-lg]="
+																	getInputGridSize(
+																		field.form.grid.gt_lg,
+																		'30px'
+																	)
 																"
-																[fxFlex.md]="
-																	getInputGridSize(field.form.grid.md, '30px')
+																[fxFlex.lt-xl]="
+																	getInputGridSize(
+																		field.form.grid.lt_xl,
+																		'30px'
+																	)
 																"
-																[fxFlex.sm]="
-																	getInputGridSize(field.form.grid.sm, '30px')
+																[fxFlex.lt-lg]="
+																	getInputGridSize(
+																		field.form.grid.lt_lg,
+																		'30px'
+																	)
+																"
+																[fxFlex.lt-md]="
+																	getInputGridSize(
+																		field.form.grid.lt_md,
+																		'30px'
+																	)
+																"
+																[fxFlex.lt-sm]="
+																	getInputGridSize(
+																		field.form.grid.lt_sm,
+																		'30px'
+																	)
 																"
 															>
 															</app-core-form-content>
@@ -90,7 +111,7 @@
 														>
 															{{ section[0] | translate }}
 														</div>
-														<div class="form-section-content">
+														<div class="form-section-content flex-wrap-wrap">
 															<ng-container *ngFor="let field of section[1]">
 																<ng-container
 																	*ngIf="
@@ -106,21 +127,33 @@
 																		[isEdit]="isEdit"
 																		[isClone]="isClone"
 																		[isSubmitted]="isSubmitted"
-																		[fxFlex.lg]="
+																		[fxFlex.gt-lg]="
 																			getInputGridSize(
-																				field.form.grid.lg,
+																				field.form.grid.gt_lg,
 																				'30px'
 																			)
 																		"
-																		[fxFlex.md]="
+																		[fxFlex.lt-xl]="
 																			getInputGridSize(
-																				field.form.grid.md,
+																				field.form.grid.lt_xl,
 																				'30px'
 																			)
 																		"
-																		[fxFlex.sm]="
+																		[fxFlex.lt-lg]="
 																			getInputGridSize(
-																				field.form.grid.sm,
+																				field.form.grid.lt_lg,
+																				'30px'
+																			)
+																		"
+																		[fxFlex.lt-md]="
+																			getInputGridSize(
+																				field.form.grid.lt_md,
+																				'30px'
+																			)
+																		"
+																		[fxFlex.lt-sm]="
+																			getInputGridSize(
+																				field.form.grid.lt_sm,
 																				'30px'
 																			)
 																		"

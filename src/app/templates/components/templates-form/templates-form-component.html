@@ -33,7 +33,7 @@
 													{{ section[0] | translate }}
 												</div>
 												<div
-													class="form-section-content"
+													class="form-section-content flex-wrap-wrap"
 													fxFlex=""
 													fxLayout="row"
 													fxLayoutGap="30px"
@@ -53,9 +53,11 @@
 																[isEdit]="isEdit"
 																[isClone]="isClone"
 																[isSubmitted]="isSubmitted"
-																[fxFlex.lg]="getInputGridSize(field.form.grid.lg, '30px')"
-																[fxFlex.md]="getInputGridSize(field.form.grid.md, '30px')"
-																[fxFlex.sm]="getInputGridSize(field.form.grid.sm, '30px')"
+																[fxFlex.gt-lg]="getInputGridSize(field.form.grid.gt_lg, '30px')"
+																[fxFlex.lt-xl]="getInputGridSize(field.form.grid.lt_xl, '30px')"
+																[fxFlex.lt-lg]="getInputGridSize(field.form.grid.lt_lg, '30px')"
+																[fxFlex.lt-md]="getInputGridSize(field.form.grid.lt_md, '30px')"
+																[fxFlex.lt-sm]="getInputGridSize(field.form.grid.lt_sm, '30px')"
 															>
 															</app-core-form-content>
 														</ng-container>
@@ -108,7 +110,7 @@
 																| translate) + ' ' + sectionI }}
 															</div>
 															<div
-																class="form-section-content"
+																class="form-section-content flex-wrap-wrap"
 																fxFlex=""
 																fxLayout="row"
 																fxLayoutGap="30px"
@@ -128,9 +130,11 @@
 																			[isEdit]="isEdit"
 																			[isClone]="isClone"
 																			[isSubmitted]="isSubmitted"
-																			[fxFlex.lg]="getInputGridSize(field.form.grid.lg, '30px')"
-																			[fxFlex.md]="getInputGridSize(field.form.grid.md, '30px')"
-																			[fxFlex.sm]="getInputGridSize(field.form.grid.sm, '30px')"
+																			[fxFlex.gt-lg]="getInputGridSize(field.form.grid.gt_lg, '30px')"
+																			[fxFlex.lt-xl]="getInputGridSize(field.form.grid.lt_xl, '30px')"
+																			[fxFlex.lt-lg]="getInputGridSize(field.form.grid.lt_lg, '30px')"
+																			[fxFlex.lt-md]="getInputGridSize(field.form.grid.lt_md, '30px')"
+																			[fxFlex.lt-sm]="getInputGridSize(field.form.grid.lt_sm, '30px')"
 																		>
 																		</app-core-form-content>
 																	</ng-container>

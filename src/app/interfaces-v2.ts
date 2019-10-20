@@ -94,9 +94,11 @@ export interface ItemProps {
 		cssClass?: string;
 		ngSelectOptions?: NgSelectOptions;
 		grid?: {
-			lg?: string;
-			md?: string;
-			sm?: string;
+			gt_lg?: string;
+			lt_xl?: string;
+			lt_lg?: string;
+			lt_md?: string;
+			lt_sm?: string;
 		};
 		groupBy?: {
 			section?: string;

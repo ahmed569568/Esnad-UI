@@ -14,7 +14,6 @@ import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
 })
 export class TemplatesV2Service extends RootV2Service {
 	stepsCount = 1;
-	stepsNames: string[] = [];
 
 	InputsTree: {
 		steps?: {
@@ -36,9 +35,11 @@ export class TemplatesV2Service extends RootV2Service {
 				Validators: [Validators.required],
 				formFieldType: 'text',
 				grid: {
-					lg: '30%',
-					md: '50%',
-					sm: '100%'
+					gt_lg: '30%',
+					lt_xl: '30%',
+					lt_lg: '30%',
+					lt_md: '50%',
+					lt_sm: '100%'
 				}
 			}
 		},
@@ -51,9 +52,11 @@ export class TemplatesV2Service extends RootV2Service {
 				dataUrl: 'templates/clients/index',
 				listPrefix: 'clients',
 				grid: {
-					lg: '30%',
-					md: '50%',
-					sm: '100%'
+					gt_lg: '30%',
+					lt_xl: '30%',
+					lt_lg: '30%',
+					lt_md: '50%',
+					lt_sm: '100%'
 				}
 			}
 		}
@@ -96,9 +99,11 @@ export class TemplatesV2Service extends RootV2Service {
 						}
 					},
 					grid: {
-						lg: '30%',
-						md: '50%',
-						sm: '100%'
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
 					}
 				}
 			},
@@ -118,9 +123,11 @@ export class TemplatesV2Service extends RootV2Service {
 						}
 					},
 					grid: {
-						lg: '30%',
-						md: '50%',
-						sm: '100%'
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
 					}
 				}
 			}
@@ -164,9 +171,11 @@ export class TemplatesV2Service extends RootV2Service {
 						section: 'form_' + formNumber
 					},
 					grid: {
-						lg: '30%',
-						md: '50%',
-						sm: '100%'
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
 					}
 				}
 			}
@@ -223,9 +232,11 @@ export class TemplatesV2Service extends RootV2Service {
 						section: 'form_' + formNumber
 					},
 					grid: {
-						lg: '30%',
-						md: '50%',
-						sm: '100%'
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
 					}
 				}
 			}
