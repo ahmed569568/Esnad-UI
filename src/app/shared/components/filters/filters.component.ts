@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {ItemProps} from '@app/interfaces';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {RootService} from '@app/core/root.service';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
+import { Component, Input, OnChanges } from '@angular/core';
+import { ItemProps } from '@app/interfaces';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { RootService } from '@app/core/root.service';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 import * as moment from 'moment';
 
 @Component({
@@ -11,14 +11,11 @@ import * as moment from 'moment';
 	styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnChanges {
-
 	form: FormGroup;
 	@Input() columns: ItemProps[];
 	@Input() service: RootService;
 
-	constructor(private fb: FormBuilder, private us: UtilitiesService) {
-
-	}
+	constructor(private fb: FormBuilder, private us: UtilitiesService) {}
 
 	ngOnChanges(): void {
 		if (this.columns) {
@@ -33,7 +30,7 @@ export class FiltersComponent implements OnChanges {
 		let formFields = {};
 		for (const field of this.columns) {
 			if (field && field.searchable) {
-				formFields = {...formFields, [field.name]: [null]};
+				formFields = { ...formFields, [field.name]: [null] };
 			}
 		}
 		return formFields;
@@ -57,13 +54,13 @@ export class FiltersComponent implements OnChanges {
 				}
 				const period = moment(date).format(format);
 				switch (index) {
-					case (0) :
+					case 0:
 						this.form.value[field + '_from'] = period;
 						// this.allowSearch[field] = false;
 						// const error: object = {field, error: 'select_to_value'};
 						// this.errors[field] = {...error};
 						break;
-					case (1) :
+					case 1:
 						this.form.value[field + '_to'] = period;
 						// delete this.errors[field];
 						// this.allowSearch[field] = true;
@@ -88,10 +85,10 @@ export class FiltersComponent implements OnChanges {
 				}
 				const period = moment(date).format(format);
 				switch (index) {
-					case (0) :
+					case 0:
 						this.form.value[field + '_from'] = period;
 						break;
-					case (1) :
+					case 1:
 						this.form.value[field + '_to'] = period;
 						break;
 				}
