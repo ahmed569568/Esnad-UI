@@ -92,18 +92,33 @@ export class MenuItems {
 			]
 		},
 		{
+			title: 'cities',
+			icon: 'school',
+			children: [
+				{
+					title: 'cities_list',
+					url: '/cities'
+				}, {
+					title: 'new_city',
+					url: '/cities/create'
+				}
+			]
+		},
+		{
 			title: 'employees',
 			url: '/employees',
 			icon: 'settings_applications',
-		}, {
+		},
+		{
 			title: 'roles',
 			url: '/roles',
 			icon: 'settings_applications',
-		}, {
-			title: 'inputs',
-			url: '/inputs',
-			icon: 'settings_applications',
-		}
+		},
+		// {
+		// 	title: 'inputs',
+		// 	url: '/inputs',
+		// 	icon: 'settings_applications',
+		// }
 	];
 }
 
