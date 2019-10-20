@@ -20,8 +20,8 @@ export class RolesService extends RootService {
 	get featureProps(): ItemProps[] {
 		return [
 			{
-				name: 'page_name',
-				prop: 'page_name',
+				name: 'group_id',
+				prop: 'name',
 				listing: true,
 				formField: true,
 				formFieldType: 'text',
