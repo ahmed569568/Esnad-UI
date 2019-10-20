@@ -61,7 +61,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 	imageFieldName: any[] = [];
 
 	currentField: string;
-
+	currentItemId: number;
 	protected _lists: any = [];
 
 	constructor(
@@ -85,6 +85,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 			.subscribe((routeInfo: any) => {
 				if (routeInfo.id) {
 					this.isEdit = true;
+					this.currentItemId = routeInfo.id;
 					this.loadResources(routeInfo.id);
 				}
 			});

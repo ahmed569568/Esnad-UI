@@ -27,6 +27,7 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
 import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 import { RouterModule } from '@angular/router';
 import { FiltersComponent } from '@app/shared/components/filters/filters.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
 	imports: [
@@ -42,7 +43,9 @@ import { FiltersComponent } from '@app/shared/components/filters/filters.compone
 		NgTippyModule,
 		ToastrModule.forRoot(),
 		AngularOpenlayersModule,
-		RouterModule
+		RouterModule,
+		OwlDateTimeModule,
+		OwlNativeDateTimeModule
 	],
 	declarations: [
 		ChartComponent,
@@ -74,6 +77,8 @@ import { FiltersComponent } from '@app/shared/components/filters/filters.compone
 		NgTippyModule,
 		ToastrModule,
 		AngularOpenlayersModule,
+		OwlDateTimeModule,
+		OwlNativeDateTimeModule,
 
 		ChartComponent,
 		ListGridComponent,
