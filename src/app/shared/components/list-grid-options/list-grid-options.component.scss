@@ -1,50 +1,50 @@
 .listOptions {
-  background-color: #f0f6ff;
-  padding: 18px 20px;
+	background-color: #f0f6ff;
+	padding: 18px 20px;
 
-  .img-container {
-    background-color: #b8cce9;
-    border-radius: 12px;
-    height: 48px;
-    width: 48px;
-    position: relative;
-    display: inline-flex;
+	.img-container {
+		background-color: #b8cce9;
+		border-radius: 12px;
+		height: 48px;
+		width: 48px;
+		position: relative;
+		display: inline-flex;
 
-    .shadow-img {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
+		.shadow-img {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
 
-    .front-img {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-    }
-  }
+		.front-img {
+			position: absolute;
+			top: 15px;
+			left: 15px;
+		}
+	}
 
-  .title-container {
-    display: flex;
-    margin-left: 12px;
-    font-size: 12px;
+	.title-container {
+		display: flex;
+		margin-left: 12px;
+		font-size: 12px;
 
-    .number {
-      color: #0063f4;
-    }
+		.number {
+			color: #0063f4;
+		}
 
-    mat-icon {
-      vertical-align: middle;
-    }
+		mat-icon {
+			vertical-align: middle;
+		}
 
-    h3 {
-      font-size: 16px;
-      margin: 0;
-    }
-  }
+		h3 {
+			font-size: 16px;
+			margin: 0;
+		}
+	}
 
-  button {
-    background-color: #0063f4;
-    color: white;
-    border-radius: 20px;
-  }
+	button {
+		background-color: #0063f4;
+		color: white;
+		border-radius: 20px;
+	}
 }

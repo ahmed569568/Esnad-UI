@@ -12,10 +12,11 @@ export class MenuItems {
 				{
 					title: 'active_treatments',
 					url: '/treatments/list'
-				}, {
+				},
+				{
 					title: 'expire_treatments',
 					url: '/treatments/list'
-				},
+				}
 			]
 		},
 		// {
@@ -30,7 +31,8 @@ export class MenuItems {
 				{
 					title: 'clients_list',
 					url: '/clients/list'
-				}, {
+				},
+				{
 					title: 'new_client',
 					url: '/clients/create'
 				}
@@ -43,7 +45,8 @@ export class MenuItems {
 				{
 					title: 'prices_list',
 					url: '/prices/list'
-				}, {
+				},
+				{
 					title: 'new_price',
 					url: '/prices/create'
 				}
@@ -56,7 +59,8 @@ export class MenuItems {
 				{
 					title: 'groups_list',
 					url: '/groups/list'
-				}, {
+				},
+				{
 					title: 'new_group',
 					url: '/groups/create'
 				}
@@ -69,7 +73,8 @@ export class MenuItems {
 				{
 					title: 'categories_list',
 					url: '/categories/list'
-				}, {
+				},
+				{
 					title: 'new_category',
 					url: '/categories/create'
 				}
@@ -82,7 +87,8 @@ export class MenuItems {
 				{
 					title: 'forms_list',
 					url: '/forms/list'
-				}, {
+				},
+				{
 					title: 'new_form',
 					url: '/forms/create'
 				}
@@ -95,7 +101,8 @@ export class MenuItems {
 				{
 					title: 'cities_list',
 					url: '/cities/list'
-				}, {
+				},
+				{
 					title: 'new_city',
 					url: '/cities/create'
 				}
@@ -104,13 +111,13 @@ export class MenuItems {
 		{
 			title: 'employees',
 			url: '/employees/list',
-			icon: 'settings_applications',
+			icon: 'settings_applications'
 		},
 		{
 			title: 'roles',
 			url: '/roles/list',
-			icon: 'settings_applications',
-		},
+			icon: 'settings_applications'
+		}
 		// {
 		// 	title: 'inputs',
 		// 	url: '/inputs',

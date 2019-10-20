@@ -10,7 +10,14 @@ import { DashboardComponent } from '@app/dashboard/dashboard.component';
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
 
 @NgModule({
-  imports: [TranslateModule, CoreModule, SharedModule, FlexLayoutModule, MaterialModule, DashboardRoutingModule],
-  declarations: [DashboardComponent, VehiclesListComponent]
+	imports: [
+		TranslateModule,
+		CoreModule,
+		SharedModule,
+		FlexLayoutModule,
+		MaterialModule,
+		DashboardRoutingModule
+	],
+	declarations: [DashboardComponent, VehiclesListComponent]
 })
 export class DashboardModule {}

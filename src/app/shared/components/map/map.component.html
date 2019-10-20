@@ -22,157 +22,175 @@
 <!--    </ion-list>-->
 <!--</div>-->
 <div id="map-layout">
-  <aol-map #map [width]="'100%'">
-    <aol-interaction-default></aol-interaction-default>
-    <aol-control-zoomslider></aol-control-zoomslider>
-    <aol-control-zoom></aol-control-zoom>
-    <!--        <aol-control-overviewmap></aol-control-overviewmap>-->
-    <!--        <aol-control #control></aol-control>-->
-    <!--        <aol-overlay #overlay [positioning]="'bottom-left'">-->
-    <!--            <aol-coordinate-->
-    <!--                    [x]="mapCenter?.lng"-->
-    <!--                    [y]="mapCenter?.lat"-->
-    <!--                    [srid]="'EPSG:4326'"-->
-    <!--            >-->
-    <!--            </aol-coordinate>-->
-    <!--            <aol-content>-->
-    <!--                <div class="my-overlay-class">-->
-    <!--                </div>-->
-    <!--            </aol-content>-->
-    <!--        </aol-overlay>-->
-    <aol-interaction-draw
-      *ngIf="mapConfig.drawing"
-      [type]="mapConfig.drawingType"
-      (onDrawEnd)="catchShape($event.feature)"
-      [source]="source.instance"
-    ></aol-interaction-draw>
+	<aol-map #map [width]="'100%'">
+		<aol-interaction-default></aol-interaction-default>
+		<aol-control-zoomslider></aol-control-zoomslider>
+		<aol-control-zoom></aol-control-zoom>
+		<!--        <aol-control-overviewmap></aol-control-overviewmap>-->
+		<!--        <aol-control #control></aol-control>-->
+		<!--        <aol-overlay #overlay [positioning]="'bottom-left'">-->
+		<!--            <aol-coordinate-->
+		<!--                    [x]="mapCenter?.lng"-->
+		<!--                    [y]="mapCenter?.lat"-->
+		<!--                    [srid]="'EPSG:4326'"-->
+		<!--            >-->
+		<!--            </aol-coordinate>-->
+		<!--            <aol-content>-->
+		<!--                <div class="my-overlay-class">-->
+		<!--                </div>-->
+		<!--            </aol-content>-->
+		<!--        </aol-overlay>-->
+		<aol-interaction-draw
+			*ngIf="mapConfig.drawing"
+			[type]="mapConfig.drawingType"
+			(onDrawEnd)="catchShape($event.feature)"
+			[source]="source.instance"
+		></aol-interaction-draw>
 
-    <aol-view #view [zoom]="zoom">
-      <aol-coordinate [x]="mapCenter.lng" [y]="mapCenter.lat" [srid]="'EPSG:4326'"></aol-coordinate>
-    </aol-view>
+		<aol-view #view [zoom]="zoom">
+			<aol-coordinate
+				[x]="mapCenter.lng"
+				[y]="mapCenter.lat"
+				[srid]="'EPSG:4326'"
+			></aol-coordinate>
+		</aol-view>
 
-    <aol-layer-tile [opacity]="1.0">
-      <aol-source-osm></aol-source-osm>
-    </aol-layer-tile>
+		<aol-layer-tile [opacity]="1.0">
+			<aol-source-osm></aol-source-osm>
+		</aol-layer-tile>
 
-    <aol-layer-vector #vectorLayer [opacity]="1.0">
-      <aol-source-vector #source>
-        <ng-container *ngIf="(service?.lists)[mapConfig.field]?.data?.length && mapConfig.type === 'group'">
-          <aol-feature
-            [id]="mapId + '_' + i"
-            *ngFor="let point of (service?.lists)[mapConfig.field]?.data; let i = index"
-          >
-            <aol-geometry-point>
-              <aol-coordinate
-                [x]="+point?.location?.lng"
-                [y]="+point?.location?.lat"
-                [srid]="'EPSG:4326'"
-              ></aol-coordinate>
-            </aol-geometry-point>
-            <aol-style>
-              <aol-style-icon
-                src="assets/icon/marker.png"
-                [anchor]="[0.5, 1]"
-                [anchorXUnits]="'fraction'"
-                [anchorYUnits]="'fraction'"
-                [anchorOrigin]="'top-left'"
-              >
-              </aol-style-icon>
-              <aol-style-text
-                [text]="point?.number"
-                [textAlign]="'center'"
-                [offsetY]="20"
-                [scale]="1.5"
-                [textBaseLine]="'center'"
-              >
-                <aol-style-fill [color]="'#cecece'"></aol-style-fill>
-                <aol-style-stroke [color]="'#000'" [width]="2"></aol-style-stroke>
-              </aol-style-text>
-            </aol-style>
-          </aol-feature>
-        </ng-container>
-        <!-- Map Lists view [Warehouses list and Points list] -->
+		<aol-layer-vector #vectorLayer [opacity]="1.0">
+			<aol-source-vector #source>
+				<ng-container
+					*ngIf="
+						(service?.lists)[mapConfig.field]?.data?.length &&
+						mapConfig.type === 'group'
+					"
+				>
+					<aol-feature
+						[id]="mapId + '_' + i"
+						*ngFor="
+							let point of (service?.lists)[mapConfig.field]?.data;
+							let i = index
+						"
+					>
+						<aol-geometry-point>
+							<aol-coordinate
+								[x]="+point?.location?.lng"
+								[y]="+point?.location?.lat"
+								[srid]="'EPSG:4326'"
+							></aol-coordinate>
+						</aol-geometry-point>
+						<aol-style>
+							<aol-style-icon
+								src="assets/icon/marker.png"
+								[anchor]="[0.5, 1]"
+								[anchorXUnits]="'fraction'"
+								[anchorYUnits]="'fraction'"
+								[anchorOrigin]="'top-left'"
+							>
+							</aol-style-icon>
+							<aol-style-text
+								[text]="point?.number"
+								[textAlign]="'center'"
+								[offsetY]="20"
+								[scale]="1.5"
+								[textBaseLine]="'center'"
+							>
+								<aol-style-fill [color]="'#cecece'"></aol-style-fill>
+								<aol-style-stroke
+									[color]="'#000'"
+									[width]="2"
+								></aol-style-stroke>
+							</aol-style-text>
+						</aol-style>
+					</aol-feature>
+				</ng-container>
+				<!-- Map Lists view [Warehouses list and Points list] -->
 
-        <!--        <ng-container *ngIf="service?.currentItem?.polyline?.length && mapConfig.type === 'single'">-->
-        <!--          <aol-feature [id]="mapId">-->
-        <!--            <aol-geometry-linestring>-->
-        <!--              <aol-collection-coordinates-->
-        <!--                *ngIf="service?.currentItem?.polyline.length"-->
-        <!--                [coordinates]="service?.currentItem?.polyline"-->
-        <!--                [srid]="'EPSG:4326'"-->
-        <!--              >-->
-        <!--              </aol-collection-coordinates>-->
-        <!--            </aol-geometry-linestring>-->
-        <!--            <aol-style>-->
-        <!--              <aol-style-stroke [lineDash]="[6]" width="4" [color]="[46, 204, 113, 1.0]"></aol-style-stroke>-->
-        <!--            </aol-style>-->
-        <!--          </aol-feature>-->
-        <!--        </ng-container>-->
-        <!-- Route Polyline [View and Edit] -->
+				<!--        <ng-container *ngIf="service?.currentItem?.polyline?.length && mapConfig.type === 'single'">-->
+				<!--          <aol-feature [id]="mapId">-->
+				<!--            <aol-geometry-linestring>-->
+				<!--              <aol-collection-coordinates-->
+				<!--                *ngIf="service?.currentItem?.polyline.length"-->
+				<!--                [coordinates]="service?.currentItem?.polyline"-->
+				<!--                [srid]="'EPSG:4326'"-->
+				<!--              >-->
+				<!--              </aol-collection-coordinates>-->
+				<!--            </aol-geometry-linestring>-->
+				<!--            <aol-style>-->
+				<!--              <aol-style-stroke [lineDash]="[6]" width="4" [color]="[46, 204, 113, 1.0]"></aol-style-stroke>-->
+				<!--            </aol-style>-->
+				<!--          </aol-feature>-->
+				<!--        </ng-container>-->
+				<!-- Route Polyline [View and Edit] -->
 
-        <!--        <ng-container *ngIf="service?.currentItem?.points?.length && mapConfig.type === 'single'">-->
-        <!--          <aol-feature-->
-        <!--            [id]="mapId + '_' + coords.id + '_' + i"-->
-        <!--            *ngFor="let coords of service?.currentItem?.points; let i = index"-->
-        <!--          >-->
-        <!--            <aol-geometry-point>-->
-        <!--              <aol-coordinate [x]="+coords.longitude" [y]="+coords.latilude" [srid]="'EPSG:4326'"></aol-coordinate>-->
-        <!--            </aol-geometry-point>-->
-        <!--            <aol-style>-->
-        <!--              <aol-style-icon-->
-        <!--                [src]="coords.icon ? coords.icon : 'assets/icon/marker.png'"-->
-        <!--                [anchor]="[0.5, 1]"-->
-        <!--                [anchorXUnits]="'fraction'"-->
-        <!--                [anchorYUnits]="'fraction'"-->
-        <!--                [anchorOrigin]="'top-left'"-->
-        <!--              >-->
-        <!--              </aol-style-icon>-->
-        <!--              <aol-style-text-->
-        <!--                [text]="coords.name"-->
-        <!--                [textAlign]="'center'"-->
-        <!--                [offsetY]="15"-->
-        <!--                [scale]="1.5"-->
-        <!--                [textBaseLine]="'center'"-->
-        <!--              >-->
-        <!--                <aol-style-stroke [color]="'#fff'" [width]="2"></aol-style-stroke>-->
-        <!--              </aol-style-text>-->
-        <!--            </aol-style>-->
-        <!--          </aol-feature>-->
-        <!--        </ng-container>-->
-        <!-- Points in Route Module [View and Edit] -->
+				<!--        <ng-container *ngIf="service?.currentItem?.points?.length && mapConfig.type === 'single'">-->
+				<!--          <aol-feature-->
+				<!--            [id]="mapId + '_' + coords.id + '_' + i"-->
+				<!--            *ngFor="let coords of service?.currentItem?.points; let i = index"-->
+				<!--          >-->
+				<!--            <aol-geometry-point>-->
+				<!--              <aol-coordinate [x]="+coords.longitude" [y]="+coords.latilude" [srid]="'EPSG:4326'"></aol-coordinate>-->
+				<!--            </aol-geometry-point>-->
+				<!--            <aol-style>-->
+				<!--              <aol-style-icon-->
+				<!--                [src]="coords.icon ? coords.icon : 'assets/icon/marker.png'"-->
+				<!--                [anchor]="[0.5, 1]"-->
+				<!--                [anchorXUnits]="'fraction'"-->
+				<!--                [anchorYUnits]="'fraction'"-->
+				<!--                [anchorOrigin]="'top-left'"-->
+				<!--              >-->
+				<!--              </aol-style-icon>-->
+				<!--              <aol-style-text-->
+				<!--                [text]="coords.name"-->
+				<!--                [textAlign]="'center'"-->
+				<!--                [offsetY]="15"-->
+				<!--                [scale]="1.5"-->
+				<!--                [textBaseLine]="'center'"-->
+				<!--              >-->
+				<!--                <aol-style-stroke [color]="'#fff'" [width]="2"></aol-style-stroke>-->
+				<!--              </aol-style-text>-->
+				<!--            </aol-style>-->
+				<!--          </aol-feature>-->
+				<!--        </ng-container>-->
+				<!-- Points in Route Module [View and Edit] -->
 
-        <ng-container *ngIf="service?.centerPoint">
-          <aol-feature [id]="mapId + '_' + service?.centerPoint?.id">
-            <aol-geometry-point>
-              <aol-coordinate
-                [x]="+service?.centerPoint?.lng"
-                [y]="+service?.centerPoint?.lat"
-                [srid]="'EPSG:4326'"
-              ></aol-coordinate>
-            </aol-geometry-point>
-            <aol-style>
-              <aol-style-icon
-                src="assets/icon/school.png"
-                [anchor]="[0.5, 1]"
-                [anchorXUnits]="'fraction'"
-                [anchorYUnits]="'fraction'"
-                [anchorOrigin]="'top-left'"
-              >
-              </aol-style-icon>
-              <aol-style-text
-                [text]="'common.school' | translate"
-                [textAlign]="'center'"
-                [offsetY]="15"
-                [scale]="1.5"
-                [textBaseLine]="'center'"
-              >
-                <aol-style-stroke [color]="'#fff'" [width]="2"></aol-style-stroke>
-              </aol-style-text>
-            </aol-style>
-          </aol-feature>
-        </ng-container>
-        <!-- Point and Warehouse single view point -->
-      </aol-source-vector>
-    </aol-layer-vector>
-  </aol-map>
+				<ng-container *ngIf="service?.centerPoint">
+					<aol-feature [id]="mapId + '_' + service?.centerPoint?.id">
+						<aol-geometry-point>
+							<aol-coordinate
+								[x]="+service?.centerPoint?.lng"
+								[y]="+service?.centerPoint?.lat"
+								[srid]="'EPSG:4326'"
+							></aol-coordinate>
+						</aol-geometry-point>
+						<aol-style>
+							<aol-style-icon
+								src="assets/icon/school.png"
+								[anchor]="[0.5, 1]"
+								[anchorXUnits]="'fraction'"
+								[anchorYUnits]="'fraction'"
+								[anchorOrigin]="'top-left'"
+							>
+							</aol-style-icon>
+							<aol-style-text
+								[text]="'common.school' | translate"
+								[textAlign]="'center'"
+								[offsetY]="15"
+								[scale]="1.5"
+								[textBaseLine]="'center'"
+							>
+								<aol-style-stroke
+									[color]="'#fff'"
+									[width]="2"
+								></aol-style-stroke>
+							</aol-style-text>
+						</aol-style>
+					</aol-feature>
+				</ng-container>
+				<!-- Point and Warehouse single view point -->
+			</aol-source-vector>
+		</aol-layer-vector>
+	</aol-map>
 </div>

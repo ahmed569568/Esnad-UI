@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormArray, FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {ClientsService} from '@app/clients/clients.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { ClientsService } from '@app/clients/clients.service';
 
 @Component({
 	selector: 'app-clients-form',
 	templateUrl: './clients-form.component.html'
 })
-export class ClientsFormComponent extends CoreFormComponent implements OnInit, OnDestroy {
+export class ClientsFormComponent extends CoreFormComponent
+	implements OnInit, OnDestroy {
 	constructor(
 		service: ClientsService,
 		fb: FormBuilder,
@@ -50,9 +51,10 @@ export class ClientsFormComponent extends CoreFormComponent implements OnInit, O
 
 	ngOnInit() {
 		super.ngOnInit();
-		this.form.addControl('client_price', this.fb.array([
-			this.initClientPrice(),
-		]));
+		this.form.addControl(
+			'client_price',
+			this.fb.array([this.initClientPrice()])
+		);
 	}
 
 	get clientPrices() {

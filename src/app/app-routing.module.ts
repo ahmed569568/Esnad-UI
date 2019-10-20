@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {Shell} from '@app/shell/shell.service';
-import {SharedModule} from '@app/shared/shared.module';
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Shell } from '@app/shell/shell.service';
+import { SharedModule } from '@app/shared/shared.module';
 
 const routes: Routes = [
 	Shell.childRoutes([
@@ -27,7 +27,8 @@ const routes: Routes = [
 		},
 		{
 			path: 'evaluation-type',
-			loadChildren: './evaluation-type/evaluation-type.module#EvaluationTypeModule'
+			loadChildren:
+				'./evaluation-type/evaluation-type.module#EvaluationTypeModule'
 		},
 		{
 			path: 'form-field',
@@ -48,35 +49,43 @@ const routes: Routes = [
 		{
 			path: 'orders',
 			loadChildren: './orders/orders.module#OrdersModule'
-		}, {
+		},
+		{
 			path: 'prices',
 			loadChildren: './prices/prices.module#PricesModule'
-		}, {
+		},
+		{
 			path: 'real-estate',
 			loadChildren: './real-estate/real-estate.module#RealEstateModule'
-		}, {
+		},
+		{
 			path: 'roles',
 			loadChildren: './roles/roles.module#RolesModule'
-		}, {
+		},
+		{
 			path: 'templates',
 			loadChildren: './templates/templates.module#TemplatesModule'
-		}, {
+		},
+		{
 			path: 'treatments',
 			loadChildren: './treatments/treatments.module#TreatmentsModule'
-		}, {
+		},
+		{
 			path: 'users',
 			loadChildren: './users/users.module#UsersModule'
-		},
+		}
 	]),
 	// Fallback when no prior route is matched
-	{path: '**', redirectTo: '', pathMatch: 'full'}
+	{ path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}), SharedModule],
+	imports: [
+		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+		SharedModule
+	],
 	exports: [RouterModule],
 	providers: [],
 	declarations: []
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

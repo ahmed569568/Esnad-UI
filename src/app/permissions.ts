@@ -23,6 +23,5 @@ export class RolesClass {
 		view: false
 	};
 
-	constructor() {
-	}
+	constructor() {}
 }

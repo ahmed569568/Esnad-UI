@@ -1,189 +1,189 @@
 :host {
-  display: flex;
-  flex: 1;
+	display: flex;
+	flex: 1;
 }
 
 .mat-expansion-panel {
-  box-shadow: none;
-  border-radius: 0;
-  color: white;
+	box-shadow: none;
+	border-radius: 0;
+	color: white;
 
-  .mat-expansion-panel-header {
-    padding: 0 16px;
-  }
+	.mat-expansion-panel-header {
+		padding: 0 16px;
+	}
 
-  .mat-expansion-panel-body {
-    padding: 0;
-  }
+	.mat-expansion-panel-body {
+		padding: 0;
+	}
 }
 
 .has-border {
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+	border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-list {
-  padding-top: 0;
+	padding-top: 0;
 }
 
 .mat-list-item {
-  text-decoration: none;
+	text-decoration: none;
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
+	&:hover {
+		background: rgba(0, 0, 0, 0.05);
+	}
 }
 
 .side-menu-button {
-  //margin-right: 1rem;
-  //margin-bottom: 3.5rem;
-  margin: 0 1rem 3.5rem 8px;
+	//margin-right: 1rem;
+	//margin-bottom: 3.5rem;
+	margin: 0 1rem 3.5rem 8px;
 
-  mat-icon {
-    color: #313131 !important;
-  }
+	mat-icon {
+		color: #313131 !important;
+	}
 }
 
 .mat-drawer {
-  background: white;
-  box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
+	background: white;
+	box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
 
-  a,
-  .mat-expansion-panel-header,
-  mat-expansion-panel {
-    color: #a7a7a7;
-    font-weight: 100;
+	a,
+	.mat-expansion-panel-header,
+	mat-expansion-panel {
+		color: #a7a7a7;
+		font-weight: 100;
 
-    &.active {
-      span:first-child {
-        color: #0063f4;
-        font-weight: bold;
+		&.active {
+			span:first-child {
+				color: #0063f4;
+				font-weight: bold;
 
-        .mat-icon {
-          color: #0063f4;
-        }
-      }
+				.mat-icon {
+					color: #0063f4;
+				}
+			}
 
-      color: #0063f4;
-      font-weight: bold;
-    }
-  }
+			color: #0063f4;
+			font-weight: bold;
+		}
+	}
 }
 
 .menuIcon {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 
 .mat-expansion-panel-header-description,
 .mat-expansion-indicator::after {
-  color: #8389a3;
+	color: #8389a3;
 }
 
 .mat-sidenav-content {
-  background: white;
+	background: white;
 }
 
 .p-5 {
-  padding: 25px;
+	padding: 25px;
 }
 
 .container {
-  padding: 0 30px;
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
+	padding: 0 30px;
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
 
-  mat-icon {
-    color: #5069e4;
+	mat-icon {
+		color: #5069e4;
 
-    &:hover {
-      color: whitesmoke;
-    }
-  }
+		&:hover {
+			color: whitesmoke;
+		}
+	}
 }
 
 .userBtn {
-  display: flex;
-  color: #5069e4;
+	display: flex;
+	color: #5069e4;
 }
 
 .tile {
-  color: whitesmoke;
-  padding: 0 20px;
+	color: whitesmoke;
+	padding: 0 20px;
 }
 
 ::ng-deep .cdk-overlay-connected-position-bounding-box {
-  margin-top: 13px !important;
+	margin-top: 13px !important;
 }
 
 ::ng-deep .mat-expansion-indicator::after {
-  color: #8389a3;
+	color: #8389a3;
 }
 
 .mat-icon-button {
-  .mat-icon {
-    color: #5069e4;
-  }
+	.mat-icon {
+		color: #5069e4;
+	}
 }
 
 .pic-logo {
-  top: 11px;
-  left: 1170px;
-  width: 40px;
-  height: 42px;
-  border-radius: 20px;
-  opacity: 1;
-  margin: 0 0.3rem;
+	top: 11px;
+	left: 1170px;
+	width: 40px;
+	height: 42px;
+	border-radius: 20px;
+	opacity: 1;
+	margin: 0 0.3rem;
 }
 
 .username {
-  width: 3.5rem;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  text-overflow: ellipsis;
-  text-align: start;
+	width: 3.5rem;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	text-overflow: ellipsis;
+	text-align: start;
 }
 
 .user-lang {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .side-menu-header {
-  display: flex;
+	display: flex;
 
-  img {
-    margin: 6px 0 0 15px;
-    height: fit-content;
-  }
+	img {
+		margin: 6px 0 0 15px;
+		height: fit-content;
+	}
 }
 
 .side-menu-bg {
-  width: 100%;
-  height: 230px;
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  background-image: url("../../assets/menubg.png");
-  background-size: cover;
+	width: 100%;
+	height: 230px;
+	position: absolute;
+	bottom: 10px;
+	right: 5px;
+	background-image: url("../../assets/menubg.png");
+	background-size: cover;
 }
 
 .side-menu {
-  max-width: 28%;
-  padding-top: 28px;
-  position: fixed;
+	max-width: 28%;
+	padding-top: 28px;
+	position: fixed;
 
-  &.wide-menu {
-    min-width: 270px;
-  }
+	&.wide-menu {
+		min-width: 270px;
+	}
 
-  &.narrow-menu {
-    min-width: 20px;
+	&.narrow-menu {
+		min-width: 20px;
 
-    .logo,
-    .menu-title,
-    .side-menu-bg {
-      display: none;
-    }
-  }
+		.logo,
+		.menu-title,
+		.side-menu-bg {
+			display: none;
+		}
+	}
 }
