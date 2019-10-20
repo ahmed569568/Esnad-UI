@@ -20,7 +20,9 @@ export class TemplatesV2Service extends RootV2Service {
 			name: string;
 			forms?: {
 				name: string;
-				fields?: string[];
+				fields?: {
+					name: string;
+				}[];
 			}[];
 		}[];
 	} = {
@@ -64,6 +66,21 @@ export class TemplatesV2Service extends RootV2Service {
 
 	constructor(router: Router, api: ApiRequestV2Service, shared: SharedService) {
 		super(router, api, shared);
+
+		this.lists.fieldTypes = [
+			{
+				name: 'Text Input',
+				id: 'text'
+			},
+			{
+				name: 'Select Input',
+				id: 'select'
+			},
+			{
+				name: 'checkbox',
+				id: 'checkbox'
+			}
+		];
 	}
 
 	routerPrefix(val: string = '') {
@@ -84,10 +101,13 @@ export class TemplatesV2Service extends RootV2Service {
 	}
 
 	addStep() {
-		const stageDefaultInputs: ItemProps[] = [
+		const stepFormName = `step_${this.stepsCount}_name`;
+		const stepFormTypeId = `step_${this.stepsCount}_typeId`;
+
+		const stepDefaultInputs: ItemProps[] = [
 			{
-				name: 'step_' + this.stepsCount + '_name',
-				prop: 'step_' + this.stepsCount + '_name',
+				name: stepFormName,
+				prop: stepFormName,
 				form: {
 					name: 'step_name',
 					Validators: [Validators.required],
@@ -108,8 +128,8 @@ export class TemplatesV2Service extends RootV2Service {
 				}
 			},
 			{
-				name: 'step_' + this.stepsCount + '_typeId',
-				prop: 'step_' + this.stepsCount + '_typeId',
+				name: stepFormTypeId,
+				prop: stepFormTypeId,
 				form: {
 					name: 'step_typeId',
 					Validators: [Validators.required],
@@ -138,7 +158,7 @@ export class TemplatesV2Service extends RootV2Service {
 			forms: []
 		});
 
-		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
 		this.stepsCount++;
 
 		console.log(this.featureProps);
@@ -155,10 +175,21 @@ export class TemplatesV2Service extends RootV2Service {
 		});
 		const formNumber = formsLength + 1;
 
-		const stageDefaultInputs: ItemProps[] = [
+		const formObj = stepObj.forms.find(
+			value => value.name === 'form_' + formNumber
+		);
+
+		const fieldsLength = formObj.fields.length ? formObj.fields.length : 0;
+		formObj.fields.push({
+			name: 'field_' + (fieldsLength + 1)
+		});
+
+		const stepFormName = `step_${stepNumber}_form_${formNumber}_name`;
+
+		const stepDefaultInputs: ItemProps[] = [
 			{
-				name: 'step_' + stepNumber + '_form_' + formNumber + '_name',
-				prop: 'step_' + stepNumber + '_form_' + formNumber + '_name',
+				name: stepFormName,
+				prop: stepFormName,
 				form: {
 					name: 'form_name',
 					Validators: [Validators.required],
@@ -176,12 +207,13 @@ export class TemplatesV2Service extends RootV2Service {
 						lt_lg: '30%',
 						lt_md: '50%',
 						lt_sm: '100%'
-					}
+					},
+					gridCssClass: 'breakLine-input30'
 				}
 			}
 		];
 
-		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
 		// this.stepsCount++;
 		console.log(this.InputsTree);
 	}
@@ -196,30 +228,19 @@ export class TemplatesV2Service extends RootV2Service {
 		);
 
 		const fieldsLength = formObj.fields.length;
-		stepObj.forms.push({
-			name: 'field_' + (fieldsLength + 1),
-			fields: []
+		formObj.fields.push({
+			name: 'field_' + (fieldsLength + 1)
 		});
 		const fieldNumber = fieldsLength + 1;
 
-		const stageDefaultInputs: ItemProps[] = [
+		const fieldName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_name`;
+		const fieldTypeName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldType`;
+		const fieldOptionsName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldOptions`;
+
+		const stepDefaultInputs: ItemProps[] = [
 			{
-				name:
-					'step_' +
-					stepNumber +
-					'_form_' +
-					formNumber +
-					'_field_' +
-					fieldNumber +
-					'_name',
-				prop:
-					'step_' +
-					stepNumber +
-					'_form_' +
-					formNumber +
-					'_field_' +
-					fieldNumber +
-					'_name',
+				name: fieldName,
+				prop: fieldName,
 				form: {
 					name: 'field_name',
 					Validators: [Validators.required],
@@ -229,7 +250,8 @@ export class TemplatesV2Service extends RootV2Service {
 							tabGroupName: 'templateAccordion',
 							tabName: 'step_' + stepNumber
 						},
-						section: 'form_' + formNumber
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
 					},
 					grid: {
 						gt_lg: '30%',
@@ -239,10 +261,67 @@ export class TemplatesV2Service extends RootV2Service {
 						lt_sm: '100%'
 					}
 				}
+			},
+			{
+				name: fieldTypeName,
+				prop: fieldTypeName,
+				form: {
+					name: 'field_type',
+					Validators: [Validators.required],
+					formFieldType: 'select',
+					initValue: 'text',
+					listPrefix: 'fieldTypes',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: fieldOptionsName,
+				prop: fieldOptionsName,
+				showIf: [
+					{
+						fieldName: fieldTypeName,
+						fieldValue: 'select'
+					}
+				],
+				form: {
+					name: 'field_options',
+					Validators: [Validators.required],
+					formFieldType: 'ng_select',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '25%',
+						lt_xl: '25%',
+						lt_lg: '25%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
 			}
 		];
 
-		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
+		console.log(this.featureProps);
 		// this.stepsCount++;
 		console.log(this.InputsTree);
 	}

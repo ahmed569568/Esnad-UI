@@ -45,6 +45,65 @@ export class TemplatesFormComponent extends CoreFormV2Component
 
 	prepareFormAfterSubmit() {}
 
+	groupItemsByGroup() {
+		const tabGroups = this.groupByPipe.transform(
+			this.service.featureProps,
+			'form.groupBy.tabGroup.tabGroupName'
+		);
+
+		Object.entries(tabGroups).forEach(group => {
+			let tabGroupName = group[0];
+			if (tabGroupName === 'undefined') {
+				tabGroupName = 'defaultGroup';
+			}
+			this.service.formInputsCategorized[tabGroupName] = {};
+
+			const tabs = this.groupByPipe.transform(
+				group[1],
+				'form.groupBy.tabGroup.tabName'
+			);
+			Object.entries(tabs).forEach(tab => {
+				let tabName = tab[0];
+				if (tabName === 'undefined') {
+					tabName = 'defaultTab';
+				}
+				this.service.formInputsCategorized[tabGroupName][tabName] = {};
+
+				const tabContent = this.groupByPipe.transform(
+					tab[1],
+					'form.groupBy.section'
+				);
+				Object.entries(tabContent).forEach(section => {
+					let sectionName = section[0];
+					if (sectionName === 'undefined') {
+						sectionName = 'defaultSection';
+					}
+					this.service.formInputsCategorized[tabGroupName][tabName][
+						sectionName
+					] = {};
+
+					const sectionContent = this.groupByPipe.transform(
+						section[1],
+						'form.groupBy.formInputs'
+					);
+
+					Object.entries(sectionContent).forEach(formInputs => {
+						let formInputsName = formInputs[0];
+						if (formInputsName === 'undefined') {
+							formInputsName = 'defaultFormInputs';
+						}
+						this.service.formInputsCategorized[tabGroupName][tabName][
+							sectionName
+						][formInputsName] = formInputs[1];
+					});
+				});
+			});
+		});
+		this.service.formInputsCategorized = {
+			...this.service.formInputsCategorized
+		};
+	}
+
 	addStep() {
 		const formData = this.form.value;
 		this.service.addStep();

@@ -27,6 +27,7 @@ import { GroupByPipe } from 'ngx-pipes';
 import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { RootV2Service } from '@app/core/root.service-v2';
+import { ShowIf } from '@app/interfaces-v2';
 
 const moment = _rollupMoment || _moment;
 
@@ -656,10 +657,9 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 		if (field.showIf) {
 			const validators = field.form.Validators;
 			let trueCount = 0;
-			field.showIf.forEach((condition: any) => {
+			field.showIf.forEach((condition: ShowIf) => {
 				if (
-					this.form.controls[Object.keys(condition)[0]].value ===
-					Object.values(condition)[0]
+					this.form.controls[condition.fieldName].value === condition.fieldValue
 				) {
 					trueCount++;
 				}

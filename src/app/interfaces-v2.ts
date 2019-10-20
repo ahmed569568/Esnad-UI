@@ -23,7 +23,7 @@ export interface ItemProps {
 	prop: string;
 	additionalProp?: string;
 	hints?: {};
-	showIf?: any;
+	showIf?: ShowIf[];
 	editDisabled?: boolean;
 	list?: {
 		name?: string; // for a case when you want the key passed to list translation is different than the main one
@@ -92,6 +92,7 @@ export interface ItemProps {
 		placeHolder?: string; // if formFieldType is image can set a placeholder when image isn't set
 		initValue?: any; // Init Value if provided then form will init with it
 		cssClass?: string;
+		gridCssClass?: string;
 		ngSelectOptions?: NgSelectOptions;
 		grid?: {
 			gt_lg?: string;
@@ -102,6 +103,7 @@ export interface ItemProps {
 		};
 		groupBy?: {
 			section?: string;
+			formInputs?: string;
 			tabGroup?: {
 				tabGroupName: string;
 				tabName: string;
@@ -117,6 +119,11 @@ export interface ItemProps {
 			list: List;
 		}[]; // array of suffixes to display inside cell < is selected from another cell identifier keys
 	};
+}
+
+export interface ShowIf {
+	fieldName: string;
+	fieldValue: string;
 }
 
 export interface DateOptions {
