@@ -1,4 +1,4 @@
-.add_stage_button {
+.big_add_button {
 	width: 100%;
 	height: 65px;
 	display: flex;
@@ -9,6 +9,19 @@
 
 .form-section {
 	&.cardStyle {
-		background-color: #fff;
+		border: 1px dashed #e0e0e0;
+		margin: 10px 0;
+		border-radius: 5px;
+		padding: 15px 30px;
 	}
+}
+
+.default-form .form-section .form-section-title {
+	font-weight: bold;
+	padding-bottom: 5px;
+	margin-top: -35px;
+	background: #fff;
+	display: flex;
+	margin-left: auto;
+	padding: 10px 10px;
 }

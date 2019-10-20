@@ -69,22 +69,24 @@
 
 								<!-- Tabs Groups start -->
 								<ng-container *ngIf="groups[0] !== 'defaultGroup'">
-									<mat-accordion>
-										<mat-expansion-panel [ngClass]="groups[0]">
+									<mat-accordion [multi]="false">
+										<mat-expansion-panel class="my-2" [expanded]="true">
 											<mat-expansion-panel-header>
 												<mat-panel-title>
-													{{groupI | json }} {{ form.get('step_' + groupI +
-													'_name').value ? form.get('step_' + groupI +
-													'_name').value : ('templates.step_placeholder' |
-													translate) }}
+													{{ form.get('step_' + groupI + '_name')?.value ?
+													form.get('step_' + groupI + '_name')?.value :
+													('templates.step_placeholder' | translate) + ' ' +
+													groupI }}
 												</mat-panel-title>
 											</mat-expansion-panel-header>
 
 											<div
+												fxFlex=""
+												fxLayout="column"
 												*ngFor="let tab of groups[1] | pairs; let stepI = index;
 														trackBy: trackByFn"
 											>
-												<div class="pt-5">
+												<div fxFlex="" fxLayout="column">
 													<ng-container
 														*ngFor="
 														let section of tab[1] | pairs; let sectionI = index;
@@ -93,13 +95,19 @@
 													>
 														<div
 															class="form-section"
+															fxFlex=""
+															fxLayout="column"
 															[ngClass]="{'cardStyle' : section[0] !== 'defaultSection'}"
 														>
 															<div
 																class="form-section-title"
 																*ngIf="section[0] !== 'defaultSection'"
 															>
-																{{ section[0] | translate }}
+																{{ form.get('step_' + groupI + '_form_' +
+																sectionI + '_name')?.value ? form.get('step_' +
+																groupI + '_form_' + sectionI + '_name')?.value :
+																('templates.form_placeholder' | translate) + ' '
+																+ sectionI }}
 															</div>
 															<div
 																class="form-section-content"
@@ -133,6 +141,21 @@
 														</div>
 													</ng-container>
 												</div>
+
+												<div>
+													<button
+														class="big_add_button"
+														mat-stroked-button
+														(click)="addForm(groupI)"
+													>
+														<mat-icon
+															class="mdi-icon"
+															svgIcon="playlist-plus"
+															[attr.size]="'22px'"
+														></mat-icon>
+														{{ 'templates.add_form' | translate}}
+													</button>
+												</div>
 											</div>
 										</mat-expansion-panel>
 									</mat-accordion>
@@ -149,17 +172,13 @@
 		<div fxFlex fxLayout>
 			<mat-card fxFlex>
 				<mat-card-content>
-					<button
-						class="add_stage_button"
-						mat-stroked-button
-						(click)="createStage()"
-					>
+					<button class="big_add_button" mat-stroked-button (click)="addStep()">
 						<mat-icon
 							class="mdi-icon"
 							svgIcon="playlist-plus"
 							[attr.size]="'22px'"
 						></mat-icon>
-						add new stage
+						{{ 'templates.add_stage' | translate}}
 					</button>
 				</mat-card-content>
 			</mat-card>

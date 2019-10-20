@@ -1107,5 +1107,12 @@ export abstract class RootV2Service {
 		this.shared.location.back();
 	}
 
-	createStage() {}
+	/**
+	 * will be overridden in specific service , they just here for reference and for types existance
+	 */
+	addStep() {}
+
+	addForm(stepNumber: number) {}
+
+	addInput() {}
 }

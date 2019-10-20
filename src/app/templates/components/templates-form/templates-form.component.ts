@@ -45,12 +45,26 @@ export class TemplatesFormComponent extends CoreFormV2Component
 
 	prepareFormAfterSubmit() {}
 
-	createStage() {
-		this.service.createStage();
+	addStep() {
+		const formData = this.form.value;
+		this.service.addStep();
 		this.groupItemsByGroup();
 		this.createForm();
 		this.service.loadSelectLists('form', true);
+		this.form.patchValue(formData);
 
 		console.log(this.service.formInputsCategorized);
+		console.log(this.form.controls);
+	}
+
+	addForm(stepNumber: number) {
+		const formData = this.form.value;
+		this.service.addForm(stepNumber);
+		this.groupItemsByGroup();
+		this.createForm();
+		this.form.patchValue(formData);
+
+		console.log(this.service.formInputsCategorized);
+		console.log(this.form.controls);
 	}
 }

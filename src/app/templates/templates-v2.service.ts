@@ -13,8 +13,20 @@ import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
 	providedIn: 'root'
 })
 export class TemplatesV2Service extends RootV2Service {
-	stepsCount = 0;
+	stepsCount = 1;
 	stepsNames: string[] = [];
+
+	InputsTree: {
+		steps?: {
+			name: string;
+			forms?: {
+				name: string;
+				inputs?: string[];
+			}[];
+		}[];
+	} = {
+		steps: []
+	};
 
 	featureProps: ItemProps[] = [
 		{
@@ -68,7 +80,7 @@ export class TemplatesV2Service extends RootV2Service {
 		}
 	}
 
-	createStage() {
+	addStep() {
 		const stageDefaultInputs: ItemProps[] = [
 			{
 				name: 'step_' + this.stepsCount + '_name',
@@ -114,8 +126,54 @@ export class TemplatesV2Service extends RootV2Service {
 			}
 		];
 
+		this.InputsTree.steps.push({
+			name: 'step_' + this.stepsCount,
+			forms: []
+		});
+
 		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
 		this.stepsCount++;
+
+		console.log(this.featureProps);
+	}
+
+	addForm(stepNumber: number) {
+		const stepObj = this.InputsTree.steps.find(
+			value => value.name === 'step_' + stepNumber
+		);
+		const formsLength = stepObj.forms.length;
+		stepObj.forms.push({
+			name: 'form_' + (formsLength + 1),
+			inputs: []
+		});
+		const formNumber = formsLength + 1;
+
+		const stageDefaultInputs: ItemProps[] = [
+			{
+				name: 'step_' + stepNumber + '_form_' + formNumber + '_name',
+				prop: 'step_' + stepNumber + '_form_' + formNumber + '_name',
+				form: {
+					name: 'form_name',
+					Validators: [Validators.required],
+					formFieldType: 'text',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'step_' + stepNumber,
+							tabName: 'form_' + stepNumber
+						},
+						section: 'form_' + formNumber
+					},
+					grid: {
+						lg: '30%',
+						md: '50%',
+						sm: '100%'
+					}
+				}
+			}
+		];
+
+		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		// this.stepsCount++;
 		console.log(this.featureProps);
 	}
 }

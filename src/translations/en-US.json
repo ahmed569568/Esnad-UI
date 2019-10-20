@@ -375,7 +375,13 @@
 	},
 	"templates": {
 		"step_name": "Step Name",
-		"step_typeId": "Select Group to access this stage"
+		"step_typeId": "Select Group to access this Step",
+		"step_placeholder": "Step",
+		"form_placeholder": "Form",
+		"Field_placeholder": "Field",
+		"add_stage": "Add Step",
+		"add_form": "Add Form",
+		"add_field": "Add Input"
 	},
 	"validation_errors": {
 		"required": "This Field is Required",
