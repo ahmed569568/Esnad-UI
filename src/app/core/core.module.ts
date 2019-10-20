@@ -12,18 +12,21 @@ import {SharedModule} from '@app/shared/shared.module';
 import {CoreViewComponent} from './components/core-view/core-view.component';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, SharedModule],
-  providers: [
-    {
-      provide: HttpClient,
-      useClass: HttpService
-    },
-    {
-      provide: RouteReuseStrategy,
-      useClass: RouteReusableStrategy
-    }
-  ],
+	imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule, SharedModule],
+	providers: [
+		{
+			provide: HttpClient,
+			useClass: HttpService
+		},
+		{
+			provide: RouteReuseStrategy,
+			useClass: RouteReusableStrategy
+		}
+	],
 	declarations: [CoreListComponent, CoreFormComponent, CoreViewComponent],
+	exports: [
+		CoreFormComponent
+	]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

@@ -7,6 +7,8 @@ import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
 import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
+// import {CoreModule} from '@app/core/core.module';
+
 @NgModule({
 	declarations: [ClientsListComponent, ClientsFormComponent],
 	imports: [
@@ -32,7 +34,8 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 					}
 				]
 			}
-		])
+		]),
+		// CoreModule
 	]
 })
 export class ClientsModule {

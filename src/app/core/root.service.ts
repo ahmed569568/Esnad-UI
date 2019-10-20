@@ -13,11 +13,7 @@ export abstract class RootService {
   resources: Subject<any> = new Subject();
   updateResources: Subject<any> = new Subject();
   lists: any = {
-    ['drivers-languages']: [],
-    users: { data: [] },
-    models: { data: [] },
-    control: { data: [] },
-    parents: []
+		['clients-price']: []
   };
   centerPoint: { lat?: number; lng?: number; id?: number };
 
