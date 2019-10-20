@@ -140,7 +140,8 @@
 		"prices_list": "Prices list",
 		"prices": "Prices",
 		"categories": "Categories",
-		"groups": "Groups"
+		"groups": "Groups",
+		"cities": "Cities"
 	},
   "check-in": {
     "title": "Check-in"
@@ -456,5 +457,10 @@
 	"groups": {
 		"title": "Groups",
 		"name": "Name"
+	},
+	"cities": {
+		"title": "Cities",
+		"name": "Name",
+		"level": "Level"
 	}
 }
