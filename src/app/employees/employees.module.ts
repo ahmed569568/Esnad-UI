@@ -5,6 +5,7 @@ import {EmployeesFormComponent} from './components/employees-form/employees-form
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [EmployeesListComponent, EmployeesFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('clients.title')},
-				component: EmployeesListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: EmployeesListComponent
+					},
 					{
 						path: 'create',
 						component: EmployeesFormComponent

@@ -5,6 +5,7 @@ import {FormFieldFormComponent} from './components/form-field-form/form-field-fo
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [FormFieldListComponent, FormFieldFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('form_field.title')},
-				component: FormFieldListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: FormFieldListComponent
+					},
 					{
 						path: 'create',
 						component: FormFieldFormComponent

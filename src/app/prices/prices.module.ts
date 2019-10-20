@@ -5,6 +5,7 @@ import {PricesFormComponent} from './components/prices-form/prices-form.componen
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [PricesListComponent, PricesFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('prices.title')},
-				component: PricesListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: PricesListComponent
+					},
 					{
 						path: 'create',
 						component: PricesFormComponent

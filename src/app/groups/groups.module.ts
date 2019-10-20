@@ -5,6 +5,7 @@ import {GroupsFormComponent} from './components/groups-form/groups-form.componen
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [GroupsListComponent, GroupsFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('groups.title')},
-				component: GroupsListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: GroupsListComponent
+					},
 					{
 						path: 'create',
 						component: GroupsFormComponent

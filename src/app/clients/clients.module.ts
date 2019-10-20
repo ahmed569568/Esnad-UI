@@ -5,6 +5,7 @@ import {ClientsFormComponent} from './components/clients-form/clients-form.compo
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [ClientsListComponent, ClientsFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('clients.title')},
-				component: ClientsListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: ClientsListComponent
+					},
 					{
 						path: 'create',
 						component: ClientsFormComponent

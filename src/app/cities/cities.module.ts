@@ -5,6 +5,7 @@ import {CitiesFormComponent} from './components/cities-form/cities-form.componen
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [CitiesListComponent, CitiesFormComponent],
@@ -14,9 +15,13 @@ import {extract} from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
+				component: RouterContainerComponent,
 				data: {title: extract('cities.title')},
-				component: CitiesListComponent,
 				children: [
+					{
+						path: 'list',
+						component: CitiesListComponent
+					},
 					{
 						path: 'create',
 						component: CitiesFormComponent
@@ -26,7 +31,7 @@ import {extract} from '@app/core';
 						component: CitiesFormComponent
 					}
 				]
-			}
+			},
 		])
 	]
 })

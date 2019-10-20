@@ -11,13 +11,13 @@ export class MenuItems {
 			children: [
 				{
 					title: 'special_treatments',
-					url: '/treatments'
+					url: '/treatments/list'
 				}, {
 					title: 'active_treatments',
-					url: '/treatments'
+					url: '/treatments/list'
 				}, {
 					title: 'expire_treatments',
-					url: '/treatments'
+					url: '/treatments/list'
 				},
 			]
 		},
@@ -32,7 +32,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'clients_list',
-					url: '/clients'
+					url: '/clients/list'
 				}, {
 					title: 'new_client',
 					url: '/clients/create'
@@ -45,7 +45,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'prices_list',
-					url: '/prices'
+					url: '/prices/list'
 				}, {
 					title: 'new_price',
 					url: '/prices/create'
@@ -58,7 +58,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'groups_list',
-					url: '/groups'
+					url: '/groups/list'
 				}, {
 					title: 'new_group',
 					url: '/groups/create'
@@ -71,7 +71,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'categories_list',
-					url: '/categories'
+					url: '/categories/list'
 				}, {
 					title: 'new_category',
 					url: '/categories/create'
@@ -84,7 +84,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'forms_list',
-					url: '/forms'
+					url: '/forms/list'
 				}, {
 					title: 'new_form',
 					url: '/forms/create'
@@ -97,7 +97,7 @@ export class MenuItems {
 			children: [
 				{
 					title: 'cities_list',
-					url: '/cities'
+					url: '/cities/list'
 				}, {
 					title: 'new_city',
 					url: '/cities/create'
@@ -106,12 +106,12 @@ export class MenuItems {
 		},
 		{
 			title: 'employees',
-			url: '/employees',
+			url: '/employees/list',
 			icon: 'settings_applications',
 		},
 		{
 			title: 'roles',
-			url: '/roles',
+			url: '/roles/list',
 			icon: 'settings_applications',
 		},
 		// {

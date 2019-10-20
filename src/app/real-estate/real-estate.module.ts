@@ -5,6 +5,7 @@ import {RealEstateFormComponent} from './components/real-estate-form/real-estate
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [RealEstateListComponent, RealEstateFormComponent],
@@ -15,8 +16,12 @@ import {extract} from '@app/core';
 			{
 				path: '',
 				data: {title: extract('real_estate.title')},
-				component: RealEstateListComponent,
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: RealEstateListComponent
+					},
 					{
 						path: 'create',
 						component: RealEstateFormComponent

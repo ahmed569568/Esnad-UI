@@ -5,30 +5,35 @@ import {CategoriesFormComponent} from './components/categories-form/categories-f
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '@app/shared/shared.module';
 import {extract} from '@app/core';
+import {RouterContainerComponent} from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [CategoriesListComponent, CategoriesFormComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild([
-      {
-        path: '',
+	imports: [
+		CommonModule,
+		SharedModule,
+		RouterModule.forChild([
+			{
+				path: '',
 				data: {title: extract('categories.title')},
-				component: CategoriesListComponent,
-        children: [
-          {
-            path: 'create',
+				component: RouterContainerComponent,
+				children: [
+					{
+						path: 'list',
+						component: CategoriesListComponent
+					},
+					{
+						path: 'create',
 						component: CategoriesFormComponent
-          },
-          {
-            path: 'edit/:id',
+					},
+					{
+						path: 'edit/:id',
 						component: CategoriesFormComponent
-          }
-        ]
-      }
-    ])
-  ]
+					}
+				]
+			}
+		])
+	]
 })
 export class CategoriesModule {
 }
