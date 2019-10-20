@@ -47,9 +47,11 @@ export class CitiesFormComponent extends CoreFormComponent
 	}
 
 	createForm(): void {
+		if (!this.isEdit) {
 		this.form = this.fb.group({
 			countries: this.fb.array([this.initCountries()])
 		});
+		}
 	}
 
 	initCountries() {
