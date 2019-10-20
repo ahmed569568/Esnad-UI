@@ -23,23 +23,13 @@ export class EmployeesFormComponent extends CoreFormComponent
 	initLists() {
 		this.lists = [
 			{
-				// ['drivers/languages']: 1
+				['employees/groups']: 1
+			},
+			{
+				['employees/categories']: 1
 			}
 		];
 	}
-
-	// refactorItem(item: any): any {
-	//   super.refactorItem(item);
-	//   /**
-	//    * Set value of selected items
-	//    */
-	//   const selectedUsers = [];
-	//   for (const user of item.users) {
-	//     selectedUsers.push(user.user_id);
-	//   }
-	//   this.form.controls.branch_managers.setValue(selectedUsers); // Final Return
-	//   return item;
-	// }
 
 	get lists() {
 		return this._lists;
@@ -51,6 +41,12 @@ export class EmployeesFormComponent extends CoreFormComponent
 
 	ngOnInit() {
 		super.ngOnInit();
+	}
+
+	patchFormValue(form: any) {
+		super.patchFormValue(form);
+		this.form.controls.photo.patchValue('');
+		this.form.controls.signature.patchValue('');
 	}
 
 	ngOnDestroy(): void {

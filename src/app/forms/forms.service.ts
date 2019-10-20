@@ -39,7 +39,8 @@ export class FormsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'client',
@@ -54,9 +55,10 @@ export class FormsService extends RootService {
 				listing: false,
 				formField: false,
 				formFieldType: 'select',
-				listPrefix: 'forms/steps',
+				listPrefix: 'forms-steps',
 				required: true,
-				width: 300
+				width: 300,
+				searchable: true
 			}
 			// {
 			//   name: 'order_id',

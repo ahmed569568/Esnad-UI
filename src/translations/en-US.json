@@ -325,7 +325,6 @@
 		"ar-SA": "Arabic"
 	},
 	"validations": {
-		"email_or_pass_not_correct": "Email or password incorrect!",
 		"required": "This field is Required",
 		"validEmail": "Please enter a valid email",
 		"validSelect": "Please select from list",
@@ -472,6 +471,22 @@
 		"title": "Cities",
 		"title_single": "City",
 		"name": "Name",
-		"level": "Level"
+		"level": "Level",
+		"country_name": "Country name",
+		"add_city": "Add city",
+		"city_name": "City name",
+		"remove_city": "Remove city",
+		"add_region": "Add region",
+		"region_name": "Region name",
+		"remove_region": "Remove region",
+		"add_province": "Add province",
+		"province_name": "Province name",
+		"remove_province": "Remove province",
+		"add_district": "Add district",
+		"district_name": "District name",
+		"remove_district": "Remove district",
+		"add_street": "Street",
+		"street_name": "Street name",
+		"remove_street": "Remove street"
 	}
 }

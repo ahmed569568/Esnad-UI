@@ -26,6 +26,7 @@ import { ListGridSearchComponent } from '@app/shared/components/list-grid-search
 import { AngularOpenlayersModule } from 'ngx-openlayers';
 import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 import { RouterModule } from '@angular/router';
+import { FiltersComponent } from '@app/shared/components/filters/filters.component';
 
 @NgModule({
 	imports: [
@@ -58,7 +59,8 @@ import { RouterModule } from '@angular/router';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		RouterContainerComponent
+		RouterContainerComponent,
+		FiltersComponent
 	],
 	exports: [
 		CommonModule,
@@ -85,7 +87,8 @@ import { RouterModule } from '@angular/router';
 		ListGridSummaryComponent,
 		ListTypeComponent,
 		ListGridSearchComponent,
-		MapComponent
+		MapComponent,
+		FiltersComponent
 	],
 	entryComponents: [DialogComponent]
 })

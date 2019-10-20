@@ -26,6 +26,12 @@
 				<!--					*ngIf="listOptions.searchable"-->
 				<!--					[service]="service"-->
 				<!--				></app-list-grid-search>-->
+				<!--				<app-list-grid-search-->
+				<!--					*ngIf="listOptions.searchable"-->
+				<!--					[service]="service"-->
+				<!--				></app-list-grid-search>-->
+
+				<app-filters [service]="service" [columns]="columns"></app-filters>
 
 				<app-list-grid
 					[controller]="cid"

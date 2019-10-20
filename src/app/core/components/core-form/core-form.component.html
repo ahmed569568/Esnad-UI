@@ -2,11 +2,7 @@
 	<h3 class="form-title">
 		{{ 'common.add' | translate }} {{ cid + '.title_single' | translate }}
 	</h3>
-	<form
-		class="d-flex default-form-style"
-		[formGroup]="form"
-		(ngSubmit)="formSubmission()"
-	>
+	<form class="d-flex default-form-style" [formGroup]="form">
 		<ng-container
 			*ngFor="let field of service.featureProps; trackBy: trackByFn"
 		>

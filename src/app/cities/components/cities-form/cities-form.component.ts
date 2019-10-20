@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
 import { CitiesService } from '@app/cities/cities.service';
@@ -34,6 +34,16 @@ export class CitiesFormComponent extends CoreFormComponent
 
 	ngOnInit() {
 		super.ngOnInit();
+	}
+
+	patchFormValue(form: any): void {
+		let cities = <FormArray>(
+			this.form.controls.countries.controls[0].controls.cities
+		);
+		form['cities'].forEach(() => {
+			cities.push(this.initCities());
+		});
+		this.form.patchValue({ countries: [form] });
 	}
 
 	createForm(): void {

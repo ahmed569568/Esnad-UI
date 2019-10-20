@@ -28,7 +28,8 @@ export class GroupsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			}
 		];
 	}

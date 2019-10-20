@@ -23,7 +23,9 @@ export class CitiesService extends RootService {
 				name: 'name',
 				prop: 'name',
 				listing: true,
-				formField: false
+				formField: false,
+				searchable: true,
+				formFieldType: 'text'
 			},
 			{
 				name: 'level',

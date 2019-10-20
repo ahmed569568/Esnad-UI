@@ -47,7 +47,12 @@ export class CoreListComponent implements OnInit, OnDestroy {
 		this.utilitiesService.filterObservable$
 			.pipe(takeWhile(() => this.alive))
 			.subscribe(keyword => {
-				this.params = { ...this.params, string: keyword };
+				for (const filterParam of Object.keys(keyword)) {
+					if (!keyword[filterParam]) {
+						delete keyword[filterParam];
+					}
+					this.params = { ...this.params, [filterParam]: keyword[filterParam] };
+				}
 				return this.loadResources();
 			});
 		AppHelper.calcListHeight();
@@ -68,6 +73,22 @@ export class CoreListComponent implements OnInit, OnDestroy {
 	 * Init navigation observables
 	 */
 	paginationInit() {
+		this.utilitiesService.filterObservable$
+			.pipe(takeWhile(() => this.alive))
+			.subscribe((filtersData: any) => {
+				if (filtersData) {
+					const filters = {};
+					for (const key of Object.keys(filtersData)) {
+						filters[key] = filtersData[key];
+						if (!filtersData[key]) {
+							delete filters[key];
+						}
+					}
+					this.params.queryParams = filters;
+					return this.resetList();
+				}
+			});
+
 		/**
 		 * refresh resources list
 		 */

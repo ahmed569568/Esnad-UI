@@ -52,7 +52,7 @@
 									<mat-form-field class="example-full-width">
 										<input
 											matInput
-											formControlName="name"
+											[formControl]="city.get('name')"
 											[placeholder]="service.cid + '.city_name' | translate"
 										/>
 									</mat-form-field>
@@ -97,7 +97,7 @@
 											<mat-form-field class="example-full-width">
 												<input
 													matInput
-													formControlName="name"
+													[formControl]="region.get('name')"
 													[placeholder]="
 														service.cid + '.region_name' | translate
 													"
@@ -150,7 +150,7 @@
 													<mat-form-field class="example-full-width">
 														<input
 															matInput
-															formControlName="name"
+															[formControl]="province.get('name')"
 															[placeholder]="
 																service.cid + '.province_name' | translate
 															"
@@ -206,7 +206,7 @@
 															<mat-form-field class="example-full-width">
 																<input
 																	matInput
-																	formControlName="name"
+																	[formControl]="district.get('name')"
 																	[placeholder]="
 																		service.cid + '.district_name' | translate
 																	"

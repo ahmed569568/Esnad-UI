@@ -28,7 +28,8 @@ export class TreatmentsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'status',
@@ -38,7 +39,8 @@ export class TreatmentsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'client',
@@ -48,7 +50,8 @@ export class TreatmentsService extends RootService {
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			}
 		];
 	}
