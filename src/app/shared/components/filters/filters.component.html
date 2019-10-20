@@ -8,23 +8,45 @@
 			<form [formGroup]="form" *ngIf="columns" (ngSubmit)="filter()">
 				<ng-container *ngFor="let column of columns">
 					<ng-container *ngIf="column && column.searchable">
-
 						<ng-container
-							*ngIf="column && (column.formFieldType === 'text' || column.formFieldType === 'email' || column.formFieldType === 'phone')">
+							*ngIf="
+								column &&
+								(column.formFieldType === 'text' ||
+									column.formFieldType === 'email' ||
+									column.formFieldType === 'phone')
+							"
+						>
 							<mat-form-field>
-								<input matInput [formControlName]="column.name" [placeholder]="'common.' + column.name | translate"/>
+								<input
+									matInput
+									[formControlName]="column.name"
+									[placeholder]="'common.' + column.name | translate"
+								/>
 							</mat-form-field>
-						</ng-container> <!-- Text Field -->
+						</ng-container>
+						<!-- Text Field -->
 
 						<ng-container
-							*ngIf="column && (column.formFieldType === 'radio' && column.listPrefix || column.formFieldType === 'select')">
+							*ngIf="
+								column &&
+								((column.formFieldType === 'radio' && column.listPrefix) ||
+									column.formFieldType === 'select')
+							"
+						>
 							<mat-form-field>
-								<mat-select [formControlName]="column.name" [placeholder]="'common.' + column.name | translate">
-									<mat-option *ngFor="let item of service.lists[column.listPrefix]"
-															[value]="item.id">{{ item.name || item.displayName }}</mat-option>
+								<mat-select
+									[formControlName]="column.name"
+									[placeholder]="'common.' + column.name | translate"
+								>
+									<mat-option
+										*ngFor="let item of service.lists[column.listPrefix]"
+										[value]="item.id"
+										>{{ item.name || item.displayName }}</mat-option
+									>
 								</mat-select>
 							</mat-form-field>
-						</ng-container> <!-- Select Field -->
+						</ng-container>
+						<!-- Select Field -->
 
 						<!--            <ng-container-->
 						<!--              *ngIf="column && (column.formFieldType === 'radio' && column.listPrefix || column.formFieldType === 'multi_select')">-->
@@ -38,8 +60,14 @@
 					</ng-container>
 				</ng-container>
 
-				<button *ngIf="columns" [disabled]="!form.valid" type="submit"
-								mat-button>{{ 'common.apply' | translate }}</button>
+				<button
+					*ngIf="columns"
+					[disabled]="!form.valid"
+					type="submit"
+					mat-button
+				>
+					{{ 'common.apply' | translate }}
+				</button>
 			</form>
 		</mat-card-content>
 	</mat-card>

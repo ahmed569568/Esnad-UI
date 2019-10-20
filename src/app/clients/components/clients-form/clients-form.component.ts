@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
-import {FormArray, FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {UtilitiesService} from '@app/shared/services/utilities.service';
-import {ClientsService} from '@app/clients/clients.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { ClientsService } from '@app/clients/clients.service';
 
 @Component({
 	selector: 'app-clients-form',
@@ -58,7 +58,7 @@ export class ClientsFormComponent extends CoreFormComponent
 	}
 
 	patchFormValue(form: any): void {
-		let client_price = <FormArray> this.form.controls.client_price;
+		let client_price = <FormArray>this.form.controls.client_price;
 		form['client_price'].forEach(() => {
 			client_price.push(this.initClientPrice());
 		});

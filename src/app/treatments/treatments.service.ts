@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {RootService} from '@app/core/root.service';
-import {ApiRequestService} from '@app/core/http/api-request.service';
-import {ItemProps} from '@app/interfaces';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Validators} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { RootService } from '@app/core/root.service';
+import { ApiRequestService } from '@app/core/http/api-request.service';
+import { ItemProps } from '@app/interfaces';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Validators } from '@angular/forms';
 
 @Injectable({
 	providedIn: 'root'
@@ -30,7 +30,6 @@ export class TreatmentsService extends RootService {
 				width: 300,
 				validations: [Validators.required],
 				searchable: true
-
 			},
 			{
 				name: 'status',
@@ -42,7 +41,6 @@ export class TreatmentsService extends RootService {
 				width: 300,
 				validations: [Validators.required],
 				searchable: true
-
 			},
 			{
 				name: 'client',
@@ -54,7 +52,6 @@ export class TreatmentsService extends RootService {
 				width: 300,
 				validations: [Validators.required],
 				searchable: true
-
 			}
 		];
 	}
