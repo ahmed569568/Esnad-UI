@@ -1,5 +1,5 @@
-<div class="filter-container search-card" fxFlex fxLayout>
-	<mat-card class="main-card">
+<div class="filter-container search-card">
+	<mat-card class="main-card" fxFlex="" fxLayout="column">
 		<mat-card-header class="filter-card-header">
 			<mat-icon class="filter-icon">tune</mat-icon>
 			{{ 'common.filter' | translate }}
@@ -16,7 +16,7 @@
 									column.formFieldType === 'phone')
 							"
 						>
-							<mat-form-field>
+							<mat-form-field appearance="outline">
 								<input
 									matInput
 									[formControlName]="column.name"

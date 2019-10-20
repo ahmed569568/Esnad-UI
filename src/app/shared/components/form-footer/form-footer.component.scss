@@ -7,14 +7,14 @@
 	.submit,
 	.cancel {
 		color: white;
-		border-radius: 20px;
+		border-radius: 8px;
 		margin-left: 10px;
 
 		&.submit {
-			background-color: #0063f4;
+			background-color: #191e2c;
 
 			&:hover {
-				background-color: #3c89fa;
+				background-color: #313853;
 				color: whitesmoke;
 			}
 		}

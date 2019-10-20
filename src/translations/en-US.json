@@ -1,5 +1,6 @@
 {
 	"common": {
+		"filter": "Filter",
 		"edit": "Edit",
 		"delete": "Delete",
 		"clone": "Clone",
