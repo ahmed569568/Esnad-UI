@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { map, takeWhile } from 'rxjs/operators';
-import { AppHelper } from '@app/core/classes/app-helper';
-import { AppConfig } from '@app/core/classes/app-config';
-import { RootService } from '@app/core/root.service';
-import { environment } from '@env/environment';
-import { UtilitiesService } from '@app/shared/services/utilities.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {map, takeWhile} from 'rxjs/operators';
+import {AppHelper} from '@app/core/classes/app-helper';
+import {AppConfig} from '@app/core/classes/app-config';
+import {RootService} from '@app/core/root.service';
+import {environment} from '@env/environment';
+import {UtilitiesService} from '@app/shared/services/utilities.service';
 
 @Component({
 	selector: 'app-core-form',
@@ -61,7 +61,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 	imageFieldName: any[] = [];
 
 	currentField: string;
-
+	currentItemId: number;
 	protected _lists: any = [];
 
 	constructor(
@@ -85,6 +85,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 			.subscribe((routeInfo: any) => {
 				if (routeInfo.id) {
 					this.isEdit = true;
+					this.currentItemId = routeInfo.id;
 					this.loadResources(routeInfo.id);
 				}
 			});

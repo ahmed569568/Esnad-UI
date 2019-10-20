@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { RolesService } from '@app/roles/roles.service';
-import { RolesClass } from '@app/permissions';
-import { UtilitiesService } from '@app/shared/services/utilities.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {CoreFormComponent} from '@app/core/components/core-form/core-form.component';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {RolesService} from '@app/roles/roles.service';
+import {RolesClass} from '@app/permissions';
+import {UtilitiesService} from '@app/shared/services/utilities.service';
 
 @Component({
 	selector: 'app-roles-form',
@@ -36,6 +36,7 @@ export class RolesFormComponent extends CoreFormComponent
 
 	ngOnInit() {
 		super.ngOnInit();
+		this.form.controls.group_id.setValue(this.currentItemId);
 	}
 
 	refactorItem(data: any) {
@@ -61,7 +62,7 @@ export class RolesFormComponent extends CoreFormComponent
 			}
 			data[item] = permissions;
 		}
-		return this.form.controls.permissions.setValue(data);
+		return this.form.controls.roles.setValue(data);
 	}
 
 	inputAction(template: any, permission: any, value: boolean) {
