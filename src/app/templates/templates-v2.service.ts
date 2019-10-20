@@ -91,8 +91,8 @@ export class TemplatesV2Service extends RootV2Service {
 					formFieldType: 'text',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step_' + this.stepsCount,
-							tabName: 'form_' + this.stepsCount
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + this.stepsCount
 						}
 					},
 					grid: {
@@ -113,8 +113,8 @@ export class TemplatesV2Service extends RootV2Service {
 					listPrefix: 'groups',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step_' + this.stepsCount,
-							tabName: 'form_' + this.stepsCount
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + this.stepsCount
 						}
 					},
 					grid: {
@@ -158,8 +158,8 @@ export class TemplatesV2Service extends RootV2Service {
 					formFieldType: 'text',
 					groupBy: {
 						tabGroup: {
-							tabGroupName: 'step_' + stepNumber,
-							tabName: 'form_' + stepNumber
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
 						},
 						section: 'form_' + formNumber
 					},

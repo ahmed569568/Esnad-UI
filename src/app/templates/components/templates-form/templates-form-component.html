@@ -70,22 +70,20 @@
 								<!-- Tabs Groups start -->
 								<ng-container *ngIf="groups[0] !== 'defaultGroup'">
 									<mat-accordion [multi]="false">
-										<mat-expansion-panel class="my-2" [expanded]="true">
-											<mat-expansion-panel-header>
-												<mat-panel-title>
-													{{ form.get('step_' + groupI + '_name')?.value ?
-													form.get('step_' + groupI + '_name')?.value :
-													('templates.step_placeholder' | translate) + ' ' +
-													groupI }}
-												</mat-panel-title>
-											</mat-expansion-panel-header>
-
-											<div
-												fxFlex=""
-												fxLayout="column"
-												*ngFor="let tab of groups[1] | pairs; let stepI = index;
+										<ng-container
+											*ngFor="let tab of groups[1] | pairs; let stepI = index;
 														trackBy: trackByFn"
-											>
+										>
+											<mat-expansion-panel class="my-2" [expanded]="true">
+												<mat-expansion-panel-header>
+													<mat-panel-title>
+														{{ form.get('step_' + (stepI + 1) + '_name')?.value
+														? form.get('step_' + (stepI + 1) + '_name')?.value :
+														('templates.step_placeholder' | translate) + ' ' +
+														(stepI + 1) }}
+													</mat-panel-title>
+												</mat-expansion-panel-header>
+
 												<div fxFlex="" fxLayout="column">
 													<ng-container
 														*ngFor="
@@ -103,11 +101,11 @@
 																class="form-section-title"
 																*ngIf="section[0] !== 'defaultSection'"
 															>
-																{{ form.get('step_' + groupI + '_form_' +
+																{{ form.get('step_' + (stepI + 1) + '_form_' +
 																sectionI + '_name')?.value ? form.get('step_' +
-																groupI + '_form_' + sectionI + '_name')?.value :
-																('templates.form_placeholder' | translate) + ' '
-																+ sectionI }}
+																(stepI + 1) + '_form_' + sectionI +
+																'_name')?.value : ('templates.form_placeholder'
+																| translate) + ' ' + sectionI }}
 															</div>
 															<div
 																class="form-section-content"
@@ -140,24 +138,24 @@
 															</div>
 														</div>
 													</ng-container>
-												</div>
 
-												<div>
-													<button
-														class="big_add_button"
-														mat-stroked-button
-														(click)="addForm(groupI)"
-													>
-														<mat-icon
-															class="mdi-icon"
-															svgIcon="playlist-plus"
-															[attr.size]="'22px'"
-														></mat-icon>
-														{{ 'templates.add_form' | translate}}
-													</button>
+													<div>
+														<button
+															class="big_add_button"
+															mat-stroked-button
+															(click)="addForm((stepI + 1))"
+														>
+															<mat-icon
+																class="mdi-icon"
+																svgIcon="playlist-plus"
+																[attr.size]="'22px'"
+															></mat-icon>
+															{{ 'templates.add_form' | translate}}
+														</button>
+													</div>
 												</div>
-											</div>
-										</mat-expansion-panel>
+											</mat-expansion-panel>
+										</ng-container>
 									</mat-accordion>
 								</ng-container>
 								<!-- Tabs Groups end -->
