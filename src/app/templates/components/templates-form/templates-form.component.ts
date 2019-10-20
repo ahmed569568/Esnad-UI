@@ -67,4 +67,15 @@ export class TemplatesFormComponent extends CoreFormV2Component
 		console.log(this.service.formInputsCategorized);
 		console.log(this.form.controls);
 	}
+
+	addField(stepNumber: number, formNumber: number) {
+		const formData = this.form.value;
+		this.service.addField(stepNumber, formNumber);
+		this.groupItemsByGroup();
+		this.createForm();
+		this.form.patchValue(formData);
+
+		console.log(this.service.formInputsCategorized);
+		console.log(this.form.controls);
+	}
 }

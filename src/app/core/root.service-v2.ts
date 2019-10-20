@@ -1114,5 +1114,5 @@ export abstract class RootV2Service {
 
 	addForm(stepNumber: number) {}
 
-	addInput() {}
+	addField(stepNumber: number, formNumber: number) {}
 }

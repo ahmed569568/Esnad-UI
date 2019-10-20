@@ -21,7 +21,7 @@ export class TemplatesV2Service extends RootV2Service {
 			name: string;
 			forms?: {
 				name: string;
-				inputs?: string[];
+				fields?: string[];
 			}[];
 		}[];
 	} = {
@@ -144,7 +144,7 @@ export class TemplatesV2Service extends RootV2Service {
 		const formsLength = stepObj.forms.length;
 		stepObj.forms.push({
 			name: 'form_' + (formsLength + 1),
-			inputs: []
+			fields: []
 		});
 		const formNumber = formsLength + 1;
 
@@ -174,6 +174,65 @@ export class TemplatesV2Service extends RootV2Service {
 
 		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
 		// this.stepsCount++;
-		console.log(this.featureProps);
+		console.log(this.InputsTree);
+	}
+
+	addField(stepNumber: number, formNumber: number) {
+		const stepObj = this.InputsTree.steps.find(
+			value => value.name === 'step_' + stepNumber
+		);
+
+		const formObj = stepObj.forms.find(
+			value => value.name === 'form_' + formNumber
+		);
+
+		const fieldsLength = formObj.fields.length;
+		stepObj.forms.push({
+			name: 'field_' + (fieldsLength + 1),
+			fields: []
+		});
+		const fieldNumber = fieldsLength + 1;
+
+		const stageDefaultInputs: ItemProps[] = [
+			{
+				name:
+					'step_' +
+					stepNumber +
+					'_form_' +
+					formNumber +
+					'_field_' +
+					fieldNumber +
+					'_name',
+				prop:
+					'step_' +
+					stepNumber +
+					'_form_' +
+					formNumber +
+					'_field_' +
+					fieldNumber +
+					'_name',
+				form: {
+					name: 'field_name',
+					Validators: [Validators.required],
+					formFieldType: 'text',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber
+					},
+					grid: {
+						lg: '30%',
+						md: '50%',
+						sm: '100%'
+					}
+				}
+			}
+		];
+
+		this.featureProps = [...this.featureProps, ...stageDefaultInputs];
+		// this.stepsCount++;
+		console.log(this.InputsTree);
 	}
 }
