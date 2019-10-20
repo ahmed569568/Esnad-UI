@@ -1,67 +1,178 @@
-<div [dir]="currentLang === 'ar-SA' ? 'rtl' : 'ltr'" class="app-container" fxFlex>
-  <mat-sidenav-container fxFill>
-    <mat-sidenav
-      class="side-menu"
-      #sidenav
-      [mode]="'side'"
-      [opened]="true"
-      [ngClass]="isWide ? 'wide-menu' : 'narrow-menu'"
-    >
-      <nav>
-        <mat-list>
-          <div class="side-menu-header">
-            <button class="side-menu-button" mat-icon-button (click)="toggleSidenavSize()">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <button class="side-menu-button" mat-icon-button (click)="logout()">
-              <mat-icon>exit_to_app</mat-icon>
-            </button>
-            <img class="logo" src="../../assets/logo.png" alt="LOGO" />
-          </div>
-          <ng-container *ngFor="let item of menuItems.items; let i = index">
-            <a
-              class="menu-item"
-              *ngIf="!item?.children?.length"
-              mat-list-item
-              [routerLink]="item.url"
-              routerLinkActive="active"
-            >
-              <mat-icon class="menuIcon" [matTooltip]="'menu.' + item.title | translate">{{ item.icon }}</mat-icon>
-              <span class="menu-title">{{ 'menu.' + item.title | translate }}</span>
-            </a>
-            <mat-expansion-panel
-              routerLinkActive="active"
-              class="menuDropDown"
-              *ngIf="item?.children?.length > 0 && isWide"
-            >
-              <mat-expansion-panel-header>
-                <span>
-                  <mat-icon class="menuIcon">{{ item.icon }}</mat-icon>
-                  {{ 'menu.' + item.title | translate }}
-                </span>
-              </mat-expansion-panel-header>
-              <mat-list *ngFor="let child of item.children; let i = index">
-                <a mat-list-item [routerLink]="child.url" routerLinkActive="active">
-                  <mat-icon class="menuIcon">{{ child.icon }}</mat-icon>
-                  <span>{{ 'menu.' + child.title | translate }}</span>
-                </a>
-                <!--                <mat-divider *ngIf="i !== item.children.length - 1"></mat-divider>-->
-              </mat-list>
-            </mat-expansion-panel>
-          </ng-container>
+<div
+	[dir]="currentLang === 'ar-SA' ? 'rtl' : 'ltr'"
+	class="app-container"
+	fxFlex
+>
+	<mat-drawer-container fxFill>
+		<mat-drawer
+			class="side-menu"
+			#sidenav
+			mode="side"
+			opened="true"
+			disableClose="true"
+			[ngClass]="isWide ? 'wide-menu' : 'narrow-menu'"
+		>
+			<nav>
+				<img
+					*ngIf="isWide"
+					class="pic-logo"
+					src="../../assets/logo3_png_bg.png"
+					alt="LOGO"
+				/>
+				<mat-list>
+					<div class="side-menu-header">
+						<button
+							class="side-menu-button"
+							mat-icon-button
+							(click)="toggleSidenavSize()"
+						>
+							<mat-icon>menu</mat-icon>
+						</button>
+						<button
+							*ngIf="isWide"
+							class="side-menu-button"
+							mat-icon-button
+							(click)="logout()"
+						>
+							<mat-icon>exit_to_app</mat-icon>
+						</button>
+					</div>
+					<ng-container *ngFor="let item of menuItems.items; let i = index">
+						<a
+							class="menu-item"
+							*ngIf="!item?.children?.length"
+							mat-list-item
+							[routerLink]="item.url"
+							routerLinkActive="active"
+						>
+							<mat-icon
+								class="menuIcon"
+								[matTooltip]="'menu.' + item.title | translate"
+								>{{ item.icon }}</mat-icon
+							>
+							<span class="menu-title">{{
+								'menu.' + item.title | translate
+							}}</span>
+						</a>
+						<mat-expansion-panel
+							routerLinkActive="active"
+							class="menuDropDown"
+							*ngIf="item?.children?.length > 0 && isWide"
+						>
+							<mat-expansion-panel-header>
+								<span>
+									<mat-icon class="menuIcon">{{ item.icon }}</mat-icon>
+									{{ 'menu.' + item.title | translate }}
+								</span>
+							</mat-expansion-panel-header>
+							<mat-list *ngFor="let child of item.children; let i = index">
+								<a
+									mat-list-item
+									[routerLink]="child.url"
+									routerLinkActive="active"
+								>
+									<mat-icon class="menuIcon">{{ child.icon }}</mat-icon>
+									<span>{{ 'menu.' + child.title | translate }}</span>
+								</a>
+								<!--                <mat-divider *ngIf="i !== item.children.length - 1"></mat-divider>-->
+							</mat-list>
+						</mat-expansion-panel>
+					</ng-container>
 
-					<!--          <a *ngIf="!isWide" mat-list-item [routerLink]="'/settings/user-settings'" routerLinkActive="active">-->
-					<!--            <mat-icon [matTooltip]="'menu.settings' | translate">settings_applications</mat-icon>-->
-					<!--          </a>-->
-        </mat-list>
-				<!--        <div class="side-menu-bg"></div>-->
-      </nav>
-    </mat-sidenav>
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/treatments/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.treatments' | translate"
+							>swap_vert</mat-icon
+						>
+					</a>
 
-    <mat-sidenav-content>
-      <div fx-flex fxLayout="column">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/clients/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.clients' | translate"
+							>contact_mail</mat-icon
+						>
+					</a>
+
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/prices/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.prices' | translate"
+							>attach_money</mat-icon
+						>
+					</a>
+
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/groups/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.groups' | translate">group</mat-icon>
+					</a>
+
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/categories/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.categories' | translate"
+							>category</mat-icon
+						>
+					</a>
+
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/forms/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.forms' | translate"
+							>format_align_right</mat-icon
+						>
+					</a>
+
+					<a
+						*ngIf="!isWide"
+						mat-list-item
+						[routerLink]="'/cities/list'"
+						routerLinkActive="active"
+					>
+						<mat-icon [matTooltip]="'menu.cities' | translate"
+							>location_city</mat-icon
+						>
+					</a>
+
+					<!--					<ng-container *ngFor="let menuItem of menuItems.items">-->
+					<!--						<ng-container *ngFor="let item of menuItem.children">-->
+					<!--							<a *ngIf="!isWide"-->
+					<!--								 mat-list-item-->
+					<!--								 [routerLink]="item.url"-->
+					<!--								 routerLinkActive="active">-->
+					<!--								<mat-icon [matTooltip]="item.title | translate">{{menuItem.icon}}</mat-icon>-->
+					<!--							</a>-->
+					<!--						</ng-container>-->
+					<!--					</ng-container>-->
+				</mat-list>
+				<div class="side-menu-bg"></div>
+			</nav>
+		</mat-drawer>
+
+		<mat-drawer-content [ngClass]="isWide ? 'wide-menu' : 'narrow-menu'">
+			<div fx-flex fxLayout="column">
+				<router-outlet></router-outlet>
+			</div>
+		</mat-drawer-content>
+	</mat-drawer-container>
 </div>

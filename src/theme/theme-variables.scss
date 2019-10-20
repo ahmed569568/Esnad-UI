@@ -14,36 +14,36 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $app-primary-color: (
-  50: #0063f4,
-  100: #0063f4,
-  200: #0063f4,
-  300: #0063f4,
-  400: #0063f4,
-  500: #0063f4,
-  600: #0063f4,
-  700: #0063f4,
-  800: #0063f4,
-  900: #0063f4,
-  A100: #0063f4,
-  A200: #0063f4,
-  A400: #0063f4,
-  A700: #0063f4,
-  contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $light-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $dark-primary-text,
-    A200: $dark-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text
-  )
+	50: #0063f4,
+	100: #0063f4,
+	200: #0063f4,
+	300: #0063f4,
+	400: #0063f4,
+	500: #0063f4,
+	600: #0063f4,
+	700: #0063f4,
+	800: #0063f4,
+	900: #0063f4,
+	A100: #0063f4,
+	A200: #0063f4,
+	A400: #0063f4,
+	A700: #0063f4,
+	contrast: (
+		50: $dark-primary-text,
+		100: $dark-primary-text,
+		200: $dark-primary-text,
+		300: $dark-primary-text,
+		400: $light-primary-text,
+		500: $light-primary-text,
+		600: $light-primary-text,
+		700: $light-primary-text,
+		800: $light-primary-text,
+		900: $light-primary-text,
+		A100: $dark-primary-text,
+		A200: $dark-primary-text,
+		A400: $light-primary-text,
+		A700: $light-primary-text
+	)
 );
 
 $app-primary: mat-palette($app-primary-color);

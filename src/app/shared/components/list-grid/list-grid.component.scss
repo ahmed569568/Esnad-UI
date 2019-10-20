@@ -1,77 +1,83 @@
 .table-overflow {
-  overflow: auto;
+	overflow: auto;
 }
 
 table.table {
-  width: 100%;
-  border-spacing: 0 10px;
+	width: 100%;
+	border-spacing: 0 10px;
 
-  tr {
-    &.locked {
-      background: white;
-      cursor: pointer;
-    }
+	tr {
+		&.locked {
+			background: white;
+			cursor: pointer;
+		}
 
-    &:hover {
-      background-color: rgba(0, 99, 244, 0.24);
-    }
+		&:hover {
+			background-color: rgba(0, 99, 244, 0.24);
+		}
 
-    td {
-      padding: 10px;
-      //border-top: solid 1px #caceda;
-      border-bottom: solid 1px rgba(0, 99, 244, 0.24);
-      font-size: 14px;
-      font-weight: 600;
-      color: #2a3348;
+		td {
+			padding: 10px;
+			//border-top: solid 1px #caceda;
+			border-bottom: solid 1px rgba(0, 99, 244, 0.24);
+			font-size: 14px;
+			//font-weight: 600;
+			color: #2a3348;
 
-      //&:first-child {
-      //  border-left: solid 1px #caceda;
-      //}
-      //
-      //&:last-child {
-      //  border-right: solid 1px #caceda;
-      //}
-    }
-  }
+			//&:first-child {
+			//  border-left: solid 1px #caceda;
+			//}
+			//
+			//&:last-child {
+			//  border-right: solid 1px #caceda;
+			//}
+		}
+	}
 }
 
 .tbl-header {
-  th {
-    color: gray;
-    font-weight: normal;
-    padding: 0 10px;
-    text-align: -webkit-auto;
+	th {
+		color: #313853;
+		font-size: 14px;
+		font-weight: bold;
+		padding: 0 10px;
+		text-align: -webkit-auto;
 
-    &.actions-head {
-      text-align: center;
-    }
-  }
+		&.actions-head {
+			text-align: center;
+		}
+	}
 }
 
 .action-column-width {
-  width: 200px !important;
-  padding: 10px;
+	width: 200px !important;
+	padding: 10px;
 }
 
 .actions-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 
-  button {
-    background: none;
-    height: 100%;
-    border: none;
-    cursor: pointer;
-    color: #9199b6;
-    margin-right: 10px;
-  }
+	button {
+		background: none;
+		height: 100%;
+		border: none;
+		cursor: pointer;
+		color: #9199b6;
+		margin-right: 10px;
+
+		mat-icon {
+			font-size: 18px;
+			color: #313853;
+		}
+	}
 }
 
 .tbl-content {
-  margin-top: 0;
-  //height: var(--allHeight);
-  //height: 100%;
-  overflow: auto;
+	margin-top: 0;
+	//height: var(--allHeight);
+	//height: 100%;
+	overflow: auto;
 }

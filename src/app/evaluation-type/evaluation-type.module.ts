@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {EvaluationTypeListComponent} from './components/evaluation-type-list/evaluation-type-list.component';
-import {EvaluationTypeFormComponent} from './components/evaluation-type-form/evaluation-type-form.component';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '@app/shared/shared.module';
-import {extract} from '@app/core';
-import {RouterContainerComponent} from '@app/shared/components/router-container-component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EvaluationTypeListComponent } from './components/evaluation-type-list/evaluation-type-list.component';
+import { EvaluationTypeFormComponent } from './components/evaluation-type-form/evaluation-type-form.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [EvaluationTypeListComponent, EvaluationTypeFormComponent],
@@ -15,7 +15,7 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		RouterModule.forChild([
 			{
 				path: '',
-				data: {title: extract('evaluation_type.title')},
+				data: { title: extract('evaluation_type.title') },
 				component: RouterContainerComponent,
 				children: [
 					{
@@ -35,5 +35,4 @@ import {RouterContainerComponent} from '@app/shared/components/router-container-
 		])
 	]
 })
-export class EvaluationTypeModule {
-}
+export class EvaluationTypeModule {}

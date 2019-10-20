@@ -7,15 +7,16 @@ export class MenuItems {
 		},
 		{
 			title: 'treatments',
-			icon: 'directions_bus',
+			icon: 'swap_vert',
 			children: [
 				{
 					title: 'active_treatments',
 					url: '/treatments/list'
-				}, {
+				},
+				{
 					title: 'expire_treatments',
 					url: '/treatments/list'
-				},
+				}
 			]
 		},
 		// {
@@ -25,12 +26,13 @@ export class MenuItems {
 		// },
 		{
 			title: 'clients',
-			icon: 'school',
+			icon: 'contact_mail',
 			children: [
 				{
 					title: 'clients_list',
 					url: '/clients/list'
-				}, {
+				},
+				{
 					title: 'new_client',
 					url: '/clients/create'
 				}
@@ -38,12 +40,13 @@ export class MenuItems {
 		},
 		{
 			title: 'prices',
-			icon: 'school',
+			icon: 'attach_money',
 			children: [
 				{
 					title: 'prices_list',
 					url: '/prices/list'
-				}, {
+				},
+				{
 					title: 'new_price',
 					url: '/prices/create'
 				}
@@ -51,12 +54,13 @@ export class MenuItems {
 		},
 		{
 			title: 'groups',
-			icon: 'school',
+			icon: 'group',
 			children: [
 				{
 					title: 'groups_list',
 					url: '/groups/list'
-				}, {
+				},
+				{
 					title: 'new_group',
 					url: '/groups/create'
 				}
@@ -64,12 +68,13 @@ export class MenuItems {
 		},
 		{
 			title: 'categories',
-			icon: 'school',
+			icon: 'category',
 			children: [
 				{
 					title: 'categories_list',
 					url: '/categories/list'
-				}, {
+				},
+				{
 					title: 'new_category',
 					url: '/categories/create'
 				}
@@ -77,12 +82,13 @@ export class MenuItems {
 		},
 		{
 			title: 'forms',
-			icon: 'school',
+			icon: 'format_align_right',
 			children: [
 				{
 					title: 'forms_list',
 					url: '/forms/list'
-				}, {
+				},
+				{
 					title: 'new_form',
 					url: '/forms/create'
 				}
@@ -90,12 +96,13 @@ export class MenuItems {
 		},
 		{
 			title: 'cities',
-			icon: 'school',
+			icon: 'location_city',
 			children: [
 				{
 					title: 'cities_list',
 					url: '/cities/list'
-				}, {
+				},
+				{
 					title: 'new_city',
 					url: '/cities/create'
 				}
@@ -104,13 +111,13 @@ export class MenuItems {
 		{
 			title: 'employees',
 			url: '/employees/list',
-			icon: 'settings_applications',
+			icon: 'person'
 		},
 		{
 			title: 'roles',
 			url: '/roles/list',
-			icon: 'settings_applications',
-		},
+			icon: 'check_circle_outline'
+		}
 		// {
 		// 	title: 'inputs',
 		// 	url: '/inputs',
