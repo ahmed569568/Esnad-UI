@@ -131,6 +131,20 @@ export class MenuItems {
 			title: 'roles',
 			url: '/roles/list',
 			icon: 'check_circle_outline'
+		},
+		{
+			title: 'reports',
+			icon: 'note',
+			children: [
+				{
+					title: 'templates_list',
+					url: '/templates/list'
+				},
+				{
+					title: 'new_templates',
+					url: '/templates/create'
+				}
+			]
 		}
 		// {
 		// 	title: 'inputs',
