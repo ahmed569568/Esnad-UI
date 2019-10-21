@@ -471,5 +471,31 @@
 		"add_street": "الشارع",
 		"street_name": "اسم اشارع",
 		"remove_street": "حذف الشارع"
+	},
+	"templates": {
+		"step_name": "اسم المرحلة",
+		"step_typeId": "اختر المجموعة التى لها حق الوصول",
+		"step_placeholder": "المرحلة",
+		"form_placeholder": "استمارة",
+		"field_placeholder": "الحقل",
+		"add_stage": "اضافة مرحلة",
+		"add_form": "اضافة استمارة",
+		"add_field": "اضافة حقل"
+	},
+	"validation_errors": {
+		"required": "الحقل مطلوب",
+		"hasCapitalCase": "Must Have Capital letter",
+		"hasSmallCase": "Must Have small case letter",
+		"hasSpecialCharacters": "Must have special character",
+		"minlength": "Must be at least {{xx}} characters",
+		"maxlength": "Must be max {{xx}} characters",
+		"passwordSchemaWrong": "passwords don't match",
+		"email": "Is not a valid Email Address",
+		"Small letter & Capital letter & Number": "Small letter & Capital letter & Number",
+		"characters": "Characters",
+		"Special Character": "Special Character",
+		"passwordsDontMatch": "Password Don't Match",
+		"passwordsMatch": "Password Match",
+		"import_failed": "Import Failed"
 	}
 }
