@@ -419,6 +419,211 @@
 					</div>
 				</ng-container>
 
+				<ng-container *ngSwitchCase="'ng_select_multiple_add'">
+					<div [ngClass]="field?.form?.cssClass">
+						<ng-select
+							class="ng-select-style1"
+							[items]="service.lists[field.form.listPrefix]"
+							[multiple]="true"
+							bindLabel="name"
+							bindValue="id"
+							dropdownPosition="auto"
+							[closeOnSelect]="false"
+							[formControlName]="field.name"
+							placeholder="{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}"
+							appendTo="body"
+							[addTag]="true"
+						>
+							<ng-template ng-header-tmp>
+								<div class="d-flex py-3">
+									<button
+										class="mr-2"
+										(click)="
+											ngSelect_selectAll(
+												form.controls[field.name],
+												field.form.listPrefix,
+												true
+											)
+										"
+										mat-stroked-button
+										color="primary"
+									>
+										Select all
+									</button>
+									<button
+										(click)="
+											ngSelect_selectAll(
+												form.controls[field.name],
+												field.form.listPrefix,
+												false
+											)
+										"
+										mat-stroked-button
+										color="warn"
+									>
+										Unselect all
+									</button>
+								</div>
+							</ng-template>
+
+							<ng-template ng-label-tmp let-item="item" let-clear="clear">
+								<div class="d-inline-flex">
+									<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+										<ng-container
+											*ngFor="
+												let prefix of field?.form?.ngSelectOptions?.prefix
+											"
+										>
+											<span class="ng_select_prefix" *ngIf="prefix?.prop">
+												<ng-container [ngSwitch]="prefix?.displayType">
+													<ng-container *ngSwitchCase="null">
+														<span
+															class="cell-display-type text{{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+														>
+															{{ item[prefix.prop] }}
+														</span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'color'">
+														<span
+															class="cell-display-type color {{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+															[style.background-color]="item[prefix.prop]"
+														></span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'img'">
+														<span
+															class="cell-display-type img {{
+																prefix?.cssClass
+															}}"
+														>
+															<img
+																class="img-data"
+																*ngIf="item[prefix.prop]"
+																[src]="item[prefix.prop]"
+																alt=""
+															/>
+															<img
+																class="img-placeholder"
+																*ngIf="!item[prefix.prop]"
+																src="{{
+																	prefix.placeHolder
+																		? prefix.placeHolder
+																		: 'assets/image-placeholder.png'
+																}}"
+																alt=""
+															/>
+														</span>
+													</ng-container>
+												</ng-container>
+											</span>
+										</ng-container>
+									</ng-container>
+								</div>
+
+								<span class="ng-value-label d-inline-flex">{{
+									item.name || item.displayName
+								}}</span>
+								<span class="ng-value-icon right ml-2" (click)="clear(item)"
+									><mat-icon
+										[svgIcon]="'close-circle'"
+										class="mdi-icon"
+										[attr.size]="'14px'"
+									></mat-icon>
+								</span>
+							</ng-template>
+
+							<ng-template
+								ng-option-tmp
+								let-item="item"
+								let-item$="item$"
+								let-index="index"
+								let-search="searchTerm"
+							>
+								<div class="d-flex align-items-center">
+									<mat-checkbox
+										class="d-inline-flex mr-3"
+										id="{{ item }}-option-{{ index }}"
+										color="primary"
+										[checked]="
+											checkSelected(form.controls[field.name], item.id)
+										"
+										(click)="preventDefault($event)"
+									></mat-checkbox>
+									<div class="d-inline-flex">
+										<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+											<ng-container
+												*ngFor="
+													let prefix of field?.form?.ngSelectOptions?.prefix
+												"
+											>
+												<span class="ng_select_prefix" *ngIf="prefix?.prop">
+													<ng-container [ngSwitch]="prefix?.displayType">
+														<ng-container *ngSwitchCase="null">
+															<span
+																class="cell-display-type text{{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+															>
+																{{ item[prefix.prop] }}
+															</span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'color'">
+															<span
+																class="cell-display-type color {{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+																[style.background-color]="item[prefix.prop]"
+															></span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'img'">
+															<span
+																class="cell-display-type img {{
+																	prefix?.cssClass
+																}}"
+															>
+																<img
+																	class="img-data"
+																	*ngIf="item[prefix.prop]"
+																	[src]="item[prefix.prop]"
+																	alt=""
+																/>
+																<img
+																	class="img-placeholder"
+																	*ngIf="!item[prefix.prop]"
+																	src="{{
+																		prefix.placeHolder
+																			? prefix.placeHolder
+																			: 'assets/image-placeholder.png'
+																	}}"
+																	alt=""
+																/>
+															</span>
+														</ng-container>
+													</ng-container>
+												</span>
+											</ng-container>
+										</ng-container>
+									</div>
+
+									<div class="d-inline-flex" [ngOptionHighlight]="search">
+										{{ item.name || item.displayName }}
+									</div>
+								</div>
+							</ng-template>
+						</ng-select>
+					</div>
+				</ng-container>
+
 				<ng-container *ngSwitchCase="'ng_select_multiple'">
 					<div [ngClass]="field?.form?.cssClass">
 						<ng-select

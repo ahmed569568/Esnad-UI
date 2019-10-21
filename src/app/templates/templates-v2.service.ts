@@ -81,6 +81,24 @@ export class TemplatesV2Service extends RootV2Service {
 				id: 'checkbox'
 			}
 		];
+		this.lists.field_cols = [
+			{
+				name: '1 Cols',
+				id: '1-cols'
+			},
+			{
+				name: '2 Cols',
+				id: '2-cols'
+			},
+			{
+				name: '4 Cols',
+				id: '4-cols'
+			},
+			{
+				name: '6 Cols',
+				id: '6-cols'
+			}
+		];
 	}
 
 	routerPrefix(val: string = '') {
@@ -236,6 +254,7 @@ export class TemplatesV2Service extends RootV2Service {
 		const fieldName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_name`;
 		const fieldTypeName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldType`;
 		const fieldOptionsName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldOptions`;
+		const fieldCols = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldCols`;
 
 		const stepDefaultInputs: ItemProps[] = [
 			{
@@ -301,6 +320,32 @@ export class TemplatesV2Service extends RootV2Service {
 					name: 'field_options',
 					Validators: [Validators.required],
 					formFieldType: 'ng_select',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '25%',
+						lt_xl: '25%',
+						lt_lg: '25%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: fieldCols,
+				prop: fieldCols,
+				form: {
+					name: 'field_cols',
+					Validators: [],
+					initValue: '1-cols',
+					formFieldType: 'select',
+					listPrefix: 'field_cols',
 					groupBy: {
 						tabGroup: {
 							tabGroupName: 'templateAccordion',
