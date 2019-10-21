@@ -5,6 +5,7 @@ import { CategoriesFormComponent } from './components/categories-form/categories
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [CategoriesListComponent, CategoriesFormComponent],
@@ -14,9 +15,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: CategoriesListComponent,
+				data: { title: extract('categories.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: CategoriesListComponent
+					},
 					{
 						path: 'create',
 						component: CategoriesFormComponent

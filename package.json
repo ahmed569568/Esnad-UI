@@ -49,6 +49,7 @@
 		"material-design-icons-iconfont": "^5.0.1",
 		"mime": "^2.4.4",
 		"moment": "^2.24.0",
+		"ng-pick-datetime": "^7.0.0",
 		"ng2-charts": "^2.3.0",
 		"ngx-color-picker": "^8.1.0",
 		"ngx-filesaver": "^8.0.0",

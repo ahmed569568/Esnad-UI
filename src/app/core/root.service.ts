@@ -12,13 +12,7 @@ export abstract class RootService {
 	public resourcesList: any;
 	resources: Subject<any> = new Subject();
 	updateResources: Subject<any> = new Subject();
-	lists: any = {
-		['drivers-languages']: [],
-		users: { data: [] },
-		models: { data: [] },
-		control: { data: [] },
-		parents: []
-	};
+	lists: any = {};
 	centerPoint: { lat?: number; lng?: number; id?: number };
 
 	protected constructor(
@@ -244,7 +238,7 @@ export abstract class RootService {
 
 	navigateToList() {
 		this.updateResources.next();
-		return this.router.navigate([this.cid]);
+		return this.router.navigate([`${this.cid}/list`]);
 	}
 
 	refactorItem(item: {}) {

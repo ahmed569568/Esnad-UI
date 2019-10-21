@@ -19,7 +19,7 @@ export class ListGridSummaryComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-		this.loadResources();
+		// this.loadResources();
 	}
 
 	/**

@@ -5,7 +5,6 @@ import { ItemProps } from '@app/interfaces';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
-import { CustomValidators } from '@app/core/classes/custom-validations';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,63 +21,37 @@ export class TreatmentsService extends RootService {
 	get featureProps(): ItemProps[] {
 		return [
 			{
-				name: 'image',
-				prop: 'image',
-				listing: true,
-				formField: true,
-				displayType: 'image',
-				formFieldType: 'file_input',
-				required: true,
-				width: 300,
-				validations: [Validators.required]
-			},
-			{
 				name: 'name',
-				prop: 'name',
+				prop: 'template.name',
 				listing: true,
 				formField: true,
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
-				name: 'phone',
-				prop: 'phone',
+				name: 'status',
+				prop: 'status',
 				listing: true,
 				formField: true,
-				formFieldType: 'phone',
+				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
-			},
-			// {
-			//   name: 'email',
-			//   prop: 'email',
-			//   listing: true,
-			//   formField: true,
-			//   formFieldType: 'email',
-			//   required: true,
-			//   width: 300
-			// },
-			{
-				name: 'password',
-				prop: 'password',
-				listing: false,
-				formField: true,
-				formFieldType: 'password',
-				required: true,
-				validations: [Validators.required, CustomValidators.validPassword]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
-				name: 'language_id',
-				prop: 'language.name',
+				name: 'client',
+				prop: 'client',
 				listing: true,
 				formField: true,
-				formFieldType: 'select',
-				listPrefix: 'drivers-languages',
+				formFieldType: 'text',
+				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			}
 		];
 	}

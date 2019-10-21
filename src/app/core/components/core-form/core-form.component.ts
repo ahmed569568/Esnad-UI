@@ -61,7 +61,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 	imageFieldName: any[] = [];
 
 	currentField: string;
-
+	currentItemId: number;
 	protected _lists: any = [];
 
 	constructor(
@@ -85,6 +85,7 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 			.subscribe((routeInfo: any) => {
 				if (routeInfo.id) {
 					this.isEdit = true;
+					this.currentItemId = routeInfo.id;
 					this.loadResources(routeInfo.id);
 				}
 			});
@@ -252,14 +253,17 @@ export class CoreFormComponent implements OnInit, OnDestroy {
 			}
 		}
 		if (this.isEdit) {
-			return this.service
-				.updateItem(skipLocationChange, this.itemId, this.form.value)
-				.then(() => {
-					this.service.updateResources.next();
-					if (!skipLocationChange) {
-						return this.service.navigateToList();
-					}
-				});
+			return this.service.updateItem(
+				skipLocationChange,
+				this.itemId,
+				this.form.value
+			);
+			// .then(() => {
+			// this.service.updateResources.next();
+			// if (!skipLocationChange) {
+			//   return this.service.navigateToList();
+			// }
+			// });
 		} else {
 			return this.service.createItem(this.form.value);
 		}

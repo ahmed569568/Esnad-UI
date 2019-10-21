@@ -5,6 +5,9 @@ import { ClientsFormComponent } from './components/clients-form/clients-form.com
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
+
+// import {CoreModule} from '@app/core/core.module';
 
 @NgModule({
 	declarations: [ClientsListComponent, ClientsFormComponent],
@@ -14,9 +17,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: ClientsListComponent,
+				data: { title: extract('clients.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: ClientsListComponent
+					},
 					{
 						path: 'create',
 						component: ClientsFormComponent
@@ -28,6 +35,7 @@ import { extract } from '@app/core';
 				]
 			}
 		])
+		// CoreModule
 	]
 })
 export class ClientsModule {}

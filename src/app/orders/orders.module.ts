@@ -5,6 +5,7 @@ import { OrdersFormComponent } from './components/orders-form/orders-form.compon
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [OrdersListComponent, OrdersFormComponent],
@@ -14,9 +15,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: OrdersListComponent,
+				data: { title: extract('orders.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: OrdersListComponent
+					},
 					{
 						path: 'create',
 						component: OrdersFormComponent

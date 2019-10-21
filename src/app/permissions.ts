@@ -1,40 +1,75 @@
 export class RolesClass {
-	users = {
+	employees = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	operations = {
+	orders = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	branches = {
+	evaluationtype = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	brands = {
+	clients = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	models = {
+	cities = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	cars = {
+	prices = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+	clientprice = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+	realestate = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+	formfields = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+	groups = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+	categories = {
 		add: false,
 		update: false,
 		delete: false,
@@ -48,23 +83,34 @@ export class RolesClass {
 		list: false,
 		view: false
 	};
-	specs = {
+	formfield = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	auditlog = {
+	forms = {
 		add: false,
 		update: false,
 		delete: false,
 		list: false,
 		view: false
 	};
-	dashboard = {
-		show: false,
-		branches: false
+	templates = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
 	};
+	treatments = {
+		add: false,
+		update: false,
+		delete: false,
+		list: false,
+		view: false
+	};
+
 	constructor() {}
 }

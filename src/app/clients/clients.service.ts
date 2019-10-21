@@ -5,7 +5,6 @@ import { ItemProps } from '@app/interfaces';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
-import { CustomValidators } from '@app/core/classes/custom-validations';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,6 +12,10 @@ import { CustomValidators } from '@app/core/classes/custom-validations';
 export class ClientsService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
+		this.lists = {
+			...this.lists,
+			['clients-price']: []
+		};
 	}
 
 	routerPrefix(val: string = '') {
@@ -22,8 +25,8 @@ export class ClientsService extends RootService {
 	get featureProps(): ItemProps[] {
 		return [
 			{
-				name: 'image',
-				prop: 'image',
+				name: 'photo',
+				prop: 'photo',
 				listing: true,
 				formField: true,
 				displayType: 'image',
@@ -33,14 +36,15 @@ export class ClientsService extends RootService {
 				validations: [Validators.required]
 			},
 			{
-				name: 'name',
-				prop: 'name',
+				name: 'full_name',
+				prop: 'full_name',
 				listing: true,
 				formField: true,
 				formFieldType: 'text',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
 				name: 'phone',
@@ -50,36 +54,29 @@ export class ClientsService extends RootService {
 				formFieldType: 'phone',
 				required: true,
 				width: 300,
-				validations: [Validators.required]
-			},
-			// {
-			//   name: 'email',
-			//   prop: 'email',
-			//   listing: true,
-			//   formField: true,
-			//   formFieldType: 'email',
-			//   required: true,
-			//   width: 300
-			// },
-			{
-				name: 'password',
-				prop: 'password',
-				listing: false,
-				formField: true,
-				formFieldType: 'password',
-				required: true,
-				validations: [Validators.required, CustomValidators.validPassword]
+				validations: [Validators.required],
+				searchable: true
 			},
 			{
-				name: 'language_id',
-				prop: 'language.name',
+				name: 'email',
+				prop: 'email',
 				listing: true,
 				formField: true,
-				formFieldType: 'select',
-				listPrefix: 'drivers-languages',
+				formFieldType: 'email',
+				required: true,
 				width: 300,
-				validations: [Validators.required]
+				validations: [Validators.required],
+				searchable: true
 			}
+			// {
+			// 	name: 'password',
+			// 	prop: 'password',
+			// 	listing: false,
+			// 	formField: true,
+			// 	formFieldType: 'password',
+			// 	required: true,
+			// 	validations: [Validators.required, CustomValidators.validPassword]
+			// },
 		];
 	}
 }

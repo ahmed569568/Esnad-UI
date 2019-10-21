@@ -119,7 +119,31 @@
 		"weekdays": "Weekdays",
 		"user_settings": "User Settings",
 		"vacation": "Vacation Days",
-		"shifts": "Shifts"
+		"shifts": "Shifts",
+		"treatments": "Treatments",
+		"clients": "Clients",
+		"forms": "Forms",
+		"employees": "Employees",
+		"inputs": "Inputs",
+		"clients_list": "Clients list",
+		"new_client": "New client",
+		"forms_list": "Forms list",
+		"groups_list": "Groups list",
+		"categories_list": "Categories list",
+		"new_form": "New form",
+		"special_treatments": "Special treatments",
+		"expire_treatments": "expire treatments",
+		"active_treatments": "Active treatments",
+		"new_price": "New price",
+		"new_category": "New category",
+		"new_group": "New group",
+		"prices_list": "Prices list",
+		"prices": "Prices",
+		"categories": "Categories",
+		"groups": "Groups",
+		"cities": "Cities",
+		"cities_list": "Cities list",
+		"new_city": "New city"
 	},
 	"check-in": {
 		"title": "Check-in"
@@ -242,7 +266,8 @@
 		"specs": "Specifications",
 		"users": "Users",
 		"all_permissions": "Select All Permission Set",
-		"dashboard": "Dashboard"
+		"dashboard": "Dashboard",
+		"page_name": "Page name"
 	},
 	"auditlog": {
 		"title": "Audit-log",
@@ -372,6 +397,97 @@
 	},
 	"control": {
 		"number": "Number"
+	},
+	"inputs": {
+		"cities": "Cities",
+		"clients_rate": "Clients rate",
+		"country_name": "Country name",
+		"add_city": "Add city",
+		"city_name": "City name",
+		"remove_city": "Remove city",
+		"add_region": "Add region",
+		"region_name": "Region name",
+		"remove_region": "Remove region",
+		"add_province": "Add province",
+		"province_name": "Province name",
+		"remove_province": "Remove province",
+		"add_district": "Add district",
+		"district_name": "District name",
+		"remove_district": "Remove district",
+		"add_street": "Street",
+		"street_name": "Street name",
+		"remove_street": "Remove street",
+		"villa_rate": "Villa Rate",
+		"space_rate": "Space Rate",
+		"showroom_rate": "Showroom Rate",
+		"apartment_rate": "Apartment Rate"
+	},
+	"treatments": {
+		"title": "Treatments",
+		"title_single": "Treatment",
+		"name": "Name",
+		"status": "Status",
+		"client": "Client name"
+	},
+	"clients": {
+		"title": "Clients",
+		"title_single": "Client",
+		"photo": "Photo",
+		"full_name": "Full name",
+		"phone": "Phone",
+		"email": "Email"
+	},
+	"forms": {
+		"title": "Forms",
+		"title_single": "Form",
+		"name": "Name",
+		"client": "Client name"
+	},
+	"employees": {
+		"title": "Employees",
+		"title_single": "Employee",
+		"photo": "Photo",
+		"full_name": "Full name",
+		"group_id": "Group",
+		"phone": "Phone",
+		"email": "Email"
+	},
+	"prices": {
+		"title": "Prices",
+		"title_single": "Price",
+		"name": "Name"
+	},
+	"categories": {
+		"title": "Categories",
+		"title_single": "Category",
+		"name": "Name"
+	},
+	"groups": {
+		"title": "Groups",
+		"title_single": "Group",
+		"name": "Name"
+	},
+	"cities": {
+		"title": "Cities",
+		"title_single": "City",
+		"name": "Name",
+		"level": "Level",
+		"country_name": "Country name",
+		"add_city": "Add city",
+		"city_name": "City name",
+		"remove_city": "Remove city",
+		"add_region": "Add region",
+		"region_name": "Region name",
+		"remove_region": "Remove region",
+		"add_province": "Add province",
+		"province_name": "Province name",
+		"remove_province": "Remove province",
+		"add_district": "Add district",
+		"district_name": "District name",
+		"remove_district": "Remove district",
+		"add_street": "Street",
+		"street_name": "Street name",
+		"remove_street": "Remove street"
 	},
 	"templates": {
 		"step_name": "Step Name",

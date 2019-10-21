@@ -1,4 +1,4 @@
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +44,6 @@ export class AppModule {
 		matIconRegistry.addSvgIconSet(
 			domSanitizer.bypassSecurityTrustResourceUrl('assets/mdi.svg')
 		); // Or whatever path you placed mdi.svg at
-		this.socket.connect();
+		// this.socket.connect();
 	}
 }

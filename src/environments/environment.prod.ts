@@ -11,6 +11,6 @@ export const environment = {
 	hmr: false,
 	version: env.npm_package_version,
 	serverUrl: 'http://35.243.244.23:7000/api/',
-	defaultLanguage: 'en-US',
+	defaultLanguage: 'ar-SA',
 	supportedLanguages: ['en-US', 'ar-SA']
 };

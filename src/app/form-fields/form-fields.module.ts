@@ -5,6 +5,7 @@ import { FormFieldsFormComponent } from './components/form-fields-form/form-fiel
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [FormFieldsListComponent, FormFieldsFormComponent],
@@ -14,9 +15,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: FormFieldsListComponent,
+				data: { title: extract('form_fields.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: FormFieldsListComponent
+					},
 					{
 						path: 'create',
 						component: FormFieldsFormComponent

@@ -36,6 +36,7 @@ export class RolesFormComponent extends CoreFormComponent
 
 	ngOnInit() {
 		super.ngOnInit();
+		this.form.controls.group_id.setValue(this.currentItemId);
 	}
 
 	refactorItem(data: any) {
@@ -61,7 +62,7 @@ export class RolesFormComponent extends CoreFormComponent
 			}
 			data[item] = permissions;
 		}
-		return this.form.controls.permissions.setValue(data);
+		return this.form.controls.roles.setValue(data);
 	}
 
 	inputAction(template: any, permission: any, value: boolean) {

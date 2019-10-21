@@ -3,16 +3,16 @@
 		<div style="flex: 1; box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);">
 			<div fxFlex fxLayout="column">
 				<div fxLayout="row">
-					<app-list-grid-summary
-						fxFlex="60"
-						[controller]="cid"
-						[service]="service"
-						[listOptions]="listOptions"
-					>
-					</app-list-grid-summary>
+					<!--					<app-list-grid-summary-->
+					<!--						fxFlex="60"-->
+					<!--						[controller]="cid"-->
+					<!--						[service]="service"-->
+					<!--						[listOptions]="listOptions"-->
+					<!--					>-->
+					<!--					</app-list-grid-summary>-->
 
 					<app-list-grid-options
-						fxFlex="40"
+						fxFlex="100"
 						[controller]="cid"
 						[listOptions]="listOptions"
 						(doActionEvent)="doAction($event)"
@@ -22,10 +22,16 @@
 
 				<!--        <app-list-type [listOptions]="listOptions" [service]="service"></app-list-type>-->
 
-				<app-list-grid-search
-					*ngIf="listOptions.searchable"
-					[service]="service"
-				></app-list-grid-search>
+				<!--				<app-list-grid-search-->
+				<!--					*ngIf="listOptions.searchable"-->
+				<!--					[service]="service"-->
+				<!--				></app-list-grid-search>-->
+				<!--				<app-list-grid-search-->
+				<!--					*ngIf="listOptions.searchable"-->
+				<!--					[service]="service"-->
+				<!--				></app-list-grid-search>-->
+
+				<app-filters [service]="service" [columns]="columns"></app-filters>
 
 				<app-list-grid
 					[controller]="cid"
@@ -39,9 +45,6 @@
 					[service]="service"
 				></app-pagination>
 			</div>
-		</div>
-		<div [hidden]="!myOutlet.isActivated" style="flex: 1">
-			<router-outlet #myOutlet="outlet"></router-outlet>
 		</div>
 	</div>
 </div>

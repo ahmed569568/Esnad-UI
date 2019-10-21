@@ -5,6 +5,7 @@ import { EvaluationTypeFormComponent } from './components/evaluation-type-form/e
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [EvaluationTypeListComponent, EvaluationTypeFormComponent],
@@ -14,9 +15,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: EvaluationTypeListComponent,
+				data: { title: extract('evaluation_type.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: EvaluationTypeListComponent
+					},
 					{
 						path: 'create',
 						component: EvaluationTypeFormComponent

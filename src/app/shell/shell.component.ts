@@ -77,10 +77,8 @@ export class ShellComponent implements OnInit {
 	toggleSidenavSize() {
 		if (!this.isWide) {
 			this.isWide = true;
-			console.log('wide', this.isWide);
 		} else {
 			this.isWide = false;
-			console.log('narrow', this.isWide);
 		}
 	}
 }

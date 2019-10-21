@@ -1,3 +1,3 @@
 export class AppConfig {
-	static socket = false;
+	static socket = true;
 }

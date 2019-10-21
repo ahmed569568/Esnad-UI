@@ -35,7 +35,8 @@ import { CoreFormV2Component } from './components/core-form-v2/core-form-v2.comp
 		CoreFormComponent,
 		CoreViewComponent,
 		CoreFormV2Component
-	]
+	],
+	exports: [CoreFormComponent]
 })
 export class CoreModule {
 	constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

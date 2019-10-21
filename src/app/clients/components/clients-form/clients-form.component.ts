@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoreFormComponent } from '@app/core/components/core-form/core-form.component';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
 import { ClientsService } from '@app/clients/clients.service';
 
 @Component({
-	selector: 'app-drivers-form',
-	templateUrl: '../../../core/components/core-form/core-form.component.html'
+	selector: 'app-clients-form',
+	templateUrl: './clients-form.component.html'
 })
 export class ClientsFormComponent extends CoreFormComponent
 	implements OnInit, OnDestroy {
@@ -21,7 +21,11 @@ export class ClientsFormComponent extends CoreFormComponent
 	}
 
 	initLists() {
-		this.lists = [{ ['drivers/languages']: 1 }];
+		this.lists = [
+			{
+				[`${this.service.cid}/price`]: 1
+			}
+		];
 	}
 
 	// refactorItem(item: any): any {
@@ -47,6 +51,37 @@ export class ClientsFormComponent extends CoreFormComponent
 
 	ngOnInit() {
 		super.ngOnInit();
+		this.form.addControl(
+			'client_price',
+			this.fb.array([this.initClientPrice()])
+		);
+	}
+
+	patchFormValue(form: any): void {
+		let client_price = <FormArray>this.form.controls.client_price;
+		form['client_price'].forEach(() => {
+			client_price.push(this.initClientPrice());
+		});
+		this.form.patchValue(form);
+	}
+
+	get clientPrices() {
+		return this.form.get('client_price') as FormArray;
+	}
+
+	initClientPrice() {
+		return this.fb.group({
+			price_id: ['', []],
+			cost: ['', []]
+		});
+	}
+
+	pushItem() {
+		this.clientPrices.push(this.initClientPrice());
+	}
+
+	deleteItem(index: number) {
+		this.clientPrices.removeAt(index);
 	}
 
 	ngOnDestroy(): void {

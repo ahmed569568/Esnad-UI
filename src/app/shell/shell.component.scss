@@ -36,22 +36,23 @@
 .side-menu-button {
 	//margin-right: 1rem;
 	//margin-bottom: 3.5rem;
-	margin: 0 1rem 3.5rem 8px;
+	margin: 0 8px 3.5rem 1rem;
 
 	mat-icon {
-		color: #313131 !important;
+		color: white !important;
 	}
 }
 
 .mat-drawer {
-	background: white;
+	background-image: linear-gradient(#191e2c, #313853);
 	box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
 
 	a,
 	.mat-expansion-panel-header,
 	mat-expansion-panel {
-		color: #a7a7a7;
+		color: white;
 		font-weight: 100;
+		background-color: transparent;
 
 		&.active {
 			span:first-child {
@@ -70,7 +71,7 @@
 }
 
 .menuIcon {
-	//margin-right: 10px;
+	margin-left: 10px;
 }
 
 .mat-expansion-panel-header-description,
@@ -79,7 +80,7 @@
 }
 
 .mat-sidenav-content {
-	background: white;
+	//background: white;
 }
 
 .p-5 {
@@ -126,13 +127,8 @@
 }
 
 .pic-logo {
-	top: 11px;
-	left: 1170px;
-	width: 40px;
-	height: 42px;
-	border-radius: 20px;
-	opacity: 1;
-	margin: 0 0.3rem;
+	display: flex;
+	margin: 0 auto;
 }
 
 .username {
@@ -160,12 +156,25 @@
 
 .side-menu-bg {
 	width: 100%;
-	height: 230px;
-	position: absolute;
-	bottom: 10px;
-	right: 5px;
-	background-image: url("../../assets/menubg.png");
-	background-size: cover;
+}
+
+mat-drawer {
+	&.wide-menu {
+		min-width: 270px;
+	}
+
+	&.narrow-menu {
+		min-width: 20px;
+	}
+}
+
+mat-drawer-content {
+	&.narrow-menu {
+		margin-right: 76px !important;
+	}
+	&.wide-menu {
+		margin-right: 300px !important;
+	}
 }
 
 .side-menu {
@@ -174,6 +183,7 @@
 	position: fixed;
 
 	&.wide-menu {
+		//min-width: 270px;
 	}
 
 	&.narrow-menu {

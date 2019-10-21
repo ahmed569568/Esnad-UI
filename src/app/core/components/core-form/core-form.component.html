@@ -2,11 +2,7 @@
 	<h3 class="form-title">
 		{{ 'common.add' | translate }} {{ cid + '.title_single' | translate }}
 	</h3>
-	<form
-		class="d-flex default-form-style"
-		[formGroup]="form"
-		(ngSubmit)="formSubmission()"
-	>
+	<form class="d-flex default-form-style" [formGroup]="form">
 		<ng-container
 			*ngFor="let field of service.featureProps; trackBy: trackByFn"
 		>
@@ -20,6 +16,21 @@
 						<mat-form-field appearance="outline">
 							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
 							<input type="text" matInput [formControlName]="field.name" />
+						</mat-form-field>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'number' &&
+							checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<input type="number" matInput [formControlName]="field.name" />
 						</mat-form-field>
 						<app-control-errors
 							[ctl]="form.get(field.name)"
@@ -219,6 +230,10 @@
 				</mat-grid-list>
 			</div>
 		</ng-container>
+		<app-form-footer
+			(submit)="formSubmission()"
+			[service]="service"
+			[form]="form"
+		></app-form-footer>
 	</form>
-	<app-form-footer (submit)="formSubmission()" [form]="form"></app-form-footer>
 </div>

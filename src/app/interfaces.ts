@@ -37,6 +37,8 @@ export interface ItemProps {
 	validations?: Validators[];
 	condition?: any;
 	initValue?: any;
+	searchable?: any;
+	filterFieldType?: any;
 }
 
 export interface Row {

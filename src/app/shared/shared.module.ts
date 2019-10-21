@@ -24,10 +24,13 @@ import { ListGridSummaryComponent } from '@app/shared/components/list-grid-summa
 import { ListTypeComponent } from '@app/shared/components/list-type/list-type.component';
 import { ListGridSearchComponent } from '@app/shared/components/list-grid-search/list-grid-search.component';
 import { AngularOpenlayersModule } from 'ngx-openlayers';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
+import { RouterModule } from '@angular/router';
+import { FiltersComponent } from '@app/shared/components/filters/filters.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { CoreFormContentComponent } from '@app/shared/components/core-form-content/core-form-content.component';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
-
 import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 
 @NgModule({
@@ -42,12 +45,14 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		NgxSpinnerModule,
 		ColorPickerModule,
 		NgTippyModule,
+		ToastrModule.forRoot(),
+		AngularOpenlayersModule,
+		RouterModule,
 		NgSelectModule,
 		NgOptionHighlightModule,
 		NgPipesModule,
-
-		ToastrModule.forRoot(),
-		AngularOpenlayersModule
+		OwlDateTimeModule,
+		OwlNativeDateTimeModule
 	],
 	declarations: [
 		ChartComponent,
@@ -64,6 +69,8 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
+		RouterContainerComponent,
+		FiltersComponent,
 		CoreFormContentComponent
 	],
 	exports: [
@@ -78,10 +85,12 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		NgTippyModule,
 		ToastrModule,
 		AngularOpenlayersModule,
+		OwlDateTimeModule,
+		OwlNativeDateTimeModule,
 		NgSelectModule,
 		NgOptionHighlightModule,
 		CoreFormContentComponent,
-
+		NgPipesModule,
 		ChartComponent,
 		ListGridComponent,
 		ListGridOptionsComponent,
@@ -95,7 +104,7 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		NgPipesModule
+		FiltersComponent
 	],
 	entryComponents: [DialogComponent],
 	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]

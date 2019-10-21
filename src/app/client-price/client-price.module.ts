@@ -5,6 +5,7 @@ import { ClientPriceFormComponent } from './components/client-price-form/client-
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [ClientPriceListComponent, ClientPriceFormComponent],
@@ -14,9 +15,13 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: ClientPriceListComponent,
+				data: { title: extract('client_price.title') },
+				component: RouterContainerComponent,
 				children: [
+					{
+						path: 'list',
+						component: ClientPriceListComponent
+					},
 					{
 						path: 'create',
 						component: ClientPriceFormComponent

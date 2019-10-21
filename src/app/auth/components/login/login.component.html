@@ -1,16 +1,16 @@
-<div class="container">
-	<div class="left-section">
+<div fxFlex fxLayout="row" class="container">
+	<div fxFlex="40" class="left-section">
 		<div class="section-content" fxLayout="column">
-			<img class="left-section-img" src="../../../../assets/login-logo.png" />
-			<span id="peepBus">Peep Bus</span>
-			<span id="take">Take it easy</span>
+			<img
+				class="left-section-img"
+				src="../../../../assets/logo3_png_bg@2x.png"
+			/>
 		</div>
 	</div>
 
-	<div class="right-section">
+	<div fxFlex="60" class="right-section" fxLayoutAlign="center center">
 		<div class="fields-container">
 			<div class="login-title" [hidden]="forgotPassword" translate></div>
-			<!--      <div class="forgot-title" [hidden]="!forgotPassword" translate>Forgot password</div>-->
 			<form
 				(ngSubmit)="login()"
 				[formGroup]="loginForm"
@@ -18,11 +18,10 @@
 				novalidate
 			>
 				<div class="login-error" [hidden]="!error || isLoading" translate>
-					email or password incorrect.
+					{{ 'email_or_pass_not_correct' | translate }}
 				</div>
 				<br />
 				<div class="login-fields" fxLayout="column">
-					<span class="welcome-msg">Welcome to school name</span>
 					<span class="login-msg">Log In</span>
 					<mat-form-field [hideRequiredMarker]="true" appearance="outline">
 						<mat-label>{{
@@ -94,42 +93,6 @@
 					<!--          </div>-->
 				</div>
 			</form>
-
-			<!--      <form (ngSubmit)="resetPassword()" [formGroup]="forgetForm" [hidden]="!forgotPassword" novalidate>-->
-			<!--        <div class="login-error" [hidden]="!error || isLoading" translate>-->
-			<!--          {{ this.error }}-->
-			<!--        </div>-->
-			<!--        <br/>-->
-			<!--        <div class="login-fields" fxLayout="column">-->
-			<!--          <mat-form-field [hideRequiredMarker]="true">-->
-			<!--            <input-->
-			<!--              type="text"-->
-			<!--              matInput-->
-			<!--              formControlName="email"-->
-			<!--              autocomplete="email"-->
-			<!--              [placeholder]="'Email' | translate"-->
-			<!--              required-->
-			<!--            />-->
-			<!--            <mat-error *ngIf="forgetForm.controls.email.invalid && forgetForm.controls.email.touched">-->
-			<!--              <span translate>Email is required</span>-->
-			<!--            </mat-error>-->
-			<!--          </mat-form-field>-->
-			<!--          <br/>-->
-			<!--          <button-->
-			<!--            class="reset-btn"-->
-			<!--            mat-raised-button-->
-			<!--           -->
-			<!--            type="submit"-->
-			<!--            [disabled]="(forgetForm.invalid && forgetForm.controls.email.touched) || isLoading"-->
-			<!--            [ngClass]="{ disabled: (forgetForm.invalid && forgetForm.controls.email.touched) || isLoading }"-->
-			<!--          >-->
-			<!--            <span translate>Send</span>-->
-			<!--          </button>-->
-			<!--        </div>-->
-			<!--      </form>-->
-		</div>
-		<div class="login-footer-img">
-			<img src="../../../../assets/Component 4 – 2.png" alt="BUS" />
 		</div>
 	</div>
 </div>
