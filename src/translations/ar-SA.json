@@ -265,7 +265,8 @@
 		"roles": "الادوار",
 		"specs": "المواصفات",
 		"users": "المستخدمين",
-		"all_permissions": "تحديد جميع الصلاحيات"
+		"all_permissions": "تحديد جميع الصلاحيات",
+		"group_id": "المجموعة"
 	},
 	"auditlog": {
 		"title": "Audit-log",
