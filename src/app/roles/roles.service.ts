@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { RootService } from '@app/core/root.service';
-import { ApiRequestService } from '@app/core/http/api-request.service';
-import { ItemProps } from '@app/interfaces';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {Injectable} from '@angular/core';
+import {RootService} from '@app/core/root.service';
+import {ApiRequestService} from '@app/core/http/api-request.service';
+import {ItemProps} from '@app/interfaces';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
 	providedIn: 'root'
@@ -30,7 +30,7 @@ export class RolesService extends RootService {
 			{
 				name: 'group_id',
 				prop: 'name',
-				listing: false,
+				listing: true,
 				formField: true,
 				formFieldType: 'select',
 				listPrefix: 'roles-groups',

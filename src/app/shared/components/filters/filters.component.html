@@ -20,7 +20,7 @@
 								<input
 									matInput
 									[formControlName]="column.name"
-									[placeholder]="'common.' + column.name | translate"
+									[placeholder]="service.cid + '.' + column.name | translate"
 								/>
 							</mat-form-field>
 						</ng-container>
@@ -36,7 +36,7 @@
 							<mat-form-field>
 								<mat-select
 									[formControlName]="column.name"
-									[placeholder]="'common.' + column.name | translate"
+									[placeholder]="service.cid  + '.' + column.name | translate"
 								>
 									<mat-option
 										*ngFor="let item of service.lists[column.listPrefix]"
