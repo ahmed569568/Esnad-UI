@@ -437,37 +437,37 @@
 							appendTo="body"
 							[addTag]="true"
 						>
-							<ng-template ng-header-tmp>
-								<div class="d-flex py-3">
-									<button
-										class="mr-2"
-										(click)="
-											ngSelect_selectAll(
-												form.controls[field.name],
-												field.form.listPrefix,
-												true
-											)
-										"
-										mat-stroked-button
-										color="primary"
-									>
-										Select all
-									</button>
-									<button
-										(click)="
-											ngSelect_selectAll(
-												form.controls[field.name],
-												field.form.listPrefix,
-												false
-											)
-										"
-										mat-stroked-button
-										color="warn"
-									>
-										Unselect all
-									</button>
-								</div>
-							</ng-template>
+							<!--							<ng-template ng-header-tmp>-->
+							<!--								<div class="d-flex py-3">-->
+							<!--									<button-->
+							<!--										class="mr-2"-->
+							<!--										(click)="-->
+							<!--											ngSelect_selectAll(-->
+							<!--												form.controls[field.name],-->
+							<!--												field.form.listPrefix,-->
+							<!--												true-->
+							<!--											)-->
+							<!--										"-->
+							<!--										mat-stroked-button-->
+							<!--										color="primary"-->
+							<!--									>-->
+							<!--										Select all-->
+							<!--									</button>-->
+							<!--									<button-->
+							<!--										(click)="-->
+							<!--											ngSelect_selectAll(-->
+							<!--												form.controls[field.name],-->
+							<!--												field.form.listPrefix,-->
+							<!--												false-->
+							<!--											)-->
+							<!--										"-->
+							<!--										mat-stroked-button-->
+							<!--										color="warn"-->
+							<!--									>-->
+							<!--										Unselect all-->
+							<!--									</button>-->
+							<!--								</div>-->
+							<!--							</ng-template>-->
 
 							<ng-template ng-label-tmp let-item="item" let-clear="clear">
 								<div class="d-inline-flex">
@@ -622,6 +622,11 @@
 							</ng-template>
 						</ng-select>
 					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'tag-input'">
+					<tag-input [formControlName]="field.name"></tag-input>
+					<!--							<ngx-tags-input class="form-control input-lg" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" [(ngModel)]="tags" name="tags"></ngx-tags-input>-->
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'ng_select_multiple'">

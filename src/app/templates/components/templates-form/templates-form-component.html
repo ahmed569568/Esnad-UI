@@ -240,12 +240,10 @@
 																						<mat-panel-title>
 																							{{ (form.get('step_' + (stepI + 1)
 																							+ '_form_' + sectionI + '_field_'
-																							+ (formFieldI + 1) +
-																							'_name')?.value) ?
+																							+ formFieldI + '_name')?.value) ?
 																							(form.get('step_' + (stepI + 1) +
 																							'_form_' + sectionI + '_field_' +
-																							(formFieldI + 1) +
-																							'_name')?.value) :
+																							formFieldI + '_name')?.value) :
 																							('templates.field_placeholder' |
 																							translate) + ' ' + formFieldI }}
 																						</mat-panel-title>

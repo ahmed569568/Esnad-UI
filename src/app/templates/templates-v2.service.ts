@@ -9,12 +9,33 @@ import { RootV2Service } from '@app/core/root.service-v2';
 import { SharedService } from '@app/shared/services/shared.service';
 import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
 
+export interface ApiRequest {
+	name?: string;
+	client_id?: number;
+	steps?: {
+		group_id?: number;
+		order?: number;
+		name?: string;
+		forms?: {
+			name?: string;
+			order?: number;
+			fields?: {
+				type?: string;
+				title?: string;
+				cols?: number;
+				options?: {
+					name?: string;
+				}[];
+			}[];
+		}[];
+	}[];
+}
+
 @Injectable({
 	providedIn: 'root'
 })
 export class TemplatesV2Service extends RootV2Service {
 	stepsCount = 1;
-
 	InputsTree: {
 		steps?: {
 			name: string;
@@ -84,21 +105,94 @@ export class TemplatesV2Service extends RootV2Service {
 		this.lists.field_cols = [
 			{
 				name: '1 Cols',
-				id: '1-cols'
+				id: '1'
 			},
 			{
 				name: '2 Cols',
-				id: '2-cols'
+				id: '2'
+			},
+			{
+				name: '3 Cols',
+				id: '3'
 			},
 			{
 				name: '4 Cols',
-				id: '4-cols'
-			},
-			{
-				name: '6 Cols',
-				id: '6-cols'
+				id: '4'
 			}
 		];
+	}
+
+	/**
+	 * Generic Create Action Request
+	 * @param data: New Item Data
+	 */
+	createItem(data: {}) {
+		return this.doCreate(this.getFunctionURL('create'), data);
+	}
+
+	refactorFormBeforeSubmit(formValue: any): any {
+		console.log(formValue);
+		const requestMock: ApiRequest = {
+			name: formValue.name,
+			client_id: formValue.client_id,
+			steps: []
+		};
+		this.InputsTree.steps.forEach((step, stepI) => {
+			requestMock.steps.push({
+				name: formValue[`step_${stepI + 1}_name`],
+				order: stepI + 1,
+				group_id: formValue[`step_${stepI + 1}_typeId`],
+				forms: []
+			});
+			if (step.forms) {
+				step.forms.forEach((form, formI) => {
+					requestMock.steps[stepI].forms.push({
+						name: formValue[`step_${stepI + 1}_form_${formI + 1}_name`],
+						order: formI + 1,
+						fields: []
+					});
+					form.fields.forEach((field, fieldI) => {
+						const optionsData =
+							formValue[
+								`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+									1}_fieldOptions`
+							];
+						const refactoredOptions: {
+							name?: string;
+						}[] = [];
+						if (optionsData && optionsData.length) {
+							optionsData.forEach((option: any) => {
+								refactoredOptions.push({ name: option.value });
+							});
+						}
+						requestMock.steps[stepI].forms[formI].fields.push({
+							title:
+								formValue[
+									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
+								],
+							type:
+								formValue[
+									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+										1}_fieldType`
+								],
+							cols:
+								formValue[
+									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+										1}_fieldCols`
+								]
+						});
+						// if (refactoredOptions && refactoredOptions.length) {
+						requestMock.steps[stepI].forms[formI].fields[fieldI].options = [
+							...refactoredOptions
+						];
+						// }
+					});
+				});
+			}
+		});
+
+		console.log(requestMock);
+		return requestMock;
 	}
 
 	routerPrefix(val: string = '') {
@@ -191,16 +285,21 @@ export class TemplatesV2Service extends RootV2Service {
 			name: 'form_' + (formsLength + 1),
 			fields: []
 		});
-		const formNumber = formsLength + 1;
+		const formNumber = formsLength ? formsLength : 1;
 
 		const formObj = stepObj.forms.find(
 			value => value.name === 'form_' + formNumber
 		);
 
-		const fieldsLength = formObj.fields.length ? formObj.fields.length : 0;
-		formObj.fields.push({
-			name: 'field_' + (fieldsLength + 1)
-		});
+		const fieldsLength =
+			formObj && formObj.fields && formObj.fields.length
+				? formObj.fields.length
+				: 0;
+		if (formObj && formObj.fields) {
+			// formObj.fields.push({
+			// 	name: 'field_' + fieldsLength
+			// });
+		}
 
 		const stepFormName = `step_${stepNumber}_form_${formNumber}_name`;
 
@@ -245,11 +344,12 @@ export class TemplatesV2Service extends RootV2Service {
 			value => value.name === 'form_' + formNumber
 		);
 
-		const fieldsLength = formObj.fields.length;
-		formObj.fields.push({
-			name: 'field_' + (fieldsLength + 1)
-		});
+		const fieldsLength = formObj.fields.length ? formObj.fields.length : 0;
+
 		const fieldNumber = fieldsLength + 1;
+		formObj.fields.push({
+			name: 'field_' + fieldNumber
+		});
 
 		const fieldName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_name`;
 		const fieldTypeName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldType`;
@@ -319,7 +419,8 @@ export class TemplatesV2Service extends RootV2Service {
 				form: {
 					name: 'field_options',
 					Validators: [Validators.required],
-					formFieldType: 'ng_select',
+					formFieldType: 'tag-input',
+					listPrefix: fieldOptionsName,
 					groupBy: {
 						tabGroup: {
 							tabGroupName: 'templateAccordion',
@@ -343,7 +444,7 @@ export class TemplatesV2Service extends RootV2Service {
 				form: {
 					name: 'field_cols',
 					Validators: [],
-					initValue: '1-cols',
+					initValue: '1',
 					formFieldType: 'select',
 					listPrefix: 'field_cols',
 					groupBy: {

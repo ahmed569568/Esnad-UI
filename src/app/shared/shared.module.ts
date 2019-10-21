@@ -32,6 +32,7 @@ import { CoreFormContentComponent } from '@app/shared/components/core-form-conte
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
 	imports: [
@@ -52,7 +53,8 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		NgOptionHighlightModule,
 		NgPipesModule,
 		OwlDateTimeModule,
-		OwlNativeDateTimeModule
+		OwlNativeDateTimeModule,
+		TagInputModule
 	],
 	declarations: [
 		ChartComponent,
@@ -104,7 +106,8 @@ import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		FiltersComponent
+		FiltersComponent,
+		TagInputModule
 	],
 	entryComponents: [DialogComponent],
 	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]

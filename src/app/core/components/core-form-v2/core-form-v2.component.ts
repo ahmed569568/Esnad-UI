@@ -402,7 +402,6 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 				}
 			});
 		}
-		this.service.refactorFormBeforeSubmit(this.form.value);
 	}
 
 	convertDate(date: any) {
@@ -444,7 +443,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 				return this.service
 					.updateItemAsPost(
 						this.itemId,
-						this.toFormData(this.form.value, 'PUT')
+						this.toFormData(
+							this.service.refactorFormBeforeSubmit(this.form.value),
+							'PUT'
+						)
 					)
 					.pipe(takeWhile(() => this.alive))
 					.subscribe(
@@ -480,7 +482,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 					);
 			} else {
 				return this.service
-					.updateItem(this.itemId, this.form.value)
+					.updateItem(
+						this.itemId,
+						this.service.refactorFormBeforeSubmit(this.form.value)
+					)
 					.pipe(takeWhile(() => this.alive))
 					.subscribe(
 						(resp: ApiResponse) => {
@@ -516,7 +521,13 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 			}
 		} else {
 			this.service
-				.createItem(this.toFormData(this.form.value, null, jsonForm))
+				.createItem(
+					this.toFormData(
+						this.service.refactorFormBeforeSubmit(this.form.value),
+						null,
+						jsonForm
+					)
+				)
 				.pipe(takeWhile(() => this.alive))
 				.subscribe(
 					(resp: ApiResponse) => {
