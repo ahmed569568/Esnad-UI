@@ -42,7 +42,9 @@
 		"not_child": "Not Child",
 		"child": "Child",
 		"add_student": "Add Student",
-		"school": "School"
+		"school": "School",
+		"apply": "بحث",
+		"filter": "تصفية"
 	},
 	"auth": {
 		"login": {
@@ -146,7 +148,13 @@
 		"groups": "المجموعات",
 		"cities": "المدن",
 		"cities_list": "قائمة المدن",
-		"new_city": "مدينة جديدة"
+		"new_city": "مدينة جديدة",
+		"reports": "التقارير",
+		"report_employees": "تقارير الموظفين",
+		"report_treatments": "تقارير المعاملات",
+		"report_income": "تقارير الايرادات",
+		"report_expenses": "تقارير المصورفات",
+		"report_banks": "تقارير البنوك"
 	},
 	"check-in": {
 		"title": "وصول"
@@ -324,7 +332,9 @@
 		"manufacturingYearRange": "تاريخ الصنع يجب أن يكون بين سنة 2000 و السنة الحالية",
 		"validOdoMeter": "من فضلك أكتب قراءة عداد صحيحة",
 		"login": {
+			"username": "اسم المستخدم",
 			"username-required": "اسم المستخدم إلزامى",
+			"password": "كلمة المرور",
 			"password-required": "كلمة المرور إلزامية",
 			"incorrectCredentials": "اسم المستخدم / كلمة المرور خاطئة"
 		},
@@ -421,7 +431,9 @@
 		"photo": "الصورة",
 		"full_name": "الاسم كامل",
 		"phone": "التليفون",
-		"email": "البريد الالكترونى"
+		"email": "البريد الالكترونى",
+		"unit": "الوحدة",
+		"client_price": "السعر"
 	},
 	"forms": {
 		"title": "النماذج",

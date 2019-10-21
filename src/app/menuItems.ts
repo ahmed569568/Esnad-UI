@@ -19,6 +19,20 @@ export class MenuItems {
 				}
 			]
 		},
+		{
+			title: 'templates',
+			icon: 'format_align_right',
+			children: [
+				{
+					title: 'templates_list',
+					url: '/templates/list'
+				},
+				{
+					title: 'new_templates',
+					url: '/templates/create'
+				}
+			]
+		},
 		// {
 		// 	title: 'reminders',
 		// 	url: '/reminders',
@@ -37,6 +51,16 @@ export class MenuItems {
 					url: '/clients/create'
 				}
 			]
+		},
+		{
+			title: 'employees',
+			url: '/employees/list',
+			icon: 'person'
+		},
+		{
+			title: 'roles',
+			url: '/roles/list',
+			icon: 'check_circle_outline'
 		},
 		{
 			title: 'prices',
@@ -81,34 +105,6 @@ export class MenuItems {
 			]
 		},
 		{
-			title: 'forms',
-			icon: 'format_align_right',
-			children: [
-				{
-					title: 'forms_list',
-					url: '/forms/list'
-				},
-				{
-					title: 'new_form',
-					url: '/forms/create'
-				}
-			]
-		},
-		{
-			title: 'templates',
-			icon: 'format_align_right',
-			children: [
-				{
-					title: 'templates_list',
-					url: '/templates/list'
-				},
-				{
-					title: 'new_templates',
-					url: '/templates/create'
-				}
-			]
-		},
-		{
 			title: 'cities',
 			icon: 'location_city',
 			children: [
@@ -123,26 +119,28 @@ export class MenuItems {
 			]
 		},
 		{
-			title: 'employees',
-			url: '/employees/list',
-			icon: 'person'
-		},
-		{
-			title: 'roles',
-			url: '/roles/list',
-			icon: 'check_circle_outline'
-		},
-		{
 			title: 'reports',
 			icon: 'note',
 			children: [
 				{
-					title: 'templates_list',
-					url: '/templates/list'
+					title: 'report_employees',
+					url: '/#'
 				},
 				{
-					title: 'new_templates',
-					url: '/templates/create'
+					title: 'report_treatments',
+					url: '/#'
+				},
+				{
+					title: 'report_income',
+					url: '/#'
+				},
+				{
+					title: 'report_expenses',
+					url: '/#'
+				},
+				{
+					title: 'report_banks',
+					url: '/#'
 				}
 			]
 		}
