@@ -1,0 +1,20 @@
+<div class="dialog-container">
+	<h1 mat-dialog-title>
+		{{ data.title | translate }}
+	</h1>
+	<mat-dialog-content>
+		{{ data.message | translate }} {{ data?.item }}
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<button mat-dialog-close>
+			{{ data.cancelText | translate }}
+		</button>
+		<button
+			class="{{ data?.submitCssClass ? data?.submitCssClass : submitCssClass }}"
+			(click)="submit()"
+			mat-dialog-close
+		>
+			{{ data.submitText | translate }}
+		</button>
+	</mat-dialog-actions>
+</div>

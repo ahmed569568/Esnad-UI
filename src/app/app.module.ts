@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketService } from '@app/core/http/socket.service';
+import { MatIconRegistry } from '@angular/material';
 
 @NgModule({
 	imports: [
@@ -35,7 +36,14 @@ import { SocketService } from '@app/core/http/socket.service';
 	bootstrap: [AppComponent]
 })
 export class AppModule {
-	constructor(public socket: SocketService) {
+	constructor(
+		matIconRegistry: MatIconRegistry,
+		domSanitizer: DomSanitizer,
+		public socket: SocketService
+	) {
+		matIconRegistry.addSvgIconSet(
+			domSanitizer.bypassSecurityTrustResourceUrl('assets/mdi.svg')
+		); // Or whatever path you placed mdi.svg at
 		// this.socket.connect();
 	}
 }
