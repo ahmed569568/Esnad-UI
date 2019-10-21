@@ -5,6 +5,7 @@ import { TemplatesFormComponent } from './components/templates-form/templates-fo
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { extract } from '@app/core';
+import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 
 @NgModule({
 	declarations: [TemplatesListComponent, TemplatesFormComponent],
@@ -14,16 +15,22 @@ import { extract } from '@app/core';
 		RouterModule.forChild([
 			{
 				path: '',
-				data: { title: extract('drivers.title') },
-				component: TemplatesListComponent
-			},
-			{
-				path: 'create',
-				component: TemplatesFormComponent
-			},
-			{
-				path: 'edit/:id',
-				component: TemplatesFormComponent
+				data: { title: extract('templates.title') },
+				component: RouterContainerComponent,
+				children: [
+					{
+						path: 'list',
+						component: TemplatesListComponent
+					},
+					{
+						path: 'create',
+						component: TemplatesFormComponent
+					},
+					{
+						path: 'edit/:id',
+						component: TemplatesFormComponent
+					}
+				]
 			}
 		])
 	]
