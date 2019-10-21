@@ -13,15 +13,22 @@ mat-card-header {
 form {
 	mat-form-field {
 		display: inline-block;
-		width: 45%;
-		margin-right: 5%;
+		width: 30%;
+		margin-left: 3%;
 	}
 
 	button {
 		display: block;
 		background-color: #313853;
 		color: white;
-		margin-right: 53px;
+		margin-right: 0;
 		margin-top: 12px;
 	}
+}
+
+.date-time {
+	padding: 15px;
+	width: 30%;
+	border-radius: 4px;
+	border: 1px solid #e2e2e2;
 }

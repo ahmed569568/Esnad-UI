@@ -1,5 +1,5 @@
 <div class="filter-container search-card">
-	<mat-card class="main-card" fxFlex="" fxLayout="column">
+	<mat-card class="main-card">
 		<mat-card-header class="filter-card-header">
 			<mat-icon class="filter-icon">tune</mat-icon>
 			{{ 'common.filter' | translate }}
@@ -48,22 +48,20 @@
 						</ng-container>
 						<!-- Select Field -->
 
-						<div class="owlInputSelector">
-							<input
-								class="d-block"
-								*ngIf="column.formFieldType == 'date_time_picker'"
-								[owlDateTimeTrigger]="dt10"
-								[owlDateTime]="dt10"
-								(dateTimeChange)="getDateTime($event, column.name)"
-								[selectMode]="'range'"
-							/>
-							<!--							<ng-container *ngFor="let error of errors | keyvalue">-->
-							<!--								<small class="text-danger" *ngIf="error.key === field.name">-->
-							<!--									{{cid + '.' + field.name | translate}} {{'validations.' + error.value.error | translate}}-->
-							<!--								</small>-->
-							<!--							</ng-container>-->
-							<owl-date-time #dt10></owl-date-time>
-						</div>
+						<input
+							class="d-block"
+							*ngIf="column.formFieldType == 'date_time_picker'"
+							[owlDateTimeTrigger]="dt10"
+							[owlDateTime]="dt10"
+							(dateTimeChange)="getDateTime($event, column.name)"
+							[selectMode]="'range'"
+						/>
+						<!--							<ng-container *ngFor="let error of errors | keyvalue">-->
+						<!--								<small class="text-danger" *ngIf="error.key === field.name">-->
+						<!--									{{cid + '.' + field.name | translate}} {{'validations.' + error.value.error | translate}}-->
+						<!--								</small>-->
+						<!--							</ng-container>-->
+						<owl-date-time #dt10></owl-date-time>
 
 						<!--						<div class="owlInputSelector">-->
 						<!--							<input class="d-block"-->
@@ -85,9 +83,10 @@
 						<!--            </ng-container> &lt;!&ndash; Multi-Select Field &ndash;&gt;-->
 					</ng-container>
 				</ng-container>
+
 				<div class="owlInputSelector">
 					<input
-						class="d-block"
+						class="d-block date-time"
 						[owlDateTimeTrigger]="dt3"
 						[owlDateTime]="dt3"
 						(dateTimeChange)="getDate($event, 'created_at')"
