@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { TreatmentsService } from '@app/treatments/treatments.service';
 
 @Component({
-	selector: 'app-treatments-list',
-	templateUrl: 'treatments-list-component.html'
+	selector: 'app-branches-list',
+	templateUrl: '../../../core/components/core-list/core-list.component.html'
 })
 export class TreatmentsListComponent extends CoreListComponent
 	implements OnInit {
@@ -22,16 +22,5 @@ export class TreatmentsListComponent extends CoreListComponent
 
 	ngOnInit() {
 		return super.ngOnInit();
-	}
-
-	doAction(data: any) {
-		switch (data.actionType) {
-			case 'resetList': {
-				return this.loadResources();
-			}
-			case 'add': {
-				return this.router.navigate([this.cid + '/create']);
-			}
-		}
 	}
 }
