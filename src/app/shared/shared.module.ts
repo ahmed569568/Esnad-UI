@@ -28,6 +28,10 @@ import { RouterContainerComponent } from '@app/shared/components/router-containe
 import { RouterModule } from '@angular/router';
 import { FiltersComponent } from '@app/shared/components/filters/filters.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { CoreFormContentComponent } from '@app/shared/components/core-form-content/core-form-content.component';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
 
 @NgModule({
 	imports: [
@@ -44,6 +48,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 		ToastrModule.forRoot(),
 		AngularOpenlayersModule,
 		RouterModule,
+		NgSelectModule,
+		NgOptionHighlightModule,
+		NgPipesModule,
 		OwlDateTimeModule,
 		OwlNativeDateTimeModule
 	],
@@ -63,7 +70,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 		ListGridSearchComponent,
 		MapComponent,
 		RouterContainerComponent,
-		FiltersComponent
+		FiltersComponent,
+		CoreFormContentComponent
 	],
 	exports: [
 		CommonModule,
@@ -79,7 +87,10 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 		AngularOpenlayersModule,
 		OwlDateTimeModule,
 		OwlNativeDateTimeModule,
-
+		NgSelectModule,
+		NgOptionHighlightModule,
+		CoreFormContentComponent,
+		NgPipesModule,
 		ChartComponent,
 		ListGridComponent,
 		ListGridOptionsComponent,
@@ -95,6 +106,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 		MapComponent,
 		FiltersComponent
 	],
-	entryComponents: [DialogComponent]
+	entryComponents: [DialogComponent],
+	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]
 })
 export class SharedModule {}

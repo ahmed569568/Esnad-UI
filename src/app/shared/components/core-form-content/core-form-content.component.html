@@ -1,0 +1,1078 @@
+<div [formGroup]="form" class="full-width">
+	<div class="full-width">
+		<div fxFlex="" fxLayout="column" class="full-width">
+			<ng-container [ngSwitch]="field.form.formFieldType">
+				<ng-container *ngSwitchCase="'text'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*
+								</span>
+							</mat-label>
+							<div matSuffix *ngIf="field.form.prefix">
+								<ng-container *ngFor="let prefix of field.form.prefix">
+									<ng-container [ngSwitch]="prefix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												prefix.list.translate
+													? (prefix.list.staticText | translate)
+													: prefix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+
+							<input type="text" matInput [formControlName]="field.name" />
+
+							<div matSuffix *ngIf="field.form.suffix">
+								<ng-container *ngFor="let suffix of field.form.suffix">
+									<ng-container [ngSwitch]="suffix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												suffix.list.translate
+													? (suffix.list.staticText | translate)
+													: suffix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'textarea'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*
+								</span>
+							</mat-label>
+							<textarea matInput [formControlName]="field.name"></textarea>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'colorPicker'">
+					<div class="field-container color-picker-style1 ">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*</span
+								>
+							</mat-label>
+							<button
+								class="color-circle"
+								mat-mini-fab
+								tabindex="-1"
+								[style.background]="
+									form.get(field.name).value
+										? form.get(field.name).value
+										: '#fff'
+								"
+								matPrefix
+								(click)="focusInputById(field.name)"
+							></button>
+							<input
+								matInput
+								[id]="field.name"
+								autocomplete="off"
+								[formControlName]="field.name"
+								[cpWidth]="'160px'"
+								[cpPresetColors]="[
+									'#1862DB',
+									'#FF9900',
+									'#2EB8FF',
+									'#FF0000',
+									'#E5237F',
+									'#13E9CC',
+									'#7FFF00'
+								]"
+								[colorPicker]="form.get(field.name).value"
+								[value]="form.get(field.name).value"
+								[cpOutputFormat]="'hex'"
+								(colorPickerChange)="form.get(field.name).setValue($event)"
+								[cpPosition]="'bottom'"
+								[cpPositionRelativeToArrow]="false"
+							/>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'password'">
+					<div fxFlex fxLayout="column" class="field-container">
+						<div fxFlex fxLayout>
+							<mat-form-field appearance="outline" class="full-width">
+								<mat-label>
+									<span>{{
+										cid +
+											'.' +
+											(field.form.name ? field.form.name : field.name)
+											| translate
+									}}</span>
+									<span
+										*ngIf="checkRequiredFields(field.name)"
+										class="mat-error required-asterisk inline"
+									>
+										*</span
+									>
+								</mat-label>
+								<input
+									type="password"
+									matInput
+									[formControlName]="field.name"
+								/>
+							</mat-form-field>
+							<button
+								mat-icon-button
+								color="primary"
+								*ngIf="
+									form.controls[field.name]?.disabled &&
+									isEdit &&
+									field.editDisabled
+								"
+								class="edit"
+								(click)="enableControl(form.controls[field.name])"
+							>
+								<mat-icon class="mat-18">edit</mat-icon>
+							</button>
+						</div>
+					</div>
+					<div
+						fxFlex
+						fxLayout
+						[@showHide]
+						*ngIf="!form.controls[field.name]?.disabled"
+					>
+						<div class="password-guide" *ngIf="field?.hints?.password_helper">
+							<ul>
+								<li
+									*ngIf="field?.hints?.minLength"
+									[ngClass]="{
+										success:
+											!form.get(field?.name)?.errors?.minlength &&
+											!form.get(field?.name)?.errors?.required,
+										danger:
+											form.get(field?.name)?.errors?.minlength ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+									}"
+								>
+									<mat-icon
+										*ngIf="
+											!form.get(field?.name)?.errors?.minlength &&
+											!form.get(field?.name)?.errors?.required
+										"
+									>
+										check
+									</mat-icon>
+									<mat-icon
+										*ngIf="
+											form.get(field?.name)?.errors?.minlength ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+										"
+									>
+										close
+									</mat-icon>
+									<!--                                <div-->
+									<!--                                  *ngIf="!form.get(field?.name)?.touched || (!form.get(field?.name)?.dirty && form.get(field?.name)?.touched)"-->
+									<!--                                  class="square-icon"></div>-->
+									<span
+										>{{ field?.hints?.minLength }}
+										{{ 'validation_errors.characters' | translate }}</span
+									>
+								</li>
+								<li
+									*ngIf="field?.hints?.hasSpecialCharacters"
+									[ngClass]="{
+										success:
+											!form.get(field?.name)?.errors?.hasSpecialCharacters &&
+											!form.get(field?.name)?.errors?.required,
+										danger:
+											form.get(field?.name)?.errors?.hasSpecialCharacters ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+									}"
+								>
+									<mat-icon
+										*ngIf="
+											!form.get(field?.name)?.errors?.hasSpecialCharacters &&
+											!form.get(field?.name)?.errors?.required
+										"
+									>
+										check
+									</mat-icon>
+									<mat-icon
+										*ngIf="
+											form.get(field?.name)?.errors?.hasSpecialCharacters ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+										"
+									>
+										close
+									</mat-icon>
+									<!--                                <div-->
+									<!--                                  *ngIf="!form.get(field?.name)?.touched || (!form.get(field?.name)?.dirty && form.get(field?.name)?.touched)"-->
+									<!--                                  class="square-icon"></div>-->
+									<span class="pr-5">{{
+										'validation_errors.Special Character' | translate
+									}}</span>
+									<span
+										*ngIf="
+											form.get(field?.name)?.errors?.hasSpecialCharacters ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+										"
+									>
+										{{ 'common.ex:' | translate }}
+										{{ field?.hints?.hasSpecialCharacters }}
+									</span>
+								</li>
+								<li
+									*ngIf="
+										field?.hints?.hasCapitalCase &&
+										field?.hints?.hasSmallCase &&
+										field?.hints?.hasNumber
+									"
+									[ngClass]="{
+										success:
+											!form.get(field?.name)?.errors?.hasCapitalCase &&
+											!form.get(field?.name)?.errors?.hasNumber &&
+											!form.get(field?.name)?.errors?.hasSmallCase &&
+											!form.get(field?.name)?.errors?.required,
+										danger:
+											form.get(field?.name)?.errors?.hasCapitalCase ||
+											form.get(field?.name)?.errors?.hasNumber ||
+											form.get(field?.name)?.errors?.hasSmallCase ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+									}"
+								>
+									<mat-icon
+										*ngIf="
+											!form.get(field?.name)?.errors?.hasCapitalCase &&
+											!form.get(field?.name)?.errors?.hasNumber &&
+											!form.get(field?.name)?.errors?.hasSmallCase &&
+											!form.get(field?.name)?.errors?.required
+										"
+									>
+										check
+									</mat-icon>
+									<mat-icon
+										*ngIf="
+											form.get(field?.name)?.errors?.hasCapitalCase ||
+											form.get(field?.name)?.errors?.hasNumber ||
+											form.get(field?.name)?.errors?.hasSmallCase ||
+											(form.get(field?.name)?.errors?.required &&
+												form.get(field?.name)?.touched)
+										"
+									>
+										close
+									</mat-icon>
+									<!--                                <div-->
+									<!--                                  *ngIf="!form.get(field?.name)?.touched || (!form.get(field?.name)?.dirty && form.get(field?.name)?.touched)"-->
+									<!--                                  class="square-icon"></div>-->
+									<span>{{
+										'validation_errors.Small letter & Capital letter & Number'
+											| translate
+									}}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'confirmPassword'">
+					<div
+						fxFlex
+						fxLayout="column"
+						class="field-container"
+						[@showHide]
+						*ngIf="form.controls['password'].enabled"
+					>
+						<div fxFlex fxLayout>
+							<mat-form-field appearance="outline" class="full-width">
+								<mat-label>
+									<span>{{
+										cid +
+											'.' +
+											(field.form.name ? field.form.name : field.name)
+											| translate
+									}}</span>
+									<span class="mat-error required-asterisk inline"> *</span>
+								</mat-label>
+								<input
+									type="password"
+									matInput
+									[formControlName]="field.name"
+								/>
+							</mat-form-field>
+						</div>
+						<!-- confirm password is always required -->
+					</div>
+
+					<div
+						fxFlex
+						fxLayout
+						[@showHide]
+						*ngIf="!form.controls['password']?.disabled"
+					>
+						<div class="password-guide" *ngIf="field?.hints?.password_helper">
+							<ul>
+								<li
+									*ngIf="field?.hints?.password_helper"
+									[ngClass]="{
+										success: !form.get(field?.name)?.errors?.passwordsDontMatch,
+										danger: form.get(field?.name)?.errors?.passwordsDontMatch
+									}"
+								>
+									<mat-icon
+										*ngIf="!form.get(field?.name)?.errors?.passwordsDontMatch"
+									>
+										check
+									</mat-icon>
+									<mat-icon
+										*ngIf="form.get(field?.name)?.errors?.passwordsDontMatch"
+									>
+										close
+									</mat-icon>
+									<!--                                <div-->
+									<!--                                  *ngIf="!form.get(field?.name)?.touched || (!form.get(field?.name)?.dirty && form.get(field?.name)?.touched)"-->
+									<!--                                  class="square-icon"></div>-->
+									<span>
+										{{ 'validation_errors.passwordsMatch' | translate }}
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'email'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*</span
+								>
+							</mat-label>
+							<input type="email" matInput [formControlName]="field.name" />
+						</mat-form-field>
+					</div>
+				</ng-container>
+				<ng-container *ngSwitchCase="'multi_select'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*</span
+								>
+							</mat-label>
+							<mat-select [formControlName]="field.name" multiple>
+								<mat-option
+									*ngFor="let item of service.lists[field.form.listPrefix]"
+									[value]="item.id"
+								>
+									{{ item.name || item.displayName }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'ng_select_multiple'">
+					<div [ngClass]="field?.form?.cssClass">
+						<ng-select
+							class="ng-select-style1"
+							[items]="service.lists[field.form.listPrefix]"
+							[multiple]="true"
+							bindLabel="name"
+							bindValue="id"
+							dropdownPosition="auto"
+							[closeOnSelect]="false"
+							[formControlName]="field.name"
+							placeholder="{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}"
+							appendTo="body"
+						>
+							<ng-template ng-header-tmp>
+								<div class="d-flex py-3">
+									<button
+										class="mr-2"
+										(click)="
+											ngSelect_selectAll(
+												form.controls[field.name],
+												field.form.listPrefix,
+												true
+											)
+										"
+										mat-stroked-button
+										color="primary"
+									>
+										Select all
+									</button>
+									<button
+										(click)="
+											ngSelect_selectAll(
+												form.controls[field.name],
+												field.form.listPrefix,
+												false
+											)
+										"
+										mat-stroked-button
+										color="warn"
+									>
+										Unselect all
+									</button>
+								</div>
+							</ng-template>
+
+							<ng-template ng-label-tmp let-item="item" let-clear="clear">
+								<div class="d-inline-flex">
+									<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+										<ng-container
+											*ngFor="
+												let prefix of field?.form?.ngSelectOptions?.prefix
+											"
+										>
+											<span class="ng_select_prefix" *ngIf="prefix?.prop">
+												<ng-container [ngSwitch]="prefix?.displayType">
+													<ng-container *ngSwitchCase="null">
+														<span
+															class="cell-display-type text{{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+														>
+															{{ item[prefix.prop] }}
+														</span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'color'">
+														<span
+															class="cell-display-type color {{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+															[style.background-color]="item[prefix.prop]"
+														></span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'img'">
+														<span
+															class="cell-display-type img {{
+																prefix?.cssClass
+															}}"
+														>
+															<img
+																class="img-data"
+																*ngIf="item[prefix.prop]"
+																[src]="item[prefix.prop]"
+																alt=""
+															/>
+															<img
+																class="img-placeholder"
+																*ngIf="!item[prefix.prop]"
+																src="{{
+																	prefix.placeHolder
+																		? prefix.placeHolder
+																		: 'assets/image-placeholder.png'
+																}}"
+																alt=""
+															/>
+														</span>
+													</ng-container>
+												</ng-container>
+											</span>
+										</ng-container>
+									</ng-container>
+								</div>
+
+								<span class="ng-value-label d-inline-flex">{{
+									item.name || item.displayName
+								}}</span>
+								<span class="ng-value-icon right ml-2" (click)="clear(item)"
+									><mat-icon
+										[svgIcon]="'close-circle'"
+										class="mdi-icon"
+										[attr.size]="'14px'"
+									></mat-icon>
+								</span>
+							</ng-template>
+
+							<ng-template
+								ng-option-tmp
+								let-item="item"
+								let-item$="item$"
+								let-index="index"
+								let-search="searchTerm"
+							>
+								<div class="d-flex align-items-center">
+									<mat-checkbox
+										class="d-inline-flex mr-3"
+										id="{{ item }}-option-{{ index }}"
+										color="primary"
+										[checked]="
+											checkSelected(form.controls[field.name], item.id)
+										"
+										(click)="preventDefault($event)"
+									></mat-checkbox>
+									<div class="d-inline-flex">
+										<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+											<ng-container
+												*ngFor="
+													let prefix of field?.form?.ngSelectOptions?.prefix
+												"
+											>
+												<span class="ng_select_prefix" *ngIf="prefix?.prop">
+													<ng-container [ngSwitch]="prefix?.displayType">
+														<ng-container *ngSwitchCase="null">
+															<span
+																class="cell-display-type text{{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+															>
+																{{ item[prefix.prop] }}
+															</span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'color'">
+															<span
+																class="cell-display-type color {{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+																[style.background-color]="item[prefix.prop]"
+															></span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'img'">
+															<span
+																class="cell-display-type img {{
+																	prefix?.cssClass
+																}}"
+															>
+																<img
+																	class="img-data"
+																	*ngIf="item[prefix.prop]"
+																	[src]="item[prefix.prop]"
+																	alt=""
+																/>
+																<img
+																	class="img-placeholder"
+																	*ngIf="!item[prefix.prop]"
+																	src="{{
+																		prefix.placeHolder
+																			? prefix.placeHolder
+																			: 'assets/image-placeholder.png'
+																	}}"
+																	alt=""
+																/>
+															</span>
+														</ng-container>
+													</ng-container>
+												</span>
+											</ng-container>
+										</ng-container>
+									</div>
+
+									<div class="d-inline-flex" [ngOptionHighlight]="search">
+										{{ item.name || item.displayName }}
+									</div>
+								</div>
+							</ng-template>
+						</ng-select>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'ng_select'">
+					<div [ngClass]="field?.form?.cssClass">
+						<ng-select
+							class="ng-select-style1"
+							[ngClass]="{
+								'required-asterisk-inline-before': checkRequiredFields(
+									field.name
+								)
+							}"
+							[items]="service.lists[field.form.listPrefix]"
+							[multiple]="false"
+							bindLabel="name"
+							bindValue="id"
+							dropdownPosition="auto"
+							[closeOnSelect]="true"
+							[formControlName]="field.name"
+							(change)="onChangeValue_ng_select(field, $event)"
+							placeholder="{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}"
+							appendTo="body"
+						>
+							<ng-template ng-label-tmp let-item="item" let-clear="clear">
+								<div class="d-inline-flex">
+									<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+										<ng-container
+											*ngFor="
+												let prefix of field?.form?.ngSelectOptions?.prefix
+											"
+										>
+											<span class="ng_select_prefix" *ngIf="prefix?.prop">
+												<ng-container [ngSwitch]="prefix?.displayType">
+													<ng-container *ngSwitchCase="null">
+														<span
+															class="cell-display-type text{{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+														>
+															{{ item[prefix.prop] }}
+														</span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'color'">
+														<span
+															class="cell-display-type color {{
+																prefix?.cssClass
+															}}"
+															*ngIf="item[prefix.prop]"
+															[style.background-color]="item[prefix.prop]"
+														></span>
+													</ng-container>
+													<ng-container *ngSwitchCase="'img'">
+														<span
+															class="cell-display-type img {{
+																prefix?.cssClass
+															}}"
+														>
+															<img
+																class="img-data"
+																*ngIf="item[prefix.prop]"
+																[src]="item[prefix.prop]"
+																alt=""
+															/>
+															<img
+																class="img-placeholder"
+																*ngIf="!item[prefix.prop]"
+																src="{{
+																	prefix.placeHolder
+																		? prefix.placeHolder
+																		: 'assets/image-placeholder.png'
+																}}"
+																alt=""
+															/>
+														</span>
+													</ng-container>
+												</ng-container>
+											</span>
+										</ng-container>
+									</ng-container>
+								</div>
+
+								<span class="ng-value-label d-inline-flex">
+									{{ item.name || item.displayName }}
+								</span>
+								<span class="ng-value-icon right ml-2" (click)="clear(item)">
+									<mat-icon
+										[svgIcon]="'close-circle'"
+										class="mdi-icon"
+										[attr.size]="'14px'"
+									></mat-icon>
+								</span>
+							</ng-template>
+
+							<ng-template
+								ng-option-tmp
+								let-item="item"
+								let-item$="item$"
+								let-index="index"
+								let-search="searchTerm"
+							>
+								<div class="d-flex align-items-center">
+									<div class="d-inline-flex">
+										<ng-container *ngIf="field?.form?.ngSelectOptions?.prefix">
+											<ng-container
+												*ngFor="
+													let prefix of field?.form?.ngSelectOptions?.prefix
+												"
+											>
+												<span class="ng_select_prefix" *ngIf="prefix?.prop">
+													<ng-container [ngSwitch]="prefix?.displayType">
+														<ng-container *ngSwitchCase="null">
+															<span
+																class="cell-display-type text{{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+															>
+																{{ item[prefix.prop] }}
+															</span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'color'">
+															<span
+																class="cell-display-type color {{
+																	prefix?.cssClass
+																}}"
+																*ngIf="item[prefix.prop]"
+																[style.background-color]="item[prefix.prop]"
+															></span>
+														</ng-container>
+														<ng-container *ngSwitchCase="'img'">
+															<span
+																class="cell-display-type img {{
+																	prefix?.cssClass
+																}}"
+															>
+																<img
+																	class="img-data"
+																	*ngIf="item[prefix.prop]"
+																	[src]="item[prefix.prop]"
+																	alt=""
+																/>
+																<img
+																	class="img-placeholder"
+																	*ngIf="!item[prefix.prop]"
+																	src="{{
+																		prefix.placeHolder
+																			? prefix.placeHolder
+																			: 'assets/image-placeholder.png'
+																	}}"
+																	alt=""
+																/>
+															</span>
+														</ng-container>
+													</ng-container>
+												</span>
+											</ng-container>
+										</ng-container>
+									</div>
+
+									<div class="d-inline-flex" [ngOptionHighlight]="search">
+										{{ item?.name || item?.displayName }}
+									</div>
+								</div>
+							</ng-template>
+						</ng-select>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'checkbox'">
+					<div class="field-container">
+						<mat-checkbox
+							color="primary"
+							class="d-flex clearfix pt-2 pb-2"
+							[formControlName]="field.name"
+							>{{ cid + '.' + field.name | translate }}
+						</mat-checkbox>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'datepicker'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" style="width: 100%">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*</span
+								>
+							</mat-label>
+							<input
+								color="primary"
+								matInput
+								[matDatepicker]="picker"
+								[formControlName]="field.name"
+								autocomplete="off"
+								(click)="picker.open()"
+							/>
+							<mat-datepicker-toggle
+								matSuffix
+								[for]="picker"
+							></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'select'">
+					<div class="field-container">
+						<mat-form-field appearance="outline" class="full-width">
+							<mat-label>
+								<span>{{
+									cid + '.' + (field.form.name ? field.form.name : field.name)
+										| translate
+								}}</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*</span
+								>
+							</mat-label>
+							<mat-select [formControlName]="field.name">
+								<mat-option
+									*ngFor="let item of service.lists[field.form.listPrefix]"
+									[value]="item.id"
+								>
+									{{ item.name || item.displayName }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'radio'">
+					<div class="field-container radio-group">
+						<label class="d-flex clearfix pt-2 pb-2">
+							<span>{{
+								cid + '.' + (field.form.name ? field.form.name : field.name)
+									| translate
+							}}</span>
+							<span
+								*ngIf="checkRequiredFields(field.name)"
+								class="mat-error required-asterisk inline"
+							>
+								*</span
+							>
+						</label>
+
+						<mat-radio-group
+							[ngClass]="field?.form?.cssClass"
+							[formControlName]="field.name"
+							aria-label="Select an option"
+						>
+							<mat-radio-button
+								color="primary"
+								*ngFor="let item of service.lists[field.form.listPrefix]"
+								[value]="item.id"
+							>
+								{{ item.name || item.displayName }}
+							</mat-radio-button>
+						</mat-radio-group>
+					</div>
+				</ng-container>
+				<ng-container *ngSwitchCase="'color_picker'">
+					<div
+						style="width: 400px;  display: flex;  flex-direction: column;  align-items: center; justify-content: center;"
+					>
+						<input
+							style="height: 60px;  width: 60px;  border-radius: 50%; margin: 5px 0; border: none;  text-align: center;"
+							[matTooltip]="'common.click_to_change' | translate"
+							[formControlName]="field.name"
+							[colorPicker]="form.controls[field.name].value"
+							(colorPickerChange)="setColor(field.name, $event)"
+							[style.background]="form.controls[field.name].value || '#e3e3e3'"
+						/>
+						<label>{{ cid + '.' + field.name | translate }}</label>
+					</div>
+				</ng-container>
+				<ng-container *ngSwitchCase="'file_input'">
+					<div class="field-container">
+						<div
+							style="display: flex;"
+							*ngIf="form.controls[field.name]?.value"
+						>
+							<img
+								width="300"
+								[src]="
+									form.controls[field.name]?.valueChanges
+										? previewImage
+										: form.controls[field.name]?.value
+								"
+								[alt]="field?.name"
+							/>
+						</div>
+						<div style="width: 400px; display: flex; flex-direction: column">
+							<label
+								style="width: 100%; border-radius: 10px; border: 1px dashed #2A3348; margin: 10px 0; padding: 10px; text-align: center"
+								for="file"
+								>{{ cid + '.' + field?.name | translate }}</label
+							>
+							<input
+								style="width: 0.1px; height: 0.1px;"
+								id="file"
+								type="file"
+								[formControlName]="field.name"
+								(change)="uploadPhoto($event, field)"
+							/>
+						</div>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'img'">
+					<div
+						class="fileUpload image-upload field-container"
+						[ngClass]="{ disabled: form.get(field?.name)?.disabled }"
+					>
+						<div class="image-container">
+							<div class="buttons-container">
+								<button
+									mat-mini-fab
+									*ngIf="form.controls[field.name]?.value !== null"
+									class="delete"
+									(click)="clearImage(form.controls[field.name])"
+								>
+									<mat-icon
+										color="primary"
+										class="mdi-icon"
+										svgIcon="delete-outline"
+										[attr.size]="'14px'"
+									></mat-icon>
+								</button>
+
+								<!--                  *ngIf="form.controls[field.name]?.disabled && isEdit && field.editDisabled"-->
+								<button
+									mat-mini-fab
+									class="edit"
+									(click)="
+										openFileSelectFromInput(
+											form.controls[field.name],
+											field.name
+										)
+									"
+								>
+									<mat-icon
+										color="warn"
+										class="mdi-icon"
+										svgIcon="pencil-outline"
+										[attr.size]="'14px'"
+									></mat-icon>
+								</button>
+							</div>
+
+							<img
+								class="img-fluid"
+								[src]="checkImgSrc(field)"
+								[alt]="field?.name"
+							/>
+							<span *ngIf="!form.controls[field.name]?.value">{{
+								'common.upload_photo' | translate
+							}}</span>
+						</div>
+						<div class="input-container">
+							<label
+								*ngIf="!form.controls[field.name]?.disabled"
+								[@showHide]
+								[for]="field.name"
+							>
+								<!--                              {{ cid + '.' + field?.name | translate }}-->
+							</label>
+							<input
+								[disabled]="form.controls[field.name]?.disabled"
+								class="upload-file-hidden"
+								[id]="field.name"
+								type="file"
+								accept=".png, .jpg, .jpeg"
+								(change)="
+									uploadPhoto($event, field, form.controls[field.name].value)
+								"
+							/>
+							<input type="hidden" [formControlName]="field.name" />
+						</div>
+						<!--                        <button-->
+						<!--                          mat-raised-button-->
+						<!--                          color="primary"-->
+						<!--                          *ngIf="form.controls[field.name]?.enabled && isEdit && field.editDisabled"-->
+						<!--                          class="edit"-->
+						<!--                          (click)="uploadNewPhoto(form.controls[field.name].value , field)"-->
+						<!--                        >-->
+						<!--                          {{ 'common.upload' | translate }}-->
+						<!--                        </button>-->
+					</div>
+				</ng-container>
+				<!--                  <div class="mat-error"> {{ form.get(field?.name)?.errors | json}} </div>-->
+				<!--                  <div> {{ form.get(field.name)?.errors?.minlength | json }}</div>-->
+
+				<!--  validation-errors  -->
+
+				<ng-container *ngIf="form.get(field?.name)?.errors">
+					<!--        <ng-container >-->
+					<div
+						class="validation-errors"
+						*ngIf="
+							(form.get(field?.name)?.touched || isSubmitted) &&
+							form.get(field?.name)?.invalid &&
+							form.get(field?.name)?.errors
+						"
+					>
+						<div
+							class="mat-error"
+							*ngFor="let error of form.get(field?.name)?.errors | keyvalue"
+						>
+							<!-- Server Side Errors -->
+							<ng-container *ngIf="error?.key === 'serverError'">
+								<ng-container *ngFor="let err of error.value">
+									{{ err }}
+								</ng-container>
+							</ng-container>
+
+							<!-- Client Side Errors-->
+							<ng-container *ngIf="error?.key !== 'serverError'">
+								<ng-container *ngIf="!field?.hints?.password_helper">
+									<ng-container [ngSwitch]="error?.key">
+										<ng-container *ngSwitchCase="'minlength'">
+											{{
+												'validation_errors.' + error.key
+													| translate: { xx: error?.value?.requiredLength }
+											}}
+										</ng-container>
+										<ng-container *ngSwitchCase="'maxlength'">
+											{{
+												'validation_errors.' + error.key
+													| translate: { xx: error?.value?.requiredLength }
+											}}
+										</ng-container>
+										<ng-container *ngSwitchDefault>
+											{{ 'validation_errors.' + error.key | translate }}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</ng-container>
+						</div>
+					</div>
+				</ng-container>
+			</ng-container>
+		</div>
+	</div>
+</div>

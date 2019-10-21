@@ -1,0 +1,194 @@
+// custom styling
+mat-drawer {
+	&.wide-menu {
+		width: 270px !important;
+	}
+
+	&.narrow-menu {
+		width: 60px !important;
+	}
+}
+
+mat-drawer-content {
+	&.wide-menu {
+		margin-right: 270px !important;
+	}
+
+	&.narrow-menu {
+		margin-right: 60px !important;
+	}
+}
+
+ng-select {
+	&.ng-select-style1 {
+		.ng-select-container {
+			padding-top: 5px;
+		}
+
+		&.ng-select.ng-select-multiple
+			.ng-select-container
+			.ng-value-container
+			.ng-value {
+			background-color: #d8dce4;
+			color: #202020;
+			padding: 2px 5px 2px 15px;
+			border-radius: 20px;
+			display: inline-flex;
+			justify-content: center;
+			align-content: center;
+
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				line-height: initial;
+			}
+
+			.ng-value-icon {
+				padding-right: 5px;
+
+				mat-icon {
+					justify-content: center;
+					align-items: center;
+					line-height: initial;
+					display: flex;
+
+					svg {
+						color: #97a5cb;
+					}
+				}
+			}
+		}
+
+		&.required-asterisk-inline-before {
+			.ng-value-container .ng-placeholder {
+				&::before {
+					content: "*";
+					display: block;
+					top: 0;
+					left: -8px;
+					color: #f44336;
+					position: absolute;
+				}
+			}
+		}
+
+		&.ng-select-focused
+			.ng-select-container
+			.ng-value-container
+			.ng-placeholder,
+		.ng-select-container .ng-value-container .ng-placeholder,
+		&.ng-has-value .ng-placeholder,
+		.ng-select.ng-select-opened .ng-placeholder {
+			transform-origin: 100% 0 !important;
+		}
+	}
+}
+
+.default-form {
+	min-width: 150px;
+	width: 100%;
+
+	//todo style form sections
+	.form-section {
+		padding-top: 15px;
+		padding-bottom: 15px;
+
+		.form-section-title {
+			font-weight: bold;
+			padding-bottom: 5px;
+		}
+
+		.form-section-content {
+		}
+	}
+
+	.field-container {
+		//padding-top: 15px;
+		position: relative;
+
+		.required-asterisk {
+			position: absolute;
+			right: 0;
+			top: calc(50% - 8px);
+
+			&.inline {
+				position: relative;
+				right: auto;
+				top: auto;
+				display: inline-flex;
+				padding-left: 5px;
+			}
+		}
+
+		&.radio-group {
+			mat-radio-group {
+				mat-radio-button {
+					margin: 0 5px;
+					transition: all 0.2s ease-in-out;
+				}
+
+				&.radio-group-vertical {
+					display: flex;
+					flex-direction: column;
+					margin: 6px 0;
+
+					mat-radio-button {
+						margin: 8px 0;
+					}
+				}
+
+				&.radio-group-horizontal {
+					mat-radio-button {
+						margin: 0 5px;
+					}
+				}
+			}
+		}
+
+		.upload-file-hidden {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 3;
+			opacity: 0;
+			cursor: pointer;
+		}
+
+		&.image-upload {
+			width: 170px;
+			height: 170px;
+			margin: 0 auto;
+			position: relative;
+
+			.image-container,
+			.input-container {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0;
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			.input-container {
+				label {
+					border: 0;
+				}
+			}
+		}
+	}
+}
+
+.breakLine-input30 {
+	flex-basis: 100% !important;
+	> div {
+		width: calc(30% - 30px);
+	}
+}
