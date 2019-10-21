@@ -95,6 +95,20 @@ export class MenuItems {
 			]
 		},
 		{
+			title: 'templates',
+			icon: 'format_align_right',
+			children: [
+				{
+					title: 'templates_list',
+					url: '/templates/list'
+				},
+				{
+					title: 'new_templates',
+					url: '/templates/create'
+				}
+			]
+		},
+		{
 			title: 'cities',
 			icon: 'location_city',
 			children: [

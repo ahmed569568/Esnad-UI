@@ -23,6 +23,10 @@
 // that you are using.
 @include angular-material-theme($app-theme);
 
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+@import "theme/utilites";
 // Theme customization
 @import "theme/theme";
+@import "theme/custom";
 @import "theme/rtl";

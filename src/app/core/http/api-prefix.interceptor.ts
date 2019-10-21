@@ -21,13 +21,17 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
 		if (!/^(http|https):/i.test(request.url)) {
-			request = request.clone({ url: environment.serverUrl + request.url });
-			request = request.clone({
-				headers: request.headers
-					.set('client_id', '2')
-					.set('user_id', '1')
-					.set('lang', 'ar')
-			});
+			if (request.url.split('/')[0] === 'assets') {
+				request = request.clone({ url: request.url });
+			} else {
+				request = request.clone({ url: environment.serverUrl + request.url });
+				request = request.clone({
+					headers: request.headers
+						.set('client_id', '2')
+						.set('user_id', '1')
+						.set('lang', 'ar')
+				});
+			}
 		}
 		return next.handle(request);
 	}

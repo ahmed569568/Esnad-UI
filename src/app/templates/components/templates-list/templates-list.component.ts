@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { TemplatesService } from '@app/templates/templates.service';
 
 @Component({
-	selector: 'app-branches-list',
-	templateUrl: '../../../core/components/core-list/core-list.component.html'
+	selector: 'app-templates-list',
+	templateUrl: 'templates-list-component.html'
 })
 export class TemplatesListComponent extends CoreListComponent
 	implements OnInit {
@@ -18,5 +18,16 @@ export class TemplatesListComponent extends CoreListComponent
 
 	ngOnInit() {
 		return super.ngOnInit();
+	}
+
+	doAction(data: any) {
+		switch (data.actionType) {
+			case 'resetList': {
+				return this.loadResources();
+			}
+			case 'add': {
+				return this.router.navigate([this.cid + '/create']);
+			}
+		}
 	}
 }
