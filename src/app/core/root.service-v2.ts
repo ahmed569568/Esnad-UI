@@ -17,6 +17,8 @@ export abstract class RootV2Service {
 	public resourcesList: any;
 	resources: Subject<any> = new Subject();
 	updateResources: Subject<any> = new Subject();
+	formFieldsUpdated: Subject<any> = new Subject();
+	patchValues: Subject<any> = new Subject();
 
 	formInputsCategorized: any = {};
 
@@ -891,11 +893,21 @@ export abstract class RootV2Service {
 			});
 		} else {
 			if (field.list.dataUrl) {
-				this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
+				this.resourceGet(
+					field.list.dataUrl,
+					false,
+					{},
+					field.list.listRequestMethod ? field.list.listRequestMethod : 'GET'
+				).subscribe((result: any) => {
 					this.lists[field.list.listPrefix] = result.data;
 				});
 			} else if (field.form.dataUrl) {
-				this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
+				this.resourceGet(
+					field.form.dataUrl,
+					false,
+					{},
+					field.form.listRequestMethod ? field.form.listRequestMethod : 'GET'
+				).subscribe((result: any) => {
 					this.lists[field.form.listPrefix] = result.data;
 				});
 			} else {
@@ -954,7 +966,14 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.list.dataUrl,
+							false,
+							{},
+							field.list.listRequestMethod
+								? field.list.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
 								result
@@ -975,7 +994,14 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.form.dataUrl,
+							false,
+							{},
+							field.form.listRequestMethod
+								? field.form.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
 								result
@@ -996,7 +1022,14 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.list.dataUrl,
+							false,
+							{},
+							field.list.listRequestMethod
+								? field.list.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
 								result
@@ -1015,7 +1048,14 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.form.dataUrl,
+							false,
+							{},
+							field.form.listRequestMethod
+								? field.form.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
 								result
@@ -1032,12 +1072,18 @@ export abstract class RootV2Service {
 	 * @param apiPath path of api resource request
 	 * @param pagination request paginated or not
 	 * @param params parameters to the request
+	 * @param listRequestMethod the request method used to fetch list
 	 */
-	resourceGet(apiPath: string, pagination: boolean = false, params: any = {}) {
+	resourceGet(
+		apiPath: string,
+		pagination: boolean = false,
+		params: any = {},
+		listRequestMethod: string = 'GET'
+	) {
 		if (!pagination) {
 			params.page = 0;
 		}
-		return this.apiRequest('GET', apiPath, {}, {}, params);
+		return this.apiRequest(listRequestMethod, apiPath, {}, {}, params);
 	}
 
 	downloadSampleFile(url: string, fileType: string) {

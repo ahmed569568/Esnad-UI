@@ -159,7 +159,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 		this.checkFormType();
 		this.groupItemsByGroup();
 		this.createForm();
-
+		this.refreshFormFieldsSubscription();
+		this.patchValuesSubscription();
 		/**
 		 * Check if path contain ID
 		 * return values from item id values
@@ -861,6 +862,27 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 			.pipe(takeWhile(() => this.alive))
 			.subscribe((input: any) => {
 				this.form.controls[input].setValue(null);
+			});
+	}
+
+	refreshFormFieldsSubscription() {
+		this.service.formFieldsUpdated
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(() => {
+				const formData = this.form.value;
+
+				this.groupItemsByGroup();
+				this.createForm();
+				this.service.loadSelectLists('form', true);
+				this.form.patchValue(formData);
+			});
+	}
+
+	patchValuesSubscription() {
+		this.service.patchValues
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(values => {
+				this.form.patchValue(values);
 			});
 	}
 
