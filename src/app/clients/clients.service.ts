@@ -68,15 +68,6 @@ export class ClientsService extends RootService {
 				validations: [Validators.required],
 				searchable: true
 			}
-			// {
-			// 	name: 'password',
-			// 	prop: 'password',
-			// 	listing: false,
-			// 	formField: true,
-			// 	formFieldType: 'password',
-			// 	required: true,
-			// 	validations: [Validators.required, CustomValidators.validPassword]
-			// },
 		];
 	}
 }
