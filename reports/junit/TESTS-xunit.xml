@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 78.0.3882 (Mac OS X 10.15.1)" package="" timestamp="2019-10-21T08:56:57" id="0" hostname="Kareems-MacBook-Pro.local" tests="0" errors="1" failures="0" time="0">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/78.0.3882.0 Safari/537.36"/>
+  </properties>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
