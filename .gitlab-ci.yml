@@ -33,6 +33,7 @@ deploy_uat:
     - 'git config git-ftp.url "ftp://ftp.samyahmed.com:21/uat"'
     - 'git config git-ftp.user $FTP_USERNAME'
     - 'git config git-ftp.password $FTP_PASSWORD'
+    - 'echo $FTP_USERNAME , $FTP_PASSWORD'
     - 'git ftp push --auto-init'
 
 deploy_production:
@@ -61,4 +62,5 @@ deploy_production:
     - 'git config git-ftp.url "ftp://ftp.samyahmed.com:21/test"'
     - 'git config git-ftp.user $FTP_USERNAME'
     - 'git config git-ftp.password $FTP_PASSWORD'
+    - 'echo $FTP_USERNAME , $FTP_PASSWORD'
     - 'git ftp push --auto-init'
