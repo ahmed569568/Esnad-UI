@@ -27,57 +27,60 @@
 				</ng-container>
 				<tr *ngFor="let row of rows?.data">
 					<ng-container *ngFor="let column of columns">
-						<td *ngIf="column.displayType === 'image'">
-							<img
-								*ngIf="getValue(row, column.prop)"
-								width="40"
-								[src]="
-									getValue(row, column.prop)
-										? environment.imagePath + getValue(row, column.prop)
-										: '../../../../assets/man.jpg'
+						<ng-container *ngIf="column.listing">
+							<td *ngIf="column.displayType === 'image'">
+								<img
+									*ngIf="getValue(row, column.prop)"
+									width="40"
+									[src]="
+										getValue(row, column.prop)
+											? environment.imagePath + getValue(row, column.prop)
+											: '../../../../assets/man.jpg'
+									"
+									alt=""
+								/>
+							</td>
+							<!-- Image TD -->
+							<td *ngIf="column.displayType === 'color'">
+								<div
+									*ngIf="getValue(row, column.prop)"
+									[style.background-color]="getValue(row, column.prop)"
+									style="width: 30px; height: 30px"
+								></div>
+							</td>
+							<!-- Color HEX TD -->
+							<td
+								[style.width.px]="column.width"
+								class="link-text"
+								*ngIf="
+									column.listing &&
+									column.displayType !== 'image' &&
+									column.displayType !== 'color'
 								"
-								alt=""
-							/>
-						</td>
-						<!-- Image TD -->
-						<td *ngIf="column.displayType === 'color'">
-							<div
-								*ngIf="getValue(row, column.prop)"
-								[style.background-color]="getValue(row, column.prop)"
-								style="width: 30px; height: 30px"
-							></div>
-						</td>
-						<!-- Color HEX TD -->
-						<td
-							[style.width.px]="column.width"
-							class="link-text"
-							*ngIf="
-								column.listing &&
-								column.displayType !== 'image' &&
-								column.displayType !== 'color'
-							"
-							[matTooltip]="
-								getValue(row, column.prop).length > 30
-									? getValue(row, column.prop)
-									: ''
-							"
-							[ngClass]="{ pointer: !archivedList && options.view }"
-						>
-							<span *ngIf="!options.hoverData.status">
-								{{
-									column.translate
-										? getValue(row, column.prop) === ''
-											? ''
-											: (controller +
-													'.' +
-													getValue(row, column.prop).toLowerCase() | translate)
-										: getValue(row, column.prop).length > 30
-										? getValue(row, column.prop).substring(0, 30) + '...'
-										: getValue(row, column.prop)
-								}}
-							</span>
-						</td>
-						<!-- Text TD -->
+								[matTooltip]="
+									getValue(row, column.prop).length > 30
+										? getValue(row, column.prop)
+										: ''
+								"
+								[ngClass]="{ pointer: !archivedList && options.view }"
+							>
+								<span *ngIf="!options.hoverData.status">
+									{{
+										column.translate
+											? getValue(row, column.prop) === ''
+												? ''
+												: (controller +
+														'.' +
+														getValue(row, column.prop).toLowerCase()
+												  | translate)
+											: getValue(row, column.prop).length > 30
+											? getValue(row, column.prop).substring(0, 30) + '...'
+											: getValue(row, column.prop)
+									}}
+								</span>
+							</td>
+							<!-- Text TD -->
+						</ng-container>
 					</ng-container>
 
 					<td *ngIf="hasActions()" class="action-column-width actions-data-row">
