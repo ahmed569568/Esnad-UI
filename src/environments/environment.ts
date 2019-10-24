@@ -15,7 +15,6 @@ export const environment = {
 	hmr: true,
 	version: env.npm_package_version + '-dev',
 	serverUrl: 'http://35.243.244.23:7000/api/',
-	socketUrl: '',
 	imagePath: 'http://35.243.244.23:7000/api/public/storage/',
 	defaultLanguage: 'ar-SA',
 	supportedLanguages: ['en-US', 'ar-SA']

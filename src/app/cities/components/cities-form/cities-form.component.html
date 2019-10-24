@@ -12,7 +12,7 @@
 				<div
 					formArrayName="countries"
 					*ngFor="
-						let country of form.get('countries').controls;
+						let country of form.get('countries')['controls'];
 						let countryIndex = index
 					"
 				>

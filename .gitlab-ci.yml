@@ -5,7 +5,7 @@ cache:
     - node_modules/
 
 before_script:
-  - apt-get update -qq && apt-get install -y -qq sshpass
+  - apt-get update -qq && apt-get install -y -qq
 
 deploy_uat:
   stage: deploy
@@ -13,10 +13,10 @@ deploy_uat:
   only:
     - uat
   script:
-    - rm ./package-lock.json
+    #    - rm ./package-lock.json
     - npm install
     - npm run env
-    - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=uat
+    - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=production
     - ls
     - 'cd dist/'
     - 'git config --global user.email "samyahmedibrahim@gmail.com"'
@@ -41,10 +41,10 @@ deploy_production:
   only:
     - test
   script:
-    - rm ./package-lock.json
+    #    - rm ./package-lock.json
     - npm install
     - npm run env
-    - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=uat
+    - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=production
     - ls
     - 'cd dist/'
     - 'git config --global user.email "samyahmedibrahim@gmail.com"'

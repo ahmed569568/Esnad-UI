@@ -32,7 +32,8 @@ import { CoreFormContentComponent } from '@app/shared/components/core-form-conte
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
-import { TagInputModule } from 'ngx-chips';
+// import { TagInputModule } from 'ngx-chips';
+import { DynamicDialogComponent } from '@app/shared/components/dynamic-dialog/dynamic-dialog.component';
 
 @NgModule({
 	imports: [
@@ -53,8 +54,8 @@ import { TagInputModule } from 'ngx-chips';
 		NgOptionHighlightModule,
 		NgPipesModule,
 		OwlDateTimeModule,
-		OwlNativeDateTimeModule,
-		TagInputModule
+		OwlNativeDateTimeModule
+		// TagInputModule
 	],
 	declarations: [
 		ChartComponent,
@@ -73,7 +74,8 @@ import { TagInputModule } from 'ngx-chips';
 		MapComponent,
 		RouterContainerComponent,
 		FiltersComponent,
-		CoreFormContentComponent
+		CoreFormContentComponent,
+		DynamicDialogComponent
 	],
 	exports: [
 		CommonModule,
@@ -106,8 +108,8 @@ import { TagInputModule } from 'ngx-chips';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		FiltersComponent,
-		TagInputModule
+		FiltersComponent
+		// TagInputModule
 	],
 	entryComponents: [DialogComponent],
 	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]
