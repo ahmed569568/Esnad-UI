@@ -3,6 +3,26 @@
 	class="app-container"
 	fxFlex
 >
+	<div
+		fxLayoutAlign="flex-start center"
+		fxLayout="row"
+		class="top-bar"
+		[ngClass]="isWide ? 'wide-menu' : 'narrow-menu'"
+	>
+		<div fxFlex="" fxLayout="row" class="user-info-container">
+			<div class="notification-icon">
+				<mat-icon>notifications_none</mat-icon>
+			</div>
+
+			<div>
+				<img src="../../assets/driver-icon.png" />
+			</div>
+			<div class="user-data" fxFlex="" fxLayout="column">
+				<span>userName</span>
+				<span>userRole</span>
+			</div>
+		</div>
+	</div>
 	<mat-drawer-container fxFill>
 		<mat-drawer
 			class="side-menu"
@@ -35,6 +55,16 @@
 							(click)="logout()"
 						>
 							<mat-icon>exit_to_app</mat-icon>
+						</button>
+					</div>
+					<div class="new-treatment-btn-container">
+						<button
+							class="new-treatment-btn"
+							*ngIf="isWide"
+							mat-flat-button
+							color="primary"
+						>
+							newTreatment
 						</button>
 					</div>
 					<ng-container *ngFor="let item of menuItems.items; let i = index">
@@ -86,8 +116,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.treatments' | translate"
-							>swap_vert</mat-icon
-						>
+							>swap_vert
+						</mat-icon>
 					</a>
 
 					<a
@@ -97,8 +127,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.clients' | translate"
-							>contact_mail</mat-icon
-						>
+							>contact_mail
+						</mat-icon>
 					</a>
 
 					<a
@@ -108,8 +138,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.prices' | translate"
-							>attach_money</mat-icon
-						>
+							>attach_money
+						</mat-icon>
 					</a>
 
 					<a
@@ -128,8 +158,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.categories' | translate"
-							>category</mat-icon
-						>
+							>category
+						</mat-icon>
 					</a>
 
 					<a
@@ -139,8 +169,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.forms' | translate"
-							>format_align_right</mat-icon
-						>
+							>format_align_right
+						</mat-icon>
 					</a>
 
 					<a
@@ -150,8 +180,8 @@
 						routerLinkActive="active"
 					>
 						<mat-icon [matTooltip]="'menu.cities' | translate"
-							>location_city</mat-icon
-						>
+							>location_city
+						</mat-icon>
 					</a>
 
 					<!--					<ng-container *ngFor="let menuItem of menuItems.items">-->
