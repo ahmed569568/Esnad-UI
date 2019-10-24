@@ -15,6 +15,8 @@ export class FiltersComponent implements OnChanges {
 	@Input() columns: ItemProps[];
 	@Input() service: RootService;
 
+	filterOpened = false;
+
 	constructor(private fb: FormBuilder, private us: UtilitiesService) {}
 
 	ngOnChanges(): void {
@@ -95,6 +97,14 @@ export class FiltersComponent implements OnChanges {
 			});
 			// console.log(this.options);
 			// this.search();
+		}
+	}
+
+	toggleFilters() {
+		if (!this.filterOpened) {
+			this.filterOpened = true;
+		} else {
+			this.filterOpened = false;
 		}
 	}
 }
