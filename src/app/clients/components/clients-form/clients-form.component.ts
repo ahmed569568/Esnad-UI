@@ -59,8 +59,10 @@ export class ClientsFormComponent extends CoreFormComponent
 
 	patchFormValue(form: any): void {
 		let client_price = <FormArray>this.form.controls.client_price;
-		form['client_price'].forEach(() => {
-			client_price.push(this.initClientPrice());
+		form['client_price'].forEach((i: any, index: any) => {
+			if (index !== 0) {
+				client_price.push(this.initClientPrice());
+			}
 		});
 		this.form.patchValue(form);
 	}
