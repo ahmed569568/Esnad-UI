@@ -39,5 +39,5 @@ deploy_ci_cd:
     - ci-cd
   script:
     - ls
-    - curl --insecure --user $FTP_USERNAME:$FTP_PASSWORD -T /test-cd/* ftp://ftp.samyahmed.com//test-cd/
+    - curl --insecure --user $FTP_USERNAME:$FTP_PASSWORD -T ./test-cd/* ftp://ftp.samyahmed.com//test-cd/
     - lftp -e "set ftp:ssl-allow no; open ftp://ftp.samyahmed.com; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --only-newer --no-symlinks test-cd /test-cd; bye"
