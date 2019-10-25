@@ -1,4 +1,4 @@
-# vehicleInspection Web
+# EsnadPortal WebApp
 
 1. Go to project folder and install dependencies:
 
