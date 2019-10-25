@@ -30,6 +30,7 @@
 						<ng-container *ngIf="column.listing">
 							<td *ngIf="column.displayType === 'image'">
 								<img
+									style="border-radius: 8px"
 									*ngIf="getValue(row, column.prop)"
 									width="40"
 									[src]="
@@ -86,30 +87,58 @@
 					<td *ngIf="hasActions()" class="action-column-width actions-data-row">
 						<div class="actions-buttons">
 							<ng-container>
-								<button
-									*ngIf="options.view"
-									[secured]="controller + '-index'"
-									[matTooltip]="'common.view' | translate"
-									(click)="doAction('view', row.id)"
+								<span class="actions-trigger" [matMenuTriggerFor]="menu"
+									>...</span
 								>
-									<mat-icon>visibility</mat-icon>
-								</button>
-								<button
-									*ngIf="options.edit"
-									[secured]="controller + '-update'"
-									[matTooltip]="'common.edit' | translate"
-									(click)="doAction('edit', row.id)"
-								>
-									<mat-icon>edit</mat-icon>
-								</button>
-								<button
-									*ngIf="options.archive"
-									[secured]="controller + '-delete'"
-									[matTooltip]="'common.delete' | translate"
-									(click)="openDialog(row, 'archive')"
-								>
-									<mat-icon>delete</mat-icon>
-								</button>
+								<mat-menu #menu="matMenu">
+									<button
+										mat-menu-item
+										*ngIf="options.view"
+										[secured]="controller + '-index'"
+										[matTooltip]="'common.view' | translate"
+										(click)="doAction('view', row.id)"
+									>
+										<mat-icon class="list-action-icon">visibility</mat-icon>
+										<span>{{ 'common.view' | translate }}</span>
+									</button>
+
+									<button
+										mat-menu-item
+										*ngIf="options.view"
+										[secured]="controller + '-index'"
+										[matTooltip]="'common.view' | translate"
+										(click)="doAction('view', row.id)"
+									>
+										<mat-icon matPrefix class="list-action-icon"
+											>visibility</mat-icon
+										>
+										<span>{{ 'common.view' | translate }}</span>
+									</button>
+
+									<button
+										mat-menu-item
+										*ngIf="options.edit"
+										[secured]="controller + '-update'"
+										[matTooltip]="'common.edit' | translate"
+										(click)="doAction('edit', row.id)"
+									>
+										<mat-icon matPrefix class="list-action-icon">edit</mat-icon>
+										<span>{{ 'common.edit' | translate }}</span>
+									</button>
+
+									<button
+										mat-menu-item
+										*ngIf="options.archive"
+										[secured]="controller + '-delete'"
+										[matTooltip]="'common.delete' | translate"
+										(click)="openDialog(row, 'archive')"
+									>
+										<mat-icon matPrefix class="list-action-icon"
+											>delete</mat-icon
+										>
+										<span>{{ 'common.delete' | translate }}</span>
+									</button>
+								</mat-menu>
 							</ng-container>
 						</div>
 					</td>

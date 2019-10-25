@@ -38,17 +38,15 @@ export class EmployeesService extends RootService {
 				displayType: 'image',
 				formFieldType: 'file_input',
 				required: true,
-				width: 300
+				width: 50
 			},
 			{
 				name: 'signature',
 				prop: 'signature',
 				listing: false,
 				formField: true,
-				displayType: 'image',
 				formFieldType: 'file_input',
-				required: true,
-				width: 300
+				required: true
 			},
 			{
 				name: 'username',
