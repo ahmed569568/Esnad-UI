@@ -1,36 +1,44 @@
-<div
-	class="listOptions"
-	fxFlex
-	fxLayout="row"
-	fxLayoutAlign="flex-end center"
-	fxLayoutGap="12px"
->
-	<button
-		mat-button
-		*ngIf="listOptions.add"
-		[ngClass]="{ disabled: mode === 'add' }"
-		[disabled]="mode === 'add'"
-		[secured]="controller + '-add'"
-		(click)="doAction('add')"
-	>
-		{{ 'common.add' | translate }}
-	</button>
+<div class="listOptions">
+	<div>
+		<h3>{{ controller + '.title' | translate }}</h3>
+	</div>
+	<div class="listOptionsButton">
+		<button
+			mat-icon-button
+			*ngIf="listOptions.add"
+			[ngClass]="{ disabled: mode === 'add' }"
+			[disabled]="mode === 'add'"
+			[secured]="controller + '-add'"
+			[matTooltip]="'common.add' | translate"
+			(click)="doAction('add')"
+		>
+			<mat-icon>add</mat-icon>
+		</button>
 
-	<button
-		mat-button
-		*ngIf="controller === 'students'"
-		[secured]="controller + '-add'"
-		(click)="openDialog('add_student')"
-	>
-		{{ 'common.add_student' | translate }}
-	</button>
+		<!--		<button-->
+		<!--			mat-button color="accent"-->
+		<!--			*ngIf="controller === 'students'"-->
+		<!--			[secured]="controller + '-add'"-->
+		<!--			(click)="openDialog('add_student')"-->
+		<!--		>-->
+		<!--			{{ 'common.add_student' | translate }}-->
+		<!--		</button>-->
 
-	<button
-		mat-button
-		[matTooltip]="'common.refresh' | translate"
-		(click)="doAction('resetList')"
-		title="{{ 'common.refresh' | translate }}"
-	>
-		<mat-icon>refresh</mat-icon>
-	</button>
+		<button
+			mat-icon-button
+			[matTooltip]="'common.refresh' | translate"
+			(click)="doAction('resetList')"
+			title="{{ 'common.refresh' | translate }}"
+		>
+			<mat-icon>refresh</mat-icon>
+		</button>
+		<button
+			mat-icon-button
+			[matTooltip]="'common.filters' | translate"
+			(click)="toggleFilters()"
+			title="{{ 'common.filters' | translate }}"
+		>
+			<mat-icon>tune</mat-icon>
+		</button>
+	</div>
 </div>

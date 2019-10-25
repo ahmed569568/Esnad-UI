@@ -1,5 +1,11 @@
 .filter-container {
-	width: 100%;
+	//width: 100%;
+	margin: 10px 30px;
+	box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
+
+	mat-card {
+		box-shadow: none;
+	}
 
 	.main-card {
 		width: 100%;

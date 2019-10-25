@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ItemProps } from '@app/interfaces';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RootService } from '@app/core/root.service';
@@ -10,14 +10,20 @@ import * as moment from 'moment';
 	templateUrl: './filters.component.html',
 	styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnChanges {
+export class FiltersComponent implements OnInit, OnChanges {
 	form: FormGroup;
 	@Input() columns: ItemProps[];
 	@Input() service: RootService;
 
-	filterOpened = false;
+	filterOpened: boolean;
 
 	constructor(private fb: FormBuilder, private us: UtilitiesService) {}
+
+	ngOnInit(): void {
+		this.us.filterPanelObservable$.subscribe(
+			(value: boolean) => (this.filterOpened = value)
+		);
+	}
 
 	ngOnChanges(): void {
 		if (this.columns) {
@@ -100,11 +106,11 @@ export class FiltersComponent implements OnChanges {
 		}
 	}
 
-	toggleFilters() {
-		if (!this.filterOpened) {
-			this.filterOpened = true;
-		} else {
-			this.filterOpened = false;
-		}
-	}
+	// toggleFilters() {
+	// 	if (!this.filterOpened) {
+	// 		this.filterOpened = true;
+	// 	} else {
+	// 		this.filterOpened = false;
+	// 	}
+	// }
 }

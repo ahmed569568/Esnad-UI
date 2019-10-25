@@ -1,12 +1,6 @@
-<div class="filter-container search-card">
+<div class="filter-container search-card" *ngIf="filterOpened">
 	<mat-card class="main-card">
-		<mat-card-header class="filter-card-header">
-			<mat-icon class="filter-icon" (click)="toggleFilters()">tune</mat-icon>
-			{{ 'common.filter' | translate }}
-		</mat-card-header>
-		<mat-card-content
-			[ngClass]="filterOpened ? 'filter-opened' : 'filter-closed'"
-		>
+		<mat-card-content>
 			<form [formGroup]="form" *ngIf="columns" (ngSubmit)="filter()">
 				<ng-container *ngFor="let column of columns">
 					<ng-container *ngIf="column && column.searchable">
