@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RolesService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
+		// this.lists = {...this.lists, ['roles-groups']: []}
 	}
 
 	routerPrefix(val: string = '') {
