@@ -45,8 +45,8 @@ export class EmployeesFormComponent extends CoreFormComponent
 
 	patchFormValue(form: any) {
 		super.patchFormValue(form);
-		this.form.controls.photo.patchValue('');
-		this.form.controls.signature.patchValue('');
+		// this.form.controls.photo.patchValue('');
+		// this.form.controls.signature.patchValue('');
 	}
 
 	ngOnDestroy(): void {
