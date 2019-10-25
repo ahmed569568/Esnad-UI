@@ -5,38 +5,70 @@
 		[formGroup]="form"
 		(ngSubmit)="formSubmission()"
 	>
-		<mat-form-field
-			appearance="outline"
-			class="form-field"
-			style="flex: 1 1 50%; width: 50%;"
-		>
-			<input
-				type="text"
-				matInput
-				formControlName="role"
-				[placeholder]="cid + '.role' | translate"
-			/>
+		<!--		<mat-form-field-->
+		<!--			appearance="outline"-->
+		<!--			class="form-field"-->
+		<!--			style="flex: 1 1 50%; width: 50%;"-->
+		<!--		>-->
+		<!--			<input-->
+		<!--				type="text"-->
+		<!--				matInput-->
+		<!--				formControlName="role"-->
+		<!--				[placeholder]="cid + '.role' | translate"-->
+		<!--			/>-->
+		<!--		</mat-form-field>-->
+
+		<mat-form-field appearance="outline">
+			<!--			<mat-label>{{ cid + '.group_id' | translate }}</mat-label>-->
+			<mat-select
+				[formControlName]="'group_id'"
+				[placeholder]="cid + '.group_id' | translate"
+			>
+				<mat-option
+					*ngFor="let item of service.lists['roles-groups']"
+					[value]="item.id"
+				>
+					{{ item.name }}
+				</mat-option>
+			</mat-select>
 		</mat-form-field>
 
-		<div>
-			<div class="category-title">
-				<h4>{{ cid + '.all_permissions' | translate }}</h4>
-			</div>
+		<!--		<mat-form-field-->
+		<!--			appearance="outline"-->
+		<!--			class="form-field"-->
+		<!--			style="flex: 1 1 50%; width: 100%;"-->
+		<!--		>-->
+		<!--			<textarea-->
+		<!--				type="text"-->
+		<!--				matInput-->
+		<!--				formControlName="role"-->
+		<!--				[placeholder]="'common.description' | translate"-->
+		<!--			>-->
+		<!--			</textarea>-->
+		<!--		</mat-form-field>-->
 
-			<div class="permissions">
-				<div *ngFor="let permission of allPermissions; let i = index">
-					<mat-checkbox
-						[id]="permission.text + '-' + i"
-						[(ngModel)]="permission.checked"
-						[ngModelOptions]="{ standalone: true }"
-						(change)="selectAll(permission); setCategories()"
-					>
-						{{ 'common.' + permission.text | translate }}
-					</mat-checkbox>
-				</div>
-			</div>
-		</div>
-		<div>
+		<!--		<div>-->
+		<!--			<div class="category-title">-->
+		<!--				<span class="permission-group-label">{{-->
+		<!--					cid + '.all_permissions' | translate-->
+		<!--				}}</span>-->
+		<!--			</div>-->
+
+		<!--			<div class="permissions">-->
+		<!--				<div *ngFor="let permission of allPermissions; let i = index">-->
+		<!--					<mat-checkbox-->
+		<!--						class="single-permission"-->
+		<!--						[id]="permission.text + '-' + i"-->
+		<!--						[(ngModel)]="permission.checked"-->
+		<!--						[ngModelOptions]="{ standalone: true }"-->
+		<!--						(change)="selectAll(permission); setCategories()"-->
+		<!--					>-->
+		<!--						{{ 'common.' + permission.text | translate }}-->
+		<!--					</mat-checkbox>-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--		</div>-->
+		<div class="all-permissions-container">
 			<!-- All Permission Type Toggles -->
 			<div
 				class="category"
@@ -44,11 +76,14 @@
 			>
 				<div>
 					<div class="category-title">
-						<h4>{{ cid + '.' + category.key | translate }}</h4>
+						<span class="permission-group-label">{{
+							cid + '.' + category.key | translate
+						}}</span>
 					</div>
 					<div class="permissions">
 						<div *ngFor="let permission of category.value | keyvalue">
 							<mat-checkbox
+								class="single-permission"
 								[id]="category.key + '-' + permission.key"
 								[(ngModel)]="permission.value"
 								[ngModelOptions]="{ standalone: true }"
@@ -66,5 +101,9 @@
 			<!-- Permissions singularity Toggles -->
 		</div>
 	</form>
-	<app-form-footer (submit)="formSubmission()" [form]="form"></app-form-footer>
+	<app-form-footer
+		[service]="service"
+		(submit)="formSubmission()"
+		[form]="form"
+	></app-form-footer>
 </div>
