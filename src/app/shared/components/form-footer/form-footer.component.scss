@@ -9,22 +9,23 @@
 		color: white;
 		border-radius: 8px;
 		margin-left: 10px;
+		cursor: pointer;
 
 		&.submit {
-			background-color: #191e2c;
+			background-color: #0063f4;
+			width: 146px;
+			height: 40px;
+			box-shadow: 0 3px 6px rgba(25, 30, 44, 0.9);
 
 			&:hover {
-				background-color: #313853;
+				background-color: #0050b2;
 				color: whitesmoke;
 			}
 		}
 
 		&.cancel {
-			background-color: red;
-
-			&:hover {
-				background-color: #ff2626;
-			}
+			border: 1px solid #757a8b;
+			color: #757a8b;
 		}
 	}
 }
