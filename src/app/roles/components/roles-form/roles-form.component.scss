@@ -1,8 +1,25 @@
 .permissions {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	width: 700px;
+	justify-content: flex-start;
+	border: 1px solid #b4b8c5;
+	border-radius: 4px;
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 32px;
+
+	.single-permission {
+		margin-left: 40px;
+		color: #2f3b5a;
+		font-size: 14px;
+	}
+}
+
+.permission-group-label {
+	margin-bottom: 8px;
+	display: block;
+	color: #757a8b;
+	font-size: 14px;
 }
 
 .formContainer {
@@ -11,4 +28,9 @@
 	display: flex;
 	flex: 1 1 0;
 	justify-content: center;
+}
+
+app-form-footer {
+	margin-bottom: 40px;
+	margin-right: 16px;
 }
