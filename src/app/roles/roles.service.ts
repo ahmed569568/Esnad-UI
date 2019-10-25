@@ -22,8 +22,14 @@ export class RolesService extends RootService {
 		return [
 			{
 				name: 'group_id',
-				prop: 'group_id',
+				prop: 'name',
 				listing: true,
+				formField: false
+			},
+			{
+				name: 'group_id',
+				prop: 'group_id',
+				listing: false,
 				formField: true,
 				formFieldType: 'select',
 				listPrefix: 'roles-groups',
