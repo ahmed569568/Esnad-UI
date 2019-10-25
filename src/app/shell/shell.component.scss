@@ -1,6 +1,7 @@
 :host {
 	display: flex;
 	flex: 1;
+	overflow: hidden;
 }
 
 .mat-expansion-panel {
@@ -158,7 +159,7 @@
 
 mat-drawer {
 	&.wide-menu {
-		min-width: 270px;
+		min-width: 300px;
 	}
 
 	&.narrow-menu {
@@ -172,7 +173,7 @@ mat-drawer-content {
 	}
 
 	&.wide-menu {
-		margin-right: 300px !important;
+		margin-right: 330px !important;
 	}
 }
 
@@ -199,16 +200,20 @@ mat-drawer-content {
 	align-items: center;
 	padding-left: 126px;
 	float: left;
+	width: 100%;
+	margin-bottom: 7px;
+	box-shadow: 0 3px 6px rgba(49, 56, 83, 0.33);
 
 	&.narrow-menu {
-		margin-right: 76px !important;
+		margin-right: 106px !important;
 	}
 
 	&.wide-menu {
-		margin-right: 300px !important;
+		margin-right: 330px !important;
 	}
 
 	.user-info-container {
+		justify-content: flex-end;
 		.notification-icon {
 			border: 1px solid rgba(49, 56, 83, 0.33);
 			border-radius: 14px;
@@ -223,10 +228,15 @@ mat-drawer-content {
 
 		img {
 			margin: 6px 0 0 8px;
+			border: 1px solid rgba(49, 56, 83, 0.33);
+			border-radius: 8px;
+			padding: 2px;
 		}
 
 		.user-data {
 			padding-top: 5px;
+			align-items: flex-end;
+			width: max-content;
 
 			span {
 				height: 20px;

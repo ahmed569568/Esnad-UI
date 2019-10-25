@@ -10,6 +10,10 @@ export class MenuItems {
 			icon: 'swap_vert',
 			children: [
 				{
+					title: 'special_treatments',
+					url: '/treatments/list'
+				},
+				{
 					title: 'active_treatments',
 					url: '/treatments/list'
 				},
