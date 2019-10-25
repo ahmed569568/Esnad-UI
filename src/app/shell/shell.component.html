@@ -15,14 +15,16 @@
 			</div>
 
 			<div>
-				<img src="../../assets/driver-icon.png" />
+				<img src="../../assets/NoPath - Copy (2).png" />
 			</div>
-			<div class="user-data" fxFlex="" fxLayout="column">
-				<span>userName</span>
-				<span>userRole</span>
+
+			<div class="user-data" fxLayout="column">
+				<span>علي عبد السلام</span>
+				<span>مثمن عادى</span>
 			</div>
 		</div>
 	</div>
+
 	<mat-drawer-container fxFill>
 		<mat-drawer
 			class="side-menu"
@@ -57,6 +59,7 @@
 							<mat-icon>exit_to_app</mat-icon>
 						</button>
 					</div>
+
 					<div class="new-treatment-btn-container">
 						<button
 							class="new-treatment-btn"
@@ -67,6 +70,7 @@
 							newTreatment
 						</button>
 					</div>
+
 					<ng-container *ngFor="let item of menuItems.items; let i = index">
 						<a
 							class="menu-item"
@@ -97,12 +101,18 @@
 							</mat-expansion-panel-header>
 							<mat-list *ngFor="let child of item.children; let i = index">
 								<a
+									class="child-list-container"
 									mat-list-item
 									[routerLink]="child.url"
 									routerLinkActive="active"
 								>
-									<mat-icon class="menuIcon">{{ child.icon }}</mat-icon>
+									<!--									<mat-icon class="menuIcon">{{ child.icon }}</mat-icon>-->
 									<span>{{ 'menu.' + child.title | translate }}</span>
+									<span
+										*ngIf="child.title === 'special_treatments'"
+										class="special-treatment-counter"
+										>6</span
+									>
 								</a>
 								<!--                <mat-divider *ngIf="i !== item.children.length - 1"></mat-divider>-->
 							</mat-list>
