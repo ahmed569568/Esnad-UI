@@ -145,7 +145,8 @@
 		"groups": "Groups",
 		"cities": "Cities",
 		"cities_list": "Cities list",
-		"new_city": "New city"
+		"new_city": "New city",
+		"new_treatment": "New Treatment"
 	},
 	"check-in": {
 		"title": "Check-in"

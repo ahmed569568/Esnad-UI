@@ -155,7 +155,8 @@
 		"report_treatments": "تقارير المعاملات",
 		"report_income": "تقارير الايرادات",
 		"report_expenses": "تقارير المصورفات",
-		"report_banks": "تقارير البنوك"
+		"report_banks": "تقارير البنوك",
+		"new_treatment": "إنشاء معاملة جديدة"
 	},
 	"check-in": {
 		"title": "وصول"
