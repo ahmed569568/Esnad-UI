@@ -43,7 +43,8 @@
 		"not_child": "Not Child",
 		"child": "Child",
 		"add_student": "Add Student",
-		"school": "School"
+		"school": "School",
+		"description": "Description"
 	},
 	"auth": {
 		"login": {
@@ -268,7 +269,22 @@
 		"users": "Users",
 		"all_permissions": "Select All Permission Set",
 		"dashboard": "Dashboard",
-		"page_name": "Page name"
+		"page_name": "Page name",
+		"categories": "Categories",
+		"cities": "Cities",
+		"clientprice": "Client Price",
+		"clients": "Clients",
+		"employees": "Employees",
+		"evaluationtype": "Evaluation Type",
+		"formfields": "Form Fields",
+		"formfield": "Form Field",
+		"forms": "Forms",
+		"groups": "Groups",
+		"orders": "Orders",
+		"prices": "Prices",
+		"realثstate": "Real Estate",
+		"templates": "Templates",
+		"treatments": "Treatments"
 	},
 	"auditlog": {
 		"title": "Audit-log",

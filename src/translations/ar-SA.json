@@ -44,7 +44,8 @@
 		"add_student": "Add Student",
 		"school": "School",
 		"apply": "بحث",
-		"filter": "تصفية"
+		"filter": "تصفية",
+		"description": "وصف الصلاحية"
 	},
 	"auth": {
 		"login": {
@@ -266,7 +267,22 @@
 		"specs": "المواصفات",
 		"users": "المستخدمين",
 		"all_permissions": "تحديد جميع الصلاحيات",
-		"group_id": "المجموعة"
+		"group_id": "المجموعة",
+		"categories": "الفئات",
+		"cities": "المدن",
+		"clientprice": "سعر العميل",
+		"clients": "العملاء",
+		"employees": "الموظفون",
+		"evaluationtype": "نوع التقييم",
+		"formfields": "الحقول",
+		"formfield": "الحقل",
+		"forms": "الإستمارات",
+		"groups": "المجموعات",
+		"orders": "الطلبات",
+		"prices": "الأسعار",
+		"realثstate": "العقارات",
+		"templates": "النماذج",
+		"treatments": "المعاملات"
 	},
 	"auditlog": {
 		"title": "Audit-log",
