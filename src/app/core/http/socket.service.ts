@@ -119,7 +119,7 @@ export class SocketService {
 			return;
 		}
 		this.webSocket = io(
-			environment.socketUrl +
+			environment.serverUrl +
 				'?token=' +
 				'Bearer ' +
 				this.authService.token +
