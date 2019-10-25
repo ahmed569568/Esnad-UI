@@ -32,7 +32,7 @@ export class ClientsService extends RootService {
 				displayType: 'image',
 				formFieldType: 'file_input',
 				required: true,
-				width: 300,
+				width: 50,
 				validations: [Validators.required]
 			},
 			{
@@ -42,7 +42,7 @@ export class ClientsService extends RootService {
 				formField: true,
 				formFieldType: 'text',
 				required: true,
-				width: 300,
+				width: 200,
 				validations: [Validators.required],
 				searchable: true
 			},
@@ -53,7 +53,7 @@ export class ClientsService extends RootService {
 				formField: true,
 				formFieldType: 'phone',
 				required: true,
-				width: 300,
+				width: 200,
 				validations: [Validators.required],
 				searchable: true
 			},

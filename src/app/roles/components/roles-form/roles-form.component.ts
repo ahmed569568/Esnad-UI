@@ -34,18 +34,36 @@ export class RolesFormComponent extends CoreFormComponent
 		this.permissionsModel = new RolesClass();
 	}
 
+	get lists() {
+		return this._lists;
+	}
+
+	set lists(value: any) {
+		this._lists = value;
+	}
+
+	initLists(): void {
+		this.lists = [{ ['roles/groups']: 1 }];
+	}
+
 	ngOnInit() {
 		super.ngOnInit();
 		this.form.controls.group_id.setValue(this.currentItemId);
 	}
 
 	refactorItem(data: any) {
-		const templates = JSON.parse(data.permissions);
-		// this.checkAllPermissions(templates);
-		for (const row of Object.keys(templates)) {
-			for (const permission of Object.keys(this.permissionsModel[row])) {
-				this.permissionsModel[row][permission] =
-					templates[row].indexOf(permission) > -1;
+		let permissions: any = {};
+		for (const item of data.roles) {
+			const permissionArray = item.Permissions.split(',');
+			permissions = { ...permissions, [item.page_name]: permissionArray };
+		}
+		for (const pageNameFromResponse of Object.keys(permissions)) {
+			const classPagePermissions = Object.keys(
+				this.permissionsModel[pageNameFromResponse]
+			);
+			for (const permission of classPagePermissions) {
+				this.permissionsModel[pageNameFromResponse][permission] =
+					permissions[pageNameFromResponse].indexOf(permission) > -1;
 			}
 		}
 		return data;
@@ -76,34 +94,34 @@ export class RolesFormComponent extends CoreFormComponent
 		}
 	}
 
-	checkAllPermissions(permissions: any) {
-		this.allPermissions.map(x => {
-			const all = [];
-			for (const category of Object.keys(permissions)) {
-				permissions[category].map((y: string) => {
-					if (y === x.text) {
-						all.push(y);
-						if (all.length === Object.keys(permissions).length) {
-							x.checked = true;
-						}
-					}
-				});
-			}
-		});
-	}
+	// checkAllPermissions(permissions: any) {
+	// 	this.allPermissions.map(x => {
+	// 		const all = [];
+	// 		for (const category of Object.keys(permissions)) {
+	// 			permissions[category].map((y: string) => {
+	// 				if (y === x.text) {
+	// 					all.push(y);
+	// 					if (all.length === Object.keys(permissions).length) {
+	// 						x.checked = true;
+	// 					}
+	// 				}
+	// 			});
+	// 		}
+	// 	});
+	// }
 
-	selectAll(permission: any) {
-		const type = permission.text;
-		const permissions = Object.entries(this.permissionsModel);
-		permissions.map(x => {
-			for (const action of Object.keys(x[1])) {
-				if (action === type) {
-					x[1][type] = permission.checked;
-				}
-			}
-		});
-		return;
-	}
+	// selectAll(permission: any) {
+	// 	const type = permission.text;
+	// 	const permissions = Object.entries(this.permissionsModel);
+	// 	permissions.map(x => {
+	// 		for (const action of Object.keys(x[1])) {
+	// 			if (action === type) {
+	// 				x[1][type] = permission.checked;
+	// 			}
+	// 		}
+	// 	});
+	// 	return;
+	// }
 
 	ngOnDestroy(): void {
 		super.ngOnDestroy();

@@ -14,13 +14,10 @@ deploy_uat:
     - uat
   script:
     #    - rm ./package-lock.json
-    - npm install
+    - npm ci
     - npm run env
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=production
-    - ls
-    - 'echo "user: " $FTP_USERNAME'
-    - 'echo "password: " $FTP_PASSWORD'
-    - lftp -e "set ssl:verify-certificate no; set ftp:ssl-allow no; open ftp://ftp.samyahmed.com:21; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete dist/ uat/; bye"
+    - lftp -e "set ftp:ssl-allow no; open ftp://ftp.samyahmed.com; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --only-newer --no-symlinks dist /uat; bye"
 
 deploy_production:
   stage: deploy
@@ -29,10 +26,16 @@ deploy_production:
     - test
   script:
     #    - rm ./package-lock.json
-    - npm install
+    - npm ci
     - npm run env
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=production
+    - lftp -e "set ftp:ssl-allow no; open ftp://ftp.samyahmed.com; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --only-newer --no-symlinks dist /prod; bye"
+
+deploy_ci_cd:
+  stage: deploy
+  environment: Production
+  only:
+    - ci-cd
+  script:
     - ls
-    - 'echo "user: " $FTP_USERNAME'
-    - 'echo "password: " $FTP_PASSWORD'
-    - lftp -e "set ssl:verify-certificate no; set ftp:ssl-allow no; open ftp://ftp.samyahmed.com:21; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete dist/ test/; bye"
+    - lftp -e "set ftp:ssl-allow no; open ftp://ftp.samyahmed.com; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --only-newer --no-symlinks test-cd /test-cd; bye"

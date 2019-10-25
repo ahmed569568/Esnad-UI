@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RolesService extends RootService {
 	constructor(toast: ToastrService, router: Router, api: ApiRequestService) {
 		super(toast, router, api);
+		// this.lists = {...this.lists, ['roles-groups']: []}
 	}
 
 	routerPrefix(val: string = '') {
@@ -20,21 +21,20 @@ export class RolesService extends RootService {
 	get featureProps(): ItemProps[] {
 		return [
 			{
-				name: 'roles',
-				prop: 'roles',
-				listing: false,
-				formField: true,
-				formFieldType: 'text',
-				required: true
-			},
-			{
 				name: 'group_id',
-				prop: 'name',
+				prop: 'group_id',
 				listing: true,
 				formField: true,
 				formFieldType: 'select',
 				listPrefix: 'roles-groups',
 				required: true
+			},
+			{
+				name: 'roles',
+				prop: 'roles',
+				listing: false,
+				formField: true,
+				formFieldType: 'text'
 			}
 		];
 	}

@@ -3,10 +3,10 @@ import {
 	ComponentFactoryResolver,
 	EventEmitter,
 	Input,
+	OnDestroy,
 	OnInit,
 	Output,
-	ViewContainerRef,
-	OnDestroy
+	ViewContainerRef
 } from '@angular/core';
 import { ItemProps, Row } from '@app/interfaces';
 import { TranslateService } from '@ngx-translate/core';
@@ -62,8 +62,10 @@ export class ListGridComponent implements OnInit, OnDestroy {
 		this.utilitiesService.dialogActionObservable$
 			.pipe(takeWhile(() => this.alive))
 			.subscribe(data => {
-				if (data) {
+				if (data.optionValue === 1) {
 					return this.doAction(data.action, data.id);
+				} else {
+					return;
 				}
 			});
 	}
@@ -136,10 +138,10 @@ export class ListGridComponent implements OnInit, OnDestroy {
 			data: {
 				id: row.id,
 				message: 'confirm_message',
-				submitText: 'yes',
-				cancelText: 'no',
+				firstButtonText: 'no',
+				secondButtonText: 'yes',
 				action,
-				name: row.name
+				name: row.name || row.full_name
 			}
 		});
 	}
