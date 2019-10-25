@@ -31,7 +31,7 @@ deploy_production:
     - npm run env
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration=production
     - ls
-    - lftp -e "set ssl:verify-certificate no; set ftp:ssl-allow no; open ftp://ftp.samyahmed.com:21; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete dist/ test/; bye"
+    - curl --insecure --user $FTP_USERNAME:$FTP_PASSWORD -T /dist/* ftp://ftp.samyahmed.com//prod/
 deploy_ci_cd:
   stage: deploy
   environment: Production
@@ -39,4 +39,5 @@ deploy_ci_cd:
     - ci-cd
   script:
     - ls
-    - curl --insecure --user $FTP_USERNAME:$FTP_PASSWORD -T /test-cd/* ftp://ftp.samyahmed.com/test-cd/
+    - curl --insecure --user $FTP_USERNAME:$FTP_PASSWORD -T /test-cd/* ftp://ftp.samyahmed.com//test-cd/
+    - lftp -e "set ftp:ssl-allow no; open ftp://ftp.samyahmed.com; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --only-newer --no-symlinks test-cd /test-cd; bye"
