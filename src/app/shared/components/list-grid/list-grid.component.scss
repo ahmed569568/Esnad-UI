@@ -3,9 +3,8 @@
 }
 
 table.table {
-	width: 100%;
-	border-spacing: 0 10px;
-
+	border-spacing: 0;
+	//margin: 1rem;
 	tr {
 		&.locked {
 			background: white;
@@ -23,7 +22,6 @@ table.table {
 			font-size: 14px;
 			//font-weight: 600;
 			color: #2a3348;
-
 			//&:first-child {
 			//  border-left: solid 1px #caceda;
 			//}
@@ -36,14 +34,22 @@ table.table {
 }
 
 .tbl-header {
+	border-bottom: 1px solid #c5dafd;
 	th {
 		color: #313853;
 		font-size: 14px;
 		font-weight: bold;
 		padding: 0 10px;
 		text-align: -webkit-auto;
-		border-bottom: 1px solid #bec3d6;
-
+		border-bottom: 1px solid #c5dafd;
+		//border-bottom: 1px solid #bec3d6;
+		//border-top: 1px solid #c5dafd;
+		//&:first-child {
+		//	border-right: 1px solid #c5dafd;
+		//}
+		//&:last-child {
+		//	border-left: 1px solid #c5dafd;
+		//}
 		&.actions-head {
 			text-align: center;
 		}
