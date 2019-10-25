@@ -22,6 +22,7 @@ export class FormFooterComponent {
 	) {}
 
 	backClicked() {
+		console.log('back clicked');
 		return this.service.navigateToList();
 		// this._location.back();
 	}
