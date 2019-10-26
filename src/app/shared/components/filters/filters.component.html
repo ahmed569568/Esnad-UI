@@ -26,18 +26,27 @@
 							*ngIf="
 								column &&
 								((column.formFieldType === 'radio' && column.listPrefix) ||
-									column.formFieldType === 'select')
+									column.formFieldType === 'select') &&
+								(service.lists[column.listPrefix] &&
+									service.lists[column.listPrefix].length)
 							"
 						>
 							<mat-form-field>
 								<mat-select
+									(selectionChange)="
+										valueChanges(column.name, column.escapedField)
+									"
 									[formControlName]="column.name"
 									[placeholder]="service.cid + '.' + column.name | translate"
 								>
 									<mat-option
 										*ngFor="let item of service.lists[column.listPrefix]"
 										[value]="item.id"
-										>{{ item.name || item.displayName }}</mat-option
+										>{{
+											column.translate
+												? (service.cid + '.' + item.name | translate)
+												: item.name
+										}}</mat-option
 									>
 								</mat-select>
 							</mat-form-field>

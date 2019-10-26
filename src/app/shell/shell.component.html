@@ -15,7 +15,7 @@
 			</div>
 
 			<div>
-				<img src="../../assets/NoPath - Copy (2).png" />
+				<img src="/assets/NoPath - Copy (2).png" />
 			</div>
 
 			<div class="user-data" fxLayout="column">
@@ -38,7 +38,13 @@
 				<img
 					*ngIf="isWide"
 					class="pic-logo"
-					src="../../assets/logo3_png_bg.png"
+					src="/assets/logo3_png_bg.png"
+					alt="LOGO"
+				/>
+				<img
+					*ngIf="!isWide"
+					class="pic-logo"
+					src="/assets/logo3_png_bg.png"
 					alt="LOGO"
 				/>
 				<mat-list>

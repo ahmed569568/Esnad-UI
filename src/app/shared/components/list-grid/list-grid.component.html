@@ -21,9 +21,11 @@
 
 			<tbody>
 				<ng-container *ngIf="rows?.data?.length === 0">
-					<h3 class="ion-text-center">
-						{{ 'msg.no_data_founds' | translate }}
-					</h3>
+					<div style="padding: 10px 15px">
+						<h3 class="ion-text-center">
+							{{ 'msg.no_data_founds' | translate }}
+						</h3>
+					</div>
 				</ng-container>
 				<tr *ngFor="let row of rows?.data">
 					<ng-container *ngFor="let column of columns">
@@ -36,7 +38,7 @@
 									[src]="
 										getValue(row, column.prop)
 											? environment.imagePath + getValue(row, column.prop)
-											: '../../../../assets/man.jpg'
+											: '/assets/man.jpg'
 									"
 									[alt]="getValue(row, 'name')"
 								/>

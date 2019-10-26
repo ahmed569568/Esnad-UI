@@ -1,275 +1,221 @@
 <div fxFlex fxLayout="column" style="padding: 0rem 1rem;">
-	<form
-		[formGroup]="form"
-		fxFlex
-		fxLayout="column"
-		style="justify-content: space-around"
-		class="example-form"
-		novalidate
-	>
-		<mat-card fxFlex fxLayout="column">
-			<div class="container">
-				<div
-					formArrayName="countries"
-					*ngFor="
-						let country of form.get('countries')['controls'];
-						let countryIndex = index
-					"
-				>
-					<div class="addressContainer" [formGroupName]="countryIndex">
-						<div class="addressFieldContainer">
-							<mat-form-field class="example-full-width">
-								<input
-									matInput
-									formControlName="name"
-									[placeholder]="service.cid + '.country_name' | translate"
-								/>
-							</mat-form-field>
-							<div class="actions">
-								<button
-									mat-icon-button
-									color="primary"
-									[matTooltip]="service.cid + '.add_city' | translate"
-									(click)="pushItem(country, 'cities')"
-								>
-									<mat-icon aria-hidden="false" aria-label="Example home icon"
-										>add</mat-icon
-									>
-								</button>
-							</div>
-						</div>
+	<h3 class="form-title">
+		{{ 'common.add' | translate }} {{ cid + '.title_single' | translate }}
+	</h3>
+	<form class="d-flex default-form-style" [formGroup]="form">
+		<ng-container
+			*ngFor="let field of service.featureProps; trackBy: trackByFn"
+		>
+			<div *ngIf="field.formField" class="form-field" style="flex: 1 1 50%;">
+				<mat-grid-list cols="2" rowHeight="5:1">
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'text' && checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<input type="text" matInput [formControlName]="field.name" />
+						</mat-form-field>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'number' &&
+							checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<input type="number" matInput [formControlName]="field.name" />
+						</mat-form-field>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'password' &&
+							checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ 'common.password' | translate }}</mat-label>
+							<input
+								type="password"
+								matInput
+								[formControlName]="field.name"
+								[placeholder]="cid + '.' + field.name | translate"
+							/>
+						</mat-form-field>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'email' &&
+							checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ 'common.email' | translate }}</mat-label>
+							<input
+								type="email"
+								matInput
+								[formControlName]="field.name"
+								[placeholder]="cid + '.' + field.name | translate"
+							/>
+						</mat-form-field>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'phone' &&
+							checkConditions(field.condition)
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ 'common.phone' | translate }}</mat-label>
+							<input
+								type="phone"
+								matInput
+								[formControlName]="field.name"
+								[placeholder]="cid + '.' + field.name | translate"
+							/>
+						</mat-form-field>
+					</ng-container>
 
+					<ng-container *ngIf="field.name === 'level'">
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<mat-select
+								(selectionChange)="showLocationById(form.controls.level.value)"
+								[formControlName]="field.name"
+								[placeholder]="cid + '.' + field.name | translate"
+							>
+								<mat-option
+									*ngFor="let item of service.lists[field.listPrefix]"
+									[value]="item.id"
+								>
+									{{ service.cid + '.' + item.name | translate }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</ng-container>
+
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'select' &&
+							field.name === 'parent_id' &&
+							parent_id
+						"
+					>
+						<mat-form-field appearance="outline">
+							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<mat-select
+								[formControlName]="field.name"
+								[placeholder]="cid + '.' + field.name | translate"
+							>
+								<mat-option
+									*ngFor="let item of service.lists['cities']"
+									[value]="item.id"
+								>
+									{{ item.name }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</ng-container>
+
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'color_picker' &&
+							checkConditions(field.condition)
+						"
+					>
+						<div style="margin: 10px" class="mat-form-field">
+							<label style="position: absolute; padding: 7px 15px;">{{
+								cid + '.' + field.name | translate
+							}}</label>
+							<input
+								style="border: none;border-radius: 10px;padding: 10px; width: 100%; text-align: center;"
+								[matTooltip]="'common.click_to_change' | translate"
+								[formControlName]="field.name"
+								[colorPicker]="form.controls[field.name].value"
+								(colorPickerChange)="setColor(field.name, $event)"
+								[style.background]="
+									form.controls[field.name].value || '#e3e3e3'
+								"
+							/>
+						</div>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'file_input' &&
+							checkConditions(field.condition)
+						"
+					>
 						<div
-							class="cities"
-							formArrayName="cities"
-							*ngFor="
-								let city of country.get('cities').controls;
-								let cityIndex = index
-							"
+							[matTooltip]="'common.click_to_upload' | translate"
+							class="mat-form-field"
+							style="display: flex; flex-direction: column"
 						>
-							<div class="addressContainer" [formGroupName]="cityIndex">
-								<div class="addressFieldContainer">
-									<mat-form-field class="example-full-width">
-										<input
-											matInput
-											[formControl]="city.get('name')"
-											[placeholder]="service.cid + '.city_name' | translate"
-										/>
-									</mat-form-field>
-									<div class="actions">
-										<button
-											mat-icon-button
-											color="warn"
-											[matTooltip]="service.cid + '.remove_city' | translate"
-											(click)="deleteItem(country, cityIndex, 'cities')"
-										>
-											<mat-icon
-												aria-hidden="false"
-												aria-label="Example home icon"
-												>delete</mat-icon
-											>
-										</button>
-										<button
-											mat-icon-button
-											color="primary"
-											[matTooltip]="service.cid + '.add_region' | translate"
-											(click)="pushItem(city, 'regions')"
-										>
-											<mat-icon
-												aria-hidden="false"
-												aria-label="Example home icon"
-												>add</mat-icon
-											>
-										</button>
-									</div>
-								</div>
-
-								<div
-									class="regions"
-									formArrayName="regions"
-									*ngFor="
-										let region of city.get('regions').controls;
-										let regionIndex = index
-									"
-								>
-									<div class="addressContainer" [formGroupName]="regionIndex">
-										<div class="addressFieldContainer">
-											<mat-form-field class="example-full-width">
-												<input
-													matInput
-													[formControl]="region.get('name')"
-													[placeholder]="
-														service.cid + '.region_name' | translate
-													"
-												/>
-											</mat-form-field>
-											<div class="actions">
-												<button
-													mat-icon-button
-													color="warn"
-													[matTooltip]="
-														service.cid + '.remove_region' | translate
-													"
-													(click)="deleteItem(city, regionIndex, 'regions')"
-												>
-													<mat-icon
-														aria-hidden="false"
-														aria-label="Example home icon"
-														>delete</mat-icon
-													>
-												</button>
-												<button
-													mat-icon-button
-													color="primary"
-													[matTooltip]="
-														service.cid + '.add_province' | translate
-													"
-													(click)="pushItem(region, 'provinces')"
-												>
-													<mat-icon
-														aria-hidden="false"
-														aria-label="Example home icon"
-														>add</mat-icon
-													>
-												</button>
-											</div>
-										</div>
-										<div
-											class="provinces"
-											formArrayName="provinces"
-											*ngFor="
-												let province of region.get('provinces').controls;
-												let provinceIndex = index
-											"
-										>
-											<div
-												class="addressContainer"
-												[formGroupName]="provinceIndex"
-											>
-												<div class="addressFieldContainer">
-													<mat-form-field class="example-full-width">
-														<input
-															matInput
-															[formControl]="province.get('name')"
-															[placeholder]="
-																service.cid + '.province_name' | translate
-															"
-														/>
-													</mat-form-field>
-													<div class="actions">
-														<button
-															mat-icon-button
-															color="warn"
-															[matTooltip]="
-																service.cid + '.remove_province' | translate
-															"
-															(click)="
-																deleteItem(region, provinceIndex, 'provinces')
-															"
-														>
-															<mat-icon
-																aria-hidden="false"
-																aria-label="Example home icon"
-																>delete</mat-icon
-															>
-														</button>
-														<button
-															mat-icon-button
-															color="primary"
-															[matTooltip]="
-																service.cid + '.add_district' | translate
-															"
-															(click)="pushItem(province, 'districts')"
-														>
-															<mat-icon
-																aria-hidden="false"
-																aria-label="Example home icon"
-																>add</mat-icon
-															>
-														</button>
-													</div>
-												</div>
-
-												<div
-													class="districts"
-													formArrayName="districts"
-													*ngFor="
-														let district of province.get('districts').controls;
-														let districtIndex = index
-													"
-												>
-													<div
-														class="addressContainer"
-														[formGroupName]="districtIndex"
-													>
-														<div class="addressFieldContainer">
-															<mat-form-field class="example-full-width">
-																<input
-																	matInput
-																	[formControl]="district.get('name')"
-																	[placeholder]="
-																		service.cid + '.district_name' | translate
-																	"
-																/>
-															</mat-form-field>
-															<div class="actions">
-																<button
-																	mat-icon-button
-																	color="warn"
-																	[matTooltip]="
-																		service.cid + '.remove_district' | translate
-																	"
-																	(click)="
-																		deleteItem(
-																			province,
-																			districtIndex,
-																			'districts'
-																		)
-																	"
-																>
-																	<mat-icon
-																		aria-hidden="false"
-																		aria-label="Example home icon"
-																		>delete</mat-icon
-																	>
-																</button>
-																<!--																<button mat-icon-button color="primary"-->
-																<!--																				[matTooltip]="service.cid + '.add_street' | translate"-->
-																<!--																				(click)="pushItem(district, 'streets')">-->
-																<!--																	<mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>-->
-																<!--																</button>-->
-															</div>
-														</div>
-														<!--														<div class="streets" formArrayName="streets"-->
-														<!--																 *ngFor="let street of district.get('streets').controls; let streetIndex = index;">-->
-														<!--															<div class="addressContainer" [formGroupName]="streetIndex">-->
-														<!--																<div class="addressFieldContainer">-->
-														<!--																	<mat-form-field class="example-full-width">-->
-														<!--																		<input matInput formControlName="name"-->
-														<!--																					 [placeholder]="service.cid + '.street_name' | translate">-->
-														<!--																	</mat-form-field>-->
-														<!--																	<div class="actions">-->
-														<!--																		<button mat-icon-button color="warn"-->
-														<!--																						[matTooltip]="service.cid + '.remove_street' | translate"-->
-														<!--																						(click)="deleteItem(district, streetIndex, 'streets')">-->
-														<!--																			<mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>-->
-														<!--																		</button>-->
-														<!--																	</div>-->
-														<!--																</div>-->
-														<!--															</div>-->
-														<!--														</div>-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							<label class="imageUploader" [for]="'file_' + field.name">
+								<span class="addNew">
+									<img
+										width="30"
+										*ngIf="form.controls[field.name].value"
+										[src]="
+											imagePath(
+												environment.imagePath,
+												form.controls[field.name].value,
+												true
+											)
+										"
+										[alt]="field.name"
+									/>
+									<img
+										*ngIf="!form.controls[field.name].value"
+										src="../../../../assets/img-alt.png"
+									/>
+								</span>
+							</label>
+							<input
+								style="width: 0.1px; height: 0.1px;"
+								[id]="'file_' + field.name"
+								type="file"
+								(change)="uploadPhoto($event, field.name)"
+							/>
 						</div>
-					</div>
-				</div>
+						<app-control-errors
+							[ctl]="form.get(field.name)"
+							class="error-message"
+						></app-control-errors>
+					</ng-container>
+					<ng-container
+						*ngIf="
+							field.formFieldType === 'map' && checkConditions(field.condition)
+						"
+					>
+						<div id="map-layout">
+							<app-map
+								[mapId]="'client_settings_form'"
+								[mapConfig]="mapConfigs"
+								[service]="null"
+							></app-map>
+						</div>
+					</ng-container>
+				</mat-grid-list>
 			</div>
-		</mat-card>
+		</ng-container>
 		<app-form-footer
 			(submit)="formSubmission()"
 			[service]="service"
@@ -277,3 +223,283 @@
 		></app-form-footer>
 	</form>
 </div>
+
+<!--<div fxFlex fxLayout="column" style="padding: 0rem 1rem;">-->
+<!--	<form-->
+<!--		[formGroup]="form"-->
+<!--		fxFlex-->
+<!--		fxLayout="column"-->
+<!--		style="justify-content: space-around"-->
+<!--		class="example-form"-->
+<!--		novalidate-->
+<!--	>-->
+<!--		<mat-card fxFlex fxLayout="column">-->
+<!--			<div class="container">-->
+<!--				<div-->
+<!--					formArrayName="countries"-->
+<!--					*ngFor="-->
+<!--						let country of form.get('countries')['controls'];-->
+<!--						let countryIndex = index-->
+<!--					"-->
+<!--				>-->
+<!--					<div class="addressContainer" [formGroupName]="countryIndex">-->
+<!--						<div class="addressFieldContainer">-->
+<!--							<mat-form-field class="example-full-width">-->
+<!--								<input-->
+<!--									matInput-->
+<!--									formControlName="name"-->
+<!--									[placeholder]="service.cid + '.country_name' | translate"-->
+<!--								/>-->
+<!--							</mat-form-field>-->
+<!--							<div class="actions">-->
+<!--								<button-->
+<!--									mat-icon-button-->
+<!--									color="primary"-->
+<!--									[matTooltip]="service.cid + '.add_city' | translate"-->
+<!--									(click)="pushItem(country, 'cities')"-->
+<!--								>-->
+<!--									<mat-icon aria-hidden="false" aria-label="Example home icon"-->
+<!--										>add</mat-icon-->
+<!--									>-->
+<!--								</button>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div-->
+<!--							class="cities"-->
+<!--							formArrayName="cities"-->
+<!--							*ngFor="-->
+<!--								let city of country.get('cities').controls;-->
+<!--								let cityIndex = index-->
+<!--							"-->
+<!--						>-->
+<!--							<div class="addressContainer" [formGroupName]="cityIndex">-->
+<!--								<div class="addressFieldContainer">-->
+<!--									<mat-form-field class="example-full-width">-->
+<!--										<input-->
+<!--											matInput-->
+<!--											[formControl]="city.get('name')"-->
+<!--											[placeholder]="service.cid + '.city_name' | translate"-->
+<!--										/>-->
+<!--									</mat-form-field>-->
+<!--									<div class="actions">-->
+<!--										<button-->
+<!--											mat-icon-button-->
+<!--											color="warn"-->
+<!--											[matTooltip]="service.cid + '.remove_city' | translate"-->
+<!--											(click)="deleteItem(country, cityIndex, 'cities')"-->
+<!--										>-->
+<!--											<mat-icon-->
+<!--												aria-hidden="false"-->
+<!--												aria-label="Example home icon"-->
+<!--												>delete</mat-icon-->
+<!--											>-->
+<!--										</button>-->
+<!--										<button-->
+<!--											mat-icon-button-->
+<!--											color="primary"-->
+<!--											[matTooltip]="service.cid + '.add_region' | translate"-->
+<!--											(click)="pushItem(city, 'regions')"-->
+<!--										>-->
+<!--											<mat-icon-->
+<!--												aria-hidden="false"-->
+<!--												aria-label="Example home icon"-->
+<!--												>add</mat-icon-->
+<!--											>-->
+<!--										</button>-->
+<!--									</div>-->
+<!--								</div>-->
+
+<!--								<div-->
+<!--									class="regions"-->
+<!--									formArrayName="regions"-->
+<!--									*ngFor="-->
+<!--										let region of city.get('regions').controls;-->
+<!--										let regionIndex = index-->
+<!--									"-->
+<!--								>-->
+<!--									<div class="addressContainer" [formGroupName]="regionIndex">-->
+<!--										<div class="addressFieldContainer">-->
+<!--											<mat-form-field class="example-full-width">-->
+<!--												<input-->
+<!--													matInput-->
+<!--													[formControl]="region.get('name')"-->
+<!--													[placeholder]="-->
+<!--														service.cid + '.region_name' | translate-->
+<!--													"-->
+<!--												/>-->
+<!--											</mat-form-field>-->
+<!--											<div class="actions">-->
+<!--												<button-->
+<!--													mat-icon-button-->
+<!--													color="warn"-->
+<!--													[matTooltip]="-->
+<!--														service.cid + '.remove_region' | translate-->
+<!--													"-->
+<!--													(click)="deleteItem(city, regionIndex, 'regions')"-->
+<!--												>-->
+<!--													<mat-icon-->
+<!--														aria-hidden="false"-->
+<!--														aria-label="Example home icon"-->
+<!--														>delete</mat-icon-->
+<!--													>-->
+<!--												</button>-->
+<!--												<button-->
+<!--													mat-icon-button-->
+<!--													color="primary"-->
+<!--													[matTooltip]="-->
+<!--														service.cid + '.add_province' | translate-->
+<!--													"-->
+<!--													(click)="pushItem(region, 'provinces')"-->
+<!--												>-->
+<!--													<mat-icon-->
+<!--														aria-hidden="false"-->
+<!--														aria-label="Example home icon"-->
+<!--														>add</mat-icon-->
+<!--													>-->
+<!--												</button>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div-->
+<!--											class="provinces"-->
+<!--											formArrayName="provinces"-->
+<!--											*ngFor="-->
+<!--												let province of region.get('provinces').controls;-->
+<!--												let provinceIndex = index-->
+<!--											"-->
+<!--										>-->
+<!--											<div-->
+<!--												class="addressContainer"-->
+<!--												[formGroupName]="provinceIndex"-->
+<!--											>-->
+<!--												<div class="addressFieldContainer">-->
+<!--													<mat-form-field class="example-full-width">-->
+<!--														<input-->
+<!--															matInput-->
+<!--															[formControl]="province.get('name')"-->
+<!--															[placeholder]="-->
+<!--																service.cid + '.province_name' | translate-->
+<!--															"-->
+<!--														/>-->
+<!--													</mat-form-field>-->
+<!--													<div class="actions">-->
+<!--														<button-->
+<!--															mat-icon-button-->
+<!--															color="warn"-->
+<!--															[matTooltip]="-->
+<!--																service.cid + '.remove_province' | translate-->
+<!--															"-->
+<!--															(click)="-->
+<!--																deleteItem(region, provinceIndex, 'provinces')-->
+<!--															"-->
+<!--														>-->
+<!--															<mat-icon-->
+<!--																aria-hidden="false"-->
+<!--																aria-label="Example home icon"-->
+<!--																>delete</mat-icon-->
+<!--															>-->
+<!--														</button>-->
+<!--														<button-->
+<!--															mat-icon-button-->
+<!--															color="primary"-->
+<!--															[matTooltip]="-->
+<!--																service.cid + '.add_district' | translate-->
+<!--															"-->
+<!--															(click)="pushItem(province, 'districts')"-->
+<!--														>-->
+<!--															<mat-icon-->
+<!--																aria-hidden="false"-->
+<!--																aria-label="Example home icon"-->
+<!--																>add</mat-icon-->
+<!--															>-->
+<!--														</button>-->
+<!--													</div>-->
+<!--												</div>-->
+
+<!--												<div-->
+<!--													class="districts"-->
+<!--													formArrayName="districts"-->
+<!--													*ngFor="-->
+<!--														let district of province.get('districts').controls;-->
+<!--														let districtIndex = index-->
+<!--													"-->
+<!--												>-->
+<!--													<div-->
+<!--														class="addressContainer"-->
+<!--														[formGroupName]="districtIndex"-->
+<!--													>-->
+<!--														<div class="addressFieldContainer">-->
+<!--															<mat-form-field class="example-full-width">-->
+<!--																<input-->
+<!--																	matInput-->
+<!--																	[formControl]="district.get('name')"-->
+<!--																	[placeholder]="-->
+<!--																		service.cid + '.district_name' | translate-->
+<!--																	"-->
+<!--																/>-->
+<!--															</mat-form-field>-->
+<!--															<div class="actions">-->
+<!--																<button-->
+<!--																	mat-icon-button-->
+<!--																	color="warn"-->
+<!--																	[matTooltip]="-->
+<!--																		service.cid + '.remove_district' | translate-->
+<!--																	"-->
+<!--																	(click)="-->
+<!--																		deleteItem(-->
+<!--																			province,-->
+<!--																			districtIndex,-->
+<!--																			'districts'-->
+<!--																		)-->
+<!--																	"-->
+<!--																>-->
+<!--																	<mat-icon-->
+<!--																		aria-hidden="false"-->
+<!--																		aria-label="Example home icon"-->
+<!--																		>delete</mat-icon-->
+<!--																	>-->
+<!--																</button>-->
+<!--																&lt;!&ndash;																<button mat-icon-button color="primary"&ndash;&gt;-->
+<!--																&lt;!&ndash;																				[matTooltip]="service.cid + '.add_street' | translate"&ndash;&gt;-->
+<!--																&lt;!&ndash;																				(click)="pushItem(district, 'streets')">&ndash;&gt;-->
+<!--																&lt;!&ndash;																	<mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>&ndash;&gt;-->
+<!--																&lt;!&ndash;																</button>&ndash;&gt;-->
+<!--															</div>-->
+<!--														</div>-->
+<!--														&lt;!&ndash;														<div class="streets" formArrayName="streets"&ndash;&gt;-->
+<!--														&lt;!&ndash;																 *ngFor="let street of district.get('streets').controls; let streetIndex = index;">&ndash;&gt;-->
+<!--														&lt;!&ndash;															<div class="addressContainer" [formGroupName]="streetIndex">&ndash;&gt;-->
+<!--														&lt;!&ndash;																<div class="addressFieldContainer">&ndash;&gt;-->
+<!--														&lt;!&ndash;																	<mat-form-field class="example-full-width">&ndash;&gt;-->
+<!--														&lt;!&ndash;																		<input matInput formControlName="name"&ndash;&gt;-->
+<!--														&lt;!&ndash;																					 [placeholder]="service.cid + '.street_name' | translate">&ndash;&gt;-->
+<!--														&lt;!&ndash;																	</mat-form-field>&ndash;&gt;-->
+<!--														&lt;!&ndash;																	<div class="actions">&ndash;&gt;-->
+<!--														&lt;!&ndash;																		<button mat-icon-button color="warn"&ndash;&gt;-->
+<!--														&lt;!&ndash;																						[matTooltip]="service.cid + '.remove_street' | translate"&ndash;&gt;-->
+<!--														&lt;!&ndash;																						(click)="deleteItem(district, streetIndex, 'streets')">&ndash;&gt;-->
+<!--														&lt;!&ndash;																			<mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>&ndash;&gt;-->
+<!--														&lt;!&ndash;																		</button>&ndash;&gt;-->
+<!--														&lt;!&ndash;																	</div>&ndash;&gt;-->
+<!--														&lt;!&ndash;																</div>&ndash;&gt;-->
+<!--														&lt;!&ndash;															</div>&ndash;&gt;-->
+<!--														&lt;!&ndash;														</div>&ndash;&gt;-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</mat-card>-->
+<!--		<app-form-footer-->
+<!--			(submit)="formSubmission()"-->
+<!--			[service]="service"-->
+<!--			[form]="form"-->
+<!--		></app-form-footer>-->
+<!--	</form>-->
+<!--</div>-->
