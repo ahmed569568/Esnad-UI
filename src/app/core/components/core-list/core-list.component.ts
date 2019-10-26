@@ -44,17 +44,6 @@ export class CoreListComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.utilitiesService.filterObservable$
-			.pipe(takeWhile(() => this.alive))
-			.subscribe(keyword => {
-				for (const filterParam of Object.keys(keyword)) {
-					if (!keyword[filterParam]) {
-						delete keyword[filterParam];
-					}
-					this.params = { ...this.params, [filterParam]: keyword[filterParam] };
-				}
-				return this.loadResources();
-			});
 		AppHelper.calcListHeight();
 		AppHelper.pushResize();
 		return this.loadResources().then(() => {
@@ -75,19 +64,39 @@ export class CoreListComponent implements OnInit, OnDestroy {
 	paginationInit() {
 		this.utilitiesService.filterObservable$
 			.pipe(takeWhile(() => this.alive))
-			.subscribe((filtersData: any) => {
-				if (filtersData) {
-					const filters = {};
-					for (const key of Object.keys(filtersData)) {
-						filters[key] = filtersData[key];
-						if (!filtersData[key]) {
-							delete filters[key];
-						}
-					}
-					this.params.queryParams = filters;
-					return this.resetList();
+			.subscribe(keyword => {
+				if (!keyword) {
+					return;
 				}
+				const filters = {};
+				for (const filterParam of Object.keys(keyword)) {
+					filters[filterParam] =
+						typeof keyword[filterParam] === 'number'
+							? keyword[filterParam].toString()
+							: keyword[filterParam];
+					if (!keyword[filterParam]) {
+						delete filters[filterParam];
+					}
+					this.params = { ...this.params, [filterParam]: filters[filterParam] };
+				}
+				return this.loadResources();
 			});
+
+		// this.utilitiesService.filterObservable$
+		// 	.pipe(takeWhile(() => this.alive))
+		// 	.subscribe((filtersData: any) => {
+		// 		if (filtersData) {
+		// 			const filters = {};
+		// 			for (const key of Object.keys(filtersData)) {
+		// 				filters[key] = filtersData[key];
+		// 				if (!filtersData[key]) {
+		// 					delete filters[key];
+		// 				}
+		// 			}
+		// this.params.queryParams = filters;
+		// return this.resetList();
+		// }
+		// });
 
 		/**
 		 * refresh resources list
@@ -95,7 +104,6 @@ export class CoreListComponent implements OnInit, OnDestroy {
 		this.service.updateResources
 			.pipe(takeWhile(() => this.alive))
 			.subscribe(() => {
-				console.log('update resource');
 				return this.loadResources();
 			});
 

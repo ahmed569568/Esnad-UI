@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { RootService } from '@app/core/root.service';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
 import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-filters',
@@ -80,6 +81,45 @@ export class FiltersComponent implements OnInit, OnChanges {
 			// if (this.allowSearch[field]) {
 			// 	this.search();
 			// }
+		}
+	}
+
+	/**
+	 * Clear select field data depends on another select field changes
+	 * @param name: current field
+	 * @param field: result field
+	 */
+	valueChanges(name: string, field: string) {
+		if (name === field) {
+			return;
+		}
+		for (const column of this.columns) {
+			if (column.name === field && column.listPrefix) {
+				if (
+					this.form.controls[name].value === 5 ||
+					this.form.controls[name].value === 1
+				) {
+					this.service.lists = {
+						...this.service.lists,
+						[column.listPrefix]: []
+					};
+					this.form.controls[field].setValue('');
+					return;
+				}
+				this.service
+					.showItem(this.form.controls[name].value - 1, 'select')
+					.pipe(
+						map(resp => {
+							return resp[0];
+						})
+					)
+					.subscribe(data => {
+						this.service.lists = {
+							...this.service.lists,
+							[column.listPrefix]: data
+						};
+					});
+			}
 		}
 	}
 

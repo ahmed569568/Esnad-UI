@@ -165,9 +165,12 @@ export abstract class RootService {
 	/**
 	 * Generic Show Action Request
 	 * @param id: Item Identifier
+	 * @param prefix
 	 */
-	showItem(id: number) {
-		return this.doShow(this.getFunctionURL(`${id}/show`));
+	showItem(id: number, prefix?: string) {
+		return this.doShow(
+			this.getFunctionURL(id + '/' + (prefix ? prefix : 'show'))
+		);
 	}
 
 	doShow(url: string) {
