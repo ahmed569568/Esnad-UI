@@ -96,6 +96,8 @@ export interface ItemProps {
 		cssClass?: string;
 		gridCssClass?: string;
 		ngSelectOptions?: NgSelectOptions;
+		disabled?: boolean;
+		hidden?: boolean;
 		grid?: {
 			gt_lg?: string;
 			lt_xl?: string;

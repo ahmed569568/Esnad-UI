@@ -43,8 +43,14 @@ import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { RootV2Service } from '@app/core/root.service-v2';
 
+import { MatChipInputEvent } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+
 const moment = _rollupMoment || _moment;
 
+export interface Chip {
+	name: string;
+}
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
@@ -86,6 +92,7 @@ export const MY_FORMATS = {
 			])
 		])
 	],
+
 	providers: [
 		// `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
 		// application's root module. We provide it at the component level here, due to limitations of
@@ -117,6 +124,8 @@ export class CoreFormContentComponent
 	imageFieldName: string;
 	alive = true;
 	itemId: number;
+	chipList: Chip[] = [];
+	readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 	constructor() // private changeDetectorRef: ChangeDetectorRef,
 	// private controlContainer: ControlContainer,
@@ -166,6 +175,29 @@ export class CoreFormContentComponent
 			}
 		} else {
 			return true;
+		}
+	}
+
+	addChip(event: MatChipInputEvent): void {
+		const input = event.input;
+		const value = event.value;
+
+		// Add our fruit
+		if ((value || '').trim()) {
+			this.chipList.push({ name: value.trim() });
+		}
+
+		// Reset the input value
+		if (input) {
+			input.value = '';
+		}
+	}
+
+	removeChip(chip: Chip): void {
+		const index = this.chipList.indexOf(chip);
+
+		if (index >= 0) {
+			this.chipList.splice(index, 1);
 		}
 	}
 

@@ -188,8 +188,8 @@ export class TreatmentsV2Service extends RootV2Service {
 							const patchedObj = { client_id: response.response.client_id };
 							this.patchValues.next(patchedObj);
 							console.log(response.response);
-							// this.generateFormFromTemplate(response.data);
-							// this.formFieldsUpdated.next();
+							this.generateFormFromTemplate(response.response);
+							this.formFieldsUpdated.next();
 						}
 					}
 				);
@@ -199,61 +199,63 @@ export class TreatmentsV2Service extends RootV2Service {
 
 	generateFormFromTemplate(template: any) {
 		const requestMock: TemplateApiRequest = {
-			client_id: formValue.client_id,
+			client_id: template.client_id,
 			steps: []
 		};
-		template.steps.forEach((step, stepI) => {
+		template.steps.forEach((step: any, stepI: any) => {
 			requestMock.steps.push({
-				name: formValue[`step_${stepI + 1}_name`],
+				name: template[`step_${stepI + 1}_name`],
 				order: stepI + 1,
-				group_id: formValue[`step_${stepI + 1}_typeId`],
+				group_id: template[`step_${stepI + 1}_typeId`],
 				forms: []
 			});
-			if (step.forms) {
-				step.forms.forEach((form, formI) => {
-					requestMock.steps[stepI].forms.push({
-						name: formValue[`step_${stepI + 1}_form_${formI + 1}_name`],
-						order: formI + 1,
-						fields: []
-					});
-					form.fields.forEach((field, fieldI) => {
-						const optionsData =
-							formValue[
-								`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-									1}_fieldOptions`
-							];
-						const refactoredOptions: {
-							name?: string;
-						}[] = [];
-						if (optionsData && optionsData.length) {
-							optionsData.forEach((option: any) => {
-								refactoredOptions.push({ name: option.value });
-							});
-						}
-						requestMock.steps[stepI].forms[formI].fields.push({
-							title:
-								formValue[
-									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
-								],
-							type:
-								formValue[
-									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-										1}_fieldType`
-								],
-							cols:
-								formValue[
-									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-										1}_fieldCols`
-								]
-						});
-						// if (refactoredOptions && refactoredOptions.length) {
-						requestMock.steps[stepI].forms[formI].fields[fieldI].options = [
-							...refactoredOptions
-						];
-						// }
-					});
-				});
-			}
+			this.generateStep(step.name, step.group_id);
+			console.log(this.lists);
+			// if (step.forms) {
+			// 	step.forms.forEach((form:any, formI:any) => {
+			// 		requestMock.steps[stepI].forms.push({
+			// 			name: template[`step_${stepI + 1}_form_${formI + 1}_name`],
+			// 			order: formI + 1,
+			// 			form_fields: []
+			// 		});
+			// 		form.fields.forEach((field:any, fieldI:any) => {
+			// 			const optionsData =
+			// 				template[
+			// 					`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+			// 						1}_fieldOptions`
+			// 				];
+			// 			const refactoredOptions: {
+			// 				name?: string;
+			// 			}[] = [];
+			// 			if (optionsData && optionsData.length) {
+			// 				optionsData.forEach((option: any) => {
+			// 					refactoredOptions.push({ name: option.value });
+			// 				});
+			// 			}
+			// 			requestMock.steps[stepI].forms[formI].form_fields.push({
+			// 				title:
+			// 					template[
+			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
+			// 					],
+			// 				type:
+			// 					template[
+			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+			// 							1}_fieldType`
+			// 					],
+			// 				cols:
+			// 					template[
+			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+			// 							1}_fieldCols`
+			// 					]
+			// 			});
+			// 			// if (refactoredOptions && refactoredOptions.length) {
+			// 			requestMock.steps[stepI].forms[formI].form_fields[fieldI].form_field_options = [
+			// 				...refactoredOptions
+			// 			];
+			// 			// }
+			// 		});
+			// 	});
+			// }
 		});
 	}
 
@@ -267,7 +269,7 @@ export class TreatmentsV2Service extends RootV2Service {
 
 	refactorFormBeforeSubmit(formValue: any): any {
 		console.log(formValue);
-		const requestMock: ApiRequest = {
+		const requestMock: TemplateApiRequest = {
 			name: formValue.name,
 			client_id: formValue.client_id,
 			steps: []
@@ -284,7 +286,7 @@ export class TreatmentsV2Service extends RootV2Service {
 					requestMock.steps[stepI].forms.push({
 						name: formValue[`step_${stepI + 1}_form_${formI + 1}_name`],
 						order: formI + 1,
-						fields: []
+						form_fields: []
 					});
 					form.fields.forEach((field, fieldI) => {
 						const optionsData =
@@ -300,7 +302,7 @@ export class TreatmentsV2Service extends RootV2Service {
 								refactoredOptions.push({ name: option.value });
 							});
 						}
-						requestMock.steps[stepI].forms[formI].fields.push({
+						requestMock.steps[stepI].forms[formI].form_fields.push({
 							title:
 								formValue[
 									`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
@@ -317,9 +319,9 @@ export class TreatmentsV2Service extends RootV2Service {
 								]
 						});
 						// if (refactoredOptions && refactoredOptions.length) {
-						requestMock.steps[stepI].forms[formI].fields[fieldI].options = [
-							...refactoredOptions
-						];
+						requestMock.steps[stepI].forms[formI].form_fields[
+							fieldI
+						].form_field_options = [...refactoredOptions];
 						// }
 					});
 				});
@@ -336,10 +338,12 @@ export class TreatmentsV2Service extends RootV2Service {
 
 	refactorListsData(field: string, response: any) {
 		if (response) {
-			if (field === 'client_id') {
+			if (field === 'client_id' || field === 'step_1_typeId') {
 				if (response.response && response.response.length) {
 					response.response.forEach((item: any) => {
-						item.name = item.full_name;
+						if (item.full_name) {
+							item.name = item.full_name;
+						}
 					});
 				}
 				return response.response;
@@ -354,6 +358,76 @@ export class TreatmentsV2Service extends RootV2Service {
 				return response.response.data;
 			}
 		}
+	}
+
+	generateStep(stepName: string, group_id: number) {
+		const stepFormName = `step_${this.stepsCount}_name`;
+		const stepFormTypeId = `step_${this.stepsCount}_typeId`;
+
+		const stepDefaultInputs: ItemProps[] = [
+			{
+				name: stepFormName,
+				prop: stepFormName,
+				form: {
+					name: 'step_name',
+					Validators: [],
+					formFieldType: 'text',
+					initValue: stepName,
+					disabled: true,
+					hidden: true,
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + this.stepsCount
+						}
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: stepFormTypeId,
+				prop: stepFormTypeId,
+				form: {
+					name: 'step_typeId',
+					Validators: [],
+					formFieldType: 'ng_select',
+					dataUrl: 'templates/groups/index',
+					initValue: group_id,
+					disabled: true,
+					hidden: true,
+					listPrefix: 'groups',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + this.stepsCount
+						}
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			}
+		];
+
+		this.InputsTree.steps.push({
+			name: 'step_' + this.stepsCount,
+			forms: []
+		});
+
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
+		this.stepsCount++;
+
+		console.log(this.featureProps);
 	}
 
 	addStep() {

@@ -17,8 +17,8 @@ export abstract class RootV2Service {
 	public resourcesList: any;
 	resources: Subject<any> = new Subject();
 	updateResources: Subject<any> = new Subject();
-	formFieldsUpdated: Subject<any> = new Subject();
 	patchValues: Subject<any> = new Subject();
+	formFieldsUpdated: Subject<any> = new Subject();
 
 	formInputsCategorized: any = {};
 

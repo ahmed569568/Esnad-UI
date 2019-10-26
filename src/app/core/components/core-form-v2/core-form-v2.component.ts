@@ -86,7 +86,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 							[field.name]: [
 								{
 									value: field.form.initValue ? field.form.initValue : null,
-									disabled: field.editDisabled && this.isEdit
+									disabled:
+										(field.editDisabled && this.isEdit) || field.form.disabled
 								},
 								field.form.Validators
 							]
@@ -97,7 +98,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 							[field.name]: [
 								{
 									value: field.form.initValue ? field.form.initValue : null,
-									disabled: field.editDisabled && this.isEdit
+									disabled:
+										(field.editDisabled && this.isEdit) || field.form.disabled
 								},
 								field.form.Validators
 							]
@@ -109,7 +111,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 						[field.name]: [
 							{
 								value: field.form.initValue ? field.form.initValue : null,
-								disabled: field.editDisabled && this.isEdit
+								disabled:
+									(field.editDisabled && this.isEdit) || field.form.disabled
 							},
 							field.form.Validators
 						]
