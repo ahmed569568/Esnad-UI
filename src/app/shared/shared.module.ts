@@ -27,12 +27,19 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
 import { RouterContainerComponent } from '@app/shared/components/router-container-component';
 import { RouterModule } from '@angular/router';
 import { FiltersComponent } from '@app/shared/components/filters/filters.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { CoreFormContentComponent } from '@app/shared/components/core-form-content/core-form-content.component';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GroupByPipe, NgPipesModule, TimeAgoPipe } from 'ngx-pipes';
-import { TagInputModule } from 'ngx-chips';
+// import { TagInputModule } from 'ngx-chips';
+import { DynamicDialogComponent } from '@app/shared/components/dynamic-dialog/dynamic-dialog.component';
+import {
+	OWL_DATE_TIME_LOCALE,
+	OwlDateTimeIntl,
+	OwlDateTimeModule,
+	OwlNativeDateTimeModule
+} from 'ng-pick-datetime';
+import { TimePickerLocalization } from './classes';
 
 @NgModule({
 	imports: [
@@ -53,8 +60,8 @@ import { TagInputModule } from 'ngx-chips';
 		NgOptionHighlightModule,
 		NgPipesModule,
 		OwlDateTimeModule,
-		OwlNativeDateTimeModule,
-		TagInputModule
+		OwlNativeDateTimeModule
+		// TagInputModule
 	],
 	declarations: [
 		ChartComponent,
@@ -73,7 +80,8 @@ import { TagInputModule } from 'ngx-chips';
 		MapComponent,
 		RouterContainerComponent,
 		FiltersComponent,
-		CoreFormContentComponent
+		CoreFormContentComponent,
+		DynamicDialogComponent
 	],
 	exports: [
 		CommonModule,
@@ -106,10 +114,22 @@ import { TagInputModule } from 'ngx-chips';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		FiltersComponent,
-		TagInputModule
+		FiltersComponent
+		// TagInputModule
 	],
 	entryComponents: [DialogComponent],
-	providers: [NgPipesModule, GroupByPipe, TimeAgoPipe]
+	providers: [
+		NgPipesModule,
+		GroupByPipe,
+		TimeAgoPipe,
+		{
+			provide: OwlDateTimeIntl,
+			useClass: TimePickerLocalization
+		},
+		{
+			provide: OWL_DATE_TIME_LOCALE,
+			useValue: 'ar'
+		}
+	]
 })
 export class SharedModule {}

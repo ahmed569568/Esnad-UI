@@ -1,6 +1,5 @@
 @import "~ngx-toastr/toastr";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-
 /*
  * Global application theme.
  * Framework overrides and customization goes here.
@@ -9,7 +8,7 @@
 
 * {
 	box-sizing: border-box;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Changa", sans-serif;
 }
 
 h1,
@@ -172,4 +171,43 @@ app-login {
 			color: white !important;
 		}
 	}
+}
+
+app-filters {
+	.mat-form-field-type-mat-select {
+		border: 1px solid #e3e3e3;
+		border-radius: 4px;
+		height: 50px;
+		padding-right: 8px;
+		transition: border 100ms;
+
+		&:hover {
+			border: 2px solid black;
+		}
+
+		.mat-form-field-underline {
+			display: none;
+		}
+	}
+}
+
+.mat-card-header-text {
+	margin: 0 !important;
+}
+
+app-form-footer {
+	width: 100%;
+}
+
+.list-action-icon {
+	font-size: 14px;
+	margin-top: 10px;
+	margin-left: 0;
+}
+
+.listContainer {
+	margin: 10px 30px;
+	background: white;
+	//box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+	box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
 }

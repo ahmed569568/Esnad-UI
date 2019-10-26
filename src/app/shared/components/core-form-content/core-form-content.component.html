@@ -2,53 +2,53 @@
 	<div class="full-width">
 		<div fxFlex="" fxLayout="column" class="full-width">
 			<ng-container [ngSwitch]="field.form.formFieldType">
-				<ng-container *ngSwitchCase="'text'">
-					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
-							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
-								<span
-									*ngIf="checkRequiredFields(field.name)"
-									class="mat-error required-asterisk inline"
-								>
-									*
-								</span>
-							</mat-label>
-							<div matSuffix *ngIf="field.form.prefix">
-								<ng-container *ngFor="let prefix of field.form.prefix">
-									<ng-container [ngSwitch]="prefix.list.displayType">
-										<ng-container *ngSwitchCase="null">
-											{{
-												prefix.list.translate
-													? (prefix.list.staticText | translate)
-													: prefix.list.staticText
-											}}
-										</ng-container>
-									</ng-container>
-								</ng-container>
-							</div>
+				<!--				<ng-container *ngSwitchCase="'text'">-->
+				<!--					<div class="field-container">-->
+				<!--						<mat-form-field appearance="outline" class="full-width">-->
+				<!--							<mat-label>-->
+				<!--								<span>{{-->
+				<!--									cid + '.' + (field.form.name ? field.form.name : field.name)-->
+				<!--										| translate-->
+				<!--								}}</span>-->
+				<!--								<span-->
+				<!--									*ngIf="checkRequiredFields(field.name)"-->
+				<!--									class="mat-error required-asterisk inline"-->
+				<!--								>-->
+				<!--									*-->
+				<!--								</span>-->
+				<!--							</mat-label>-->
+				<!--							<div matSuffix *ngIf="field.form.prefix">-->
+				<!--								<ng-container *ngFor="let prefix of field.form.prefix">-->
+				<!--									<ng-container [ngSwitch]="prefix.list.displayType">-->
+				<!--										<ng-container *ngSwitchCase="null">-->
+				<!--											{{-->
+				<!--												prefix.list.translate-->
+				<!--													? (prefix.list.staticText | translate)-->
+				<!--													: prefix.list.staticText-->
+				<!--											}}-->
+				<!--										</ng-container>-->
+				<!--									</ng-container>-->
+				<!--								</ng-container>-->
+				<!--							</div>-->
 
-							<input type="text" matInput [formControlName]="field.name" />
+				<!--							<input type="text" matInput [formControlName]="field.name" />-->
 
-							<div matSuffix *ngIf="field.form.suffix">
-								<ng-container *ngFor="let suffix of field.form.suffix">
-									<ng-container [ngSwitch]="suffix.list.displayType">
-										<ng-container *ngSwitchCase="null">
-											{{
-												suffix.list.translate
-													? (suffix.list.staticText | translate)
-													: suffix.list.staticText
-											}}
-										</ng-container>
-									</ng-container>
-								</ng-container>
-							</div>
-						</mat-form-field>
-					</div>
-				</ng-container>
+				<!--							<div matSuffix *ngIf="field.form.suffix">-->
+				<!--								<ng-container *ngFor="let suffix of field.form.suffix">-->
+				<!--									<ng-container [ngSwitch]="suffix.list.displayType">-->
+				<!--										<ng-container *ngSwitchCase="null">-->
+				<!--											{{-->
+				<!--												suffix.list.translate-->
+				<!--													? (suffix.list.staticText | translate)-->
+				<!--													: suffix.list.staticText-->
+				<!--											}}-->
+				<!--										</ng-container>-->
+				<!--									</ng-container>-->
+				<!--								</ng-container>-->
+				<!--							</div>-->
+				<!--						</mat-form-field>-->
+				<!--					</div>-->
+				<!--				</ng-container>-->
 
 				<ng-container *ngSwitchCase="'textarea'">
 					<div class="field-container">
@@ -625,7 +625,8 @@
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'tag-input'">
-					<tag-input [formControlName]="field.name"></tag-input>
+					{{ 'ngx-chips caused dangirous build issues' }}
+					<!--					<tag-input [formControlName]="field.name"></tag-input>-->
 					<!--							<ngx-tags-input class="form-control input-lg" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" [(ngModel)]="tags" name="tags"></ngx-tags-input>-->
 				</ng-container>
 

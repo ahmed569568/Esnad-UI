@@ -1,9 +1,5 @@
-<div class="filter-container search-card">
+<div class="filter-container search-card" *ngIf="filterOpened">
 	<mat-card class="main-card">
-		<mat-card-header class="filter-card-header">
-			<mat-icon class="filter-icon">tune</mat-icon>
-			{{ 'common.filter' | translate }}
-		</mat-card-header>
 		<mat-card-content>
 			<form [formGroup]="form" *ngIf="columns" (ngSubmit)="filter()">
 				<ng-container *ngFor="let column of columns">

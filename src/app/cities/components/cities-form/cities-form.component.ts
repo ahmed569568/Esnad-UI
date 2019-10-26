@@ -40,8 +40,10 @@ export class CitiesFormComponent extends CoreFormComponent
 		let cities = <FormArray>(
 			this.form.controls.countries['controls'][0].controls.cities
 		);
-		form['cities'].forEach(() => {
-			cities.push(this.initCities());
+		form['cities'].forEach((item: any, index: any) => {
+			if (index !== 0) {
+				cities.push(this.initCities());
+			}
 		});
 		this.form.patchValue({ countries: [form] });
 	}

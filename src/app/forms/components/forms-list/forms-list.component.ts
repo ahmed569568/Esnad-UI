@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormsService } from '@app/forms/forms.service';
 
 @Component({
-	selector: 'app-branches-list',
+	selector: 'app-forms-list',
 	templateUrl: '../../../core/components/core-list/core-list.component.html'
 })
 export class FormsListComponent extends CoreListComponent implements OnInit {
