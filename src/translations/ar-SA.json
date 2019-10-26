@@ -46,7 +46,7 @@
 		"apply": "بحث",
 		"filters": "تصفية",
 		"description": "وصف الصلاحية",
-		"date_range": "التاريخ"
+		"date_range": "التاريخ من/إلى"
 	},
 	"auth": {
 		"login": {
@@ -472,7 +472,9 @@
 		"nationalId": "رقم الهوية",
 		"address": "العنوان",
 		"category_id": "التصنيف",
-		"active_status": "حالة العضوية"
+		"active_status": "حالة العضوية",
+		"active": "مفعله",
+		"inactive": "غير مفعله"
 	},
 	"prices": {
 		"title": "التسعير",
