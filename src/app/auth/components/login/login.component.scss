@@ -16,11 +16,16 @@ form {
 .login-container,
 .mat-form-field {
 	width: 100%;
+	color: white;
+
+	::placeholder {
+		color: white;
+	}
 
 	mat-icon {
 		font-size: 18px;
 		font-weight: 100;
-		color: white;
+		//color: white;
 	}
 }
 
@@ -136,8 +141,4 @@ form {
 	&.login-msg {
 		color: white;
 	}
-}
-
-.mat-form-field-wrapper {
-	padding-bottom: 0 !important;
 }
