@@ -43,7 +43,7 @@
 													>
 														<ng-container *ngFor="let field of formField[1]">
 															<ng-container
-																*ngIf="field?.form && fieldShowConditions(field)"
+																*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 															>
 																<app-core-form-content
 																	[cid]="service.cid"
@@ -84,7 +84,7 @@
 													<mat-panel-title>
 														{{ form.get('step_' + (stepI + 1) + '_name')?.value
 														? form.get('step_' + (stepI + 1) + '_name')?.value :
-														('treatments.step_placeholder' | translate) + ' ' +
+														('templates.step_placeholder' | translate) + ' ' +
 														(stepI + 1) }}
 													</mat-panel-title>
 												</mat-expansion-panel-header>
@@ -109,7 +109,7 @@
 																{{ form.get('step_' + (stepI + 1) + '_form_' +
 																sectionI + '_name')?.value ? form.get('step_' +
 																(stepI + 1) + '_form_' + sectionI +
-																'_name')?.value : ('treatments.form_placeholder'
+																'_name')?.value : ('templates.form_placeholder'
 																| translate) + ' ' + sectionI }}
 															</div>
 
@@ -136,9 +136,7 @@
 													"
 																			>
 																				<ng-container
-																					*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																				>
 																					<app-core-form-content
 																						[cid]="service.cid"
@@ -187,9 +185,7 @@
 													"
 																			>
 																				<ng-container
-																					*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																				>
 																					<app-core-form-content
 																						[cid]="service.cid"
@@ -244,7 +240,7 @@
 																							(form.get('step_' + (stepI + 1) +
 																							'_form_' + sectionI + '_field_' +
 																							formFieldI + '_name')?.value) :
-																							('treatments.field_placeholder' |
+																							('templates.field_placeholder' |
 																							translate) + ' ' + formFieldI }}
 																						</mat-panel-title>
 																					</mat-expansion-panel-header>
@@ -256,9 +252,7 @@
 													"
 																					>
 																						<ng-container
-																							*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																							*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																						>
 																							<app-core-form-content
 																								[cid]="service.cid"
@@ -297,26 +291,26 @@
 															<!--																		svgIcon="shape-rectangle-plus"-->
 															<!--																		[attr.size]="'22px'"-->
 															<!--																	></mat-icon>-->
-															<!--																	{{ 'treatments.add_field' | translate}}-->
+															<!--																	{{ 'templates.add_field' | translate}}-->
 															<!--																</button>-->
 															<!--															</div>-->
 														</div>
 													</ng-container>
 
-													<div>
-														<!--														<button-->
-														<!--															class="big_add_button"-->
-														<!--															mat-stroked-button-->
-														<!--															(click)="addForm(stepI + 1)"-->
-														<!--														>-->
-														<!--															<mat-icon-->
-														<!--																class="mdi-icon"-->
-														<!--																svgIcon="shape-rectangle-plus"-->
-														<!--																[attr.size]="'22px'"-->
-														<!--															></mat-icon>-->
-														<!--															{{ 'treatments.add_form' | translate}}-->
-														<!--														</button>-->
-													</div>
+													<!--													<div>-->
+													<!--														<button-->
+													<!--															class="big_add_button"-->
+													<!--															mat-stroked-button-->
+													<!--															(click)="addForm(stepI + 1)"-->
+													<!--														>-->
+													<!--															<mat-icon-->
+													<!--																class="mdi-icon"-->
+													<!--																svgIcon="shape-rectangle-plus"-->
+													<!--																[attr.size]="'22px'"-->
+													<!--															></mat-icon>-->
+													<!--															{{ 'templates.add_form' | translate}}-->
+													<!--														</button>-->
+													<!--													</div>-->
 												</div>
 											</mat-expansion-panel>
 										</ng-container>
@@ -340,7 +334,7 @@
 		<!--							svgIcon="playlist-plus"-->
 		<!--							[attr.size]="'22px'"-->
 		<!--						></mat-icon>-->
-		<!--						{{ 'treatments.add_stage' | translate}}-->
+		<!--						{{ 'templates.add_stage' | translate}}-->
 		<!--					</button>-->
 		<!--				</mat-card-content>-->
 		<!--			</mat-card>-->

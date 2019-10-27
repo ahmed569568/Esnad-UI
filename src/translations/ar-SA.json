@@ -441,7 +441,10 @@
 		"title_single": "معاملة",
 		"name": "الاسم",
 		"status": "الحالة",
-		"client": "اسم العميل"
+		"client": "اسم العميل",
+		"templateId": "اختر نموذج",
+		"client_id": "العميل",
+		"form_status": "حالة الاستمارة"
 	},
 	"clients": {
 		"title": "العملاء",

@@ -38,7 +38,11 @@
 														*ngFor="let field of section[1]; trackBy: trackByFn"
 													>
 														<ng-container
-															*ngIf="field?.form && fieldShowConditions(field)"
+															*ngIf="
+																field?.form &&
+																fieldShowConditions(field) &&
+																!field?.form?.hidden
+															"
 														>
 															<ng-container>
 																<app-core-form-content
@@ -117,7 +121,9 @@
 															<ng-container *ngFor="let field of section[1]">
 																<ng-container
 																	*ngIf="
-																		field?.form && fieldShowConditions(field)
+																		field?.form &&
+																		fieldShowConditions(field) &&
+																		!field?.form?.hidden
 																	"
 																>
 																	<ng-container>

@@ -112,8 +112,8 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		this.service.loadSelectLists('form', true);
 		this.form.patchValue(formData);
 
-		console.log(this.service.formInputsCategorized);
-		console.log(this.form.controls);
+		// console.log(this.service.formInputsCategorized);
+		// console.log(this.form.controls);
 	}
 
 	addForm(stepNumber: number) {
@@ -123,8 +123,8 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		this.createForm();
 		this.form.patchValue(formData);
 
-		console.log(this.service.formInputsCategorized);
-		console.log(this.form.controls);
+		// console.log(this.service.formInputsCategorized);
+		// console.log(this.form.controls);
 	}
 
 	addField(stepNumber: number, formNumber: number) {
@@ -134,7 +134,7 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		this.createForm();
 		this.form.patchValue(formData);
 
-		console.log(this.service.formInputsCategorized);
-		console.log(this.form.controls);
+		// console.log(this.service.formInputsCategorized);
+		// console.log(this.form.controls);
 	}
 }

@@ -6,10 +6,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}
+								</span>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -54,10 +59,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -74,10 +84,15 @@
 					<div class="field-container color-picker-style1 ">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -377,10 +392,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -396,10 +416,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -641,9 +666,12 @@
 								<mat-icon matChipRemove>cancel</mat-icon>
 							</mat-chip>
 							<input
-								placeholder="{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
+								placeholder="								{{
+									field?.form?.name
+										? !field?.form?.backEndName
+											? (cid + '.' + field?.form?.name | translate)
+											: field?.form?.name
+										: (cid + '.' + field.name | translate)
 								}}"
 								[matChipInputFor]="chipList"
 								[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -1042,10 +1070,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" style="width: 100%">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -1074,10 +1107,15 @@
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"

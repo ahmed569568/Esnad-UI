@@ -85,6 +85,7 @@ export interface ItemProps {
 	};
 	form?: {
 		name?: string; // for a case when you want the key passed to form translation is different than the main one
+		backEndName?: boolean; // for translating name or not
 		Validators: Validators[]; // Validators => Required
 		inputValueType?: string; // [formData, base64_img] (images)
 		formFieldType: string; // [text, email, select, color_picker, number, file_input]

@@ -43,7 +43,7 @@
 													>
 														<ng-container *ngFor="let field of formField[1]">
 															<ng-container
-																*ngIf="field?.form && fieldShowConditions(field)"
+																*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 															>
 																<app-core-form-content
 																	[cid]="service.cid"
@@ -136,9 +136,7 @@
 													"
 																			>
 																				<ng-container
-																					*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																				>
 																					<app-core-form-content
 																						[cid]="service.cid"
@@ -187,9 +185,7 @@
 													"
 																			>
 																				<ng-container
-																					*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																				>
 																					<app-core-form-content
 																						[cid]="service.cid"
@@ -256,9 +252,7 @@
 													"
 																					>
 																						<ng-container
-																							*ngIf="
-																		field?.form && fieldShowConditions(field)
-																	"
+																							*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
 																						>
 																							<app-core-form-content
 																								[cid]="service.cid"

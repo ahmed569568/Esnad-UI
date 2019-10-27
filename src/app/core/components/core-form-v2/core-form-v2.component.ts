@@ -756,6 +756,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	}
 
 	ngOnDestroy(): void {
+		this.service.featureProps = [...this.service.defaultFeatureProps];
+		this.service.InputsTree = {};
+		this.service.formInputsCategorized = {};
+		this.service.lists = {};
 		this.alive = false;
 	}
 

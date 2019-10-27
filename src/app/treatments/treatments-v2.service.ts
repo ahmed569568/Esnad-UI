@@ -56,30 +56,17 @@ export class TreatmentsV2Service extends RootV2Service {
 		steps: []
 	};
 
-	featureProps: ItemProps[] = [
-		// {
-		// 	name: 'name',
-		// 	prop: 'name',
-		// 	form: {
-		// 		Validators: [Validators.required],
-		// 		formFieldType: 'text',
-		// 		grid: {
-		// 			gt_lg: '30%',
-		// 			lt_xl: '30%',
-		// 			lt_lg: '30%',
-		// 			lt_md: '50%',
-		// 			lt_sm: '100%'
-		// 		}
-		// 	}
-		// },
+	defaultFeatureProps: ItemProps[] = [
 		{
-			name: 'client_id',
-			prop: 'client_id',
+			name: 'templateId',
+			prop: 'templateId',
 			form: {
 				Validators: [],
 				formFieldType: 'ng_select',
-				dataUrl: 'templates/clients/index',
-				listPrefix: 'clients',
+				dataUrl: 'treatments/templates/index',
+				listPrefix: 'templateId',
+				// listRequestMethod: 'post',
+				onChange: true,
 				grid: {
 					gt_lg: '30%',
 					lt_xl: '30%',
@@ -108,15 +95,14 @@ export class TreatmentsV2Service extends RootV2Service {
 			}
 		},
 		{
-			name: 'templateId',
-			prop: 'templateId',
+			name: 'client_id',
+			prop: 'client_id',
 			form: {
 				Validators: [],
+				// disabled: true,
 				formFieldType: 'ng_select',
-				dataUrl: 'templates/index',
-				listPrefix: 'templateId',
-				listRequestMethod: 'post',
-				onChange: true,
+				dataUrl: 'templates/clients/index',
+				listPrefix: 'clients',
 				grid: {
 					gt_lg: '30%',
 					lt_xl: '30%',
@@ -127,7 +113,7 @@ export class TreatmentsV2Service extends RootV2Service {
 			}
 		}
 	];
-	startingFeatureProps: ItemProps[] = [...this.featureProps];
+	featureProps: ItemProps[] = [...this.defaultFeatureProps];
 
 	constructor(router: Router, api: ApiRequestV2Service, shared: SharedService) {
 		super(router, api, shared);
@@ -179,15 +165,19 @@ export class TreatmentsV2Service extends RootV2Service {
 	onChangedValue(column: ItemProps, event: any) {
 		super.onChangedValue(column, event);
 		if (column.name === 'templateId') {
-			console.log(event.id);
-			this.featureProps = [...this.startingFeatureProps];
+			// console.log(event.id);
+			this.InputsTree = { steps: [] };
+			this.formInputsCategorized = {};
+			this.stepsCount = 1;
+			this.featureProps = [...this.defaultFeatureProps];
+
 			if (event && event.id) {
 				this.resourceGet(`templates/${event.id}/show`).subscribe(
 					(response: any) => {
 						if (response && response.response) {
 							const patchedObj = { client_id: response.response.client_id };
 							this.patchValues.next(patchedObj);
-							console.log(response.response);
+							// console.log(response.response);
 							this.generateFormFromTemplate(response.response);
 							this.formFieldsUpdated.next();
 						}
@@ -210,52 +200,53 @@ export class TreatmentsV2Service extends RootV2Service {
 				forms: []
 			});
 			this.generateStep(step.name, step.group_id);
-			console.log(this.lists);
-			// if (step.forms) {
-			// 	step.forms.forEach((form:any, formI:any) => {
-			// 		requestMock.steps[stepI].forms.push({
-			// 			name: template[`step_${stepI + 1}_form_${formI + 1}_name`],
-			// 			order: formI + 1,
-			// 			form_fields: []
-			// 		});
-			// 		form.fields.forEach((field:any, fieldI:any) => {
-			// 			const optionsData =
-			// 				template[
-			// 					`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-			// 						1}_fieldOptions`
-			// 				];
-			// 			const refactoredOptions: {
-			// 				name?: string;
-			// 			}[] = [];
-			// 			if (optionsData && optionsData.length) {
-			// 				optionsData.forEach((option: any) => {
-			// 					refactoredOptions.push({ name: option.value });
-			// 				});
-			// 			}
-			// 			requestMock.steps[stepI].forms[formI].form_fields.push({
-			// 				title:
-			// 					template[
-			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
-			// 					],
-			// 				type:
-			// 					template[
-			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-			// 							1}_fieldType`
-			// 					],
-			// 				cols:
-			// 					template[
-			// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
-			// 							1}_fieldCols`
-			// 					]
-			// 			});
-			// 			// if (refactoredOptions && refactoredOptions.length) {
-			// 			requestMock.steps[stepI].forms[formI].form_fields[fieldI].form_field_options = [
-			// 				...refactoredOptions
-			// 			];
-			// 			// }
-			// 		});
-			// 	});
-			// }
+			if (step.forms) {
+				step.forms.forEach((form: any, formI: any) => {
+					requestMock.steps[stepI].forms.push({
+						name: template[`step_${stepI + 1}_form_${formI + 1}_name`],
+						order: formI + 1,
+						form_fields: []
+					});
+					this.generateForm(stepI + 1, form.name);
+
+					// form.fields.forEach((field:any, fieldI:any) => {
+					// 			const optionsData =
+					// 				template[
+					// 					`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+					// 						1}_fieldOptions`
+					// 				];
+					// 			const refactoredOptions: {
+					// 				name?: string;
+					// 			}[] = [];
+					// 			if (optionsData && optionsData.length) {
+					// 				optionsData.forEach((option: any) => {
+					// 					refactoredOptions.push({ name: option.value });
+					// 				});
+					// 			}
+					// 			requestMock.steps[stepI].forms[formI].form_fields.push({
+					// 				title:
+					// 					template[
+					// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI + 1}_name`
+					// 					],
+					// 				type:
+					// 					template[
+					// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+					// 							1}_fieldType`
+					// 					],
+					// 				cols:
+					// 					template[
+					// 						`step_${stepI + 1}_form_${formI + 1}_field_${fieldI +
+					// 							1}_fieldCols`
+					// 					]
+					// 			});
+					// 			// if (refactoredOptions && refactoredOptions.length) {
+					// 			requestMock.steps[stepI].forms[formI].form_fields[fieldI].form_field_options = [
+					// 				...refactoredOptions
+					// 			];
+					// 			// }
+					// 		});
+				});
+			}
 		});
 	}
 
@@ -268,7 +259,7 @@ export class TreatmentsV2Service extends RootV2Service {
 	}
 
 	refactorFormBeforeSubmit(formValue: any): any {
-		console.log(formValue);
+		// console.log(formValue);
 		const requestMock: TemplateApiRequest = {
 			name: formValue.name,
 			client_id: formValue.client_id,
@@ -328,7 +319,7 @@ export class TreatmentsV2Service extends RootV2Service {
 			}
 		});
 
-		console.log(requestMock);
+		// console.log(requestMock);
 		return requestMock;
 	}
 
@@ -336,9 +327,9 @@ export class TreatmentsV2Service extends RootV2Service {
 		return val ? val : 'treatments';
 	}
 
-	refactorListsData(field: string, response: any) {
+	refactorListsData(field: string, response: any, fieldProps?: ItemProps) {
 		if (response) {
-			if (field === 'client_id' || field === 'step_1_typeId') {
+			if (field === 'client_id' || fieldProps.form.listPrefix === 'groups') {
 				if (response.response && response.response.length) {
 					response.response.forEach((item: any) => {
 						if (item.full_name) {
@@ -349,13 +340,27 @@ export class TreatmentsV2Service extends RootV2Service {
 				return response.response;
 			}
 			if (field === 'templateId') {
-				if (response.response.data && response.response.data.length) {
+				if (response.response && response.response.length) {
 					// response.response.data.forEach((item: any) => {
 					//
 					// });
+					// console.log(response.response.data);
+					return response.response;
 				}
-				// console.log(response.response.data);
-				return response.response.data;
+			}
+			if (fieldProps.form.listPrefix === 'treatmentsStatus') {
+				if (response.response && response.response.length) {
+					const newArr: { id: any; name: any }[] = [];
+					response.response.forEach((item: any) => {
+						newArr.push({
+							id: item,
+							name: item
+						});
+					});
+					console.log('newArr');
+					console.log(newArr);
+					return newArr;
+				}
 			}
 		}
 	}
@@ -419,6 +424,10 @@ export class TreatmentsV2Service extends RootV2Service {
 			}
 		];
 
+		if (!this.InputsTree.steps) {
+			this.InputsTree.steps = [];
+		}
+
 		this.InputsTree.steps.push({
 			name: 'step_' + this.stepsCount,
 			forms: []
@@ -427,7 +436,229 @@ export class TreatmentsV2Service extends RootV2Service {
 		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
 		this.stepsCount++;
 
-		console.log(this.featureProps);
+		// console.log(this.featureProps);
+	}
+
+	generateForm(stepNumber: number, formName: string) {
+		const stepObj = this.InputsTree.steps.find(
+			value => value.name === 'step_' + stepNumber
+		);
+		const formsLength = stepObj.forms.length ? stepObj.forms.length : 0;
+		const formNumber = formsLength + 1;
+		stepObj.forms.push({
+			name: 'form_' + formNumber,
+			fields: []
+		});
+
+		const formObj = stepObj.forms.find(
+			value => value.name === 'form_' + formNumber
+		);
+
+		const fieldsLength =
+			formObj && formObj.fields && formObj.fields.length
+				? formObj.fields.length
+				: 0;
+
+		const stepFormName = `step_${stepNumber}_form_${formNumber}_name`;
+		const stepFormStatus = `step_${stepNumber}_form_${formNumber}_status`;
+
+		const stepDefaultInputs: ItemProps[] = [
+			{
+				name: stepFormName,
+				prop: stepFormName,
+				form: {
+					name: 'form_name',
+					Validators: [Validators.required],
+					formFieldType: 'text',
+					initValue: formName,
+					disabled: true,
+					hidden: true,
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+					// gridCssClass: 'breakLine-input30'
+				}
+			},
+			{
+				name: stepFormStatus,
+				prop: stepFormStatus,
+				form: {
+					name: 'form_status',
+					Validators: [],
+					formFieldType: 'ng_select',
+					dataUrl: 'treatments/status',
+					listPrefix: 'treatmentsStatus',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			}
+		];
+
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
+		// this.stepsCount++;
+		// console.log(this.InputsTree);
+		console.log(this.lists);
+	}
+
+	generateField(stepNumber: number, formNumber: number) {
+		const stepObj = this.InputsTree.steps.find(
+			value => value.name === 'step_' + stepNumber
+		);
+
+		const formObj = stepObj.forms.find(
+			value => value.name === 'form_' + formNumber
+		);
+
+		const fieldsLength = formObj.fields.length ? formObj.fields.length : 0;
+
+		const fieldNumber = fieldsLength + 1;
+		formObj.fields.push({
+			name: 'field_' + fieldNumber
+		});
+
+		const fieldName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_name`;
+		const fieldTypeName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldType`;
+		const fieldOptionsName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldOptions`;
+		const fieldCols = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldCols`;
+
+		const stepDefaultInputs: ItemProps[] = [
+			{
+				name: fieldName,
+				prop: fieldName,
+				form: {
+					name: 'field_name',
+					backEndName: true,
+					Validators: [Validators.required],
+					formFieldType: 'text',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: fieldTypeName,
+				prop: fieldTypeName,
+				form: {
+					name: 'field_type',
+					Validators: [Validators.required],
+					formFieldType: 'select',
+					initValue: 'text',
+					listPrefix: 'fieldTypes',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '30%',
+						lt_xl: '30%',
+						lt_lg: '30%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: fieldOptionsName,
+				prop: fieldOptionsName,
+				showIf: [
+					{
+						fieldName: fieldTypeName,
+						fieldValue: 'select'
+					}
+				],
+				form: {
+					name: 'field_options',
+					Validators: [Validators.required],
+					formFieldType: 'tag-input',
+					listPrefix: fieldOptionsName,
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '25%',
+						lt_xl: '25%',
+						lt_lg: '25%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			},
+			{
+				name: fieldCols,
+				prop: fieldCols,
+				form: {
+					name: 'field_cols',
+					Validators: [],
+					initValue: '1',
+					formFieldType: 'select',
+					listPrefix: 'field_cols',
+					groupBy: {
+						tabGroup: {
+							tabGroupName: 'templateAccordion',
+							tabName: 'step_' + stepNumber
+						},
+						section: 'form_' + formNumber,
+						formInputs: 'form_' + fieldNumber
+					},
+					grid: {
+						gt_lg: '25%',
+						lt_xl: '25%',
+						lt_lg: '25%',
+						lt_md: '50%',
+						lt_sm: '100%'
+					}
+				}
+			}
+		];
+
+		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
+		// console.log(this.featureProps);
+		// this.stepsCount++;
+		// console.log(this.InputsTree);
 	}
 
 	addStep() {
@@ -491,19 +722,19 @@ export class TreatmentsV2Service extends RootV2Service {
 		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
 		this.stepsCount++;
 
-		console.log(this.featureProps);
+		// console.log(this.featureProps);
 	}
 
 	addForm(stepNumber: number) {
 		const stepObj = this.InputsTree.steps.find(
 			value => value.name === 'step_' + stepNumber
 		);
-		const formsLength = stepObj.forms.length;
+		const formsLength = stepObj.forms.length ? stepObj.forms.length : 0;
+		const formNumber = formsLength + 1;
 		stepObj.forms.push({
-			name: 'form_' + (formsLength + 1),
+			name: 'form_' + formNumber,
 			fields: []
 		});
-		const formNumber = formsLength ? formsLength : 1;
 
 		const formObj = stepObj.forms.find(
 			value => value.name === 'form_' + formNumber
@@ -550,7 +781,7 @@ export class TreatmentsV2Service extends RootV2Service {
 
 		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
 		// this.stepsCount++;
-		console.log(this.InputsTree);
+		// console.log(this.InputsTree);
 	}
 
 	addField(stepNumber: number, formNumber: number) {
@@ -685,8 +916,8 @@ export class TreatmentsV2Service extends RootV2Service {
 		];
 
 		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
-		console.log(this.featureProps);
+		// console.log(this.featureProps);
 		// this.stepsCount++;
-		console.log(this.InputsTree);
+		// console.log(this.InputsTree);
 	}
 }
