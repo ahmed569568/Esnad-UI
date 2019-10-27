@@ -2,11 +2,12 @@
 	<h3 class="form-title">
 		{{ 'common.add' | translate }} {{ cid + '.title_single' | translate }}
 	</h3>
+
 	<form class="d-flex default-form-style" [formGroup]="form">
 		<ng-container
 			*ngFor="let field of service.featureProps; trackBy: trackByFn"
 		>
-			<div *ngIf="field.formField" class="form-field" style="flex: 1 1 50%;">
+			<div *ngIf="field.formField" class="form-field" style="flex: 1 1 100%;">
 				<mat-grid-list cols="2" rowHeight="5:1">
 					<ng-container
 						*ngIf="
@@ -241,63 +242,65 @@
 				</mat-grid-list>
 			</div>
 		</ng-container>
-		<ng-container>
-			<div class="form-field">
-				<div
-					formArrayName="client_price"
-					*ngFor="
-						let singlePrice of clientPrices.controls;
-						let priceIndex = index
-					"
-				>
-					<div class="addressContainer" [formGroupName]="priceIndex">
-						<mat-form-field class="example-full-width" appearance="outline">
-							<input
-								matInput
-								[formControl]="singlePrice.get('cost')"
-								[placeholder]="service.cid + '.client_price' | translate"
-							/>
+
+		<!--		<ng-container>-->
+		<div class="dynamic-form-container">
+			<div
+				formArrayName="client_price"
+				*ngFor="
+					let singlePrice of clientPrices.controls;
+					let priceIndex = index
+				"
+			>
+				<div [formGroupName]="priceIndex">
+					<mat-form-field class="dynamic-field" appearance="outline">
+						<input
+							matInput
+							[formControl]="singlePrice.get('cost')"
+							[placeholder]="service.cid + '.client_price' | translate"
+						/>
+					</mat-form-field>
+
+					<ng-container>
+						<mat-form-field appearance="outline">
+							<!--								<mat-label>{{ cid + '.unit' | translate }}</mat-label>-->
+							<mat-select
+								[formControl]="singlePrice.get('price_id')"
+								[placeholder]="cid + '.price_id' | translate"
+							>
+								<mat-option
+									*ngFor="let item of service.lists['clients-price']"
+									[value]="item.id"
+								>
+									{{ item.name }}
+								</mat-option>
+							</mat-select>
 						</mat-form-field>
-						<ng-container>
-							<mat-form-field appearance="outline">
-								<!--								<mat-label>{{ cid + '.unit' | translate }}</mat-label>-->
-								<mat-select
-									[formControl]="singlePrice.get('price_id')"
-									[placeholder]="cid + '.price_id' | translate"
-								>
-									<mat-option
-										*ngFor="let item of service.lists['clients-price']"
-										[value]="item.id"
-									>
-										{{ item.name }}
-									</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</ng-container>
-						<div class="actions">
-							<button
-								mat-icon-button
-								color="primary"
-								[matTooltip]="service.cid + '.add_client_price' | translate"
-								(click)="pushItem()"
+					</ng-container>
+					<div class="actions">
+						<button
+							mat-icon-button
+							color="primary"
+							[matTooltip]="service.cid + '.add_client_price' | translate"
+							(click)="pushItem()"
+						>
+							<mat-icon aria-hidden="false">add</mat-icon>
+						</button>
+						<button
+							mat-icon-button
+							color="warn"
+							[matTooltip]="service.cid + '.remove_city' | translate"
+							(click)="deleteItem(priceIndex)"
+						>
+							<mat-icon aria-hidden="false" aria-label="Example home icon"
+								>delete</mat-icon
 							>
-								<mat-icon aria-hidden="false">add</mat-icon>
-							</button>
-							<button
-								mat-icon-button
-								color="warn"
-								[matTooltip]="service.cid + '.remove_city' | translate"
-								(click)="deleteItem(priceIndex)"
-							>
-								<mat-icon aria-hidden="false" aria-label="Example home icon"
-									>delete</mat-icon
-								>
-							</button>
-						</div>
+						</button>
 					</div>
 				</div>
 			</div>
-		</ng-container>
+		</div>
+		<!--		</ng-container>-->
 		<app-form-footer
 			style="margin-right: 12px; padding-bottom: 50px"
 			(submit)="formSubmission()"
