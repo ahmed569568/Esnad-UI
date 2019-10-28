@@ -6,7 +6,7 @@
 		"actions": "خيارات",
 		"cancel": "الغاء",
 		"submit": "موافق",
-		"add": "اضافة عنصر جديد",
+		"add": "اضافة",
 		"refresh": "تحديث القائمة",
 		"back": "عودة",
 		"loading": "جاري التحميل....",
@@ -44,8 +44,9 @@
 		"add_student": "Add Student",
 		"school": "School",
 		"apply": "بحث",
-		"filter": "تصفية",
-		"description": "وصف الصلاحية"
+		"filters": "تصفية",
+		"description": "وصف الصلاحية",
+		"date_range": "التاريخ من/إلى"
 	},
 	"auth": {
 		"login": {
@@ -147,9 +148,9 @@
 		"prices": "التسعير",
 		"categories": "التصنيفات",
 		"groups": "المجموعات",
-		"cities": "المدن",
-		"cities_list": "قائمة المدن",
-		"new_city": "مدينة جديدة",
+		"cities": "المواقع",
+		"cities_list": "قائمة المواقع",
+		"new_city": "موقع جديدة",
 		"reports": "التقارير",
 		"report_employees": "تقارير الموظفين",
 		"report_treatments": "تقارير المعاملات",
@@ -270,7 +271,7 @@
 		"all_permissions": "تحديد جميع الصلاحيات",
 		"group_id": "المجموعة",
 		"categories": "الفئات",
-		"cities": "المدن",
+		"cities": "المواقع",
 		"clientprice": "سعر العميل",
 		"clients": "العملاء",
 		"employees": "الموظفون",
@@ -413,8 +414,8 @@
 		"number": "Number"
 	},
 	"inputs": {
-		"cities": "المدن",
-		"clients_rate": "تقيم المدن",
+		"cities": "المواقع",
+		"clients_rate": "تقيم العميل",
 		"country_name": "اسم البلد",
 		"add_city": "اضافة مدينة",
 		"city_name": "اسم المدينة",
@@ -474,7 +475,9 @@
 		"nationalId": "رقم الهوية",
 		"address": "العنوان",
 		"category_id": "التصنيف",
-		"active_status": "حالة العضوية"
+		"active_status": "حالة العضوية",
+		"active": "مفعله",
+		"inactive": "غير مفعله"
 	},
 	"prices": {
 		"title": "التسعير",
@@ -492,10 +495,10 @@
 		"name": "الاسم"
 	},
 	"cities": {
-		"title": "المدن",
-		"title_single": "مدينة",
+		"title": "المواقع",
+		"title_single": "موقع",
 		"name": "الاسم",
-		"level": "المرحلة",
+		"level": "نوع الموقع",
 		"country_name": "اسم البلد",
 		"add_city": "اضافة مدينة",
 		"city_name": "اسم المدينة",
@@ -511,7 +514,13 @@
 		"remove_district": "حذف الحي",
 		"add_street": "الشارع",
 		"street_name": "اسم اشارع",
-		"remove_street": "حذف الشارع"
+		"remove_street": "حذف الشارع",
+		"city": "مدينه",
+		"region": "منطقه",
+		"province": "مقاطعة",
+		"district": "حي",
+		"street": "شارع",
+		"parent_id": "تابع الي"
 	},
 	"templates": {
 		"step_name": "اسم المرحلة",
@@ -538,5 +547,8 @@
 		"passwordsDontMatch": "Password Don't Match",
 		"passwordsMatch": "Password Match",
 		"import_failed": "Import Failed"
+	},
+	"msg": {
+		"no_data_founds": "لا توجد بيانات"
 	}
 }

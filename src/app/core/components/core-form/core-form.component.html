@@ -13,38 +13,51 @@
 							field.formFieldType === 'text' && checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
-							<input type="text" matInput [formControlName]="field.name" />
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>-->
+							<input
+								type="text"
+								matInput
+								[placeholder]="cid + '.' + field.name | translate"
+								[formControlName]="field.name"
+							/>
 						</mat-form-field>
 						<app-control-errors
 							[ctl]="form.get(field.name)"
 							class="error-message"
 						></app-control-errors>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'number' &&
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
-							<input type="number" matInput [formControlName]="field.name" />
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>-->
+							<input
+								type="number"
+								matInput
+								[placeholder]="cid + '.' + field.name | translate"
+								[formControlName]="field.name"
+							/>
 						</mat-form-field>
 						<app-control-errors
 							[ctl]="form.get(field.name)"
 							class="error-message"
-						></app-control-errors>
+						>
+						</app-control-errors>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'password' &&
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ 'common.password' | translate }}</mat-label>
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ 'common.password' | translate }}</mat-label>-->
 							<input
 								type="password"
 								matInput
@@ -57,14 +70,15 @@
 							class="error-message"
 						></app-control-errors>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'email' &&
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ 'common.email' | translate }}</mat-label>
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ 'common.email' | translate }}</mat-label>-->
 							<input
 								type="email"
 								matInput
@@ -73,14 +87,15 @@
 							/>
 						</mat-form-field>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'phone' &&
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ 'common.phone' | translate }}</mat-label>
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ 'common.phone' | translate }}</mat-label>-->
 							<input
 								type="phone"
 								matInput
@@ -96,8 +111,8 @@
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>-->
 							<mat-select
 								[formControlName]="field.name"
 								[placeholder]="cid + '.' + field.name | translate"
@@ -123,8 +138,8 @@
 							checkConditions(field.condition)
 						"
 					>
-						<mat-form-field appearance="outline">
-							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+						<mat-form-field appearance="outline" floatLabel="never">
+							<!--							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>-->
 							<mat-select
 								[formControlName]="field.name"
 								[placeholder]="cid + '.' + field.name | translate"
@@ -145,6 +160,7 @@
 							</mat-select>
 						</mat-form-field>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'color_picker' &&
@@ -171,6 +187,7 @@
 							class="error-message"
 						></app-control-errors>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'file_input' &&
@@ -198,7 +215,7 @@
 									/>
 									<img
 										*ngIf="!form.controls[field.name].value"
-										src="../../../../assets/img-alt.png"
+										src="/assets/img-alt.png"
 									/>
 								</span>
 							</label>
@@ -214,6 +231,7 @@
 							class="error-message"
 						></app-control-errors>
 					</ng-container>
+
 					<ng-container
 						*ngIf="
 							field.formFieldType === 'map' && checkConditions(field.condition)

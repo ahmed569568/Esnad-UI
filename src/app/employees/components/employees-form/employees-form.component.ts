@@ -49,6 +49,15 @@ export class EmployeesFormComponent extends CoreFormComponent
 		// this.form.controls.signature.patchValue('');
 	}
 
+	prepareFormAfterSubmit(): void {
+		if (this.form.controls.photo.value.length < 100) {
+			this.form.removeControl('photo');
+		}
+		if (this.form.controls.signature.value.length < 100) {
+			this.form.removeControl('signature');
+		}
+	}
+
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}

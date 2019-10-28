@@ -57,7 +57,11 @@
 
 				<ng-container *ngSwitchCase="'textarea'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
 								<span>
 									{{
@@ -82,7 +86,11 @@
 
 				<ng-container *ngSwitchCase="'colorPicker'">
 					<div class="field-container color-picker-style1 ">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
 								<span>
 									{{
@@ -141,7 +149,11 @@
 				<ng-container *ngSwitchCase="'password'">
 					<div fxFlex fxLayout="column" class="field-container">
 						<div fxFlex fxLayout>
-							<mat-form-field appearance="outline" class="full-width">
+							<mat-form-field
+								appearance="outline"
+								floatLabel="never"
+								class="full-width"
+							>
 								<mat-label>
 									<span>{{
 										cid +
@@ -331,7 +343,11 @@
 						*ngIf="form.controls['password'].enabled"
 					>
 						<div fxFlex fxLayout>
-							<mat-form-field appearance="outline" class="full-width">
+							<mat-form-field
+								appearance="outline"
+								floatLabel="never"
+								class="full-width"
+							>
 								<mat-label>
 									<span>{{
 										cid +
@@ -390,7 +406,11 @@
 
 				<ng-container *ngSwitchCase="'email'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
 								<span>
 									{{
@@ -412,9 +432,14 @@
 						</mat-form-field>
 					</div>
 				</ng-container>
+
 				<ng-container *ngSwitchCase="'multi_select'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
 								<span>
 									{{
@@ -1068,7 +1093,11 @@
 
 				<ng-container *ngSwitchCase="'datepicker'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" style="width: 100%">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							style="width: 100%"
+						>
 							<mat-label>
 								<span>
 									{{
@@ -1105,7 +1134,11 @@
 
 				<ng-container *ngSwitchCase="'select'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
 								<span>
 									{{

@@ -125,6 +125,7 @@ export class EmployeesService extends RootService {
 				required: true,
 				width: 300,
 				validations: [Validators.required],
+				translate: true,
 				searchable: true
 			},
 			{
