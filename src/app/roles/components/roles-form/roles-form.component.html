@@ -18,7 +18,7 @@
 		<!--			/>-->
 		<!--		</mat-form-field>-->
 
-		<mat-form-field appearance="outline">
+		<mat-form-field class="groups-drop-down" appearance="outline">
 			<!--			<mat-label>{{ cid + '.group_id' | translate }}</mat-label>-->
 			<mat-select
 				[formControlName]="'group_id'"
@@ -74,13 +74,13 @@
 				class="category"
 				*ngFor="let category of permissionsModel | keyvalue"
 			>
-				<div>
+				<div fxFlex="" fxLayout="column">
 					<div class="category-title">
 						<span class="permission-group-label">{{
 							cid + '.' + category.key | translate
 						}}</span>
 					</div>
-					<div class="permissions">
+					<div class="permissions" fxFlex="" fxLayout="column">
 						<div *ngFor="let permission of category.value | keyvalue">
 							<mat-checkbox
 								class="single-permission"

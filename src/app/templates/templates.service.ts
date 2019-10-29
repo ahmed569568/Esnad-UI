@@ -20,6 +20,19 @@ export class TemplatesService extends RootService {
 	}
 
 	get featureProps(): ItemProps[] {
-		return [];
+		return [
+			{
+				name: 'name',
+				prop: 'name',
+				listing: true,
+				formField: false
+			},
+			{
+				name: 'full_name',
+				prop: 'client.full_name',
+				listing: false,
+				formField: false
+			}
+		];
 	}
 }

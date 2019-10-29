@@ -2,7 +2,12 @@
 	<h3 class="form-title">
 		{{ 'common.add' | translate }} {{ cid + '.title_single' | translate }}
 	</h3>
-	<form class="d-flex default-form-style" [formGroup]="form">
+	<form
+		class="d-flex default-form-style"
+		fxFlex=""
+		fxLayout="column"
+		[formGroup]="form"
+	>
 		<ng-container
 			*ngFor="let field of service.featureProps; trackBy: trackByFn"
 		>
@@ -120,13 +125,12 @@
 
 					<ng-container
 						*ngIf="
-							field.formFieldType === 'select' &&
-							field.name === 'parent_id' &&
-							parent_id
+							field.formFieldType === 'select' && field.name === 'parent_id'
 						"
 					>
+						<!--						&& parent_id-->
 						<mat-form-field appearance="outline">
-							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>
+							<!--							<mat-label>{{ cid + '.' + field.name | translate }}</mat-label>-->
 							<mat-select
 								[formControlName]="field.name"
 								[placeholder]="cid + '.' + field.name | translate"
