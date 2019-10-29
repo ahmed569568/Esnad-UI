@@ -1,23 +1,30 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ItemProps } from '@app/interfaces';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RootService } from '@app/core/root.service';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
 import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-filters',
 	templateUrl: './filters.component.html',
 	styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnChanges {
+export class FiltersComponent implements OnInit, OnChanges {
 	form: FormGroup;
 	@Input() columns: ItemProps[];
 	@Input() service: RootService;
 
-	filterOpened = false;
+	filterOpened: boolean;
 
 	constructor(private fb: FormBuilder, private us: UtilitiesService) {}
+
+	ngOnInit(): void {
+		this.us.filterPanelObservable$.subscribe(
+			(value: boolean) => (this.filterOpened = value)
+		);
+	}
 
 	ngOnChanges(): void {
 		if (this.columns) {
@@ -77,6 +84,45 @@ export class FiltersComponent implements OnChanges {
 		}
 	}
 
+	/**
+	 * Clear select field data depends on another select field changes
+	 * @param name: current field
+	 * @param field: result field
+	 */
+	valueChanges(name: string, field: string) {
+		if (name === field) {
+			return;
+		}
+		for (const column of this.columns) {
+			if (column.name === field && column.listPrefix) {
+				if (
+					this.form.controls[name].value === 5 ||
+					this.form.controls[name].value === 1
+				) {
+					this.service.lists = {
+						...this.service.lists,
+						[column.listPrefix]: []
+					};
+					this.form.controls[field].setValue('');
+					return;
+				}
+				this.service
+					.showItem(this.form.controls[name].value - 1, 'select')
+					.pipe(
+						map(resp => {
+							return resp[0];
+						})
+					)
+					.subscribe(data => {
+						this.service.lists = {
+							...this.service.lists,
+							[column.listPrefix]: data
+						};
+					});
+			}
+		}
+	}
+
 	getDate(event: any, field: any) {
 		if (event.value) {
 			const format = 'Y-MM-DD';
@@ -100,11 +146,11 @@ export class FiltersComponent implements OnChanges {
 		}
 	}
 
-	toggleFilters() {
-		if (!this.filterOpened) {
-			this.filterOpened = true;
-		} else {
-			this.filterOpened = false;
-		}
-	}
+	// toggleFilters() {
+	// 	if (!this.filterOpened) {
+	// 		this.filterOpened = true;
+	// 	} else {
+	// 		this.filterOpened = false;
+	// 	}
+	// }
 }

@@ -137,4 +137,8 @@ export class TemplatesFormComponent extends CoreFormV2Component
 		console.log(this.service.formInputsCategorized);
 		console.log(this.form.controls);
 	}
+
+	ngOnDestroy(): void {
+		super.ngOnDestroy();
+	}
 }

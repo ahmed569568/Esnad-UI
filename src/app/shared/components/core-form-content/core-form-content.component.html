@@ -2,62 +2,76 @@
 	<div class="full-width">
 		<div fxFlex="" fxLayout="column" class="full-width">
 			<ng-container [ngSwitch]="field.form.formFieldType">
-				<!--				<ng-container *ngSwitchCase="'text'">-->
-				<!--					<div class="field-container">-->
-				<!--						<mat-form-field appearance="outline" class="full-width">-->
-				<!--							<mat-label>-->
-				<!--								<span>{{-->
-				<!--									cid + '.' + (field.form.name ? field.form.name : field.name)-->
-				<!--										| translate-->
-				<!--								}}</span>-->
-				<!--								<span-->
-				<!--									*ngIf="checkRequiredFields(field.name)"-->
-				<!--									class="mat-error required-asterisk inline"-->
-				<!--								>-->
-				<!--									*-->
-				<!--								</span>-->
-				<!--							</mat-label>-->
-				<!--							<div matSuffix *ngIf="field.form.prefix">-->
-				<!--								<ng-container *ngFor="let prefix of field.form.prefix">-->
-				<!--									<ng-container [ngSwitch]="prefix.list.displayType">-->
-				<!--										<ng-container *ngSwitchCase="null">-->
-				<!--											{{-->
-				<!--												prefix.list.translate-->
-				<!--													? (prefix.list.staticText | translate)-->
-				<!--													: prefix.list.staticText-->
-				<!--											}}-->
-				<!--										</ng-container>-->
-				<!--									</ng-container>-->
-				<!--								</ng-container>-->
-				<!--							</div>-->
-
-				<!--							<input type="text" matInput [formControlName]="field.name" />-->
-
-				<!--							<div matSuffix *ngIf="field.form.suffix">-->
-				<!--								<ng-container *ngFor="let suffix of field.form.suffix">-->
-				<!--									<ng-container [ngSwitch]="suffix.list.displayType">-->
-				<!--										<ng-container *ngSwitchCase="null">-->
-				<!--											{{-->
-				<!--												suffix.list.translate-->
-				<!--													? (suffix.list.staticText | translate)-->
-				<!--													: suffix.list.staticText-->
-				<!--											}}-->
-				<!--										</ng-container>-->
-				<!--									</ng-container>-->
-				<!--								</ng-container>-->
-				<!--							</div>-->
-				<!--						</mat-form-field>-->
-				<!--					</div>-->
-				<!--				</ng-container>-->
-
-				<ng-container *ngSwitchCase="'textarea'">
+				<ng-container *ngSwitchCase="'text'">
 					<div class="field-container">
 						<mat-form-field appearance="outline" class="full-width">
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}
+								</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*
+								</span>
+							</mat-label>
+							<div matSuffix *ngIf="field.form.prefix">
+								<ng-container *ngFor="let prefix of field.form.prefix">
+									<ng-container [ngSwitch]="prefix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												prefix.list.translate
+													? (prefix.list.staticText | translate)
+													: prefix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+
+							<input type="text" matInput [formControlName]="field.name" />
+
+							<div matSuffix *ngIf="field.form.suffix">
+								<ng-container *ngFor="let suffix of field.form.suffix">
+									<ng-container [ngSwitch]="suffix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												suffix.list.translate
+													? (suffix.list.staticText | translate)
+													: suffix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+						</mat-form-field>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'textarea'">
+					<div class="field-container">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
+							<mat-label>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -72,12 +86,21 @@
 
 				<ng-container *ngSwitchCase="'colorPicker'">
 					<div class="field-container color-picker-style1 ">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -126,7 +149,11 @@
 				<ng-container *ngSwitchCase="'password'">
 					<div fxFlex fxLayout="column" class="field-container">
 						<div fxFlex fxLayout>
-							<mat-form-field appearance="outline" class="full-width">
+							<mat-form-field
+								appearance="outline"
+								floatLabel="never"
+								class="full-width"
+							>
 								<mat-label>
 									<span>{{
 										cid +
@@ -316,7 +343,11 @@
 						*ngIf="form.controls['password'].enabled"
 					>
 						<div fxFlex fxLayout>
-							<mat-form-field appearance="outline" class="full-width">
+							<mat-form-field
+								appearance="outline"
+								floatLabel="never"
+								class="full-width"
+							>
 								<mat-label>
 									<span>{{
 										cid +
@@ -375,12 +406,21 @@
 
 				<ng-container *ngSwitchCase="'email'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -392,14 +432,24 @@
 						</mat-form-field>
 					</div>
 				</ng-container>
+
 				<ng-container *ngSwitchCase="'multi_select'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -625,9 +675,53 @@
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'tag-input'">
-					{{ 'ngx-chips caused dangirous build issues' }}
+					<!--					{{ 'ngx-chips caused dangirous build issues' }}-->
 					<!--					<tag-input [formControlName]="field.name"></tag-input>-->
 					<!--							<ngx-tags-input class="form-control input-lg" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" [(ngModel)]="tags" name="tags"></ngx-tags-input>-->
+
+					<mat-form-field class="example-chip-list">
+						<mat-chip-list #chipList aria-label="chip selection">
+							<mat-chip
+								*ngFor="let chip of chips"
+								[selectable]="chipsConfigs.selectable"
+								[removable]="chipsConfigs.removable"
+								(removed)="removeChip(chip)"
+							>
+								{{ chip }}
+								<mat-icon matChipRemove *ngIf="chipsConfigs.removable"
+									>cancel</mat-icon
+								>
+							</mat-chip>
+							<input
+								placeholder="{{
+									field?.form?.name
+										? !field?.form?.backEndName
+											? (cid + '.' + field?.form?.name | translate)
+											: field?.form?.name
+										: (cid + '.' + field.name | translate)
+								}}"
+								#chipInput
+								[formControl]="chipsCtrl"
+								[matAutocomplete]="auto"
+								[matChipInputFor]="chipList"
+								[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+								[matChipInputAddOnBlur]="chipsConfigs.addOnBlur"
+								(matChipInputTokenEnd)="addChip($event)"
+							/>
+						</mat-chip-list>
+						<mat-autocomplete
+							#auto="matAutocomplete"
+							(optionSelected)="selectedChip($event)"
+						>
+							<mat-option
+								*ngFor="let chip of filteredChips | async"
+								[value]="chip"
+							>
+								{{ chip }}
+							</mat-option>
+						</mat-autocomplete>
+						<input [formControlName]="field?.name" type="hidden" />
+					</mat-form-field>
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'ng_select_multiple'">
@@ -1009,19 +1103,35 @@
 							color="primary"
 							class="d-flex clearfix pt-2 pb-2"
 							[formControlName]="field.name"
-							>{{ cid + '.' + field.name | translate }}
+						>
+							{{
+								field?.form?.name
+									? !field?.form?.backEndName
+										? (cid + '.' + field?.form?.name | translate)
+										: field?.form?.name
+									: (cid + '.' + field.name | translate)
+							}}
 						</mat-checkbox>
 					</div>
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'datepicker'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" style="width: 100%">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							style="width: 100%"
+						>
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -1048,12 +1158,21 @@
 
 				<ng-container *ngSwitchCase="'select'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field
+							appearance="outline"
+							floatLabel="never"
+							class="full-width"
+						>
 							<mat-label>
-								<span>{{
-									cid + '.' + (field.form.name ? field.form.name : field.name)
-										| translate
-								}}</span>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}</span
+								>
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"

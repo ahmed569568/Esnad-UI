@@ -38,49 +38,55 @@
 														*ngFor="let field of section[1]; trackBy: trackByFn"
 													>
 														<ng-container
-															*ngIf="field?.form && fieldShowConditions(field)"
+															*ngIf="
+																field?.form &&
+																fieldShowConditions(field) &&
+																!field?.form?.hidden
+															"
 														>
-															<app-core-form-content
-																[cid]="service.cid"
-																[service]="service"
-																[field]="field"
-																[form]="form"
-																(showHideChanges)="showHideChanges($event)"
-																[isEdit]="isEdit"
-																[isClone]="isClone"
-																[isSubmitted]="isSubmitted"
-																[fxFlex.gt-lg]="
-																	getInputGridSize(
-																		field.form.grid.gt_lg,
-																		'30px'
-																	)
-																"
-																[fxFlex.lt-xl]="
-																	getInputGridSize(
-																		field.form.grid.lt_xl,
-																		'30px'
-																	)
-																"
-																[fxFlex.lt-lg]="
-																	getInputGridSize(
-																		field.form.grid.lt_lg,
-																		'30px'
-																	)
-																"
-																[fxFlex.lt-md]="
-																	getInputGridSize(
-																		field.form.grid.lt_md,
-																		'30px'
-																	)
-																"
-																[fxFlex.lt-sm]="
-																	getInputGridSize(
-																		field.form.grid.lt_sm,
-																		'30px'
-																	)
-																"
-															>
-															</app-core-form-content>
+															<ng-container>
+																<app-core-form-content
+																	[cid]="service.cid"
+																	[service]="service"
+																	[field]="field"
+																	[form]="form"
+																	(showHideChanges)="showHideChanges($event)"
+																	[isEdit]="isEdit"
+																	[isClone]="isClone"
+																	[isSubmitted]="isSubmitted"
+																	[fxFlex.gt-lg]="
+																		getInputGridSize(
+																			field.form.grid.gt_lg,
+																			'30px'
+																		)
+																	"
+																	[fxFlex.lt-xl]="
+																		getInputGridSize(
+																			field.form.grid.lt_xl,
+																			'30px'
+																		)
+																	"
+																	[fxFlex.lt-lg]="
+																		getInputGridSize(
+																			field.form.grid.lt_lg,
+																			'30px'
+																		)
+																	"
+																	[fxFlex.lt-md]="
+																		getInputGridSize(
+																			field.form.grid.lt_md,
+																			'30px'
+																		)
+																	"
+																	[fxFlex.lt-sm]="
+																		getInputGridSize(
+																			field.form.grid.lt_sm,
+																			'30px'
+																		)
+																	"
+																>
+																</app-core-form-content>
+															</ng-container>
 														</ng-container>
 													</ng-container>
 												</div>
@@ -115,50 +121,56 @@
 															<ng-container *ngFor="let field of section[1]">
 																<ng-container
 																	*ngIf="
-																		field?.form && fieldShowConditions(field)
+																		field?.form &&
+																		fieldShowConditions(field) &&
+																		!field?.form?.hidden
 																	"
 																>
-																	<app-core-form-content
-																		[cid]="service.cid"
-																		[service]="service"
-																		[field]="field"
-																		[form]="form"
-																		(showHideChanges)="showHideChanges($event)"
-																		[isEdit]="isEdit"
-																		[isClone]="isClone"
-																		[isSubmitted]="isSubmitted"
-																		[fxFlex.gt-lg]="
-																			getInputGridSize(
-																				field.form.grid.gt_lg,
-																				'30px'
-																			)
-																		"
-																		[fxFlex.lt-xl]="
-																			getInputGridSize(
-																				field.form.grid.lt_xl,
-																				'30px'
-																			)
-																		"
-																		[fxFlex.lt-lg]="
-																			getInputGridSize(
-																				field.form.grid.lt_lg,
-																				'30px'
-																			)
-																		"
-																		[fxFlex.lt-md]="
-																			getInputGridSize(
-																				field.form.grid.lt_md,
-																				'30px'
-																			)
-																		"
-																		[fxFlex.lt-sm]="
-																			getInputGridSize(
-																				field.form.grid.lt_sm,
-																				'30px'
-																			)
-																		"
-																	>
-																	</app-core-form-content>
+																	<ng-container>
+																		<app-core-form-content
+																			[cid]="service.cid"
+																			[service]="service"
+																			[field]="field"
+																			[form]="form"
+																			(showHideChanges)="
+																				showHideChanges($event)
+																			"
+																			[isEdit]="isEdit"
+																			[isClone]="isClone"
+																			[isSubmitted]="isSubmitted"
+																			[fxFlex.gt-lg]="
+																				getInputGridSize(
+																					field.form.grid.gt_lg,
+																					'30px'
+																				)
+																			"
+																			[fxFlex.lt-xl]="
+																				getInputGridSize(
+																					field.form.grid.lt_xl,
+																					'30px'
+																				)
+																			"
+																			[fxFlex.lt-lg]="
+																				getInputGridSize(
+																					field.form.grid.lt_lg,
+																					'30px'
+																				)
+																			"
+																			[fxFlex.lt-md]="
+																				getInputGridSize(
+																					field.form.grid.lt_md,
+																					'30px'
+																				)
+																			"
+																			[fxFlex.lt-sm]="
+																				getInputGridSize(
+																					field.form.grid.lt_sm,
+																					'30px'
+																				)
+																			"
+																		>
+																		</app-core-form-content>
+																	</ng-container>
 																</ng-container>
 															</ng-container>
 														</div>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DialogComponent } from '@app/shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Component({
 	selector: 'app-list-grid-options',
@@ -15,10 +16,17 @@ export class ListGridOptionsComponent {
 	@Output() switchViewEvent: EventEmitter<any> = new EventEmitter();
 	@Output() doActionEvent: EventEmitter<any> = new EventEmitter();
 
-	constructor(public dialog: MatDialog) {}
+	filterStatus = false;
+
+	constructor(public dialog: MatDialog, private us: UtilitiesService) {}
 
 	doAction(actionType: string, options?: {}) {
 		this.doActionEvent.emit({ actionType, options });
+	}
+
+	toggleFilters() {
+		this.filterStatus = !this.filterStatus;
+		this.us.toggleFilterPanel(this.filterStatus);
 	}
 
 	openDialog(action: string): void {

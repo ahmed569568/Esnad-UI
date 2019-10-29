@@ -39,6 +39,7 @@ export interface ItemProps {
 	initValue?: any;
 	searchable?: any;
 	filterFieldType?: any;
+	escapedField?: string;
 }
 
 export interface Row {

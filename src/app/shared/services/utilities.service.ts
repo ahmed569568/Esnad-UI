@@ -26,6 +26,10 @@ export class UtilitiesService {
 
 	private filter$: Subject<string>;
 
+	filterPanelObservable$: Observable<boolean>;
+	private _filterPanel$: BehaviorSubject<boolean>;
+	_filterPanelState = false;
+
 	constructor() {
 		this.initSubjects();
 	}
@@ -60,6 +64,10 @@ export class UtilitiesService {
 		this.language$.next(lang);
 	}
 
+	toggleFilterPanel(status: boolean) {
+		this._filterPanel$.next(status);
+	}
+
 	initSubjects() {
 		this.paginate$ = new Subject();
 		this.paginateObservable$ = this.paginate$.asObservable();
@@ -69,6 +77,9 @@ export class UtilitiesService {
 
 		this.menu$ = new BehaviorSubject(this._menuState);
 		this.menuObservable$ = this.menu$.asObservable();
+
+		this._filterPanel$ = new BehaviorSubject(this._filterPanelState);
+		this.filterPanelObservable$ = this._filterPanel$.asObservable();
 
 		this.filter$ = new Subject();
 		this.filterObservable$ = this.filter$.asObservable();

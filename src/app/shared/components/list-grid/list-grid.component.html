@@ -21,24 +21,26 @@
 
 			<tbody>
 				<ng-container *ngIf="rows?.data?.length === 0">
-					<h3 class="ion-text-center">
-						{{ 'msg.no_data_founds' | translate }}
-					</h3>
+					<div style="padding: 10px 15px">
+						<h3 class="ion-text-center">
+							{{ 'msg.no_data_founds' | translate }}
+						</h3>
+					</div>
 				</ng-container>
 				<tr *ngFor="let row of rows?.data">
 					<ng-container *ngFor="let column of columns">
 						<ng-container *ngIf="column.listing">
 							<td *ngIf="column.displayType === 'image'">
 								<img
-									style="border-radius: 8px"
+									style="border-radius: 8px; width: 40px; height: 40px"
 									*ngIf="getValue(row, column.prop)"
 									width="40"
 									[src]="
 										getValue(row, column.prop)
 											? environment.imagePath + getValue(row, column.prop)
-											: '../../../../assets/man.jpg'
+											: '/assets/man.jpg'
 									"
-									alt=""
+									[alt]="getValue(row, 'name')"
 								/>
 							</td>
 							<!-- Image TD -->
@@ -110,8 +112,8 @@
 										(click)="doAction('view', row.id)"
 									>
 										<mat-icon matPrefix class="list-action-icon"
-											>visibility</mat-icon
-										>
+											>visibility
+										</mat-icon>
 										<span>{{ 'common.view' | translate }}</span>
 									</button>
 
@@ -134,8 +136,8 @@
 										(click)="openDialog(row, 'archive')"
 									>
 										<mat-icon matPrefix class="list-action-icon"
-											>delete</mat-icon
-										>
+											>delete
+										</mat-icon>
 										<span>{{ 'common.delete' | translate }}</span>
 									</button>
 								</mat-menu>
