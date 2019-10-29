@@ -17,6 +17,8 @@ export abstract class RootV2Service {
 	public resourcesList: any;
 	resources: Subject<any> = new Subject();
 	updateResources: Subject<any> = new Subject();
+	patchValues: Subject<any> = new Subject();
+	formFieldsUpdated: Subject<any> = new Subject();
 
 	formInputsCategorized: any = {};
 
@@ -26,6 +28,7 @@ export abstract class RootV2Service {
 		// 'roles-create': { data: [] }
 		// replaced with key : [] that holds data
 	};
+	stepsCount = 1;
 
 	dummyDataLoader = false;
 
@@ -39,7 +42,9 @@ export abstract class RootV2Service {
 	/**
 	 * define the grid list items (columns)
 	 */
-	featureProps: ItemProps[];
+	defaultFeatureProps: ItemProps[] = [];
+	featureProps: ItemProps[] = [...this.defaultFeatureProps];
+	InputsTree: any;
 
 	protected constructor(
 		protected router: Router,
@@ -48,6 +53,13 @@ export abstract class RootV2Service {
 	) {
 		// Initialize the resourceList as empty array.
 		this.resourcesList = {};
+	}
+
+	/**
+	 * @returns the controller id that predefined in child service
+	 */
+	get cid() {
+		return this.routerPrefix();
 	}
 
 	/**
@@ -108,13 +120,6 @@ export abstract class RootV2Service {
 	 */
 	routerPrefix(val: string = ''): string {
 		return val ? val : '';
-	}
-
-	/**
-	 * @returns the controller id that predefined in child service
-	 */
-	get cid() {
-		return this.routerPrefix();
 	}
 
 	getFunctionURL(action: any, suffix: string = '', prefix: string = '') {
@@ -477,7 +482,7 @@ export abstract class RootV2Service {
 			);
 	}
 
-	refactorListsData(field: string, response: any) {
+	refactorListsData(field: string, response: any, fieldProps?: ItemProps) {
 		return response.response.data;
 	}
 
@@ -511,7 +516,7 @@ export abstract class RootV2Service {
 		this.selectedItems = [];
 	}
 
-	refactorFormBeforeSubmit(formValue: any) {
+	refactorFormBeforeSubmit(formValue: any, formRawValue?: any) {
 		return formValue;
 	}
 
@@ -887,16 +892,38 @@ export abstract class RootV2Service {
 		const field = this.featureProps.find(x => x.name === fieldName);
 		if (url && type) {
 			this.resourceGet(url).subscribe((result: any) => {
-				this.lists[field[type].listPrefix] = result.data;
+				this.lists[field[type].listPrefix] = this.refactorListsData(
+					field.name,
+					result,
+					field
+				);
 			});
 		} else {
 			if (field.list.dataUrl) {
-				this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
-					this.lists[field.list.listPrefix] = result.data;
+				this.resourceGet(
+					field.list.dataUrl,
+					false,
+					{},
+					field.list.listRequestMethod ? field.list.listRequestMethod : 'GET'
+				).subscribe((result: any) => {
+					this.lists[field.list.listPrefix] = this.refactorListsData(
+						field.name,
+						result,
+						field
+					);
 				});
 			} else if (field.form.dataUrl) {
-				this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
-					this.lists[field.form.listPrefix] = result.data;
+				this.resourceGet(
+					field.form.dataUrl,
+					false,
+					{},
+					field.form.listRequestMethod ? field.form.listRequestMethod : 'GET'
+				).subscribe((result: any) => {
+					this.lists[field.form.listPrefix] = this.refactorListsData(
+						field.name,
+						result,
+						field
+					);
 				});
 			} else {
 				return;
@@ -954,10 +981,18 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.list.dataUrl,
+							false,
+							{},
+							field.list.listRequestMethod
+								? field.list.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
-								result
+								result,
+								field
 							);
 						});
 					}
@@ -975,10 +1010,18 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.form.dataUrl,
+							false,
+							{},
+							field.form.listRequestMethod
+								? field.form.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
-								result
+								result,
+								field
 							);
 						});
 					}
@@ -996,10 +1039,18 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.list.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.list.dataUrl,
+							false,
+							{},
+							field.list.listRequestMethod
+								? field.list.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.list.listPrefix] = this.refactorListsData(
 								field.name,
-								result
+								result,
+								field
 							);
 						});
 					} else if (
@@ -1015,10 +1066,18 @@ export abstract class RootV2Service {
 						) {
 							return;
 						}
-						this.resourceGet(field.form.dataUrl).subscribe((result: any) => {
+						this.resourceGet(
+							field.form.dataUrl,
+							false,
+							{},
+							field.form.listRequestMethod
+								? field.form.listRequestMethod
+								: 'GET'
+						).subscribe((result: any) => {
 							this.lists[field.form.listPrefix] = this.refactorListsData(
 								field.name,
-								result
+								result,
+								field
 							);
 						});
 					}
@@ -1032,12 +1091,18 @@ export abstract class RootV2Service {
 	 * @param apiPath path of api resource request
 	 * @param pagination request paginated or not
 	 * @param params parameters to the request
+	 * @param listRequestMethod the request method used to fetch list
 	 */
-	resourceGet(apiPath: string, pagination: boolean = false, params: any = {}) {
+	resourceGet(
+		apiPath: string,
+		pagination: boolean = false,
+		params: any = {},
+		listRequestMethod: string = 'GET'
+	) {
 		if (!pagination) {
 			params.page = 0;
 		}
-		return this.apiRequest('GET', apiPath, {}, {}, params);
+		return this.apiRequest(listRequestMethod, apiPath, {}, {}, params);
 	}
 
 	downloadSampleFile(url: string, fileType: string) {
