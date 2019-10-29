@@ -19,6 +19,8 @@ export interface LoginContext {
 	providedIn: 'root'
 })
 export class AuthenticationService {
+	_userInfo: any;
+
 	constructor(
 		private credentialsService: CredentialsService,
 		private api: ApiRequestService
@@ -43,10 +45,13 @@ export class AuthenticationService {
 		return this.api.post('login', data).pipe(
 			map((resp: ApiResponse) => {
 				if (resp.status_code === 200) {
+					// console.log(info);
 					const credentials = {
 						// id: resp.response.id,
 						token: resp.response.user_token.access_token
 					};
+
+					this.setUserInfo(resp.response.user_info);
 					this.credentialsService.setCredentials(credentials, context.remember);
 				}
 				return resp;
@@ -70,5 +75,15 @@ export class AuthenticationService {
 				return res;
 			})
 		);
+	}
+
+	get userInfo(): any | null {
+		return JSON.parse(localStorage.getItem('user'));
+	}
+
+	setUserInfo(userInfo: any) {
+		if (userInfo) {
+			localStorage.setItem('user', JSON.stringify(userInfo));
+		}
 	}
 }

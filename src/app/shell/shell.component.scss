@@ -227,6 +227,7 @@ mat-drawer-content {
 
 	.user-info-container {
 		justify-content: flex-end;
+		padding-bottom: 8px;
 		.notification-icon {
 			border: 1px solid rgba(49, 56, 83, 0.33);
 			border-radius: 14px;
@@ -268,5 +269,18 @@ mat-drawer-content {
 		margin: 0 auto;
 		width: 214px;
 		height: 40px;
+	}
+}
+
+.user-img-container {
+	border-radius: 14px;
+	height: 48px;
+	width: 48px;
+	display: flex;
+	margin: 6px 0 0 8px;
+	img {
+		border-radius: 14px;
+		height: 100%;
+		width: 100%;
 	}
 }
