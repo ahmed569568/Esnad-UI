@@ -131,7 +131,7 @@ export class TemplatesV2Service extends RootV2Service {
 		return this.doCreate(this.getFunctionURL('create'), data);
 	}
 
-	refactorFormBeforeSubmit(formValue: any): any {
+	refactorFormBeforeSubmit(formValue: any, formRawValue?: any): any {
 		console.log(formValue);
 		const requestMock: ApiRequest = {
 			name: formValue.name,
@@ -163,7 +163,7 @@ export class TemplatesV2Service extends RootV2Service {
 						}[] = [];
 						if (optionsData && optionsData.length) {
 							optionsData.forEach((option: any) => {
-								refactoredOptions.push({ name: option.value });
+								refactoredOptions.push({ name: option });
 							});
 						}
 						requestMock.steps[stepI].forms[formI].fields.push({
@@ -434,7 +434,7 @@ export class TemplatesV2Service extends RootV2Service {
 				],
 				form: {
 					name: 'field_options',
-					Validators: [Validators.required],
+					Validators: [],
 					formFieldType: 'tag-input',
 					listPrefix: fieldOptionsName,
 					groupBy: {

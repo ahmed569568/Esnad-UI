@@ -448,7 +448,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 					.updateItemAsPost(
 						this.itemId,
 						this.toFormData(
-							this.service.refactorFormBeforeSubmit(this.form.value),
+							this.service.refactorFormBeforeSubmit(
+								this.form.value,
+								this.form.getRawValue()
+							),
 							'PUT'
 						)
 					)
@@ -488,7 +491,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 				return this.service
 					.updateItem(
 						this.itemId,
-						this.service.refactorFormBeforeSubmit(this.form.value)
+						this.service.refactorFormBeforeSubmit(
+							this.form.value,
+							this.form.getRawValue()
+						)
 					)
 					.pipe(takeWhile(() => this.alive))
 					.subscribe(
@@ -527,7 +533,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 			this.service
 				.createItem(
 					this.toFormData(
-						this.service.refactorFormBeforeSubmit(this.form.value),
+						this.service.refactorFormBeforeSubmit(
+							this.form.value,
+							this.form.getRawValue()
+						),
 						null,
 						jsonForm
 					)

@@ -3,13 +3,15 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	ElementRef,
 	EventEmitter,
 	Input,
 	OnChanges,
 	OnDestroy,
 	OnInit,
 	Output,
-	SimpleChanges
+	SimpleChanges,
+	ViewChild
 } from '@angular/core';
 import { RootService } from '@app/core/root.service';
 import { ItemProps } from '@app/interfaces-v2';
@@ -24,8 +26,8 @@ import {
 	HideAnimation,
 	showAnimation
 } from '@app/shared/animations/transform-opacity';
-import { takeWhile } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { map, startWith, takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import {
@@ -43,7 +45,11 @@ import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { RootV2Service } from '@app/core/root.service-v2';
 
-import { MatChipInputEvent } from '@angular/material';
+import {
+	MatAutocomplete,
+	MatAutocompleteSelectedEvent,
+	MatChipInputEvent
+} from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 const moment = _rollupMoment || _moment;
@@ -51,6 +57,7 @@ const moment = _rollupMoment || _moment;
 export interface Chip {
 	name: string;
 }
+
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
@@ -124,8 +131,28 @@ export class CoreFormContentComponent
 	imageFieldName: string;
 	alive = true;
 	itemId: number;
-	chipList: Chip[] = [];
-	readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+	chipsConfigs: {
+		visible: boolean;
+		selectable: boolean;
+		removable: boolean;
+		addOnBlur: boolean;
+	} = {
+		visible: true,
+		selectable: true,
+		removable: true,
+		addOnBlur: true
+	};
+	separatorKeysCodes: number[] = [ENTER, COMMA];
+	chipsCtrl: AbstractControl = new FormControl();
+	filteredChips: Observable<string[]>;
+	chips: string[] = [];
+	allChips: string[] = ['Yes', 'No'];
+
+	@ViewChild('chipInput', { static: false }) chipInput: ElementRef<
+		HTMLInputElement
+	>;
+	@ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
 	constructor() // private changeDetectorRef: ChangeDetectorRef,
 	// private controlContainer: ControlContainer,
@@ -179,28 +206,64 @@ export class CoreFormContentComponent
 	}
 
 	addChip(event: MatChipInputEvent): void {
-		const input = event.input;
-		const value = event.value;
+		// Add fruit only when MatAutocomplete is not open
+		// To make sure this does not conflict with OptionSelected Event
+		if (!this.matAutocomplete.isOpen) {
+			const input = event.input;
+			const value = event.value;
 
-		// Add our fruit
-		if ((value || '').trim()) {
-			this.chipList.push({ name: value.trim() });
-		}
+			// Add our fruit
+			if ((value || '').trim()) {
+				this.chips.push(value.trim());
+			}
 
-		// Reset the input value
-		if (input) {
-			input.value = '';
+			// Reset the input value
+			if (input) {
+				input.value = '';
+			}
+
+			this.chipsCtrl.setValue(null);
 		}
+		this.updateChipsValues();
 	}
 
-	removeChip(chip: Chip): void {
-		const index = this.chipList.indexOf(chip);
+	removeChip(fruit: string): void {
+		const index = this.chips.indexOf(fruit);
 
 		if (index >= 0) {
-			this.chipList.splice(index, 1);
+			this.chips.splice(index, 1);
 		}
+		this.updateChipsValues();
 	}
 
+	selectedChip(event: MatAutocompleteSelectedEvent): void {
+		this.chips.push(event.option.viewValue);
+		this.chipInput.nativeElement.value = '';
+		this.chipsCtrl.setValue(null);
+		this.updateChipsValues();
+	}
+
+	_filterChips(value: string): string[] {
+		const filterValue = value.toLowerCase();
+
+		return this.allChips.filter(
+			chip => chip.toLowerCase().indexOf(filterValue) === 0
+		);
+	}
+
+	filteredChipsSubscription() {
+		this.filteredChips = this.chipsCtrl.valueChanges.pipe(
+			startWith(null),
+			takeWhile(() => this.alive),
+			map((chip: string | null) =>
+				chip ? this._filterChips(chip) : this.allChips.slice()
+			)
+		);
+	}
+
+	updateChipsValues() {
+		this.form.controls[this.field.name].setValue(this.chips);
+	}
 	/**
 	 * checks if the control name is required or not from the current validators on it
 	 * why > because template checking doesn't update as you remove the validations and re insert them when live removing inputs
@@ -373,6 +436,9 @@ export class CoreFormContentComponent
 		// this.changeDetectorRef.detectChanges();
 		// this.form.updateValueAndValidity();
 		// console.log(this.form.controls[this.field.name].value)
+
+		// this.chipsCtrl = this.form.controls[this.field.name];
+		this.filteredChipsSubscription();
 	}
 
 	// ngOnChanges(changes: SimpleChanges): void {

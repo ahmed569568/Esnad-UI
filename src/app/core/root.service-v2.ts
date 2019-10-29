@@ -56,6 +56,13 @@ export abstract class RootV2Service {
 	}
 
 	/**
+	 * @returns the controller id that predefined in child service
+	 */
+	get cid() {
+		return this.routerPrefix();
+	}
+
+	/**
 	 * Main method to get resource lists
 	 * @param params: params
 	 * @param archivedList: Flag to check if list is archived list
@@ -113,13 +120,6 @@ export abstract class RootV2Service {
 	 */
 	routerPrefix(val: string = ''): string {
 		return val ? val : '';
-	}
-
-	/**
-	 * @returns the controller id that predefined in child service
-	 */
-	get cid() {
-		return this.routerPrefix();
 	}
 
 	getFunctionURL(action: any, suffix: string = '', prefix: string = '') {
@@ -516,7 +516,7 @@ export abstract class RootV2Service {
 		this.selectedItems = [];
 	}
 
-	refactorFormBeforeSubmit(formValue: any) {
+	refactorFormBeforeSubmit(formValue: any, formRawValue?: any) {
 		return formValue;
 	}
 
