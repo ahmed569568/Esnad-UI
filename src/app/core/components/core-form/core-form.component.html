@@ -149,12 +149,9 @@
 									[value]="item.id"
 								>
 									{{
-										item.name ||
-											item.role ||
-											item.brand_name ||
-											item.model_name ||
-											item.branch_name ||
-											item.address
+										field.translate
+											? (service.cid + '.' + item.name | translate)
+											: item.name
 									}}
 								</mat-option>
 							</mat-select>

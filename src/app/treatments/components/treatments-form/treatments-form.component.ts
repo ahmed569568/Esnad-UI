@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TreatmentsV2Service } from '@app/treatments/treatments-v2.service';
 import { CoreFormV2Component } from '@app/core/components/core-form-v2/core-form-v2.component';
 import { GroupByPipe } from 'ngx-pipes';
+import { MapService } from '@app/shared/services/map.service';
 
 @Component({
 	selector: 'app-treatments-form',
@@ -12,19 +13,30 @@ import { GroupByPipe } from 'ngx-pipes';
 })
 export class TreatmentsFormComponent extends CoreFormV2Component
 	implements OnInit, OnDestroy {
+	mapConfig: any = {
+		type: 'single',
+		drawing: true,
+		drawingType: 'Point'
+	};
+
 	constructor(
 		service: TreatmentsV2Service,
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
-		groupByPipe: GroupByPipe
+		groupByPipe: GroupByPipe,
+		private mapService: MapService
 	) {
 		super(service, fb, activatedRoute, groupByPipe);
 	}
 
 	ngOnInit(): void {
 		super.ngOnInit();
-		if (this.isEdit) {
-		}
+		// if (this.isEdit) {
+		// }
+		this.mapService.drawShape.subscribe(point => {
+			this.form.controls.lat = point.lat;
+			this.form.controls.lng = point.lng;
+		});
 	}
 
 	get lists() {
