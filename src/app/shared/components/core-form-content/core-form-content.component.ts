@@ -1,33 +1,23 @@
 import {
 	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	EventEmitter,
 	Input,
-	OnChanges,
 	OnDestroy,
 	OnInit,
 	Output,
-	SimpleChanges,
 	ViewChild
 } from '@angular/core';
-import { RootService } from '@app/core/root.service';
 import { ItemProps } from '@app/interfaces-v2';
-import {
-	AbstractControl,
-	ControlContainer,
-	FormControl,
-	FormGroup
-} from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import {
 	HideAnimation,
 	showAnimation
 } from '@app/shared/animations/transform-opacity';
 import { map, startWith, takeWhile } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import {
@@ -35,13 +25,12 @@ import {
 	MAT_DATE_FORMATS,
 	MAT_DATE_LOCALE
 } from '@angular/material/core';
-
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
 // syntax. However, rollup creates a synthetic default module and we thus need to import it using
 // the `default as` syntax.
-import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
+import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { RootV2Service } from '@app/core/root.service-v2';
 
