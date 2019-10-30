@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { from, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 import { AppHelper } from '@app/core/classes/app-helper';
 import { AppConfig } from '@app/core/classes/app-config';
@@ -86,7 +86,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 							[field.name]: [
 								{
 									value: field.form.initValue ? field.form.initValue : null,
-									disabled: field.editDisabled && this.isEdit
+									disabled:
+										(field.editDisabled && this.isEdit) || field.form.disabled
 								},
 								field.form.Validators
 							]
@@ -97,7 +98,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 							[field.name]: [
 								{
 									value: field.form.initValue ? field.form.initValue : null,
-									disabled: field.editDisabled && this.isEdit
+									disabled:
+										(field.editDisabled && this.isEdit) || field.form.disabled
 								},
 								field.form.Validators
 							]
@@ -109,7 +111,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 						[field.name]: [
 							{
 								value: field.form.initValue ? field.form.initValue : null,
-								disabled: field.editDisabled && this.isEdit
+								disabled:
+									(field.editDisabled && this.isEdit) || field.form.disabled
 							},
 							field.form.Validators
 						]
@@ -159,7 +162,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 		this.checkFormType();
 		this.groupItemsByGroup();
 		this.createForm();
-
+		this.refreshFormFieldsSubscription();
+		this.patchValuesSubscription();
 		/**
 		 * Check if path contain ID
 		 * return values from item id values
@@ -444,7 +448,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 					.updateItemAsPost(
 						this.itemId,
 						this.toFormData(
-							this.service.refactorFormBeforeSubmit(this.form.value),
+							this.service.refactorFormBeforeSubmit(
+								this.form.value,
+								this.form.getRawValue()
+							),
 							'PUT'
 						)
 					)
@@ -484,7 +491,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 				return this.service
 					.updateItem(
 						this.itemId,
-						this.service.refactorFormBeforeSubmit(this.form.value)
+						this.service.refactorFormBeforeSubmit(
+							this.form.value,
+							this.form.getRawValue()
+						)
 					)
 					.pipe(takeWhile(() => this.alive))
 					.subscribe(
@@ -523,7 +533,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 			this.service
 				.createItem(
 					this.toFormData(
-						this.service.refactorFormBeforeSubmit(this.form.value),
+						this.service.refactorFormBeforeSubmit(
+							this.form.value,
+							this.form.getRawValue()
+						),
 						null,
 						jsonForm
 					)
@@ -752,6 +765,10 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	}
 
 	ngOnDestroy(): void {
+		this.service.featureProps = [...this.service.defaultFeatureProps];
+		this.service.InputsTree = {};
+		this.service.formInputsCategorized = {};
+		this.service.lists = {};
 		this.alive = false;
 	}
 
@@ -861,6 +878,27 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 			.pipe(takeWhile(() => this.alive))
 			.subscribe((input: any) => {
 				this.form.controls[input].setValue(null);
+			});
+	}
+
+	refreshFormFieldsSubscription() {
+		this.service.formFieldsUpdated
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(() => {
+				const formData = this.form.value;
+
+				this.groupItemsByGroup();
+				this.createForm();
+				this.service.loadSelectLists('form', true);
+				this.form.patchValue(formData);
+			});
+	}
+
+	patchValuesSubscription() {
+		this.service.patchValues
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(values => {
+				this.form.patchValue(values);
 			});
 	}
 

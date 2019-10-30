@@ -211,3 +211,9 @@ app-form-footer {
 	//box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 	box-shadow: 5px 0 15px -2px rgba(0, 99, 244, 0.24);
 }
+
+app-roles-form {
+	.mat-form-field-outline {
+		background-color: #f2f7ff !important;
+	}
+}

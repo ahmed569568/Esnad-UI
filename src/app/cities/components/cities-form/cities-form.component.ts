@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-cities-form',
-	templateUrl: 'cities-form.component.html'
+	templateUrl: 'cities-form.component.html',
+	styleUrls: ['cities-form.component.scss']
 })
 export class CitiesFormComponent extends CoreFormComponent
 	implements OnInit, OnDestroy {

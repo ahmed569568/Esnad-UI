@@ -7,7 +7,8 @@ import { ClientsService } from '@app/clients/clients.service';
 
 @Component({
 	selector: 'app-clients-form',
-	templateUrl: './clients-form.component.html'
+	templateUrl: './clients-form.component.html',
+	styleUrls: ['./clients-form.component.scss']
 })
 export class ClientsFormComponent extends CoreFormComponent
 	implements OnInit, OnDestroy {

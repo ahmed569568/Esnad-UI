@@ -57,6 +57,7 @@ export interface ItemProps {
 		icon?: Icon;
 
 		listPrefix?: string; // if formFieldType is select, It defines the list prefix which filled in service.lists[prefix]
+		listRequestMethod?: string;
 		dataUrl?: string; // if formFieldType is select, it defines the list api url which fills the service.lists[prefix]
 
 		onChange?: boolean;
@@ -84,16 +85,20 @@ export interface ItemProps {
 	};
 	form?: {
 		name?: string; // for a case when you want the key passed to form translation is different than the main one
+		backEndName?: boolean; // for translating name or not
 		Validators: Validators[]; // Validators => Required
 		inputValueType?: string; // [formData, base64_img] (images)
 		formFieldType: string; // [text, email, select, color_picker, number, file_input]
 		listPrefix?: string; // if formFieldType is select, It defines the list prefix which filled in service.lists[prefix]
+		listRequestMethod?: string;
 		dataUrl?: string; // if formFieldType is select, it defines the list api url which fills the service.lists[prefix]
 		placeHolder?: string; // if formFieldType is image can set a placeholder when image isn't set
 		initValue?: any; // Init Value if provided then form will init with it
 		cssClass?: string;
 		gridCssClass?: string;
 		ngSelectOptions?: NgSelectOptions;
+		disabled?: boolean;
+		hidden?: boolean;
 		grid?: {
 			gt_lg?: string;
 			lt_xl?: string;

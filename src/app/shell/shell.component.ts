@@ -19,7 +19,8 @@ import { UtilitiesService } from '@app/shared/services/utilities.service';
 export class ShellComponent implements OnInit {
 	menuItems = new MenuItems();
 	environment = environment;
-	isWide = true;
+	isWide = false;
+	authInfo: any;
 
 	constructor(
 		private router: Router,
@@ -31,7 +32,9 @@ export class ShellComponent implements OnInit {
 		private us: UtilitiesService
 	) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.getUserData();
+	}
 
 	setLanguage(language: string) {
 		this.i18nService.language = language;
@@ -80,5 +83,11 @@ export class ShellComponent implements OnInit {
 		} else {
 			this.isWide = false;
 		}
+	}
+
+	getUserData() {
+		this.authInfo = this.authenticationService.userInfo
+			? this.authenticationService.userInfo
+			: '';
 	}
 }

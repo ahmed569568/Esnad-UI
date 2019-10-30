@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiRequestService } from '@app/core/http/api-request.service';
 import { ItemProps } from '@app/interfaces-v2';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
-import { CustomValidators } from '@app/core/classes/custom-validations';
 import { RootV2Service } from '@app/core/root.service-v2';
 import { SharedService } from '@app/shared/services/shared.service';
 import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
@@ -50,7 +47,7 @@ export class TemplatesV2Service extends RootV2Service {
 		steps: []
 	};
 
-	featureProps: ItemProps[] = [
+	defaultFeatureProps: ItemProps[] = [
 		{
 			name: 'name',
 			prop: 'name',
@@ -84,6 +81,7 @@ export class TemplatesV2Service extends RootV2Service {
 			}
 		}
 	];
+	featureProps: ItemProps[] = this.defaultFeatureProps;
 
 	constructor(router: Router, api: ApiRequestV2Service, shared: SharedService) {
 		super(router, api, shared);
@@ -130,7 +128,7 @@ export class TemplatesV2Service extends RootV2Service {
 		return this.doCreate(this.getFunctionURL('create'), data);
 	}
 
-	refactorFormBeforeSubmit(formValue: any): any {
+	refactorFormBeforeSubmit(formValue: any, formRawValue?: any): any {
 		console.log(formValue);
 		const requestMock: ApiRequest = {
 			name: formValue.name,
@@ -162,7 +160,7 @@ export class TemplatesV2Service extends RootV2Service {
 						}[] = [];
 						if (optionsData && optionsData.length) {
 							optionsData.forEach((option: any) => {
-								refactoredOptions.push({ name: option.value });
+								refactoredOptions.push({ name: option });
 							});
 						}
 						requestMock.steps[stepI].forms[formI].fields.push({
@@ -215,6 +213,10 @@ export class TemplatesV2Service extends RootV2Service {
 	addStep() {
 		const stepFormName = `step_${this.stepsCount}_name`;
 		const stepFormTypeId = `step_${this.stepsCount}_typeId`;
+		const stepInitValue =
+			this.shared.translate.instant('templates.step_placeholder') +
+			' ' +
+			this.stepsCount;
 
 		const stepDefaultInputs: ItemProps[] = [
 			{
@@ -224,6 +226,7 @@ export class TemplatesV2Service extends RootV2Service {
 					name: 'step_name',
 					Validators: [Validators.required],
 					formFieldType: 'text',
+					initValue: stepInitValue,
 					groupBy: {
 						tabGroup: {
 							tabGroupName: 'templateAccordion',
@@ -280,12 +283,12 @@ export class TemplatesV2Service extends RootV2Service {
 		const stepObj = this.InputsTree.steps.find(
 			value => value.name === 'step_' + stepNumber
 		);
-		const formsLength = stepObj.forms.length;
+		const formsLength = stepObj.forms.length ? stepObj.forms.length : 0;
+		const formNumber = formsLength + 1;
 		stepObj.forms.push({
-			name: 'form_' + (formsLength + 1),
+			name: 'form_' + formNumber,
 			fields: []
 		});
-		const formNumber = formsLength ? formsLength : 1;
 
 		const formObj = stepObj.forms.find(
 			value => value.name === 'form_' + formNumber
@@ -302,6 +305,10 @@ export class TemplatesV2Service extends RootV2Service {
 		}
 
 		const stepFormName = `step_${stepNumber}_form_${formNumber}_name`;
+		const stepFormInitValue =
+			this.shared.translate.instant('templates.form_placeholder') +
+			' ' +
+			formNumber;
 
 		const stepDefaultInputs: ItemProps[] = [
 			{
@@ -311,6 +318,7 @@ export class TemplatesV2Service extends RootV2Service {
 					name: 'form_name',
 					Validators: [Validators.required],
 					formFieldType: 'text',
+					initValue: stepFormInitValue,
 					groupBy: {
 						tabGroup: {
 							tabGroupName: 'templateAccordion',
@@ -355,6 +363,10 @@ export class TemplatesV2Service extends RootV2Service {
 		const fieldTypeName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldType`;
 		const fieldOptionsName = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldOptions`;
 		const fieldCols = `step_${stepNumber}_form_${formNumber}_field_${fieldNumber}_fieldCols`;
+		const fieldInitValue =
+			this.shared.translate.instant('templates.field_placeholder') +
+			' ' +
+			fieldNumber;
 
 		const stepDefaultInputs: ItemProps[] = [
 			{
@@ -364,6 +376,7 @@ export class TemplatesV2Service extends RootV2Service {
 					name: 'field_name',
 					Validators: [Validators.required],
 					formFieldType: 'text',
+					initValue: fieldInitValue,
 					groupBy: {
 						tabGroup: {
 							tabGroupName: 'templateAccordion',
@@ -418,7 +431,7 @@ export class TemplatesV2Service extends RootV2Service {
 				],
 				form: {
 					name: 'field_options',
-					Validators: [Validators.required],
+					Validators: [],
 					formFieldType: 'tag-input',
 					listPrefix: fieldOptionsName,
 					groupBy: {
