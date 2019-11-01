@@ -62,24 +62,44 @@
 				<div class="treatments-number">
 					<span>432</span>
 				</div>
-				<span id="old-treats">{{ 'dashboard.old-treats' | translate }}</span>
-				<span class="on-hold"
-					>{{ 'dashboard.on-hold' | translate }} ( 81 )</span
-				>
+				<span class="old-treats">{{ 'dashboard.old' | translate }}</span>
+				<span class="old-treats">{{ 'dashboard.treats' | translate }}</span>
+				<span class="on-hold">{{ 'dashboard.on-hold' | translate }} (81)</span>
 			</div>
 
 			<div *ngFor="let day of weekDays" class="daily-treatments">
-				<div class="single-daily-treatment" fxFlex="" fxLayout="column">
-					<div class="treatments-number">
+				<div
+					class="single-daily-treatment"
+					fxFlex=""
+					fxLayout="column"
+					fxLayoutAlign="space-between center"
+				>
+					<div fxFlex="" class="treatments-number">
 						<span>0/0</span>
 					</div>
-					<span id="day-name">{{ 'dashboard.' + day.day | translate }}</span>
-					<span class="date">{{ day.date }}</span>
-					<span class="on-hold-empty"
-						>{{ 'dashboard.on-hold' | translate }} ( 81 )</span
-					>
+					<div fxFlex="" style="text-align: center">
+						<div id="day-name">{{ 'dashboard.' + day.day | translate }}</div>
+						<div class="date">{{ day.date }}</div>
+						<div class="on-hold-empty">
+							{{ 'dashboard.on-hold' | translate }} (0)
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div
+		class="btns-container"
+		fxFlex=""
+		fxLayout="row"
+		fxLayoutAlign="flex-start center"
+		fxLayoutGap="8px"
+	>
+		<ng-container *ngFor="let button of buttons">
+			<button class="btn" mat-raised-button>
+				{{ 'dashboard.' + button.name | translate }}
+			</button>
+		</ng-container>
 	</div>
 </div>

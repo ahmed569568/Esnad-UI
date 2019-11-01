@@ -55,6 +55,13 @@ export class DashboardComponent implements OnInit {
 		{ day: 'friday', date: '8-11-2019', noHold: 0 }
 	];
 
+	public buttons: Array<object> = [
+		{ name: 'clients_follow_up' },
+		{ name: 'previewers_follow_up' },
+		{ name: 'appraisers_follow_up' },
+		{ name: 'open_treatment' }
+	];
+
 	constructor() {}
 
 	ngOnInit() {}
