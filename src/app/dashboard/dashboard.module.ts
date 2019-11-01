@@ -8,6 +8,7 @@ import { MaterialModule } from '@app/material.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from '@app/dashboard/dashboard.component';
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
 	imports: [
@@ -16,7 +17,8 @@ import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.
 		SharedModule,
 		FlexLayoutModule,
 		MaterialModule,
-		DashboardRoutingModule
+		DashboardRoutingModule,
+		ChartsModule
 	],
 	declarations: [DashboardComponent, VehiclesListComponent]
 })
