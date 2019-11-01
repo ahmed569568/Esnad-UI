@@ -1,47 +1,68 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DashboardService } from '@app/dashboard/dashboard.service';
-import { SocketService } from '@app/core/http/socket.service';
-import { takeWhile } from 'rxjs/operators';
-import { ApiRequestService } from '@app/core/http/api-request.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-	mapConfig = {
-		type: 'group',
-		field: 'control'
-	};
-	alive = true;
+export class DashboardComponent implements OnInit {
+	public summary: Array<object> = [
+		{
+			name: 'under_pricing',
+			quantity: 246,
+			color: '#F59C1A',
+			footerBgColor: '#935E10'
+		},
+		{
+			name: 'held_treatments',
+			quantity: 81,
+			color: '#E02551',
+			footerBgColor: '#861631'
+		},
+		{
+			name: 'audit_treatments',
+			quantity: 99,
+			color: '#5DA5E8',
+			footerBgColor: '#38638B'
+		},
+		{
+			name: 'accreditation_treatments',
+			quantity: 87,
+			color: '#348FE2',
+			footerBgColor: '#1F5688'
+		},
+		{
+			name: 'approved_treatments',
+			quantity: 21,
+			color: '#00ACAC',
+			footerBgColor: '#006767'
+		},
+		{
+			name: 'archived_treatments',
+			quantity: 170,
+			color: '#2D353C',
+			footerBgColor: '#1B2024'
+		}
+	];
 
-	constructor(
-		private service: DashboardService,
-		private socket: SocketService
-	) {}
+	public weekDays: Array<object> = [
+		{ day: 'saturday', date: '2-11-2019', noHold: 0 },
+		{ day: 'sunday', date: '3-11-2019', noHold: 0 },
+		{ day: 'monday', date: '4-11-2019', noHold: 0 },
+		{ day: 'tuesday', date: '5-11-2019', noHold: 0 },
+		{ day: 'wednesday', date: '6-11-2019', noHold: 0 },
+		{ day: 'thursday', date: '7-11-2019', noHold: 0 },
+		{ day: 'friday', date: '8-11-2019', noHold: 0 }
+	];
 
-	ngOnInit() {
-		this.socket.dataListener
-			.pipe(takeWhile(() => this.alive))
-			.subscribe(data => {
-				this.service.lists.control.data.find((p: any) => {
-					if (p.id !== +data.ride_id) {
-						return;
-					}
-					const updated = { ...p, location: data.data };
-					const removedItem = this.service.lists.control.data.indexOf(
-						this.service.lists.control.data.find(
-							(t: any) => t.id === +data.ride_id
-						)
-					);
-					this.service.lists.control.data.splice(removedItem, 1);
-					this.service.lists.control.data.push(updated);
-				});
-			});
-	}
+	public buttons: Array<object> = [
+		{ name: 'clients_follow_up' },
+		{ name: 'previewers_follow_up' },
+		{ name: 'appraisers_follow_up' },
+		{ name: 'open_treatment' }
+	];
 
-	ngOnDestroy() {
-		this.alive = false;
-	}
+	constructor() {}
+
+	ngOnInit() {}
 }
