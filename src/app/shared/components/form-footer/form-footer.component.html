@@ -1,13 +1,14 @@
 <div class="container">
 	<button
 		class="submit"
-		mat-button
+		mat-raised-button
+		color="primary"
 		(click)="submit.emit()"
 		[disabled]="!form.valid"
 	>
 		{{ 'common.save' | translate }}
 	</button>
-	<button class="cancel" mat-button (click)="backClicked()">
+	<button class="cancel" mat-raised-button color="warn" (click)="backClicked()">
 		{{ 'common.cancel' | translate }}
 	</button>
 </div>

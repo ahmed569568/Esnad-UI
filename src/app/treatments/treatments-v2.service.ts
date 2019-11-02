@@ -39,6 +39,40 @@ export interface TreatmentApiRequest {
 	client_id?: number;
 	template_id?: number;
 	status?: string;
+
+	category_id?: number;
+	purpose_id?: number;
+	city_level_1?: number;
+	city_level_2?: number;
+	city_level_3?: number;
+	city_level_4?: number;
+	city_level_5?: number;
+	price_id?: number;
+	owner?: string;
+	owner_phone?: string;
+	evaluation_provider?: string;
+	evaluation_provider_phone?: string;
+	evaluation_provider_id?: number;
+	request_date?: string;
+	delivery_date?: string;
+	request_number?: number;
+	real_estate_code?: string;
+	planned_number?: number;
+	piece_number?: number;
+	apartment_number?: number;
+	floor?: number;
+	document_number?: number;
+	document_date?: string;
+	document_location?: string;
+	no_building_clearance?: number;
+	building_clearance_date?: string;
+	space?: number;
+	location?: {
+		address?: string;
+		lat?: string;
+		lng?: string;
+	};
+
 	steps?: {
 		group_id?: number;
 		assign_to?: number;
@@ -80,39 +114,51 @@ export class TreatmentsV2Service extends RootV2Service {
 
 	defaultFeatureProps: ItemProps[] = [
 		{
-			name: 'templateId',
-			prop: 'templateId',
+			name: 'template_id',
+			prop: 'template_id',
 			form: {
 				Validators: [],
 				formFieldType: 'ng_select',
 				dataUrl: 'treatments/templates/index',
-				listPrefix: 'templateId',
+				listPrefix: 'template_id',
 				// listRequestMethod: 'post',
 				onChange: true,
 				grid: {
-					gt_lg: '30%',
-					lt_xl: '30%',
-					lt_lg: '30%',
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
 					lt_md: '50%',
 					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
 				}
 			}
 		},
+
 		{
 			name: 'status',
 			prop: 'status',
 			form: {
 				Validators: [],
 				formFieldType: 'ng_select',
-				// dataUrl: 'treatments/clients/index',
-				initValue: 'open',
-				listPrefix: 'status',
+				dataUrl: 'treatments/status',
+				listPrefix: 'treatmentsStatus',
 				grid: {
-					gt_lg: '30%',
-					lt_xl: '30%',
-					lt_lg: '30%',
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
 					lt_md: '50%',
 					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
 				}
 			}
 		},
@@ -126,14 +172,798 @@ export class TreatmentsV2Service extends RootV2Service {
 				dataUrl: 'templates/clients/index',
 				listPrefix: 'clients',
 				grid: {
-					gt_lg: '30%',
-					lt_xl: '30%',
-					lt_lg: '30%',
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
 					lt_md: '50%',
 					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'category_id',
+			prop: 'category_id',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'categories/index',
+				listPrefix: 'categories',
+				listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'purpose_id',
+			prop: 'purpose_id',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'purposes/index',
+				listPrefix: 'purposes',
+				listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'price_id',
+			prop: 'price_id',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'prices/index',
+				listPrefix: 'prices',
+				listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'owner',
+			prop: 'owner',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'text',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '50%',
+					lt_xl: '50%',
+					lt_lg: '50%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'owner_phone',
+			prop: 'owner_phone',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '50%',
+					lt_xl: '50%',
+					lt_lg: '50%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'evaluation_provider',
+			prop: 'evaluation_provider',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'text',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'evaluation_provider_phone',
+			prop: 'evaluation_provider_phone',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'evaluation_provider_id',
+			prop: 'evaluation_provider_id',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'request_date',
+			prop: 'request_date',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'datepicker',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '50%',
+					lt_xl: '50%',
+					lt_lg: '50%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'delivery_date',
+			prop: 'delivery_date',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'datepicker',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '50%',
+					lt_xl: '50%',
+					lt_lg: '50%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'request_number',
+			prop: 'request_number',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'real_estate_code',
+			prop: 'real_estate_code',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'text',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'planned_number',
+			prop: 'planned_number',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'piece_number',
+			prop: 'piece_number',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'apartment_number',
+			prop: 'apartment_number',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'floor',
+			prop: 'floor',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'document_number',
+			prop: 'document_number',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'document_date',
+			prop: 'document_date',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'datepicker',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'document_location',
+			prop: 'document_location',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'text',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'no_building_clearance',
+			prop: 'no_building_clearance',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'building_clearance_date',
+			prop: 'building_clearance_date',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'datepicker',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'space',
+			prop: 'space',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'number',
+				// dataUrl: 'prices/index',
+				// listPrefix: 'prices',
+				// listRequestMethod: 'POST',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+
+		/////// cities /////////
+		{
+			name: 'city_level_1',
+			prop: 'city_level_1',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'cities/1/select',
+				listPrefix: 'city_level_1',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'city_levels',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'city_level_2',
+			prop: 'city_level_2',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'cities/2/select',
+				listPrefix: 'city_level_2',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'city_levels',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'city_level_3',
+			prop: 'city_level_3',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'cities/3/select',
+				listPrefix: 'city_level_3',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'city_levels',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'city_level_4',
+			prop: 'city_level_4',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'cities/4/select',
+				listPrefix: 'city_level_4',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'city_levels',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'city_level_5',
+			prop: 'city_level_5',
+			form: {
+				Validators: [],
+				// disabled: true,
+				formFieldType: 'ng_select',
+				dataUrl: 'cities/5/select',
+				listPrefix: 'city_level_5',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '50%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'city_levels',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		/////// cities /////////
+
+		// locations section ///
+		{
+			name: 'location_map',
+			prop: 'location_map',
+			form: {
+				Validators: [],
+				formFieldType: 'map',
+				mapOptions: {
+					mapId: 'treatments_form_map',
+					height: '300px',
+					mapConfig: {
+						type: 'single',
+						drawing: true,
+						drawingType: 'Point'
+					}
+				},
+				grid: {
+					gt_lg: '100%',
+					lt_xl: '100%',
+					lt_lg: '100%',
+					lt_md: '100%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'locationSection',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'address',
+			prop: 'address',
+			form: {
+				Validators: [],
+				formFieldType: 'text',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'locationSection',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'lat',
+			prop: 'lat',
+			form: {
+				Validators: [],
+				formFieldType: 'text',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'locationSection',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
+				}
+			}
+		},
+		{
+			name: 'lng',
+			prop: 'lng',
+			form: {
+				Validators: [],
+				formFieldType: 'text',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
+					lt_sm: '100%'
+				},
+				groupBy: {
+					section: 'locationSection',
+					tabGroup: {
+						tabGroupName: 'templateAccordionStatic',
+						tabName: 'step_staticFields'
+					}
 				}
 			}
 		}
+		// locations section ///
 	];
 	featureProps: ItemProps[] = [...this.defaultFeatureProps];
 
@@ -172,21 +1002,11 @@ export class TreatmentsV2Service extends RootV2Service {
 				id: '4'
 			}
 		];
-		this.lists.status = [
-			{
-				name: 'open',
-				id: 'open'
-			},
-			{
-				name: 'closed',
-				id: 'closed'
-			}
-		];
 	}
 
 	onChangedValue(column: ItemProps, event: any) {
 		super.onChangedValue(column, event);
-		if (column.name === 'templateId') {
+		if (column.name === 'template_id') {
 			// console.log(event.id);
 			this.InputsTree = { steps: [] };
 			this.formInputsCategorized = {};
@@ -301,8 +1121,45 @@ export class TreatmentsV2Service extends RootV2Service {
 		const requestMock: TreatmentApiRequest = {
 			name: formValue.name,
 			client_id: formValue.client_id,
-			template_id: formRawValue.templateId,
+			template_id: formRawValue.template_id,
 			status: formValue.status,
+
+			category_id: formValue.category_id,
+			purpose_id: formValue.purpose_id,
+			city_level_1: formValue.city_level_1,
+			city_level_2: formValue.city_level_2,
+			city_level_3: formValue.city_level_3,
+			city_level_4: formValue.city_level_4,
+			city_level_5: formValue.city_level_5,
+			price_id: formValue.price_id,
+			owner: formValue.owner,
+			owner_phone: formValue.owner_phone,
+			evaluation_provider: formValue.evaluation_provider,
+			evaluation_provider_phone: formValue.evaluation_provider_phone,
+			evaluation_provider_id: formValue.evaluation_provider_id,
+			request_date: formValue.request_date,
+			delivery_date: formValue.delivery_date,
+			request_number: formValue.request_number,
+			real_estate_code: formValue.real_estate_code,
+			planned_number: formValue.planned_number,
+			piece_number: formValue.piece_number,
+			apartment_number: formValue.apartment_number,
+			floor: formValue.floor,
+			document_number: formValue.document_number,
+			document_date: formValue.document_date,
+			document_location: formValue.document_location,
+			no_building_clearance: formValue.no_building_clearance,
+			building_clearance_date: formValue.building_clearance_date,
+			space: formValue.space,
+			location: {
+				// sends dummy data if data isn't saved for now
+				// todo: remove the dummy data after fixing map
+				address: formValue.address
+					? formValue.address
+					: 'Al Marqab District, Al Batha Muncipality, Riyadh, Riyadh Region, 11131, Saudi Arabia',
+				lat: formValue.lat ? formValue.lat : '24.6317260860661',
+				lng: formValue.lng ? formValue.lng : '46.7174655054535'
+			},
 			steps: []
 		};
 		this.InputsTree.steps.forEach((step, stepI) => {
@@ -346,17 +1203,10 @@ export class TreatmentsV2Service extends RootV2Service {
 
 	refactorListsData(field: string, response: any, fieldProps?: ItemProps) {
 		if (response) {
-			if (field === 'client_id' || fieldProps.form.listPrefix === 'groups') {
-				if (response.response && response.response.length) {
-					response.response.forEach((item: any) => {
-						if (item.full_name) {
-							item.name = item.full_name;
-						}
-					});
-				}
-				return response.response;
-			}
-			if (fieldProps.form.listPrefix === 'employees') {
+			if (
+				fieldProps.form.listPrefix === 'groups' ||
+				fieldProps.form.listPrefix === 'prices'
+			) {
 				if (
 					response.response &&
 					response.response.data &&
@@ -370,12 +1220,45 @@ export class TreatmentsV2Service extends RootV2Service {
 				}
 				return response.response.data;
 			}
-			if (field === 'templateId') {
+			if (
+				fieldProps.form.listPrefix === 'city_level_1' ||
+				fieldProps.form.listPrefix === 'city_level_2' ||
+				fieldProps.form.listPrefix === 'city_level_3' ||
+				fieldProps.form.listPrefix === 'city_level_4' ||
+				fieldProps.form.listPrefix === 'city_level_5'
+			) {
 				if (response.response && response.response.length) {
-					// response.response.data.forEach((item: any) => {
-					//
-					// });
-					// console.log(response.response.data);
+					return response.response[0];
+				}
+			}
+			if (
+				fieldProps.form.listPrefix === 'employees' ||
+				fieldProps.form.listPrefix === 'categories' ||
+				fieldProps.form.listPrefix === 'purposes'
+			) {
+				if (
+					response.response &&
+					response.response.data &&
+					response.response.data.length
+				) {
+					response.response.data.forEach((item: any) => {
+						if (item.full_name) {
+							item.name = item.full_name;
+						}
+					});
+				}
+				return response.response.data;
+			}
+			if (
+				fieldProps.form.listPrefix === 'template_id' ||
+				fieldProps.form.listPrefix === 'clients'
+			) {
+				if (response.response && response.response.length) {
+					response.response.forEach((item: any) => {
+						if (item.full_name) {
+							item.name = item.full_name;
+						}
+					});
 					return response.response;
 				}
 			}
@@ -664,7 +1547,7 @@ export class TreatmentsV2Service extends RootV2Service {
 		}
 
 		this.featureProps = [...this.featureProps, ...stepDefaultInputs];
-		console.log(this.featureProps);
+		// console.log(this.featureProps);
 		// this.stepsCount++;
 		// console.log(this.InputsTree);
 	}

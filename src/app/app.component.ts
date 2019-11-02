@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
 		private activatedRoute: ActivatedRoute,
 		private titleService: Title,
 		private translateService: TranslateService,
-		private i18nService: I18nService
+		private i18nService: I18nService,
+		public viewContainerRef: ViewContainerRef
 	) {}
 
 	ngOnInit() {

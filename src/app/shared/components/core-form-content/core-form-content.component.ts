@@ -7,7 +7,8 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	ViewChild
+	ViewChild,
+	ViewContainerRef
 } from '@angular/core';
 import { ItemProps } from '@app/interfaces-v2';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
@@ -132,18 +133,20 @@ export class CoreFormContentComponent
 		removable: true,
 		addOnBlur: true
 	};
-	separatorKeysCodes: number[] = [ENTER, COMMA];
+	separatorKeysCodes: number[] = [ENTER];
 	chipsCtrl: AbstractControl = new FormControl();
 	filteredChips: Observable<string[]>;
 	chips: string[] = [];
-	allChips: string[] = ['Yes', 'No'];
+	allChips: string[] = [];
 
 	@ViewChild('chipInput', { static: false }) chipInput: ElementRef<
 		HTMLInputElement
 	>;
 	@ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
-	constructor() // private changeDetectorRef: ChangeDetectorRef,
+	constructor(
+		public viewContainerRef: ViewContainerRef
+	) // private changeDetectorRef: ChangeDetectorRef,
 	// private controlContainer: ControlContainer,
 	{}
 
