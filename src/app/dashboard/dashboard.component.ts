@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit {
 
 	data: any;
 	clients: Client[] = [];
+	employees: Employee[] = [];
 	environment = environment;
 
 	constructor(private service: DashboardService) {}
@@ -77,7 +78,11 @@ export class DashboardComponent implements OnInit {
 			this.initStatus(dashboard.by_status);
 			this.initWeekdays(dashboard.by_week_days);
 			this.initClients(dashboard.by_clients);
+			this.initEmployees(dashboard.by_employees);
 		});
+	}
+	initEmployees(data: Employee[]) {
+		this.employees = data;
 	}
 
 	initClients(data: Client[]) {
@@ -92,7 +97,8 @@ export class DashboardComponent implements OnInit {
 
 	initWeekdays(data: any) {
 		for (const weekday of this.weekDays) {
-			weekday.noHold = data[weekday.day];
+			weekday.noHold = data[weekday.day]['count'];
+			weekday.date = data[weekday.day]['date'];
 		}
 	}
 }
@@ -110,4 +116,10 @@ interface Client {
 	under_accreditation: number;
 	under_audit: number;
 	under_evaluation: number;
+}
+
+interface Employee {
+	full_name: string;
+	photo: string;
+	treatments: number;
 }

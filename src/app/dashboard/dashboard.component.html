@@ -38,7 +38,37 @@
 			</div>
 		</div>
 		<div class="my-treatments-section-body body-bg-white" fxFlex="">
-			<span>{{ 'dashboard.no-treatments' | translate }}</span>
+			<span *ngIf="!employees.length">{{
+				'dashboard.no-treatments' | translate
+			}}</span>
+			<div
+				*ngFor="let employee of employees"
+				class="main-card"
+				fxFlex="20"
+				fxLayout="column"
+			>
+				<div
+					class="card-header"
+					fxFlex=""
+					fxLayout=""
+					fxLayoutAlign="space-between center"
+				>
+					<div fxFlex="75" fxLayoutAlign="flex-start">
+						<img
+							style="width: 50px; height: auto"
+							[src]="environment.imagePath + employee.photo"
+							[alt]="employee.full_name"
+						/>
+					</div>
+					<div fxFlex="25" fxLayoutAlign="flex-end">
+						<span class="number">{{ employee.treatments }}</span>
+					</div>
+				</div>
+
+				<div class="table-header">
+					{{ employee.full_name }}
+				</div>
+			</div>
 		</div>
 	</div>
 
