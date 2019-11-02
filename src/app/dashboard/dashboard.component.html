@@ -26,56 +26,56 @@
 		</div>
 	</div>
 
-	<div class="my-treatments-container" fxFlex="" fxLayout="column">
-		<div class="title-bar title-bar-bg-dark" fxFlex="" fxLayout="">
-			<div class="right-section">
-				{{ 'dashboard.my-treatments' | translate }} (
-				{{ 'dashboard.evaluation' | translate }} )
-			</div>
-			<div class="left-section" fxFlex="" fxLayout="">
-				<mat-icon
-					class="mdi-icon"
-					svgIcon="arrow-top-right-bottom-left"
-				></mat-icon>
-				<mat-icon>refresh</mat-icon>
-				<mat-icon class="mdi-icon" svgIcon="window-minimize"></mat-icon>
-				<mat-icon>close</mat-icon>
-			</div>
-		</div>
-		<div class="my-treatments-section-body body-bg-white" fxFlex="">
-			<span *ngIf="!employees.length">{{
-				'dashboard.no-treatments' | translate
-			}}</span>
-			<div
-				*ngFor="let employee of employees"
-				class="main-card"
-				fxFlex="20"
-				fxLayout="column"
-			>
-				<div
-					class="card-header"
-					fxFlex=""
-					fxLayout=""
-					fxLayoutAlign="space-between center"
-				>
-					<div fxFlex="75" fxLayoutAlign="flex-start">
-						<img
-							style="width: 50px; height: auto"
-							[src]="environment.imagePath + employee.photo"
-							[alt]="employee.full_name"
-						/>
-					</div>
-					<div fxFlex="25" fxLayoutAlign="flex-end">
-						<span class="number">{{ employee.treatments }}</span>
-					</div>
-				</div>
+	<!--	<div class="my-treatments-container" fxFlex="" fxLayout="column">-->
+	<!--		<div class="title-bar title-bar-bg-dark" fxFlex="" fxLayout="">-->
+	<!--			<div class="right-section">-->
+	<!--				{{ 'dashboard.my-treatments' | translate }} (-->
+	<!--				{{ 'dashboard.evaluation' | translate }} )-->
+	<!--			</div>-->
+	<!--			<div class="left-section" fxFlex="" fxLayout="">-->
+	<!--				<mat-icon-->
+	<!--					class="mdi-icon"-->
+	<!--					svgIcon="arrow-top-right-bottom-left"-->
+	<!--				></mat-icon>-->
+	<!--				<mat-icon>refresh</mat-icon>-->
+	<!--				<mat-icon class="mdi-icon" svgIcon="window-minimize"></mat-icon>-->
+	<!--				<mat-icon>close</mat-icon>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--		<div class="my-treatments-section-body body-bg-white" fxFlex="">-->
+	<!--			<span *ngIf="!employees.length">{{-->
+	<!--				'dashboard.no-treatments' | translate-->
+	<!--			}}</span>-->
+	<!--			<div-->
+	<!--				*ngFor="let employee of employees"-->
+	<!--				class="main-card"-->
+	<!--				fxFlex="20"-->
+	<!--				fxLayout="column"-->
+	<!--			>-->
+	<!--				<div-->
+	<!--					class="card-header"-->
+	<!--					fxFlex=""-->
+	<!--					fxLayout=""-->
+	<!--					fxLayoutAlign="space-between center"-->
+	<!--				>-->
+	<!--					<div fxFlex="75" fxLayoutAlign="flex-start">-->
+	<!--						<img-->
+	<!--							style="width: 50px; height: auto"-->
+	<!--							[src]="environment.imagePath + employee.photo"-->
+	<!--							[alt]="employee.full_name"-->
+	<!--						/>-->
+	<!--					</div>-->
+	<!--					<div fxFlex="25" fxLayoutAlign="flex-end">-->
+	<!--						<span class="number">{{ employee.treatments }}</span>-->
+	<!--					</div>-->
+	<!--				</div>-->
 
-				<div class="table-header">
-					{{ employee.full_name }}
-				</div>
-			</div>
-		</div>
-	</div>
+	<!--				<div class="table-header">-->
+	<!--					{{ employee.full_name }}-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</div>-->
 
 	<div class="treatments-monitoring-container" fxFlex="" fxLayout="column">
 		<div class="title-bar title-bar-bg-dark" fxFlex="" fxLayout="">
@@ -124,19 +124,19 @@
 		</div>
 	</div>
 
-	<div
-		class="btns-container"
-		fxFlex=""
-		fxLayout="row"
-		fxLayoutAlign="flex-start center"
-		fxLayoutGap="8px"
-	>
-		<!--		<ng-container *ngFor="let button of buttons">-->
-		<!--			<button color="primary" mat-raised-button>-->
-		<!--				{{ 'dashboard.' + button.name | translate }}-->
-		<!--			</button>-->
-		<!--		</ng-container>-->
-	</div>
+	<!--	<div-->
+	<!--		class="btns-container"-->
+	<!--		fxFlex=""-->
+	<!--		fxLayout="row"-->
+	<!--		fxLayoutAlign="flex-start center"-->
+	<!--		fxLayoutGap="8px"-->
+	<!--	>-->
+	<!--		<ng-container *ngFor="let button of buttons">-->
+	<!--			<button color="primary" mat-raised-button>-->
+	<!--				{{ 'dashboard.' + button.name | translate }}-->
+	<!--			</button>-->
+	<!--		</ng-container>-->
+	<!--	</div>-->
 
 	<div class="all-clients-container" fxFlex="" fxLayout="row" fxLayoutGap="8px">
 		<div
@@ -153,7 +153,7 @@
 			>
 				<div fxFlex="75" fxLayoutAlign="flex-start">
 					<img
-						style="width: 50px; height: auto"
+						style="width: 80px; height: auto"
 						[src]="environment.imagePath + client.photo"
 						[alt]="client.full_name"
 					/>
