@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TreatmentsV2Service } from '@app/treatments/treatments-v2.service';
 import { CoreFormV2Component } from '@app/core/components/core-form-v2/core-form-v2.component';
 import { GroupByPipe } from 'ngx-pipes';
 import { MapService } from '@app/shared/services/map.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-treatments-form',
@@ -24,19 +25,10 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
 		groupByPipe: GroupByPipe,
+		public vcRef: ViewContainerRef,
 		private mapService: MapService
 	) {
 		super(service, fb, activatedRoute, groupByPipe);
-	}
-
-	ngOnInit(): void {
-		super.ngOnInit();
-		// if (this.isEdit) {
-		// }
-		this.mapService.drawShape.subscribe(point => {
-			this.form.controls.lat = point.lat;
-			this.form.controls.lng = point.lng;
-		});
 	}
 
 	get lists() {
@@ -45,6 +37,23 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 
 	set lists(value: any) {
 		this._lists = value;
+	}
+
+	ngOnInit(): void {
+		super.ngOnInit();
+		// if (this.isEdit) {
+		// }
+		this.mapService.drawShape
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(point => {
+				if (this.form.controls.lat && this.form.controls.lng) {
+					/*  doesn't happen */
+					console.log(point.lat);
+					console.log(this.form.controls.lat);
+					this.form.controls.lat.setValue(point.lat);
+					this.form.controls.lng.setValue(point.lng);
+				}
+			});
 	}
 
 	refactorItem(item: any): any {
