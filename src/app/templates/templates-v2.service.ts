@@ -9,6 +9,8 @@ import { ApiRequestV2Service } from '@app/core/http/api-request-v2.service';
 export interface ApiRequest {
 	name?: string;
 	client_id?: number;
+	color?: string;
+
 	steps?: {
 		group_id?: number;
 		order?: number;
@@ -55,10 +57,10 @@ export class TemplatesV2Service extends RootV2Service {
 				Validators: [Validators.required],
 				formFieldType: 'text',
 				grid: {
-					gt_lg: '30%',
-					lt_xl: '30%',
-					lt_lg: '30%',
-					lt_md: '50%',
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
 					lt_sm: '100%'
 				}
 			}
@@ -72,10 +74,25 @@ export class TemplatesV2Service extends RootV2Service {
 				dataUrl: 'templates/clients/index',
 				listPrefix: 'clients',
 				grid: {
-					gt_lg: '30%',
-					lt_xl: '30%',
-					lt_lg: '30%',
-					lt_md: '50%',
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
+					lt_sm: '100%'
+				}
+			}
+		},
+		{
+			name: 'color',
+			prop: 'color',
+			form: {
+				Validators: [],
+				formFieldType: 'colorPicker',
+				grid: {
+					gt_lg: '33.3%',
+					lt_xl: '33.3%',
+					lt_lg: '33.3%',
+					lt_md: '33.3%',
 					lt_sm: '100%'
 				}
 			}
@@ -88,33 +105,49 @@ export class TemplatesV2Service extends RootV2Service {
 
 		this.lists.fieldTypes = [
 			{
-				name: 'Text Input',
+				name: 'حقل نصى',
 				id: 'text'
 			},
 			{
-				name: 'Select Input',
-				id: 'select'
+				name: 'حقل اختيار الألوان',
+				id: 'colorPicker'
 			},
 			{
-				name: 'checkbox',
+				name: 'حقل اختيار التاريخ',
+				id: 'datepicker'
+			},
+			{
+				name: 'حقل اختيار من متعدد',
+				id: 'ng_select'
+			},
+			{
+				name: 'حقل على شكل ازرار الراديو',
+				id: 'radio'
+			},
+			{
+				name: 'حقل اختيار عدة اختيارات من متعدد',
+				id: 'ng_select_multiple'
+			},
+			{
+				name: 'حقل صواب ام خطأ',
 				id: 'checkbox'
 			}
 		];
 		this.lists.field_cols = [
 			{
-				name: '1 Cols',
+				name: 'العرض الكامل',
 				id: '1'
 			},
 			{
-				name: '2 Cols',
+				name: 'نصف العرض المتاح',
 				id: '2'
 			},
 			{
-				name: '3 Cols',
+				name: 'ثلث العرض المتاح',
 				id: '3'
 			},
 			{
-				name: '4 Cols',
+				name: 'ربع العرض المتاح',
 				id: '4'
 			}
 		];
@@ -133,6 +166,7 @@ export class TemplatesV2Service extends RootV2Service {
 		const requestMock: ApiRequest = {
 			name: formValue.name,
 			client_id: formValue.client_id,
+			color: formValue.color,
 			steps: []
 		};
 		this.InputsTree.steps.forEach((step, stepI) => {
@@ -427,6 +461,18 @@ export class TemplatesV2Service extends RootV2Service {
 					{
 						fieldName: fieldTypeName,
 						fieldValue: 'select'
+					},
+					{
+						fieldName: fieldTypeName,
+						fieldValue: 'radio'
+					},
+					{
+						fieldName: fieldTypeName,
+						fieldValue: 'ng_select_multiple'
+					},
+					{
+						fieldName: fieldTypeName,
+						fieldValue: 'ng_select'
 					}
 				],
 				form: {

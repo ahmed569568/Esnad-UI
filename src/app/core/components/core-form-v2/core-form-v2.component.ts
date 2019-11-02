@@ -62,13 +62,29 @@ const moment = _rollupMoment || _moment;
 export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	showBreadcrumb = true;
 	headerSmallSize = false;
+	cid: string;
+	form: FormGroup;
+	isEdit = false;
+	itemId: number;
+	item: any;
+	config = AppConfig;
+	helper = AppHelper;
+	isSubmitted = false;
+	isClone = false;
+	isSaveAddNew = false;
+	environment = environment;
+	imageFieldName: string;
+	previewImage: string;
+	fileFields: string[] = [];
+	alive = true;
 
-	get lists() {
-		return this._lists;
-	}
-
-	set lists(value: any) {
-		this._lists = value;
+	constructor(
+		public service: RootV2Service,
+		protected fb: FormBuilder,
+		protected activatedRoute: ActivatedRoute,
+		public groupByPipe: GroupByPipe
+	) {
+		this.cid = service.cid;
 	}
 
 	/**
@@ -123,34 +139,14 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 		return formFields;
 	}
 
-	cid: string;
-	form: FormGroup;
-	isEdit = false;
-	itemId: number;
-	item: any;
-	config = AppConfig;
-	helper = AppHelper;
-	isSubmitted = false;
-	isClone = false;
-	isSaveAddNew = false;
-
-	environment = environment;
-	imageFieldName: string;
-
-	previewImage: string;
-
-	fileFields: string[] = [];
-	alive = true;
-
 	protected _lists: any = [];
 
-	constructor(
-		public service: RootV2Service,
-		protected fb: FormBuilder,
-		protected activatedRoute: ActivatedRoute,
-		public groupByPipe: GroupByPipe
-	) {
-		this.cid = service.cid;
+	get lists() {
+		return this._lists;
+	}
+
+	set lists(value: any) {
+		this._lists = value;
 	}
 
 	ngOnInit(): void {
@@ -409,7 +405,7 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	}
 
 	convertDate(date: any) {
-		const convertedDate = _moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD');
+		const convertedDate = _moment(date, 'YYYY-MM-DD').format('YYYY-DD-MM');
 		console.log(convertedDate);
 		return convertedDate;
 	}
@@ -559,6 +555,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 					},
 					error => {
 						if (error) {
+							// console.log('error');
+							// console.log(error);
 							/**
 							 * payload error
 							 */
@@ -583,8 +581,8 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 							/**
 							 * handling server side validation errors
 							 */
-							if (error.error && error.error.errors) {
-								this.ServerValidationErrors(error.error.errors);
+							if (error.error && error.error && error.error.error) {
+								this.ServerValidationErrors(error.error.error);
 							}
 						}
 					}

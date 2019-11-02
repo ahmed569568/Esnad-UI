@@ -23,6 +23,12 @@ ng-select {
 	&.ng-select-style1 {
 		.ng-select-container {
 			padding-top: 5px;
+			min-height: 39px;
+
+			.ng-value-container {
+				padding-top: 5px;
+				border-top: 0.3em solid transparent;
+			}
 		}
 
 		&.ng-select.ng-select-multiple
@@ -188,7 +194,27 @@ ng-select {
 
 .breakLine-input30 {
 	flex-basis: 100% !important;
+
 	> div {
 		width: calc(30% - 30px);
 	}
+}
+
+.map-container {
+	height: 250px;
+	overflow: hidden;
+}
+
+.color-picker-style1 {
+	.mat-form-field-flex {
+		flex-direction: row-reverse;
+	}
+	.mat-mini-fab {
+		width: 25px;
+		height: 25px;
+	}
+}
+
+.mat-raised-button[disabled] {
+	cursor: not-allowed !important;
 }
