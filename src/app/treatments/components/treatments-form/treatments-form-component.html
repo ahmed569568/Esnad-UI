@@ -10,7 +10,15 @@
 		<div fxFlex fxLayout>
 			<mat-card fxFlex>
 				<mat-card-content>
-					<div fxFlex="" fxLayout="column" class="d-flex flex-items-center">
+					<div>
+						<input type="button" value="CPTURE" (click)="captureScreen()" />
+					</div>
+					<div
+						id="treatmentCotentToExport"
+						#content
+						fxLayout="column"
+						class="d-flex flex-items-center"
+					>
 						<div fxFlex="" class="default-form">
 							<div
 								*ngFor="

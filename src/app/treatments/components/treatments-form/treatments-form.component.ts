@@ -5,6 +5,8 @@ import { TreatmentsV2Service } from '@app/treatments/treatments-v2.service';
 import { CoreFormV2Component } from '@app/core/components/core-form-v2/core-form-v2.component';
 import { GroupByPipe } from 'ngx-pipes';
 import { MapService } from '@app/shared/services/map.service';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -157,5 +159,22 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 
 		// console.log(this.service.formInputsCategorized);
 		// console.log(this.form.controls);
+	}
+
+	captureScreen() {
+		const data = document.getElementById('treatmentCotentToExport');
+		html2canvas(data).then(canvas => {
+			// Few necessary setting options
+			const imgWidth = 208;
+			const pageHeight = 295;
+			const imgHeight = (canvas.height * imgWidth) / canvas.width;
+			const heightLeft = imgHeight;
+
+			const contentDataURL = canvas.toDataURL('image/png');
+			const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+			const position = 0;
+			pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+			pdf.save('MYPdf.pdf'); // Generated PDF
+		});
 	}
 }

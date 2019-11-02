@@ -51,21 +51,29 @@
 
 	.my-treatments-section-body {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		color: #969799;
 		padding: 24px 8px;
 		border-radius: 0 0 8px 8px;
+
+		.main-card {
+			height: 130px;
+			padding: 4px;
+
+			.number {
+				background-color: #0063f4;
+				color: white;
+				padding: 0 10px;
+				border-radius: 4px;
+			}
+		}
 	}
 }
 
 .treatments-monitoring-container {
 	margin: 24px auto;
 	width: 98%;
-
-	.my-treatments-section-body {
-		justify-content: space-between;
-	}
 
 	.old-treatments {
 		align-items: center;
@@ -105,6 +113,7 @@
 }
 
 .btns-container {
+	margin: 12px;
 	.btn {
 		background: none;
 		color: #6e7179;
@@ -116,7 +125,109 @@
 	}
 }
 
+.all-clients-container {
+	background-color: white;
+	padding: 40px 12px;
+
+	.card-header {
+		margin-bottom: 10px;
+		.number {
+			background-color: #00acac;
+			color: white;
+			//padding: 8px 12px;
+			font-weight: 300;
+			border-radius: 4px;
+			width: 44px;
+			height: 33px;
+			text-align: center;
+		}
+
+		img {
+			width: 50px;
+			height: 25px;
+		}
+	}
+}
+
+.table-header {
+	background-color: #eeeeee;
+	color: #989b9d;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 8px;
+	padding: 4px 0;
+	border-radius: 4px 4px 0 0;
+}
+
+.table-body {
+	text-align: center;
+
+	.titles-row {
+		font-size: 12px;
+		color: #bda5a7;
+		padding-bottom: 4px;
+
+		.title {
+			border-bottom: none;
+			border-right: 1px solid #eeeeee !important;
+		}
+	}
+
+	.data-row {
+		font-size: 12px;
+		color: white;
+
+		.data {
+			border-top: 1px solid #eeeeee;
+			border-right: 1px solid #eeeeee !important;
+			border-bottom: 1px solid #eeeeee;
+			padding: 6px 4px;
+
+			span {
+				padding: 2px 8px;
+				border-radius: 4px;
+			}
+
+			&:first-child {
+				span {
+					background-color: #f59c1a;
+				}
+			}
+
+			&:nth-child(2) {
+				span {
+					background-color: #ff5b57;
+				}
+			}
+
+			&:nth-child(3) {
+				span {
+					background-color: #b6c2c9;
+				}
+			}
+
+			&:nth-child(4) {
+				span {
+					background-color: #348fe2;
+				}
+			}
+
+			&:last-child {
+				span {
+					background-color: #00acac;
+				}
+			}
+		}
+	}
+}
+
 /*General classes*/
+
+.main-card {
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	padding: 18px 4px;
+}
 
 .treatments-number {
 	span {
