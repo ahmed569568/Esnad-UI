@@ -1,4 +1,9 @@
-<div class="dashboard-container" fxFlex="" fxLayout="column">
+<div
+	class="dashboard-container"
+	[ngClass]="{ opened: menuState }"
+	fxFlex=""
+	fxLayout="column"
+>
 	<div class="summary-container" fxFlex="" fxLayout="" fxLayoutGap="16px">
 		<div fxFlex="" fxLayout="column" *ngFor="let item of summary">
 			<div

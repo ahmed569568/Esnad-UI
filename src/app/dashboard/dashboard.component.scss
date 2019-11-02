@@ -2,7 +2,9 @@
 	display: block;
 	height: 100%;
 	background-color: #d9e0e7;
-
+	&.opened {
+		max-width: 1140px;
+	}
 	.summary-container {
 		padding: 8px;
 
