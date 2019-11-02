@@ -131,11 +131,11 @@
 		fxLayoutAlign="flex-start center"
 		fxLayoutGap="8px"
 	>
-		<ng-container *ngFor="let button of buttons">
-			<button class="btn" mat-raised-button>
-				{{ 'dashboard.' + button.name | translate }}
-			</button>
-		</ng-container>
+		<!--		<ng-container *ngFor="let button of buttons">-->
+		<!--			<button color="primary" mat-raised-button>-->
+		<!--				{{ 'dashboard.' + button.name | translate }}-->
+		<!--			</button>-->
+		<!--		</ng-container>-->
 	</div>
 
 	<div class="all-clients-container" fxFlex="" fxLayout="row" fxLayoutGap="8px">
@@ -147,8 +147,8 @@
 		>
 			<div
 				class="card-header"
-				fxFlex=""
-				fxLayout=""
+				fxFlex
+				fxLayout
 				fxLayoutAlign="space-between center"
 			>
 				<div fxFlex="75" fxLayoutAlign="flex-start">
