@@ -45,16 +45,12 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		super.ngOnInit();
 		// if (this.isEdit) {
 		// }
-		this.mapService.drawShape
+		this.mapService.getLocation
 			.pipe(takeWhile(() => this.alive))
 			.subscribe(point => {
-				if (this.form.controls.lat && this.form.controls.lng) {
-					/*  doesn't happen */
-					console.log(point.lat);
-					console.log(this.form.controls.lat);
-					this.form.controls.lat.setValue(point.lat);
-					this.form.controls.lng.setValue(point.lng);
-				}
+				this.form.controls.lat.setValue(point.lat);
+				this.form.controls.lng.setValue(point.lng);
+				this.form.controls.location_map.setValue(point.display_name);
 			});
 	}
 
@@ -162,6 +158,7 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 	}
 
 	captureScreen() {
+		console.log(this.form.value);
 		const data = document.getElementById('treatmentCotentToExport');
 		html2canvas(data).then(canvas => {
 			// Few necessary setting options
