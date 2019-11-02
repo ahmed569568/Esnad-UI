@@ -40,6 +40,7 @@ import {
 	OwlNativeDateTimeModule
 } from 'ng-pick-datetime';
 import { TimePickerLocalization } from './classes';
+import { ExportAsModule } from 'ngx-export-as';
 
 @NgModule({
 	imports: [
@@ -60,7 +61,8 @@ import { TimePickerLocalization } from './classes';
 		NgOptionHighlightModule,
 		NgPipesModule,
 		OwlDateTimeModule,
-		OwlNativeDateTimeModule
+		OwlNativeDateTimeModule,
+		ExportAsModule
 		// TagInputModule
 	],
 	declarations: [
@@ -114,7 +116,8 @@ import { TimePickerLocalization } from './classes';
 		ListTypeComponent,
 		ListGridSearchComponent,
 		MapComponent,
-		FiltersComponent
+		FiltersComponent,
+		ExportAsModule
 		// TagInputModule
 	],
 	entryComponents: [DialogComponent],

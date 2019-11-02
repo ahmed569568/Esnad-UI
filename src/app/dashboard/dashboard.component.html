@@ -1,5 +1,8 @@
 <div class="dashboard-container" fxFlex="" fxLayout="column">
 	<div class="summary-container" fxFlex="" fxLayout="" fxLayoutGap="16px">
+		<div>
+			<button mat-button (click)="downloadPDF()">download pdf</button>
+		</div>
 		<div fxFlex="" fxLayout="column" *ngFor="let item of summary">
 			<div
 				[style.background]="item.color"

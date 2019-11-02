@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
 	selector: 'app-dashboard',
@@ -6,6 +7,17 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+	exportAsConfig: ExportAsConfig = {
+		type: 'pdf', // the type you want to download
+		elementId: 'appContainer', // the id of html/table element
+		options: {
+			orientation: 'landscape',
+			margins: {
+				top: '20'
+			}
+		}
+	};
+
 	public summary: Array<object> = [
 		{
 			name: 'under_pricing',
@@ -62,7 +74,20 @@ export class DashboardComponent implements OnInit {
 		{ name: 'open_treatment' }
 	];
 
-	constructor() {}
+	constructor(private exportAsService: ExportAsService) {}
 
 	ngOnInit() {}
+
+	downloadPDF() {
+		// download the file using old school javascript method
+		this.exportAsService
+			.save(this.exportAsConfig, 'My File Name')
+			.subscribe(() => {
+				// save started
+			});
+		// get the data as base64 or json object for json type - this will be helpful in ionic or SSR
+		this.exportAsService.get(this.exportAsConfig).subscribe(content => {
+			// console.log(content);
+		});
+	}
 }
