@@ -38,7 +38,37 @@
 			</div>
 		</div>
 		<div class="my-treatments-section-body body-bg-white" fxFlex="">
-			<span>{{ 'dashboard.no-treatments' | translate }}</span>
+			<span *ngIf="!employees.length">{{
+				'dashboard.no-treatments' | translate
+			}}</span>
+			<div
+				*ngFor="let employee of employees"
+				class="main-card"
+				fxFlex="20"
+				fxLayout="column"
+			>
+				<div
+					class="card-header"
+					fxFlex=""
+					fxLayout=""
+					fxLayoutAlign="space-between center"
+				>
+					<div fxFlex="75" fxLayoutAlign="flex-start">
+						<img
+							style="width: 50px; height: auto"
+							[src]="environment.imagePath + employee.photo"
+							[alt]="employee.full_name"
+						/>
+					</div>
+					<div fxFlex="25" fxLayoutAlign="flex-end">
+						<span class="number">{{ employee.treatments }}</span>
+					</div>
+				</div>
+
+				<div class="table-header">
+					{{ employee.full_name }}
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -81,7 +111,7 @@
 						<div id="day-name">{{ 'dashboard.' + day.day | translate }}</div>
 						<div class="date">{{ day.date }}</div>
 						<div class="on-hold-empty">
-							{{ 'dashboard.on-hold' | translate }} (0)
+							{{ 'dashboard.on-hold' | translate }} {{ day.noHold }}
 						</div>
 					</div>
 				</div>
@@ -104,7 +134,12 @@
 	</div>
 
 	<div class="all-clients-container" fxFlex="" fxLayout="row" fxLayoutGap="8px">
-		<div class="main-card" fxFlex="20" fxLayout="column">
+		<div
+			*ngFor="let client of clients"
+			class="main-card"
+			fxFlex="20"
+			fxLayout="column"
+		>
 			<div
 				class="card-header"
 				fxFlex=""
@@ -112,168 +147,50 @@
 				fxLayoutAlign="space-between center"
 			>
 				<div fxFlex="75" fxLayoutAlign="flex-start">
-					<img src="../../assets/NCB-logo-1.png" alt="NCB LOGO" />
+					<img
+						style="width: 50px; height: auto"
+						[src]="environment.imagePath + client.photo"
+						[alt]="client.full_name"
+					/>
 				</div>
 				<div fxFlex="25" fxLayoutAlign="flex-end">
-					<span class="number">52</span>
+					<span class="number">{{ client.sent }}</span>
 				</div>
 			</div>
 
 			<div class="table-header">
-				{{ 'dashboard.ncb' | translate }}
+				{{ client.full_name }}
 			</div>
 			<div class="table-body">
 				<table style="width: 100%">
 					<tr class="titles-row">
-						<td class="title">{{ 'dashboard.under_pricing' | translate }}</td>
-						<td class="title">{{ 'dashboard.on-hold' | translate }}</td>
-						<td class="title">{{ 'dashboard.audit' | translate }}</td>
-						<td class="title">{{ 'dashboard.accreditation' | translate }}</td>
-						<td class="title">{{ 'dashboard.approved' | translate }}</td>
+						<td class="title">
+							{{ 'dashboard.under_evaluation' | translate }}
+						</td>
+						<td class="title">{{ 'dashboard.closed' | translate }}</td>
+						<td class="title">{{ 'dashboard.under_audit' | translate }}</td>
+						<td class="title">
+							{{ 'dashboard.under_accreditation' | translate }}
+						</td>
+						<td class="title">{{ 'dashboard.accredited' | translate }}</td>
 					</tr>
 
 					<tr class="data-row">
-						<td class="data"><span>18</span></td>
-						<td class="data"><span>11</span></td>
-						<td class="data"><span>8</span></td>
-						<td class="data"><span>6</span></td>
-						<td class="data"><span>9</span></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div class="main-card" fxFlex="20" fxLayout="column">
-			<div
-				class="card-header"
-				fxFlex=""
-				fxLayout=""
-				fxLayoutAlign="space-between center"
-			>
-				<div fxFlex="75" fxLayoutAlign="flex-start">
-					<img src="../../assets/rajhi-logo.png" alt="NCB LOGO" />
-				</div>
-				<div fxFlex="25" fxLayoutAlign="flex-end">
-					<span class="number">52</span>
-				</div>
-			</div>
-
-			<div class="table-header">
-				{{ 'dashboard.rajhi' | translate }}
-			</div>
-			<div class="table-body">
-				<table style="width: 100%">
-					<tr class="titles-row">
-						<td class="title">{{ 'dashboard.under_pricing' | translate }}</td>
-						<td class="title">{{ 'dashboard.on-hold' | translate }}</td>
-						<td class="title">{{ 'dashboard.audit' | translate }}</td>
-						<td class="title">{{ 'dashboard.accreditation' | translate }}</td>
-					</tr>
-
-					<tr class="data-row">
-						<td class="data"><span>18</span></td>
-						<td class="data"><span>11</span></td>
-						<td class="data"><span>8</span></td>
-						<td class="data"><span>6</span></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div class="main-card" fxFlex="20" fxLayout="column">
-			<div
-				class="card-header"
-				fxFlex=""
-				fxLayout=""
-				fxLayoutAlign="space-between center"
-			>
-				<div fxFlex="75" fxLayoutAlign="flex-start">
-					<img src="../../assets/albilad-logo 1.png" alt="NCB LOGO" />
-				</div>
-				<div fxFlex="25" fxLayoutAlign="flex-end">
-					<span class="number">52</span>
-				</div>
-			</div>
-
-			<div class="table-header">
-				{{ 'dashboard.albilad' | translate }}
-			</div>
-			<div class="table-body">
-				<table style="width: 100%">
-					<tr class="titles-row">
-						<td class="title">{{ 'dashboard.under_pricing' | translate }}</td>
-						<td class="title">{{ 'dashboard.on-hold' | translate }}</td>
-						<td class="title">{{ 'dashboard.audit' | translate }}</td>
-					</tr>
-
-					<tr class="data-row">
-						<td class="data"><span>18</span></td>
-						<td class="data"><span>11</span></td>
-						<td class="data"><span>8</span></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div class="main-card" fxFlex="20" fxLayout="column">
-			<div
-				class="card-header"
-				fxFlex=""
-				fxLayout=""
-				fxLayoutAlign="space-between center"
-			>
-				<div fxFlex="75" fxLayoutAlign="flex-start">
-					<img src="../../assets/inmaa-logo.png" alt="NCB LOGO" />
-				</div>
-				<div fxFlex="25" fxLayoutAlign="flex-end">
-					<span class="number">52</span>
-				</div>
-			</div>
-
-			<div class="table-header">
-				{{ 'dashboard.inmaa' | translate }}
-			</div>
-			<div class="table-body">
-				<table style="width: 100%">
-					<tr class="titles-row">
-						<td class="title">{{ 'dashboard.under_pricing' | translate }}</td>
-						<td class="title">{{ 'dashboard.on-hold' | translate }}</td>
-					</tr>
-
-					<tr class="data-row">
-						<td class="data"><span>18</span></td>
-						<td class="data"><span>11</span></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div class="main-card" fxFlex="20" fxLayout="column">
-			<div
-				class="card-header"
-				fxFlex=""
-				fxLayout=""
-				fxLayoutAlign="space-between center"
-			>
-				<div fxFlex="75" fxLayoutAlign="flex-start">
-					<img src="../../assets/jazirah-logo.png" alt="NCB LOGO" />
-				</div>
-				<div fxFlex="25" fxLayoutAlign="flex-end">
-					<span class="number">52</span>
-				</div>
-			</div>
-
-			<div class="table-header">
-				{{ 'dashboard.jazirah' | translate }}
-			</div>
-			<div class="table-body">
-				<table style="width: 100%">
-					<tr class="titles-row">
-						<td class="title">{{ 'dashboard.under_pricing' | translate }}</td>
-					</tr>
-
-					<tr class="data-row">
-						<td class="data"><span>18</span></td>
+						<td class="data">
+							<span>{{ client.under_evaluation }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.closed }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.under_audit }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.under_accreditation }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.Accredited }}</span>
+						</td>
 					</tr>
 				</table>
 			</div>
