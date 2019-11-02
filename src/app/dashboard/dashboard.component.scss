@@ -51,21 +51,29 @@
 
 	.my-treatments-section-body {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		color: #969799;
 		padding: 24px 8px;
 		border-radius: 0 0 8px 8px;
+
+		.main-card {
+			height: 130px;
+			padding: 4px;
+
+			.number {
+				background-color: #0063f4;
+				color: white;
+				padding: 0 10px;
+				border-radius: 4px;
+			}
+		}
 	}
 }
 
 .treatments-monitoring-container {
 	margin: 24px auto;
 	width: 98%;
-
-	.my-treatments-section-body {
-		justify-content: space-between;
-	}
 
 	.old-treatments {
 		align-items: center;
