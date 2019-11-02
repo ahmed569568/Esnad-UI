@@ -10,7 +10,15 @@
 		<div fxFlex fxLayout>
 			<mat-card fxFlex>
 				<mat-card-content>
-					<div fxFlex="" fxLayout="column" class="d-flex flex-items-center">
+					<div>
+						<input type="button" value="CPTURE" (click)="captureScreen()" />
+					</div>
+					<div
+						id="treatmentCotentToExport"
+						#content
+						fxLayout="column"
+						class="d-flex flex-items-center"
+					>
 						<div fxFlex="" class="default-form">
 							<div
 								*ngFor="
@@ -73,7 +81,247 @@
 								<!-- default inputs Group start -->
 
 								<!-- Tabs Groups start -->
-								<ng-container *ngIf="groups[0] !== 'defaultGroup'">
+								<ng-container *ngIf="groups[0] === 'templateAccordionStatic'">
+									<mat-accordion [multi]="false">
+										<ng-container
+											*ngFor="let tab of groups[1] | pairs; let stepI = index;
+														trackBy: trackByFn"
+										>
+											<mat-expansion-panel class="my-2" [expanded]="true">
+												<mat-expansion-panel-header>
+													<mat-panel-title>
+														{{ ('treatments.' + groups[0] | translate) }}
+													</mat-panel-title>
+												</mat-expansion-panel-header>
+
+												<div fxFlex="" fxLayout="column">
+													<ng-container
+														*ngFor="
+														let section of tab[1] | pairs; let sectionI = index;
+														trackBy: trackByFn
+													"
+													>
+														<div
+															class="form-section"
+															fxFlex=""
+															fxLayout="column"
+															[ngClass]="{'cardStyle' : section[0] !== 'defaultSection'}"
+														>
+															<div
+																class="form-section-title"
+																*ngIf="section[0] !== 'defaultSection'"
+															>
+																{{ ('treatments.' + section[0] | translate) }}
+															</div>
+
+															<ng-container
+																*ngIf="section[0] === 'defaultSection'"
+															>
+																<div
+																	class="form-section-content flex-wrap-wrap"
+																	fxFlex=""
+																	fxLayout="row"
+																	fxLayoutGap="30px"
+																>
+																	<ng-container
+																		*ngFor="let formField of section[1] | pairs; let formFieldI = index;
+														trackBy: trackByFn"
+																	>
+																		<ng-container
+																			*ngIf="formField[0] === 'defaultFormInputs'"
+																		>
+																			<ng-container
+																				*ngFor="
+														let field of formField[1]; let fieldI = index;
+														trackBy: trackByFn
+													"
+																			>
+																				<ng-container
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
+																				>
+																					<app-core-form-content
+																						[cid]="service.cid"
+																						[service]="service"
+																						[field]="field"
+																						[form]="form"
+																						(showHideChanges)="showHideChanges($event)"
+																						[isEdit]="isEdit"
+																						[isClone]="isClone"
+																						[isSubmitted]="isSubmitted"
+																						[ngClass]="field?.form?.gridCssClass"
+																						[fxFlex.gt-lg]="getInputGridSize(field.form.grid.gt_lg, '30px')"
+																						[fxFlex.lt-xl]="getInputGridSize(field.form.grid.lt_xl, '30px')"
+																						[fxFlex.lt-lg]="getInputGridSize(field.form.grid.lt_lg, '30px')"
+																						[fxFlex.lt-md]="getInputGridSize(field.form.grid.lt_md, '30px')"
+																						[fxFlex.lt-sm]="getInputGridSize(field.form.grid.lt_sm, '30px')"
+																					>
+																					</app-core-form-content>
+																				</ng-container>
+																			</ng-container>
+																		</ng-container>
+																	</ng-container>
+																</div>
+															</ng-container>
+
+															<ng-container
+																*ngIf="section[0] !== 'defaultSection'"
+															>
+																<div
+																	class="form-section-content flex-wrap-wrap"
+																	fxFlex=""
+																	fxLayout="row"
+																	fxLayoutGap="30px"
+																>
+																	<ng-container
+																		*ngFor="let formField of section[1] | pairs; let formFieldI = index;
+														trackBy: trackByFn"
+																	>
+																		<ng-container
+																			*ngIf="formField[0] === 'defaultFormInputs'"
+																		>
+																			<ng-container
+																				*ngFor="
+														let field of formField[1]; let fieldI = index;
+														trackBy: trackByFn
+													"
+																			>
+																				<ng-container
+																					*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
+																				>
+																					<app-core-form-content
+																						[cid]="service.cid"
+																						[service]="service"
+																						[field]="field"
+																						[form]="form"
+																						(showHideChanges)="showHideChanges($event)"
+																						[isEdit]="isEdit"
+																						[isClone]="isClone"
+																						[isSubmitted]="isSubmitted"
+																						[ngClass]="field?.form?.gridCssClass"
+																						[fxFlex.gt-lg]="getInputGridSize(field.form.grid.gt_lg, '30px')"
+																						[fxFlex.lt-xl]="getInputGridSize(field.form.grid.lt_xl, '30px')"
+																						[fxFlex.lt-lg]="getInputGridSize(field.form.grid.lt_lg, '30px')"
+																						[fxFlex.lt-md]="getInputGridSize(field.form.grid.lt_md, '30px')"
+																						[fxFlex.lt-sm]="getInputGridSize(field.form.grid.lt_sm, '30px')"
+																					>
+																					</app-core-form-content>
+																				</ng-container>
+																			</ng-container>
+																		</ng-container>
+																	</ng-container>
+																</div>
+															</ng-container>
+
+															<ng-container
+																*ngIf="section[0] !== 'defaultSection'"
+															>
+																<div
+																	class="form-section-content flex-wrap-wrap"
+																	fxFlex=""
+																	fxLayout="row"
+																	fxLayoutGap="30px"
+																>
+																	<mat-accordion fxFlex="" [multi]="false">
+																		<ng-container
+																			*ngFor="let formField of section[1] | pairs; let formFieldI = index;
+														trackBy: trackByFn"
+																		>
+																			<ng-container
+																				*ngIf="formField[0] !== 'defaultFormInputs'"
+																			>
+																				<mat-expansion-panel
+																					class="my-2"
+																					[expanded]="true"
+																				>
+																					<mat-expansion-panel-header>
+																						<mat-panel-title>
+																							{{ (form.get('step_' + (stepI + 1)
+																							+ '_form_' + sectionI + '_field_'
+																							+ formFieldI + '_name')?.value) ?
+																							(form.get('step_' + (stepI + 1) +
+																							'_form_' + sectionI + '_field_' +
+																							formFieldI + '_name')?.value) :
+																							('templates.field_placeholder' |
+																							translate) + ' ' + formFieldI }}
+																						</mat-panel-title>
+																					</mat-expansion-panel-header>
+
+																					<ng-container
+																						*ngFor="
+														let field of formField[1]; let fieldI = index;
+														trackBy: trackByFn
+													"
+																					>
+																						<ng-container
+																							*ngIf="field?.form && fieldShowConditions(field) && !field?.form?.hidden"
+																						>
+																							<app-core-form-content
+																								[cid]="service.cid"
+																								[service]="service"
+																								[field]="field"
+																								[form]="form"
+																								(showHideChanges)="showHideChanges($event)"
+																								[isEdit]="isEdit"
+																								[isClone]="isClone"
+																								[isSubmitted]="isSubmitted"
+																								[ngClass]="field?.form?.gridCssClass"
+																								[fxFlex.gt-lg]="getInputGridSize(field.form.grid.gt_lg, '30px')"
+																								[fxFlex.lt-xl]="getInputGridSize(field.form.grid.lt_xl, '30px')"
+																								[fxFlex.lt-lg]="getInputGridSize(field.form.grid.lt_lg, '30px')"
+																								[fxFlex.lt-md]="getInputGridSize(field.form.grid.lt_md, '30px')"
+																								[fxFlex.lt-sm]="getInputGridSize(field.form.grid.lt_sm, '30px')"
+																							>
+																							</app-core-form-content>
+																						</ng-container>
+																					</ng-container>
+																				</mat-expansion-panel>
+																			</ng-container>
+																		</ng-container>
+																	</mat-accordion>
+																</div>
+															</ng-container>
+
+															<!--															<div *ngIf="section[0] !== 'defaultSection'">-->
+															<!--																<button-->
+															<!--																	class="big_add_button"-->
+															<!--																	mat-stroked-button-->
+															<!--																	(click)="addField(stepI + 1 , sectionI)"-->
+															<!--																>-->
+															<!--																	<mat-icon-->
+															<!--																		class="mdi-icon"-->
+															<!--																		svgIcon="shape-rectangle-plus"-->
+															<!--																		[attr.size]="'22px'"-->
+															<!--																	></mat-icon>-->
+															<!--																	{{ 'templates.add_field' | translate}}-->
+															<!--																</button>-->
+															<!--															</div>-->
+														</div>
+													</ng-container>
+
+													<!--													<div>-->
+													<!--														<button-->
+													<!--															class="big_add_button"-->
+													<!--															mat-stroked-button-->
+													<!--															(click)="addForm(stepI + 1)"-->
+													<!--														>-->
+													<!--															<mat-icon-->
+													<!--																class="mdi-icon"-->
+													<!--																svgIcon="shape-rectangle-plus"-->
+													<!--																[attr.size]="'22px'"-->
+													<!--															></mat-icon>-->
+													<!--															{{ 'templates.add_form' | translate}}-->
+													<!--														</button>-->
+													<!--													</div>-->
+												</div>
+											</mat-expansion-panel>
+										</ng-container>
+									</mat-accordion>
+								</ng-container>
+								<!-- Tabs Groups end -->
+								<!-- Tabs Groups start -->
+								<ng-container
+									*ngIf="groups[0] !== 'defaultGroup' && groups[0] !== 'templateAccordionStatic'"
+								>
 									<mat-accordion [multi]="false">
 										<ng-container
 											*ngFor="let tab of groups[1] | pairs; let stepI = index;
@@ -321,6 +569,7 @@
 						</div>
 					</div>
 				</mat-card-content>
+
 				<mat-card-footer></mat-card-footer>
 			</mat-card>
 		</div>

@@ -123,6 +123,15 @@ export interface ItemProps {
 			prop?: string;
 			list: List;
 		}[]; // array of suffixes to display inside cell < is selected from another cell identifier keys
+		mapOptions?: {
+			mapId: string;
+			height?: string;
+			mapConfig: {
+				type: string;
+				drawing: boolean;
+				drawingType: string;
+			};
+		};
 	};
 }
 

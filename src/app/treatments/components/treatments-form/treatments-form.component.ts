@@ -1,9 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TreatmentsV2Service } from '@app/treatments/treatments-v2.service';
 import { CoreFormV2Component } from '@app/core/components/core-form-v2/core-form-v2.component';
 import { GroupByPipe } from 'ngx-pipes';
+import { MapService } from '@app/shared/services/map.service';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-treatments-form',
@@ -12,19 +16,21 @@ import { GroupByPipe } from 'ngx-pipes';
 })
 export class TreatmentsFormComponent extends CoreFormV2Component
 	implements OnInit, OnDestroy {
+	mapConfig: any = {
+		type: 'single',
+		drawing: true,
+		drawingType: 'Point'
+	};
+
 	constructor(
 		service: TreatmentsV2Service,
 		fb: FormBuilder,
 		activatedRoute: ActivatedRoute,
-		groupByPipe: GroupByPipe
+		groupByPipe: GroupByPipe,
+		public vcRef: ViewContainerRef,
+		private mapService: MapService
 	) {
 		super(service, fb, activatedRoute, groupByPipe);
-	}
-
-	ngOnInit(): void {
-		super.ngOnInit();
-		if (this.isEdit) {
-		}
 	}
 
 	get lists() {
@@ -33,6 +39,23 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 
 	set lists(value: any) {
 		this._lists = value;
+	}
+
+	ngOnInit(): void {
+		super.ngOnInit();
+		// if (this.isEdit) {
+		// }
+		this.mapService.drawShape
+			.pipe(takeWhile(() => this.alive))
+			.subscribe(point => {
+				if (this.form.controls.lat && this.form.controls.lng) {
+					/*  doesn't happen */
+					console.log(point.lat);
+					console.log(this.form.controls.lat);
+					this.form.controls.lat.setValue(point.lat);
+					this.form.controls.lng.setValue(point.lng);
+				}
+			});
 	}
 
 	refactorItem(item: any): any {
@@ -136,5 +159,22 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 
 		// console.log(this.service.formInputsCategorized);
 		// console.log(this.form.controls);
+	}
+
+	captureScreen() {
+		const data = document.getElementById('treatmentCotentToExport');
+		html2canvas(data).then(canvas => {
+			// Few necessary setting options
+			const imgWidth = 208;
+			const pageHeight = 295;
+			const imgHeight = (canvas.height * imgWidth) / canvas.width;
+			const heightLeft = imgHeight;
+
+			const contentDataURL = canvas.toDataURL('image/png');
+			const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+			const position = 0;
+			pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+			pdf.save('MYPdf.pdf'); // Generated PDF
+		});
 	}
 }

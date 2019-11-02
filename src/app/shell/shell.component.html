@@ -13,14 +13,21 @@
 			<div class="notification-icon">
 				<mat-icon>notifications_none</mat-icon>
 			</div>
-
-			<div>
-				<img src="assets/NoPath - Copy (2).png" />
+			<div class="user-img-container">
+				<!--				{{authInfo | json}}-->
+				<img
+					[src]="
+						authInfo.photo
+							? environment.imagePath + authInfo.photo
+							: '/assets/man.jpg'
+					"
+				/>
+				<!--				<img *ngIf="authInfo.photo.length <= 0" src="assets/NoPath - Copy (2).png" />-->
 			</div>
 
 			<div class="user-data" fxLayout="column">
-				<span>علي عبد السلام</span>
-				<span>مثمن عادى</span>
+				<span>{{ authInfo.username }}</span>
+				<span>{{ authInfo?.group?.name }}</span>
 			</div>
 		</div>
 	</div>

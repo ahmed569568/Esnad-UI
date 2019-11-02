@@ -4,7 +4,7 @@
 			<ng-container [ngSwitch]="field.form.formFieldType">
 				<ng-container *ngSwitchCase="'text'">
 					<div class="field-container">
-						<mat-form-field appearance="outline" class="full-width">
+						<mat-form-field class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -54,14 +54,62 @@
 						</mat-form-field>
 					</div>
 				</ng-container>
+				<ng-container *ngSwitchCase="'number'">
+					<div class="field-container">
+						<mat-form-field class="full-width">
+							<mat-label>
+								<span>
+									{{
+										field?.form?.name
+											? !field?.form?.backEndName
+												? (cid + '.' + field?.form?.name | translate)
+												: field?.form?.name
+											: (cid + '.' + field.name | translate)
+									}}
+								</span>
+								<span
+									*ngIf="checkRequiredFields(field.name)"
+									class="mat-error required-asterisk inline"
+								>
+									*
+								</span>
+							</mat-label>
+							<div matSuffix *ngIf="field.form.prefix">
+								<ng-container *ngFor="let prefix of field.form.prefix">
+									<ng-container [ngSwitch]="prefix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												prefix.list.translate
+													? (prefix.list.staticText | translate)
+													: prefix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+
+							<input type="number" matInput [formControlName]="field.name" />
+
+							<div matSuffix *ngIf="field.form.suffix">
+								<ng-container *ngFor="let suffix of field.form.suffix">
+									<ng-container [ngSwitch]="suffix.list.displayType">
+										<ng-container *ngSwitchCase="null">
+											{{
+												suffix.list.translate
+													? (suffix.list.staticText | translate)
+													: suffix.list.staticText
+											}}
+										</ng-container>
+									</ng-container>
+								</ng-container>
+							</div>
+						</mat-form-field>
+					</div>
+				</ng-container>
 
 				<ng-container *ngSwitchCase="'textarea'">
 					<div class="field-container">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							class="full-width"
-						>
+						<mat-form-field floatLabel="never" class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -86,11 +134,7 @@
 
 				<ng-container *ngSwitchCase="'colorPicker'">
 					<div class="field-container color-picker-style1 ">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							class="full-width"
-						>
+						<mat-form-field floatLabel="never" class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -120,12 +164,12 @@
 								matPrefix
 								(click)="focusInputById(field.name)"
 							></button>
+							<!--								[cpWidth]="'160px'"-->
 							<input
 								matInput
 								[id]="field.name"
 								autocomplete="off"
 								[formControlName]="field.name"
-								[cpWidth]="'160px'"
 								[cpPresetColors]="[
 									'#1862DB',
 									'#FF9900',
@@ -141,6 +185,7 @@
 								(colorPickerChange)="form.get(field.name).setValue($event)"
 								[cpPosition]="'bottom'"
 								[cpPositionRelativeToArrow]="false"
+								[cpUseRootViewContainer]="true"
 							/>
 						</mat-form-field>
 					</div>
@@ -149,11 +194,7 @@
 				<ng-container *ngSwitchCase="'password'">
 					<div fxFlex fxLayout="column" class="field-container">
 						<div fxFlex fxLayout>
-							<mat-form-field
-								appearance="outline"
-								floatLabel="never"
-								class="full-width"
-							>
+							<mat-form-field floatLabel="never" class="full-width">
 								<mat-label>
 									<span>{{
 										cid +
@@ -343,11 +384,7 @@
 						*ngIf="form.controls['password'].enabled"
 					>
 						<div fxFlex fxLayout>
-							<mat-form-field
-								appearance="outline"
-								floatLabel="never"
-								class="full-width"
-							>
+							<mat-form-field floatLabel="never" class="full-width">
 								<mat-label>
 									<span>{{
 										cid +
@@ -406,11 +443,7 @@
 
 				<ng-container *ngSwitchCase="'email'">
 					<div class="field-container">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							class="full-width"
-						>
+						<mat-form-field floatLabel="never" class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -435,11 +468,7 @@
 
 				<ng-container *ngSwitchCase="'multi_select'">
 					<div class="field-container">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							class="full-width"
-						>
+						<mat-form-field floatLabel="never" class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -447,22 +476,24 @@
 											? !field?.form?.backEndName
 												? (cid + '.' + field?.form?.name | translate)
 												: field?.form?.name
-											: (cid + '.' + field.name | translate)
+											: (cid + '.' + field?.name | translate)
 									}}</span
 								>
 								<span
-									*ngIf="checkRequiredFields(field.name)"
+									*ngIf="checkRequiredFields(field?.name)"
 									class="mat-error required-asterisk inline"
 								>
 									*</span
 								>
 							</mat-label>
-							<mat-select [formControlName]="field.name" multiple>
+							<mat-select [formControlName]="field?.name" multiple>
 								<mat-option
-									*ngFor="let item of service.lists[field.form.listPrefix]"
-									[value]="item.id"
+									*ngFor="
+										let item of (service?.lists)[(field?.form?.listPrefix)]
+									"
+									[value]="item?.id"
 								>
-									{{ item.name || item.displayName }}
+									{{ item?.name || item?.displayName }}
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
@@ -473,15 +504,17 @@
 					<div [ngClass]="field?.form?.cssClass">
 						<ng-select
 							class="ng-select-style1"
-							[items]="service.lists[field.form.listPrefix]"
+							[items]="(service?.lists)[(field?.form?.listPrefix)]"
 							[multiple]="true"
 							bindLabel="name"
 							bindValue="id"
 							dropdownPosition="auto"
 							[closeOnSelect]="false"
-							[formControlName]="field.name"
+							[formControlName]="field?.name"
 							placeholder="{{
-								cid + '.' + (field.form.name ? field.form.name : field.name)
+								cid +
+									'.' +
+									(field?.form?.name ? field?.form?.name : field?.name)
 									| translate
 							}}"
 							appendTo="body"
@@ -536,7 +569,7 @@
 															}}"
 															*ngIf="item[prefix.prop]"
 														>
-															{{ item[prefix.prop] }}
+															{{ item[(prefix?.prop)] }}
 														</span>
 													</ng-container>
 													<ng-container *ngSwitchCase="'color'">
@@ -544,8 +577,8 @@
 															class="cell-display-type color {{
 																prefix?.cssClass
 															}}"
-															*ngIf="item[prefix.prop]"
-															[style.background-color]="item[prefix.prop]"
+															*ngIf="item[(prefix?.prop)]"
+															[style.background-color]="item[(prefix?.prop)]"
 														></span>
 													</ng-container>
 													<ng-container *ngSwitchCase="'img'">
@@ -556,16 +589,16 @@
 														>
 															<img
 																class="img-data"
-																*ngIf="item[prefix.prop]"
-																[src]="item[prefix.prop]"
+																*ngIf="item[(prefix?.prop)]"
+																[src]="item[(prefix?.prop)]"
 																alt=""
 															/>
 															<img
 																class="img-placeholder"
-																*ngIf="!item[prefix.prop]"
+																*ngIf="!item[(prefix?.prop)]"
 																src="{{
-																	prefix.placeHolder
-																		? prefix.placeHolder
+																	prefix?.placeHolder
+																		? prefix?.placeHolder
 																		: 'assets/image-placeholder.png'
 																}}"
 																alt=""
@@ -579,7 +612,7 @@
 								</div>
 
 								<span class="ng-value-label d-inline-flex">{{
-									item.name || item.displayName
+									item?.name || item?.displayName
 								}}</span>
 								<span class="ng-value-icon right ml-2" (click)="clear(item)"
 									><mat-icon
@@ -603,7 +636,7 @@
 										id="{{ item }}-option-{{ index }}"
 										color="primary"
 										[checked]="
-											checkSelected(form.controls[field.name], item.id)
+											checkSelected((form?.controls)[(field?.name)], item.id)
 										"
 										(click)="preventDefault($event)"
 									></mat-checkbox>
@@ -621,9 +654,9 @@
 																class="cell-display-type text{{
 																	prefix?.cssClass
 																}}"
-																*ngIf="item[prefix.prop]"
+																*ngIf="item[(prefix?.prop)]"
 															>
-																{{ item[prefix.prop] }}
+																{{ item[(prefix?.prop)] }}
 															</span>
 														</ng-container>
 														<ng-container *ngSwitchCase="'color'">
@@ -631,8 +664,8 @@
 																class="cell-display-type color {{
 																	prefix?.cssClass
 																}}"
-																*ngIf="item[prefix.prop]"
-																[style.background-color]="item[prefix.prop]"
+																*ngIf="item[(prefix?.prop)]"
+																[style.background-color]="item[(prefix?.prop)]"
 															></span>
 														</ng-container>
 														<ng-container *ngSwitchCase="'img'">
@@ -643,16 +676,16 @@
 															>
 																<img
 																	class="img-data"
-																	*ngIf="item[prefix.prop]"
-																	[src]="item[prefix.prop]"
+																	*ngIf="item[(prefix?.prop)]"
+																	[src]="item[(prefix?.prop)]"
 																	alt=""
 																/>
 																<img
 																	class="img-placeholder"
-																	*ngIf="!item[prefix.prop]"
+																	*ngIf="!item[(prefix?.prop)]"
 																	src="{{
-																		prefix.placeHolder
-																			? prefix.placeHolder
+																		prefix?.placeHolder
+																			? prefix?.placeHolder
 																			: 'assets/image-placeholder.png'
 																	}}"
 																	alt=""
@@ -666,7 +699,7 @@
 									</div>
 
 									<div class="d-inline-flex" [ngOptionHighlight]="search">
-										{{ item.name || item.displayName }}
+										{{ item?.name || item?.displayName }}
 									</div>
 								</div>
 							</ng-template>
@@ -689,8 +722,8 @@
 							>
 								{{ chip }}
 								<mat-icon matChipRemove *ngIf="chipsConfigs.removable"
-									>cancel</mat-icon
-								>
+									>cancel
+								</mat-icon>
 							</mat-chip>
 							<input
 								placeholder="{{
@@ -728,15 +761,17 @@
 					<div [ngClass]="field?.form?.cssClass">
 						<ng-select
 							class="ng-select-style1"
-							[items]="service.lists[field.form.listPrefix]"
+							[items]="(service?.lists)[(field?.form?.listPrefix)]"
 							[multiple]="true"
 							bindLabel="name"
 							bindValue="id"
 							dropdownPosition="auto"
 							[closeOnSelect]="false"
-							[formControlName]="field.name"
+							[formControlName]="field?.name"
 							placeholder="{{
-								cid + '.' + (field.form.name ? field.form.name : field.name)
+								cid +
+									'.' +
+									(field?.form?.name ? field?.form?.name : field?.name)
 									| translate
 							}}"
 							appendTo="body"
@@ -747,8 +782,8 @@
 										class="mr-2"
 										(click)="
 											ngSelect_selectAll(
-												form.controls[field.name],
-												field.form.listPrefix,
+												(form?.controls)[(field?.name)],
+												field?.form?.listPrefix,
 												true
 											)
 										"
@@ -760,8 +795,8 @@
 									<button
 										(click)="
 											ngSelect_selectAll(
-												form.controls[field.name],
-												field.form.listPrefix,
+												(form?.controls)[(field?.name)],
+												field?.form?.listPrefix,
 												false
 											)
 										"
@@ -934,19 +969,21 @@
 							class="ng-select-style1"
 							[ngClass]="{
 								'required-asterisk-inline-before': checkRequiredFields(
-									field.name
+									field?.name
 								)
 							}"
-							[items]="service.lists[field.form.listPrefix]"
+							[items]="(service?.lists)[(field?.form?.listPrefix)]"
 							[multiple]="false"
 							bindLabel="name"
 							bindValue="id"
 							dropdownPosition="auto"
 							[closeOnSelect]="true"
-							[formControlName]="field.name"
+							[formControlName]="field?.name"
 							(change)="onChangeValue_ng_select(field, $event)"
 							placeholder="{{
-								cid + '.' + (field.form.name ? field.form.name : field.name)
+								cid +
+									'.' +
+									(field?.form?.name ? field?.form?.name : field?.name)
 									| translate
 							}}"
 							appendTo="body"
@@ -1117,11 +1154,7 @@
 
 				<ng-container *ngSwitchCase="'datepicker'">
 					<div class="field-container">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							style="width: 100%"
-						>
+						<mat-form-field floatLabel="never" style="width: 100%">
 							<mat-label>
 								<span>
 									{{
@@ -1158,11 +1191,7 @@
 
 				<ng-container *ngSwitchCase="'select'">
 					<div class="field-container">
-						<mat-form-field
-							appearance="outline"
-							floatLabel="never"
-							class="full-width"
-						>
+						<mat-form-field floatLabel="never" class="full-width">
 							<mat-label>
 								<span>
 									{{
@@ -1270,6 +1299,23 @@
 					</div>
 				</ng-container>
 
+				<ng-container *ngSwitchCase="'map'">
+					<div
+						class="map-container"
+						[style.height]="
+							field?.form?.mapOptions?.height
+								? field?.form?.mapOptions?.height
+								: '250px'
+						"
+					>
+						<app-map
+							[mapConfig]="field?.form?.mapOptions?.mapConfig"
+							[service]="service"
+							[mapId]="'treatments_form_map'"
+						></app-map>
+					</div>
+				</ng-container>
+
 				<ng-container *ngSwitchCase="'img'">
 					<div
 						class="fileUpload image-upload field-container"
@@ -1367,14 +1413,22 @@
 						"
 					>
 						<div
-							class="mat-error"
+							class="mat-error d-flex "
+							fxFlex
+							fxLayout="column"
 							*ngFor="let error of form.get(field?.name)?.errors | keyvalue"
 						>
 							<!-- Server Side Errors -->
 							<ng-container *ngIf="error?.key === 'serverError'">
-								<ng-container *ngFor="let err of error.value">
-									{{ err }}
-								</ng-container>
+								<div
+									*ngFor="let err of error.value"
+									class=" d-flex "
+									fxFlex="row"
+								>
+									<span>
+										{{ err }}
+									</span>
+								</div>
 							</ng-container>
 
 							<!-- Client Side Errors-->

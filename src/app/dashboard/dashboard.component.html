@@ -1,7 +1,199 @@
-<div class="container splitArea">
-	<!--  <app-vehicles-list style="flex: 1"></app-vehicles-list>-->
-	<!--  <app-map id="mainMap" style="flex: 1" [mapConfig]="mapConfig" [mapId]="'control'" [service]="service"></app-map>-->
+<div class="dashboard-container" fxFlex="" fxLayout="column">
+	<div class="summary-container" fxFlex="" fxLayout="" fxLayoutGap="16px">
+		<div fxFlex="" fxLayout="column" *ngFor="let item of summary">
+			<div
+				[style.background]="item.color"
+				class="summary"
+				fxFlex=""
+				fxLayout="column"
+			>
+				<span class="header" fxFlex="">{{
+					'dashboard.' + item?.name | translate
+				}}</span>
+				<span class="header" fxFlex="">{{ item?.quantity }}</span>
+			</div>
+			<div [style.background]="item?.footerBgColor" class="footer">
+				<span>{{ 'dashboard.browse' | translate }}</span>
+				<a href="#">
+					<mat-icon matPrefix>arrow_back</mat-icon>
+				</a>
+			</div>
+		</div>
+	</div>
 
-	<h1>CI-CD Works</h1>
-	<h1>test</h1>
+	<div class="my-treatments-container" fxFlex="" fxLayout="column">
+		<div class="title-bar title-bar-bg-dark" fxFlex="" fxLayout="">
+			<div class="right-section">
+				{{ 'dashboard.my-treatments' | translate }} (
+				{{ 'dashboard.evaluation' | translate }} )
+			</div>
+			<div class="left-section" fxFlex="" fxLayout="">
+				<mat-icon
+					class="mdi-icon"
+					svgIcon="arrow-top-right-bottom-left"
+				></mat-icon>
+				<mat-icon>refresh</mat-icon>
+				<mat-icon class="mdi-icon" svgIcon="window-minimize"></mat-icon>
+				<mat-icon>close</mat-icon>
+			</div>
+		</div>
+		<div class="my-treatments-section-body body-bg-white" fxFlex="">
+			<span *ngIf="!employees.length">{{
+				'dashboard.no-treatments' | translate
+			}}</span>
+			<div
+				*ngFor="let employee of employees"
+				class="main-card"
+				fxFlex="20"
+				fxLayout="column"
+			>
+				<div
+					class="card-header"
+					fxFlex=""
+					fxLayout=""
+					fxLayoutAlign="space-between center"
+				>
+					<div fxFlex="75" fxLayoutAlign="flex-start">
+						<img
+							style="width: 50px; height: auto"
+							[src]="environment.imagePath + employee.photo"
+							[alt]="employee.full_name"
+						/>
+					</div>
+					<div fxFlex="25" fxLayoutAlign="flex-end">
+						<span class="number">{{ employee.treatments }}</span>
+					</div>
+				</div>
+
+				<div class="table-header">
+					{{ employee.full_name }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="treatments-monitoring-container" fxFlex="" fxLayout="column">
+		<div class="title-bar title-bar-bg-dark" fxFlex="" fxLayout="">
+			<div class="right-section">
+				{{ 'dashboard.monitoring-treatments' | translate }}
+			</div>
+			<div class="left-section" fxFlex="" fxLayout="">
+				<mat-icon
+					class="mdi-icon"
+					svgIcon="arrow-top-right-bottom-left"
+				></mat-icon>
+				<mat-icon>refresh</mat-icon>
+				<mat-icon class="mdi-icon" svgIcon="window-minimize"></mat-icon>
+				<mat-icon>close</mat-icon>
+			</div>
+		</div>
+		<div class="my-treatments-section-body body-bg-white" fxFlex="" fxLayout="">
+			<div class="old-treatments" fxFlex="12" fxLayout="column">
+				<div class="treatments-number">
+					<span>432</span>
+				</div>
+				<span class="old-treats">{{ 'dashboard.old' | translate }}</span>
+				<span class="old-treats">{{ 'dashboard.treats' | translate }}</span>
+				<span class="on-hold">{{ 'dashboard.on-hold' | translate }} (81)</span>
+			</div>
+
+			<div *ngFor="let day of weekDays" class="daily-treatments">
+				<div
+					class="single-daily-treatment"
+					fxFlex=""
+					fxLayout="column"
+					fxLayoutAlign="space-between center"
+				>
+					<div fxFlex="" class="treatments-number">
+						<span>0/0</span>
+					</div>
+					<div fxFlex="" style="text-align: center">
+						<div id="day-name">{{ 'dashboard.' + day.day | translate }}</div>
+						<div class="date">{{ day.date }}</div>
+						<div class="on-hold-empty">
+							{{ 'dashboard.on-hold' | translate }} {{ day.noHold }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="btns-container"
+		fxFlex=""
+		fxLayout="row"
+		fxLayoutAlign="flex-start center"
+		fxLayoutGap="8px"
+	>
+		<ng-container *ngFor="let button of buttons">
+			<button class="btn" mat-raised-button>
+				{{ 'dashboard.' + button.name | translate }}
+			</button>
+		</ng-container>
+	</div>
+
+	<div class="all-clients-container" fxFlex="" fxLayout="row" fxLayoutGap="8px">
+		<div
+			*ngFor="let client of clients"
+			class="main-card"
+			fxFlex="20"
+			fxLayout="column"
+		>
+			<div
+				class="card-header"
+				fxFlex=""
+				fxLayout=""
+				fxLayoutAlign="space-between center"
+			>
+				<div fxFlex="75" fxLayoutAlign="flex-start">
+					<img
+						style="width: 50px; height: auto"
+						[src]="environment.imagePath + client.photo"
+						[alt]="client.full_name"
+					/>
+				</div>
+				<div fxFlex="25" fxLayoutAlign="flex-end">
+					<span class="number">{{ client.sent }}</span>
+				</div>
+			</div>
+
+			<div class="table-header">
+				{{ client.full_name }}
+			</div>
+			<div class="table-body">
+				<table style="width: 100%">
+					<tr class="titles-row">
+						<td class="title">
+							{{ 'dashboard.under_evaluation' | translate }}
+						</td>
+						<td class="title">{{ 'dashboard.closed' | translate }}</td>
+						<td class="title">{{ 'dashboard.under_audit' | translate }}</td>
+						<td class="title">
+							{{ 'dashboard.under_accreditation' | translate }}
+						</td>
+						<td class="title">{{ 'dashboard.accredited' | translate }}</td>
+					</tr>
+
+					<tr class="data-row">
+						<td class="data">
+							<span>{{ client.under_evaluation }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.closed }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.under_audit }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.under_accreditation }}</span>
+						</td>
+						<td class="data">
+							<span>{{ client.Accredited }}</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
