@@ -33,10 +33,10 @@ export abstract class RootService {
 		this.toast.error(msg, title);
 	}
 
-	getDashboardData(type: string) {
-		return this.api.get(`${type}`, '').pipe(
+	getDashboardData() {
+		return this.api.post(`dashboard/index`).pipe(
 			map((response: ApiResponse) => {
-				return response.data;
+				return response.response;
 			})
 		);
 	}

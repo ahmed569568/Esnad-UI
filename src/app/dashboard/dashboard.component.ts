@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '@app/dashboard/dashboard.service';
+import { environment } from '@env/environment';
 
 @Component({
 	selector: 'app-dashboard',
@@ -6,53 +8,53 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-	public summary: Array<object> = [
+	public summary: Array<any> = [
 		{
-			name: 'under_pricing',
-			quantity: 246,
+			name: 'under_evaluation',
+			quantity: 0,
 			color: '#F59C1A',
 			footerBgColor: '#935E10'
 		},
 		{
-			name: 'held_treatments',
-			quantity: 81,
+			name: 'closed',
+			quantity: 0,
 			color: '#E02551',
 			footerBgColor: '#861631'
 		},
 		{
-			name: 'audit_treatments',
-			quantity: 99,
+			name: 'under_audit',
+			quantity: 0,
 			color: '#5DA5E8',
 			footerBgColor: '#38638B'
 		},
 		{
-			name: 'accreditation_treatments',
-			quantity: 87,
+			name: 'under_accreditation',
+			quantity: 0,
 			color: '#348FE2',
 			footerBgColor: '#1F5688'
 		},
 		{
-			name: 'approved_treatments',
-			quantity: 21,
+			name: 'accredited',
+			quantity: 0,
 			color: '#00ACAC',
 			footerBgColor: '#006767'
 		},
 		{
-			name: 'archived_treatments',
-			quantity: 170,
+			name: 'archived',
+			quantity: 0,
 			color: '#2D353C',
 			footerBgColor: '#1B2024'
 		}
 	];
 
-	public weekDays: Array<object> = [
-		{ day: 'saturday', date: '2-11-2019', noHold: 0 },
-		{ day: 'sunday', date: '3-11-2019', noHold: 0 },
-		{ day: 'monday', date: '4-11-2019', noHold: 0 },
-		{ day: 'tuesday', date: '5-11-2019', noHold: 0 },
-		{ day: 'wednesday', date: '6-11-2019', noHold: 0 },
-		{ day: 'thursday', date: '7-11-2019', noHold: 0 },
-		{ day: 'friday', date: '8-11-2019', noHold: 0 }
+	public weekDays: Array<any> = [
+		{ day: 'Saturday', date: '2-11-2019', noHold: 0 },
+		{ day: 'Sunday', date: '3-11-2019', noHold: 0 },
+		{ day: 'Monday', date: '4-11-2019', noHold: 0 },
+		{ day: 'Tuesday', date: '5-11-2019', noHold: 0 },
+		{ day: 'Wednesday', date: '6-11-2019', noHold: 0 },
+		{ day: 'Thursday', date: '7-11-2019', noHold: 0 },
+		{ day: 'Friday', date: '8-11-2019', noHold: 0 }
 	];
 
 	public buttons: Array<object> = [
@@ -62,7 +64,50 @@ export class DashboardComponent implements OnInit {
 		{ name: 'open_treatment' }
 	];
 
-	constructor() {}
+	data: any;
+	clients: Client[] = [];
+	environment = environment;
 
-	ngOnInit() {}
+	constructor(private service: DashboardService) {}
+
+	ngOnInit() {
+		this.service.getDashboardData().subscribe((dashboard: any) => {
+			console.log(dashboard);
+			this.data = dashboard;
+			this.initStatus(dashboard.by_status);
+			this.initWeekdays(dashboard.by_week_days);
+			this.initClients(dashboard.by_clients);
+		});
+	}
+
+	initClients(data: Client[]) {
+		this.clients = data;
+	}
+
+	initStatus(data: any) {
+		for (const item of this.summary) {
+			item.quantity = data[item.name];
+		}
+	}
+
+	initWeekdays(data: any) {
+		for (const weekday of this.weekDays) {
+			weekday.noHold = data[weekday.day];
+		}
+	}
+}
+
+interface Client {
+	Accredited: number;
+	archived: number;
+	closed: number;
+	email: string;
+	full_name: string;
+	id: number;
+	phone: number;
+	photo: string;
+	sent: number;
+	under_accreditation: number;
+	under_audit: number;
+	under_evaluation: number;
 }
