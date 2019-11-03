@@ -1157,8 +1157,8 @@ export class TreatmentsV2Service extends RootV2Service {
 				address: formValue.address
 					? formValue.address
 					: 'Al Marqab District, Al Batha Muncipality, Riyadh, Riyadh Region, 11131, Saudi Arabia',
-				lat: formValue.lat ? formValue.lat : '24.6317260860661',
-				lng: formValue.lng ? formValue.lng : '46.7174655054535'
+				lat: formValue.lat ? JSON.stringify(formValue.lat) : '24.6317260860661',
+				lng: formValue.lng ? JSON.stringify(formValue.lng) : '46.7174655054535'
 			},
 			steps: []
 		};
@@ -1320,7 +1320,7 @@ export class TreatmentsV2Service extends RootV2Service {
 					dataUrl: 'templates/groups/index',
 					initValue: group_id,
 					disabled: true,
-					// hidden: true,
+					hidden: true,
 					listPrefix: 'groups',
 					groupBy: {
 						tabGroup: {
@@ -1533,7 +1533,12 @@ export class TreatmentsV2Service extends RootV2Service {
 				}
 			}
 		];
-		if (fieldType === 'select') {
+		if (
+			fieldType === 'select' ||
+			fieldType === 'ng_select' ||
+			fieldType === 'ng_select_multiple' ||
+			fieldType === 'radio'
+		) {
 			stepDefaultInputs[0].form.listPrefix = fieldName;
 			if (form_field_options && form_field_options.length) {
 				this.lists[fieldName] = [];

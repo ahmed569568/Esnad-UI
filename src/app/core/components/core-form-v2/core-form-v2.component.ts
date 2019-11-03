@@ -405,7 +405,7 @@ export class CoreFormV2Component implements OnInit, OnDestroy, OnChanges {
 	}
 
 	convertDate(date: any) {
-		const convertedDate = _moment(date, 'YYYY-MM-DD').format('YYYY-DD-MM');
+		const convertedDate = _moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD');
 		console.log(convertedDate);
 		return convertedDate;
 	}

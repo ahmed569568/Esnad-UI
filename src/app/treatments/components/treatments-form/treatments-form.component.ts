@@ -48,9 +48,10 @@ export class TreatmentsFormComponent extends CoreFormV2Component
 		this.mapService.getLocation
 			.pipe(takeWhile(() => this.alive))
 			.subscribe(point => {
-				this.form.controls.lat.setValue(point.lat);
-				this.form.controls.lng.setValue(point.lng);
-				this.form.controls.location_map.setValue(point.display_name);
+				console.log(point);
+				this.form.controls.lat.setValue(point.coords[0]);
+				this.form.controls.lng.setValue(point.coords[1]);
+				this.form.controls.address.setValue(point.location.display_name);
 			});
 	}
 
