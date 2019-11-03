@@ -514,7 +514,8 @@
 		"no_building_clearance": "رقم تصريح البناء",
 		"building_clearance_date": "تاريخ رقم تصريح البناء",
 		"space": "الفضاء",
-		"template_id": "النموذج"
+		"template_id": "النموذج",
+		"export_pdf": "استخراج ملف PDF للمعاملة"
 	},
 	"clients": {
 		"title": "العملاء",

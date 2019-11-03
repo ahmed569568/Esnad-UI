@@ -511,11 +511,13 @@
 							dropdownPosition="auto"
 							[closeOnSelect]="false"
 							[formControlName]="field?.name"
-							placeholder="{{
-								cid +
-									'.' +
-									(field?.form?.name ? field?.form?.name : field?.name)
-									| translate
+							placeholder="
+							{{
+								field?.form?.name
+									? !field?.form?.backEndName
+										? (cid + '.' + field?.form?.name | translate)
+										: field?.form?.name
+									: (cid + '.' + field.name | translate)
 							}}"
 							appendTo="body"
 							[addTag]="true"
@@ -769,10 +771,11 @@
 							[closeOnSelect]="false"
 							[formControlName]="field?.name"
 							placeholder="{{
-								cid +
-									'.' +
-									(field?.form?.name ? field?.form?.name : field?.name)
-									| translate
+								field?.form?.name
+									? !field?.form?.backEndName
+										? (cid + '.' + field?.form?.name | translate)
+										: field?.form?.name
+									: (cid + '.' + field.name | translate)
 							}}"
 							appendTo="body"
 						>
@@ -981,10 +984,11 @@
 							[formControlName]="field?.name"
 							(change)="onChangeValue_ng_select(field, $event)"
 							placeholder="{{
-								cid +
-									'.' +
-									(field?.form?.name ? field?.form?.name : field?.name)
-									| translate
+								field?.form?.name
+									? !field?.form?.backEndName
+										? (cid + '.' + field?.form?.name | translate)
+										: field?.form?.name
+									: (cid + '.' + field.name | translate)
 							}}"
 							appendTo="body"
 						>
@@ -1200,8 +1204,9 @@
 												? (cid + '.' + field?.form?.name | translate)
 												: field?.form?.name
 											: (cid + '.' + field.name | translate)
-									}}</span
-								>
+									}}
+								</span>
+
 								<span
 									*ngIf="checkRequiredFields(field.name)"
 									class="mat-error required-asterisk inline"
@@ -1224,10 +1229,15 @@
 				<ng-container *ngSwitchCase="'radio'">
 					<div class="field-container radio-group">
 						<label class="d-flex clearfix pt-2 pb-2">
-							<span>{{
-								cid + '.' + (field.form.name ? field.form.name : field.name)
-									| translate
-							}}</span>
+							<span>
+								{{
+									field?.form?.name
+										? !field?.form?.backEndName
+											? (cid + '.' + field?.form?.name | translate)
+											: field?.form?.name
+										: (cid + '.' + field.name | translate)
+								}}
+							</span>
 							<span
 								*ngIf="checkRequiredFields(field.name)"
 								class="mat-error required-asterisk inline"
@@ -1263,7 +1273,17 @@
 							(colorPickerChange)="setColor(field.name, $event)"
 							[style.background]="form.controls[field.name].value || '#e3e3e3'"
 						/>
-						<label>{{ cid + '.' + field.name | translate }}</label>
+						<label>
+							<span>
+								{{
+									field?.form?.name
+										? !field?.form?.backEndName
+											? (cid + '.' + field?.form?.name | translate)
+											: field?.form?.name
+										: (cid + '.' + field.name | translate)
+								}}
+							</span>
+						</label>
 					</div>
 				</ng-container>
 				<ng-container *ngSwitchCase="'file_input'">
