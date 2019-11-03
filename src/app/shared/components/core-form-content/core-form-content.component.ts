@@ -145,10 +145,8 @@ export class CoreFormContentComponent
 	@ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
 	constructor(
-		public viewContainerRef: ViewContainerRef
-	) // private changeDetectorRef: ChangeDetectorRef,
-	// private controlContainer: ControlContainer,
-	{}
+		public viewContainerRef: ViewContainerRef // private changeDetectorRef: ChangeDetectorRef, // private controlContainer: ControlContainer,
+	) {}
 
 	ngOnInit() {}
 
