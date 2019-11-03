@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '@app/dashboard/dashboard.service';
 import { environment } from '@env/environment';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Component({
 	selector: 'app-dashboard',
@@ -64,21 +65,25 @@ export class DashboardComponent implements OnInit {
 		{ name: 'open_treatment' }
 	];
 
-	data: any;
 	clients: Client[] = [];
 	employees: Employee[] = [];
 	environment = environment;
+	menuState: boolean;
 
-	constructor(private service: DashboardService) {}
+	constructor(
+		private service: DashboardService,
+		private us: UtilitiesService
+	) {}
 
 	ngOnInit() {
 		this.service.getDashboardData().subscribe((dashboard: any) => {
-			console.log(dashboard);
-			this.data = dashboard;
 			this.initStatus(dashboard.by_status);
 			this.initWeekdays(dashboard.by_week_days);
 			this.initClients(dashboard.by_clients);
 			this.initEmployees(dashboard.by_employees);
+		});
+		this.us.menuObservable$.subscribe(state => {
+			this.menuState = state;
 		});
 	}
 	initEmployees(data: Employee[]) {

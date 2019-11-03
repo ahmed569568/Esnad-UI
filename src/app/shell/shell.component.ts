@@ -34,6 +34,11 @@ export class ShellComponent implements OnInit {
 
 	ngOnInit() {
 		this.getUserData();
+		this.us.menuObservable$.subscribe(menu => {
+			if (menu) {
+				this.isWide = menu;
+			}
+		});
 	}
 
 	setLanguage(language: string) {
@@ -78,11 +83,8 @@ export class ShellComponent implements OnInit {
 	}
 
 	toggleSidenavSize() {
-		if (!this.isWide) {
-			this.isWide = true;
-		} else {
-			this.isWide = false;
-		}
+		this.isWide = !this.isWide;
+		this.us.toggleMenu(this.isWide);
 	}
 
 	getUserData() {
