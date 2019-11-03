@@ -15,6 +15,10 @@ export class UtilitiesService {
 	dialogActionObservable$: Observable<any>;
 	languageObservable$: Observable<any>;
 
+	filterPanelObservable$: Observable<boolean>;
+
+	_filterPanelState = false;
+
 	private paginate$: Subject<number>;
 	private _dialogAction$: Subject<any>;
 
@@ -25,10 +29,7 @@ export class UtilitiesService {
 	private language$: Subject<string>;
 
 	private filter$: Subject<string>;
-
-	filterPanelObservable$: Observable<boolean>;
 	private _filterPanel$: BehaviorSubject<boolean>;
-	_filterPanelState = false;
 
 	constructor() {
 		this.initSubjects();
@@ -66,6 +67,11 @@ export class UtilitiesService {
 
 	toggleFilterPanel(status: boolean) {
 		this._filterPanel$.next(status);
+	}
+
+	toggleMenu(status: boolean) {
+		this._menuState = status;
+		this.menu$.next(status);
 	}
 
 	initSubjects() {
