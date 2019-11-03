@@ -13,24 +13,34 @@ export class TemplatesService extends RootService {
 		super(toast, router, api);
 	}
 
-	routerPrefix(val: string = '') {
-		return val ? val : 'templates';
-	}
-
 	get featureProps(): ItemProps[] {
 		return [
 			{
 				name: 'name',
 				prop: 'name',
 				listing: true,
-				formField: false
+				formField: true,
+				formFieldType: 'text',
+				required: true,
+				width: 300,
+				validations: [],
+				searchable: true
 			},
 			{
-				name: 'full_name',
+				name: 'client',
 				prop: 'client.full_name',
-				listing: false,
-				formField: false
+				listing: true,
+				formField: true,
+				formFieldType: 'text',
+				required: true,
+				width: 300,
+				validations: [],
+				searchable: true
 			}
 		];
+	}
+
+	routerPrefix(val: string = '') {
+		return val ? val : 'templates';
 	}
 }

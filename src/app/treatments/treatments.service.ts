@@ -13,11 +13,45 @@ export class TreatmentsService extends RootService {
 		super(toast, router, api);
 	}
 
-	routerPrefix(val: string = '') {
-		return val ? val : 'treatments';
+	get featureProps(): ItemProps[] {
+		return [
+			{
+				name: 'status',
+				prop: 'status',
+				listing: true,
+				formField: true,
+				formFieldType: 'text',
+				required: true,
+				width: 300,
+				validations: [],
+				searchable: true
+			},
+			{
+				name: 'client',
+				prop: 'client.full_name',
+				listing: true,
+				formField: true,
+				formFieldType: 'text',
+				required: true,
+				width: 300,
+				validations: [],
+				searchable: true
+			},
+			{
+				name: 'template',
+				prop: 'template.name',
+				listing: true,
+				formField: true,
+				formFieldType: 'text',
+				required: true,
+				width: 300,
+				validations: [],
+				searchable: true
+			}
+		];
 	}
 
-	get featureProps(): ItemProps[] {
-		return [];
+	routerPrefix(val: string = '') {
+		return val ? val : 'treatments';
 	}
 }
