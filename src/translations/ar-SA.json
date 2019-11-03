@@ -515,7 +515,9 @@
 		"building_clearance_date": "تاريخ رقم تصريح البناء",
 		"space": "الفضاء",
 		"template_id": "النموذج",
-		"export_pdf": "استخراج ملف PDF للمعاملة"
+		"export_pdf": "استخراج ملف PDF للمعاملة",
+		"templates": "النماذج",
+		"template": "النموذج"
 	},
 	"clients": {
 		"title": "العملاء",
@@ -606,7 +608,12 @@
 		"name": "اسم النموذج",
 		"form_name": "اسم الاستمارة",
 		"field_options": "الاختيارات المتاحة",
-		"templates_id": "النموذج"
+		"templates_id": "النموذج",
+		"templates": "النماذج",
+		"status": "الحالة",
+		"client": "العميل",
+		"template": "النموذج",
+		"title": "النماذج"
 	},
 	"validation_errors": {
 		"required": "الحقل مطلوب",
